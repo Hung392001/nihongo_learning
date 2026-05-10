@@ -2488,6 +2488,864 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
           ]
         }
       ]
+    },
+    unit13: {
+      id: 'unit13',
+      title: 'Unit 13: Wants and Purposes',
+      japaneseTitle: 'ユニット１３：きぼう・もくてき',
+      content: [
+        {
+          type: 'explanation',
+          text: 'In Unit 13, you will learn how to express desires, purposes of movement, indefinite question words, and polite honorific expressions.',
+          vietnamese: 'ユニット１３では、欲しいもの、したいこと、移動の目的、不定疑問詞、丁寧な敬語表現を学びます。'
+        },
+
+        {
+          type: 'title',
+          text: '１. ほしいです - Want Something'
+        },
+
+        {
+          type: 'explanation',
+          text: 'ほしいです is used to express that the speaker wants a noun or object.',
+          vietnamese: '「ほしいです」は、話者が何か物を欲しい時に使います。'
+        },
+
+        {
+          type: 'note',
+          text: 'Structure: N が ほしいです',
+          vietnamese: '文型：N が ほしいです'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'わたしは あたらしい くるまが ほしいです。',
+              vietnamese: 'Tôi muốn một chiếc xe mới.',
+              english: 'I want a new car.'
+            },
+            {
+              japanese: 'わたしは おおきな いえが ほしいです。',
+              vietnamese: 'Tôi muốn một ngôi nhà lớn.',
+              english: 'I want a big house.'
+            },
+            {
+              japanese: 'いま カメラが ほしいです。',
+              vietnamese: 'Bây giờ tôi muốn máy ảnh.',
+              english: 'I want a camera now.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '２. ～たいです - Want to Do'
+        },
+
+        {
+          type: 'explanation',
+          text: 'たいです is attached to the verb stem to express the desire to do an action.',
+          vietnamese: '「たいです」は動詞のます形の語幹に付けて、「〜したい」という希望を表します。'
+        },
+
+        {
+          type: 'note',
+          text: 'Structure: V（ます-stem） + たいです',
+          vietnamese: '文型：V（ます形語幹）+ たいです'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'わたしは きょう うちへ はやく かえりたいです。',
+              vietnamese: 'Hôm nay tôi muốn về nhà sớm.',
+              english: 'I want to go home early today.'
+            },
+            {
+              japanese: 'わたしは スーパーで くろい かばんを かいたいです。',
+              vietnamese: 'Tôi muốn mua cái cặp màu đen ở siêu thị.',
+              english: 'I want to buy a black bag at the supermarket.'
+            },
+            {
+              japanese: 'にほんへ いきたいです。',
+              vietnamese: 'Tôi muốn đi Nhật.',
+              english: 'I want to go to Japan.'
+            }
+          ]
+        },
+
+        {
+          type: 'note',
+          text: 'Do not use ～たいです to directly ask another person’s desire. Use ～ませんか for invitations instead.',
+          vietnamese: '相手の希望を直接聞く時には「〜たいです」を使いません。招待には「〜ませんか」を使います。'
+        },
+
+        {
+          type: 'title',
+          text: '３. Purpose of Movement'
+        },
+
+        {
+          type: 'explanation',
+          text: 'Use に with movement verbs to express the purpose of going, coming, or returning somewhere.',
+          vietnamese: '移動動詞と一緒に「に」を使って、移動の目的を表します。'
+        },
+
+        {
+          type: 'note',
+          text: 'Structure: Place へ V（ます-stem）/N に いきます・きます・かえります',
+          vietnamese: '文型：場所 へ V（ます形語幹）/名詞 に いきます・きます・かえります'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'わたしは スーパーへ おかしを かいに いきます。',
+              vietnamese: 'Tôi đi siêu thị để mua bánh kẹo.',
+              english: 'I go to the supermarket to buy snacks.'
+            },
+            {
+              japanese: 'わたしは にほんへ けいざいの べんきょうに きました。',
+              vietnamese: 'Tôi đến Nhật để học kinh tế.',
+              english: 'I came to Japan to study economics.'
+            },
+            {
+              japanese: 'ともだちに あいに いきます。',
+              vietnamese: 'Tôi đi gặp bạn.',
+              english: 'I go to meet my friend.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '４. Particles に and へ'
+        },
+
+        {
+          type: 'explanation',
+          text: 'に indicates time or purpose, while へ indicates direction or destination.',
+          vietnamese: '「に」は時間や目的を表し、「へ」は方向や目的地を表します。'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'けさ わたしは ７じに うちを でました。',
+              vietnamese: 'Sáng nay tôi ra khỏi nhà lúc 7 giờ.',
+              english: 'This morning I left home at 7.'
+            },
+            {
+              japanese: 'こんばん わたしは きっさてんに はいります。',
+              vietnamese: 'Tối nay tôi sẽ vào quán cà phê.',
+              english: 'Tonight I will enter a coffee shop.'
+            },
+            {
+              japanese: 'とうきょうへ いきます。',
+              vietnamese: 'Tôi đi Tokyo.',
+              english: 'I go to Tokyo.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '５. どこか and なにか'
+        },
+
+        {
+          type: 'explanation',
+          text: 'どこか means “somewhere” and なにか means “something.” They are used for indefinite questions or statements.',
+          vietnamese: '「どこか」は「どこか」、「なにか」は「何か」を意味します。'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'ふゆやすみは どこか いきましたか。',
+              vietnamese: 'Kỳ nghỉ đông bạn có đi đâu không?',
+              english: 'Did you go somewhere during winter vacation?'
+            },
+            {
+              japanese: 'おなかが すきましたから、なにか たべたいです。',
+              vietnamese: 'Vì đói nên tôi muốn ăn cái gì đó.',
+              english: 'Because I am hungry, I want to eat something.'
+            },
+            {
+              japanese: 'だれか きましたか。',
+              vietnamese: 'Có ai đến không?',
+              english: 'Did someone come?'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '６. Honorific Prefix ご〜'
+        },
+
+        {
+          type: 'explanation',
+          text: 'ご is added before certain nouns to make expressions more polite and respectful.',
+          vietnamese: '「ご」は名詞の前に付けて、丁寧で敬意のある表現にします。'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'ごちゅうもんは？',
+              vietnamese: 'Anh/Chị gọi món gì ạ?',
+              english: 'What would you like to order?'
+            },
+            {
+              japanese: 'ごかぞくは おげんきですか。',
+              vietnamese: 'Gia đình bạn có khỏe không?',
+              english: 'Is your family well?'
+            },
+            {
+              japanese: 'ごしゅっしんは どちらですか。',
+              vietnamese: 'Quê quán của bạn ở đâu?',
+              english: 'Where are you from?'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '７. Common Patterns Summary'
+        },
+
+        {
+          type: 'note',
+          text: 'Pattern 1: N が ほしいです | Pattern 2: V（ます-stem）+ たいです | Pattern 3: Place へ Purpose に いきます | Pattern 4: どこか / なにか | Pattern 5: ご + Noun',
+          vietnamese: 'パターン1：N が ほしいです｜パターン2：V（ます形語幹）+ たいです｜パターン3：場所 へ 目的 に いきます｜パターン4：どこか・なにか｜パターン5：ご + 名詞'
+        },
+
+        {
+          type: 'practice',
+          items: [
+            {
+              meaning: 'I want a new phone.',
+              usage: 'あたらしい でんわが ほしいです'
+            },
+            {
+              meaning: 'I want to eat sushi.',
+              usage: 'すしを たべたいです'
+            },
+            {
+              meaning: 'I go to the library to study.',
+              usage: 'としょかんへ べんきょうに いきます'
+            },
+            {
+              meaning: 'Did you buy something?',
+              usage: 'なにか かいましたか'
+            },
+            {
+              meaning: 'What would you like to drink?',
+              usage: 'ごちゅうもんは？'
+            }
+          ]
+        }
+      ]
+    },
+    unit14: {
+      id: 'unit14',
+      title: 'Unit 14: Te-form and Related Expressions',
+      japaneseTitle: 'ユニット１４：てけい・かんれんぶんけい',
+      content: [
+        {
+          type: 'explanation',
+          text: 'In Unit 14, you will learn the Japanese て-form, polite requests, progressive tense, offers of help, and important particle usage.',
+          vietnamese: 'ユニット１４では、日本語の「て形」、丁寧な依頼、進行形、申し出表現、助詞の使い方を学びます。'
+        },
+
+        {
+          type: 'title',
+          text: '１. Verb Groups and Te-form Conjugation'
+        },
+
+        {
+          type: 'explanation',
+          text: 'Japanese verbs are divided into three groups. The conjugation into て-form depends on the verb group and ending.',
+          vietnamese: '日本語の動詞は３つのグループに分かれています。て形への変化は動詞の種類によって異なります。'
+        },
+
+        {
+          type: 'note',
+          text: 'Group I: います/ちます/ります → って | みます/びます/にます → んで | きます → いて | ぎます → いで | します → して | Exception: いきます → いって',
+          vietnamese: 'グループI：います・ちます・ります → って｜みます・びます・にます → んで｜きます → いて｜ぎます → いで｜します → して｜例外：いきます → いって'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'かいます → かって',
+              vietnamese: 'Mua → hãy mua / mua rồi',
+              english: 'buy → buy (te-form)'
+            },
+            {
+              japanese: 'よみます → よんで',
+              vietnamese: 'Đọc → hãy đọc / đọc rồi',
+              english: 'read → read (te-form)'
+            },
+            {
+              japanese: 'ききます → きいて',
+              vietnamese: 'Nghe → hãy nghe',
+              english: 'listen → listen (te-form)'
+            },
+            {
+              japanese: 'いそぎます → いそいで',
+              vietnamese: 'Vội → hãy vội',
+              english: 'hurry → hurry (te-form)'
+            },
+            {
+              japanese: 'はなします → はなして',
+              vietnamese: 'Nói → hãy nói',
+              english: 'speak → speak (te-form)'
+            },
+            {
+              japanese: 'いきます → いって',
+              vietnamese: 'Đi → hãy đi',
+              english: 'go → go (te-form)'
+            }
+          ]
+        },
+
+        {
+          type: 'note',
+          text: 'Group II: Remove ます and add て | Group III: します → して, きます → きて',
+          vietnamese: 'グループII：ますを取って「て」を付ける｜グループIII：します → して、きます → きて'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'たべます → たべて',
+              vietnamese: 'Ăn → hãy ăn',
+              english: 'eat → eat (te-form)'
+            },
+            {
+              japanese: 'ねます → ねて',
+              vietnamese: 'Ngủ → hãy ngủ',
+              english: 'sleep → sleep (te-form)'
+            },
+            {
+              japanese: 'みます → みて',
+              vietnamese: 'Xem → hãy xem',
+              english: 'watch → watch (te-form)'
+            },
+            {
+              japanese: 'べんきょうします → べんきょうして',
+              vietnamese: 'Học → hãy học',
+              english: 'study → study (te-form)'
+            },
+            {
+              japanese: 'きます → きて',
+              vietnamese: 'Đến → hãy đến',
+              english: 'come → come (te-form)'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '２. ～てください - Polite Requests'
+        },
+
+        {
+          type: 'explanation',
+          text: '～てください is used to politely request or instruct someone to do something.',
+          vietnamese: '「〜てください」は、相手に丁寧に依頼や指示をする時に使います。'
+        },
+
+        {
+          type: 'note',
+          text: 'Structure: V（て-form） + ください',
+          vietnamese: '文型：V（て形）+ ください'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'すみませんが、ボールペンで かいて ください。',
+              vietnamese: 'Xin lỗi, vui lòng viết bằng bút bi.',
+              english: 'Excuse me, please write with a ballpoint pen.'
+            },
+            {
+              japanese: 'ここに じゅうしょと なまえを かいて ください。',
+              vietnamese: 'Vui lòng viết địa chỉ và tên vào đây.',
+              english: 'Please write your address and name here.'
+            },
+            {
+              japanese: 'まって ください。',
+              vietnamese: 'Xin hãy đợi.',
+              english: 'Please wait.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '３. ～ています - Present Progressive'
+        },
+
+        {
+          type: 'explanation',
+          text: '～ています is used to describe actions currently in progress.',
+          vietnamese: '「〜ています」は、今進行中の動作を表します。'
+        },
+
+        {
+          type: 'note',
+          text: 'Structure: V（て-form） + います',
+          vietnamese: '文型：V（て形）+ います'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'いま にほんごを べんきょうして います。',
+              vietnamese: 'Bây giờ tôi đang học tiếng Nhật.',
+              english: 'I am studying Japanese now.'
+            },
+            {
+              japanese: 'ミラーさんは いま でんわを かけて います。',
+              vietnamese: 'Anh Miller đang gọi điện thoại.',
+              english: 'Mr. Miller is making a phone call now.'
+            },
+            {
+              japanese: 'こどもが あそんで います。',
+              vietnamese: 'Bọn trẻ đang chơi.',
+              english: 'The children are playing.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '４. ～ましょうか - Offering Help'
+        },
+
+        {
+          type: 'explanation',
+          text: '～ましょうか is used when offering to do something for another person.',
+          vietnamese: '「〜ましょうか」は、相手のために何かを申し出る時に使います。'
+        },
+
+        {
+          type: 'note',
+          text: 'Structure: V（ます-stem） + ましょうか',
+          vietnamese: '文型：V（ます形語幹）+ ましょうか'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'あついですね。まどを あけましょうか。',
+              vietnamese: 'Nóng nhỉ. Tôi mở cửa sổ giúp nhé?',
+              english: 'It is hot, isn’t it? Shall I open the window?'
+            },
+            {
+              japanese: 'にもつを もちましょうか。',
+              vietnamese: 'Tôi mang hành lý giúp nhé?',
+              english: 'Shall I carry your luggage?'
+            },
+            {
+              japanese: 'ええ、おねがいします。',
+              vietnamese: 'Vâng, nhờ bạn.',
+              english: 'Yes, please.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '５. Particle が for Natural Phenomena'
+        },
+
+        {
+          type: 'explanation',
+          text: 'When describing natural phenomena or objective states, が is often used instead of は.',
+          vietnamese: '自然現象や客観的な状態を説明する時、「は」ではなく「が」を使うことがあります。'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'あめが ふって います。',
+              vietnamese: 'Trời đang mưa.',
+              english: 'It is raining.'
+            },
+            {
+              japanese: 'ゆきが ふって います。',
+              vietnamese: 'Trời đang có tuyết.',
+              english: 'It is snowing.'
+            },
+            {
+              japanese: 'かぜが つよいです。',
+              vietnamese: 'Gió mạnh.',
+              english: 'The wind is strong.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '６. すみませんが vs しつれいですが'
+        },
+
+        {
+          type: 'explanation',
+          text: 'すみませんが is used before requests or to get attention. しつれいですが is used before asking personal or sensitive information.',
+          vietnamese: '「すみませんが」は依頼や呼びかけの前に使い、「しつれいですが」は個人的な質問の前に使います。'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'すみませんが、えんぴつを かして ください。',
+              vietnamese: 'Xin lỗi, cho tôi mượn bút chì được không?',
+              english: 'Excuse me, please lend me a pencil.'
+            },
+            {
+              japanese: 'しつれいですが、おなまえは？',
+              vietnamese: 'Xin thất lễ, tên của bạn là gì?',
+              english: 'Excuse me, but what is your name?'
+            },
+            {
+              japanese: 'しつれいですが、おいくつですか。',
+              vietnamese: 'Xin thất lễ, bạn bao nhiêu tuổi?',
+              english: 'Excuse me, but how old are you?'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '７. Common Patterns Summary'
+        },
+
+        {
+          type: 'note',
+          text: 'Pattern 1: V（て-form）+ ください | Pattern 2: V（て-form）+ います | Pattern 3: V（ます-stem）+ ましょうか | Pattern 4: Natural phenomenon + が | Pattern 5: すみませんが / しつれいですが',
+          vietnamese: 'パターン1：V（て形）+ ください｜パターン2：V（て形）+ います｜パターン3：V（ます形語幹）+ ましょうか｜パターン4：自然現象 + が｜パターン5：すみませんが・しつれいですが'
+        },
+
+        {
+          type: 'practice',
+          items: [
+            {
+              meaning: 'Please read this book.',
+              usage: 'このほんを よんで ください'
+            },
+            {
+              meaning: 'I am eating lunch now.',
+              usage: 'いま ひるごはんを たべて います'
+            },
+            {
+              meaning: 'Shall I help you?',
+              usage: 'てつだいましょうか'
+            },
+            {
+              meaning: 'It is raining now.',
+              usage: 'あめが ふって います'
+            },
+            {
+              meaning: 'Excuse me, may I ask your address?',
+              usage: 'しつれいですが、じゅうしょは？'
+            }
+          ]
+        }
+      ]
+    },
+    unit15: {
+      id: 'unit15',
+      title: 'Unit 15: Permission, Prohibition, and States',
+      japaneseTitle: 'ユニット１５：きょか・きんし・じょうたい',
+      content: [
+        {
+          type: 'explanation',
+          text: 'In Unit 15, you will learn how to ask for permission, prohibit actions, express continuing states, and use particles with certain verbs.',
+          vietnamese: 'ユニット１５では、許可の求め方、禁止表現、継続状態、および特定の動詞と助詞の使い方を学びます。'
+        },
+
+        {
+          type: 'title',
+          text: '１. ～てもいいです - Asking for Permission'
+        },
+
+        {
+          type: 'explanation',
+          text: '～てもいいです is used to ask for or give permission to do something.',
+          vietnamese: '「〜てもいいです」は、何かをしてもよいか尋ねたり、許可を与えたりする時に使います。'
+        },
+
+        {
+          type: 'note',
+          text: 'Question: V（て-form） + も いいですか。 | Permission: V（て-form） + も いいです。',
+          vietnamese: '質問：V（て形）+ も いいですか｜許可：V（て形）+ も いいです'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'ここで たばこを すっても いいですか。',
+              vietnamese: 'Tôi hút thuốc ở đây có được không?',
+              english: 'May I smoke here?'
+            },
+            {
+              japanese: 'ここに すわっても いいですか。',
+              vietnamese: 'Tôi ngồi ở đây được không?',
+              english: 'May I sit here?'
+            },
+            {
+              japanese: 'ええ、いいですよ。',
+              vietnamese: 'Vâng, được chứ.',
+              english: 'Yes, of course.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '２. ～てはいけません - Prohibition'
+        },
+
+        {
+          type: 'explanation',
+          text: '～てはいけません is used to prohibit or forbid actions.',
+          vietnamese: '「〜てはいけません」は、禁止や「〜してはいけない」を表します。'
+        },
+
+        {
+          type: 'note',
+          text: 'Structure: V（て-form） + は いけません',
+          vietnamese: '文型：V（て形）+ は いけません'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'ここで おさけを のんでは いけません。',
+              vietnamese: 'Ở đây không được uống rượu.',
+              english: 'You must not drink alcohol here.'
+            },
+            {
+              japanese: 'ここに はいっては いけません。',
+              vietnamese: 'Không được vào đây.',
+              english: 'You must not enter here.'
+            },
+            {
+              japanese: 'しゃしんを とっては いけません。',
+              vietnamese: 'Không được chụp hình.',
+              english: 'You must not take photos.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '３. ～ています - Continuing States and Habits'
+        },
+
+        {
+          type: 'explanation',
+          text: 'In addition to ongoing actions, ～ています can also describe continuing states, occupations, or habitual situations.',
+          vietnamese: '「〜ています」は進行中の動作だけでなく、継続状態、職業、習慣も表します。'
+        },
+
+        {
+          type: 'note',
+          text: 'State Result: action completed but result remains | Habit/Occupation: repeated or ongoing activity',
+          vietnamese: '状態結果：動作の結果が現在も続く｜習慣・職業：繰り返し行う活動'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'わたしは けっこんして います。',
+              vietnamese: 'Tôi đã kết hôn.',
+              english: 'I am married.'
+            },
+            {
+              japanese: 'わたしは たなかさんの じゅうしょを しって います。',
+              vietnamese: 'Tôi biết địa chỉ của anh Tanaka.',
+              english: 'I know Mr. Tanaka’s address.'
+            },
+            {
+              japanese: 'わたしは IMCで はたらいて います。',
+              vietnamese: 'Tôi đang làm việc tại công ty IMC.',
+              english: 'I work at IMC company.'
+            },
+            {
+              japanese: 'わたしは パワーでんきで コンピューターを つくって います。',
+              vietnamese: 'Tôi làm nghề sản xuất máy tính tại công ty Power Electric.',
+              english: 'I make computers at Power Electric.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '４. Particle に with Certain Verbs'
+        },
+
+        {
+          type: 'explanation',
+          text: 'The particle に is used after destination or target nouns with verbs such as はいります, のります, and すわります.',
+          vietnamese: '助詞「に」は、「はいります」「のります」「すわります」などの動詞と一緒に使われます。'
+        },
+
+        {
+          type: 'note',
+          text: 'Common verbs: はいります（enter）, のります（ride）, すわります（sit）',
+          vietnamese: '代表的な動詞：はいります（入る）、のります（乗る）、すわります（座る）'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'ここに はいっては いけません。',
+              vietnamese: 'Không được vào đây.',
+              english: 'You must not enter here.'
+            },
+            {
+              japanese: 'ここに すわっても いいですか。',
+              vietnamese: 'Tôi ngồi đây được không?',
+              english: 'May I sit here?'
+            },
+            {
+              japanese: 'バスに のります。',
+              vietnamese: 'Tôi lên xe buýt.',
+              english: 'I get on the bus.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '５. Particle に for Placement Location'
+        },
+
+        {
+          type: 'explanation',
+          text: 'The particle に can indicate the place where something is placed or left after an action.',
+          vietnamese: '助詞「に」は、物や人が行動の結果として置かれる場所を示します。'
+        },
+
+        {
+          type: 'note',
+          text: 'Structure: Place に Object を Verb',
+          vietnamese: '文型：場所 に 物 を 動詞'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'ここに くるまを とめて ください。',
+              vietnamese: 'Hãy đỗ xe ở đây.',
+              english: 'Please park the car here.'
+            },
+            {
+              japanese: 'ここに じゅうしょを かいて ください。',
+              vietnamese: 'Hãy viết địa chỉ vào đây.',
+              english: 'Please write your address here.'
+            },
+            {
+              japanese: 'テーブルに ほんを おきました。',
+              vietnamese: 'Tôi đã đặt quyển sách lên bàn.',
+              english: 'I placed the book on the table.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '６. Common Response Patterns'
+        },
+
+        {
+          type: 'explanation',
+          text: 'There are common ways to respond to permission and prohibition expressions.',
+          vietnamese: '許可や禁止の表現には、よく使われる返答パターンがあります。'
+        },
+
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'ええ、いいですよ。',
+              vietnamese: 'Vâng, được chứ.',
+              english: 'Yes, that is fine.'
+            },
+            {
+              japanese: 'すみませんが、ちょっと…',
+              vietnamese: 'Xin lỗi nhưng hơi khó...',
+              english: 'I am sorry, but...'
+            },
+            {
+              japanese: 'いいえ、いけません。',
+              vietnamese: 'Không, không được.',
+              english: 'No, you may not.'
+            }
+          ]
+        },
+
+        {
+          type: 'title',
+          text: '７. Common Patterns Summary'
+        },
+
+        {
+          type: 'note',
+          text: 'Pattern 1: V（て-form）+ も いいですか | Pattern 2: V（て-form）+ は いけません | Pattern 3: V（て-form）+ います | Pattern 4: Place に + movement verb | Pattern 5: Place に Object を V',
+          vietnamese: 'パターン1：V（て形）+ も いいですか｜パターン2：V（て形）+ は いけません｜パターン3：V（て形）+ います｜パターン4：場所 に + 移動動詞｜パターン5：場所 に 物 を V'
+        },
+
+        {
+          type: 'practice',
+          items: [
+            {
+              meaning: 'May I use this computer?',
+              usage: 'この コンピューターを つかっても いいですか'
+            },
+            {
+              meaning: 'You must not swim here.',
+              usage: 'ここで およいでは いけません'
+            },
+            {
+              meaning: 'I know Mr. Sato.',
+              usage: 'さとうさんを しって います'
+            },
+            {
+              meaning: 'Please put the bag here.',
+              usage: 'ここに かばんを おいて ください'
+            },
+            {
+              meaning: 'I work at a bank.',
+              usage: 'ぎんこうで はたらいて います'
+            }
+          ]
+        }
+      ]
     }
   };
 
@@ -2649,6 +3507,27 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
             <span className="unit-number">12</span>
             <span className="unit-name">Unit 12</span>
           </button>
+          <button
+            className={`grammar-unit-btn ${selectedUnit === 'unit13' ? 'active' : ''}`}
+            onClick={() => setSelectedUnit('unit13')}
+          >
+            <span className="unit-number">13</span>
+            <span className="unit-name">Unit 13</span>
+          </button>
+          <button
+            className={`grammar-unit-btn ${selectedUnit === 'unit14' ? 'active' : ''}`}
+            onClick={() => setSelectedUnit('unit14')}
+          >
+            <span className="unit-number">14</span>
+            <span className="unit-name">Unit 14</span>
+          </button>
+          <button
+            className={`grammar-unit-btn ${selectedUnit === 'unit15' ? 'active' : ''}`}
+            onClick={() => setSelectedUnit('unit15')}
+          >
+            <span className="unit-number">15</span>
+            <span className="unit-name">Unit 15</span>
+          </button>
         </div>
       </div>
 
@@ -2671,13 +3550,13 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
           <button 
             className="grammar-nav-btn next" 
             onClick={() => {
-              const units = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5', 'unit6', 'unit7', 'unit8', 'unit9', 'unit10', 'unit11', 'unit12'];
+              const units = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5', 'unit6', 'unit7', 'unit8', 'unit9', 'unit10', 'unit11', 'unit12', 'unit13', 'unit14', 'unit15'];
               const currentIndex = units.indexOf(selectedUnit);
               if (currentIndex < units.length - 1) {
                 setSelectedUnit(units[currentIndex + 1]);
               }
             }}
-            disabled={selectedUnit === 'unit12'}
+            disabled={selectedUnit === 'unit15'}
           >
             Next Unit →
           </button>
