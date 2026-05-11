@@ -15,6 +15,33 @@ export interface VocabularyItem {
   /** Kanji representation (optional - not all words have kanji) */
   kanji: string | null;
   
+  /** Romanized pronunciation (romaji) */
+  romaji?: string;
+  
+  /** Category for organization (pronoun, occupation, country, greeting, grammar) */
+  category?: VocabularyCategory;
+  
+  /** Tags for flexible filtering and grouping */
+  tags?: string[];
+  
+  /** Example sentence in Japanese (with kanji) */
+  exampleSentence?: string;
+  
+  /** Example sentence in hiragana only */
+  exampleSentenceHiragana?: string;
+  
+  /** Vietnamese translation of example sentence */
+  exampleTranslationVi?: string;
+  
+  /** Unit/lesson number for curriculum organization */
+  unit?: number;
+  
+  /** Difficulty level (N5 = 1, N4 = 2, N3 = 3, N2 = 4, N1 = 5) */
+  difficulty?: 1 | 2 | 3 | 4 | 5;
+  
+  /** Audio pronunciation URL (for future enhancement) */
+  audioUrl?: string;
+  
   /** Creation timestamp */
   createdAt: number;
   
@@ -26,16 +53,35 @@ export interface VocabularyItem {
   
   /** Personal note or memory hint */
   note?: string;
-  
-  /** Category for organization */
-  category?: string;
-  
-  // Future extensibility fields (commented for v2):
-  // romaji?: string;
-  // exampleSentence?: string;
-  // audioUrl?: string;
-  // difficulty?: 1 | 2 | 3 | 4 | 5;
-  // tags?: string[];
+}
+
+export type VocabularyCategory = 
+  | 'pronoun'
+  | 'people'
+  | 'occupation'
+  | 'country'
+  | 'place'
+  | 'greeting'
+  | 'grammar'
+  | 'question'
+  | 'number'
+  | 'honorific'
+  | 'phrase'
+  | 'verb'
+  | 'interjection'
+  | 'transportation'
+  | 'time'
+
+/**
+ * Filter criteria for vocabulary search
+ */
+export interface VocabularyFilter {
+  category?: VocabularyCategory;
+  unit?: number;
+  tags?: string[];
+  searchTerm?: string;
+  difficulty?: number;
+  isFavorite?: boolean;
 }
 
 /**
@@ -54,6 +100,10 @@ export interface UpdateVocabularyDto {
   vietnamese?: string;
   hiragana?: string;
   kanji?: string | null;
+  isFavorite?: boolean;
+  note?: string;
+  category?: VocabularyCategory;
+  tags?: string[];
 }
 
 /**

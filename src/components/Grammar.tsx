@@ -37,7 +37,6 @@ interface GrammarProps {
 
 export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
   const [selectedUnit, setSelectedUnit] = useState<string>('unit1');
-  const [expandedSection, setExpandedSection] = useState<string | null>('intro');
 
   const grammarLessons: Record<string, GrammarLesson> = {
     unit1: {
@@ -3347,10 +3346,6 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
         }
       ]
     }
-  };
-
-  const toggleSection = (sectionId: string) => {
-    setExpandedSection(expandedSection === sectionId ? null : sectionId);
   };
 
   const renderContent = (content: GrammarContent, index: number) => {

@@ -193,6 +193,24 @@
   color: #38f9d7;
 }
 
+.kanji-card::before {
+  background: linear-gradient(90deg, #fa709a, #fee140);
+}
+
+.kanji-card .stat-badge,
+.kanji-card .feature-tag {
+  background: rgba(250, 112, 154, 0.1);
+  color: #fa709a;
+}
+
+.kanji-card .card-cta {
+  color: #fa709a;
+}
+
+.kanji-card:hover .card-cta {
+  color: #fee140;
+}
+
 /* Quick Stats Section */
 .home-quick-stats {
   background: var(--card-bg, #ffffff);

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FlashcardMode } from './types/vocabulary';
 import { LocalStorageVocabularyStorage } from './services/LocalStorageVocabularyStorage';
 import { useVocabulary } from './hooks/useVocabulary';
@@ -8,17 +8,19 @@ import { Flashcard } from './components/Flashcard';
 import { FlashcardControls } from './components/FlashcardControls';
 import { ModeSelector } from './components/ModeSelector';
 import { VocabularyManager } from './components/VocabularyManager';
+import { VocabularyTable } from './components/VocabularyTable';
 import { StatisticsPanel } from './components/StatisticsPanel';
 import { Home } from './components/Home';
 import { Navigation } from './components/Navigation';
 import { Grammar } from './components/Grammar';
+import { Kanji } from './components/Kanji';
 import './App.css';
 
 // Initialize storage (can be swapped with ApiVocabularyStorage)
 const storage = new LocalStorageVocabularyStorage();
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'flashcards' | 'vocabulary' | 'alphabet' | 'grammar'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'flashcards' | 'vocabulary' | 'alphabet' | 'grammar' | 'kanji'>('home');
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode');
     return saved === 'true';
@@ -26,7 +28,21 @@ function App() {
   
   const [autoPlay, setAutoPlay] = useState(false);
   const [autoPlaySpeed] = useState(3000); // 3 seconds
-  const [showStats, setShowStats] = useState(false);
+  const [showStats] = useState(false);
+  const [selectedFlashcardUnit, setSelectedFlashcardUnit] = useState<number | 'all'>('all');
+  const [selectedVocabularyUnit, setSelectedVocabularyUnit] = useState<number | 'all'>('all');
+
+  // Navigation handler
+  const handleNavigate = (page: string) => {
+    setCurrentPage(page as 'home' | 'flashcards' | 'vocabulary' | 'alphabet' | 'grammar' | 'kanji');
+  };
+
+  // Handle flashcard practice start with unit selection
+  const handleStartPractice = (unit: number | 'all') => {
+    setSelectedFlashcardUnit(unit);
+    setSelectedVocabularyUnit(unit); // Sync vocabulary unit with flashcard unit
+    setCurrentPage('flashcards');
+  };
 
   // Apply dark mode
   useEffect(() => {
@@ -36,6 +52,22 @@ function App() {
   // Vocabulary management
   const { vocabulary, loading, error, create, update, remove, refresh } = useVocabulary(storage);
 
+  // Filter vocabulary for flashcards based on selected unit
+  const flashcardVocabulary = useMemo(() => {
+    if (selectedFlashcardUnit === 'all') {
+      return vocabulary;
+    }
+    return vocabulary.filter(v => v.unit === selectedFlashcardUnit);
+  }, [vocabulary, selectedFlashcardUnit]);
+
+  // Filter vocabulary for management based on selected unit
+  const managedVocabulary = useMemo(() => {
+    if (selectedVocabularyUnit === 'all') {
+      return vocabulary;
+    }
+    return vocabulary.filter(v => v.unit === selectedVocabularyUnit);
+  }, [vocabulary, selectedVocabularyUnit]);
+
   // Flashcard management
   const {
     state,
@@ -44,8 +76,9 @@ function App() {
     previous,
     changeMode,
     shuffle,
+    reset,
   } = useFlashcardManager({
-    vocabulary,
+    vocabulary: flashcardVocabulary,
     initialMode: FlashcardMode.VI_TO_HIRA,
   });
 
@@ -54,6 +87,11 @@ function App() {
 
   // Calculate statistics
   const statistics = useMemo(() => calculateStatistics(vocabulary), [vocabulary]);
+
+  // Cleanup flashcard state when unit changes
+  useEffect(() => {
+    reset();
+  }, [selectedFlashcardUnit, reset]);
 
   // Auto-play functionality
   useEffect(() => {
@@ -124,7 +162,7 @@ function App() {
       <div className="app">
         <Navigation
           currentPage={currentPage}
-          onNavigate={setCurrentPage}
+          onNavigate={handleNavigate}
           darkMode={darkMode}
           onThemeToggle={() => setDarkMode(!darkMode)}
         />
@@ -143,13 +181,13 @@ function App() {
     <div className="app">
       <Navigation
         currentPage={currentPage}
-        onNavigate={setCurrentPage}
+        onNavigate={handleNavigate}
         darkMode={darkMode}
         onThemeToggle={() => setDarkMode(!darkMode)}
       />
 
       {currentPage === 'home' ? (
-        <Home onNavigate={setCurrentPage} vocabularyCount={vocabulary.length} />
+        <Home onNavigate={handleNavigate} vocabularyCount={vocabulary.length} />
       ) : currentPage === 'flashcards' ? (
         <main className="app-main">
           {showStats && vocabulary.length > 0 && (
@@ -167,6 +205,17 @@ function App() {
             </div>
           ) : (
             <>
+              <div className="flashcard-unit-indicator">
+                <span className="unit-label">
+                  {selectedFlashcardUnit === 'all' 
+                    ? '📚 Luyện tập: Tất cả Units' 
+                    : `📖 Luyện tập: Unit ${selectedFlashcardUnit}`}
+                </span>
+                <span className="unit-count">
+                  {flashcardVocabulary.length} từ vựng
+                </span>
+              </div>
+
               <ModeSelector
                 currentMode={state.mode}
                 availableModes={availableModes}
@@ -215,7 +264,7 @@ function App() {
           )}
 
           <VocabularyManager
-            vocabulary={vocabulary}
+            vocabulary={flashcardVocabulary}
             onCreate={create}
             onUpdate={update}
             onDelete={remove}
@@ -223,11 +272,55 @@ function App() {
         </main>
       ) : currentPage === 'vocabulary' ? (
         <main className="app-main">
-          <div className="feature-placeholder">
-            <div className="placeholder-icon">📚</div>
-            <h2>Vocabulary Library</h2>
-            <p>Browse and organize vocabulary by units</p>
-            <p className="coming-soon">Coming soon...</p>
+          <div className="vocabulary-page">
+            <div className="page-header">
+              <h2>📚 Từ Vựng</h2>
+              <p>
+                {selectedVocabularyUnit === 'all' 
+                  ? `Tất cả Units - ${vocabulary.length} từ vựng`
+                  : `Unit ${selectedVocabularyUnit} - ${managedVocabulary.length} từ vựng`}
+              </p>
+            </div>
+            
+            {vocabulary.length === 0 ? (
+              <div className="empty-vocabulary">
+                <div className="empty-icon">📚</div>
+                <h3>Chào mừng đến Unit 1!</h3>
+                <p>Thư viện từ vựng của bạn sẽ được khởi tạo với 45 từ của Unit 1</p>
+                <p className="hint">Nếu bạn không thấy từ vựng, click nút bên dưới để tải Unit 1</p>
+                <button 
+                  onClick={async () => {
+                    // Force clear and reload
+                    localStorage.removeItem('nihongo_vocabulary_initialized');
+                    await refresh();
+                  }}
+                  className="back-to-home-btn"
+                >
+                  Tải Từ Vựng Unit 1
+                </button>
+              </div>
+            ) : (
+              <>
+                <VocabularyTable
+                  vocabulary={vocabulary}
+                  onStartPractice={handleStartPractice}
+                  selectedUnit={selectedVocabularyUnit}
+                  onUnitChange={setSelectedVocabularyUnit}
+                />
+
+                <div className="vocabulary-actions">
+                  <details className="advanced-management">
+                    <summary>⚙️ Quản lý nâng cao</summary>
+                    <VocabularyManager
+                      vocabulary={managedVocabulary}
+                      onCreate={create}
+                      onUpdate={update}
+                      onDelete={remove}
+                    />
+                  </details>
+                </div>
+              </>
+            )}
           </div>
         </main>
       ) : currentPage === 'alphabet' ? (
@@ -239,9 +332,11 @@ function App() {
             <p className="coming-soon">Coming soon...</p>
           </div>
         </main>
+      ) : currentPage === 'kanji' ? (
+        <Kanji onNavigate={handleNavigate} />
       ) : (
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Grammar onNavigate={setCurrentPage} />
+          <Grammar onNavigate={handleNavigate} />
         </div>
       )}
 

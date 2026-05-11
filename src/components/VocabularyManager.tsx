@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
-import { VocabularyItem, CreateVocabularyDto, SortOption } from '../types/vocabulary';
-import { sortVocabulary, filterVocabulary, getSortOptionName } from '../utils/flashcardHelpers';
+import { VocabularyItem, CreateVocabularyDto, UpdateVocabularyDto, SortOption } from '../types/vocabulary';
+import { sortVocabulary, filterVocabulary } from '../utils/flashcardHelpers';
 import './VocabularyManager.css';
 
 interface VocabularyManagerProps {
   vocabulary: VocabularyItem[];
   onCreate: (data: CreateVocabularyDto) => Promise<void>;
-  onUpdate: (id: string, data: Partial<CreateVocabularyDto>) => Promise<void>;
+  onUpdate: (id: string, data: UpdateVocabularyDto) => Promise<void>;
   onDelete: (id: string) => Promise<void>;
 }
 

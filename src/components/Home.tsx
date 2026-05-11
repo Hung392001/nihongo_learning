@@ -32,14 +32,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, vocabularyCount }) => {
         {/* Vocabulary Library Section */}
         <div className="home-card vocabulary-card" onClick={() => onNavigate('vocabulary')}>
           <div className="card-icon">📚</div>
-          <h3>Vocabulary Library</h3>
-          <p className="card-description">Browse vocabulary organized by units</p>
+          <h3>Từ Vựng</h3>
+          <p className="card-description">Xem danh sách từ vựng theo dạng bảng, có thể chuyển sang flashcard</p>
           <div className="card-features">
             <span className="feature-tag">Unit 1</span>
-            <span className="feature-tag">Unit 2</span>
-            <span className="feature-tag">More...</span>
+            <span className="feature-tag">45 từ</span>
+            <span className="feature-tag">Bảng + Flashcard</span>
           </div>
-          <div className="card-cta">Browse Library →</div>
+          <div className="card-cta">Xem Từ Vựng →</div>
         </div>
 
         {/* Alphabets Section */}
@@ -65,6 +65,19 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, vocabularyCount }) => {
             <span className="feature-tag">Exercises</span>
           </div>
           <div className="card-cta">Study Grammar →</div>
+        </div>
+
+        {/* Kanji Section */}
+        <div className="home-card kanji-card" onClick={() => onNavigate('kanji')}>
+          <div className="card-icon">🎌</div>
+          <h3>Kanji</h3>
+          <p className="card-description">Learn kanji characters and their stroke orders</p>
+          <div className="card-features">
+            <span className="feature-tag">Numbers 1-10</span>
+            <span className="feature-tag">Stroke Guide</span>
+            <span className="feature-tag">Visual Learning</span>
+          </div>
+          <div className="card-cta">Learn Kanji →</div>
         </div>
       </div>
 
