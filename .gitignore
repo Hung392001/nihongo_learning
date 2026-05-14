@@ -39,3 +39,9 @@ coverage
 # Temporary files
 *.tmp
 *.temp
+
+# Docker
+.docker
+
+# IDE
+.vscode/

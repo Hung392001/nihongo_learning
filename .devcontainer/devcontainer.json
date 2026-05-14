@@ -1,0 +1,42 @@
+{
+  "name": "Nihongo Learning Dev Container",
+  "dockerComposeFile": "docker-compose.dev.yml",
+  "service": "app",
+  "forwardPorts": [5173],
+  "remoteUser": "node",
+  "containerUser": "node",
+  "workspaceFolder": "/app",
+  "postCreateCommand": "rm -rf node_modules && npm install",
+  "postStartCommand": "npx vite --host --no-open",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "ms-vscode.vscode-node-azure-pack",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg",
+        "redhat.vscode-yaml",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "usernamehw.errorlens",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "eslint.enable": true,
+        "eslint.validate": ["typescript", "typescriptreact"],
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "files.autoSave": "onFocusChange",
+        "search.exclude": {
+          "**/node_modules": true,
+          "**/dist": true
+        },
+        "typescript.tsserver.watchFile": "dynamicPriorityPolling",
+        "remote.containers.reopenFolders": "onStart"
+      }
+    }
+  }
+}
