@@ -54,20 +54,28 @@ export const getKanjiByCharacter = async (character: string): Promise<KanjiData 
 
 /**
  * Search kanji by various criteria
+ * Supports searching by: kanji character, meaning, romaji (kname), hiragana (onyomi_ja, kunyomi_ja)
  */
 export const searchKanji = async (params: KanjiSearchParams): Promise<KanjiData[]> => {
   try {
     let results = [...kanjiDatabase];
 
     if (params.q) {
-      const query = params.q.toLowerCase();
+      const query = params.q.toLowerCase().trim();
       results = results.filter(
         k =>
+          // Search by kanji character (exact or partial)
           k.ka_utf.includes(query) ||
+          // Search by meaning
           k.meaning.toLowerCase().includes(query) ||
+          // Search by romaji (kname like "ichi", "ni", etc.)
+          k.kname.toLowerCase().includes(query) ||
+          // Search by on-yomi (both katakana and hiragana)
           k.onyomi.toLowerCase().includes(query) ||
+          k.onyomi_ja.toLowerCase().includes(query) ||
+          // Search by kun-yomi (both katakana and hiragana)
           k.kunyomi.toLowerCase().includes(query) ||
-          k.kname.toLowerCase().includes(query)
+          k.kunyomi_ja.toLowerCase().includes(query)
       );
     }
 
@@ -113,4 +121,15 @@ export const getRandomKanji = async (): Promise<KanjiData | null> => {
     console.error('Error fetching random kanji:', error);
     return null;
   }
+};
+
+/**
+ * Search kanji by simple query string
+ * Used for search box autocomplete
+ */
+export const searchKanjiByQuery = async (query: string): Promise<KanjiData[]> => {
+  if (!query.trim()) {
+    return [];
+  }
+  return searchKanji({ q: query, limit: 10 });
 };
