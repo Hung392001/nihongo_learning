@@ -6,8 +6,8 @@ interface UseVocabularyReturn {
   vocabulary: VocabularyItem[];
   loading: boolean;
   error: string | null;
-  create: (data: CreateVocabularyDto) => Promise<void>;
-  update: (id: string, data: UpdateVocabularyDto) => Promise<void>;
+  create: (data: CreateVocabularyDto) => Promise<VocabularyItem>;
+  update: (id: string, data: UpdateVocabularyDto) => Promise<VocabularyItem>;
   remove: (id: string) => Promise<void>;
   refresh: () => Promise<void>;
 }
@@ -16,7 +16,7 @@ interface UseVocabularyReturn {
  * Custom hook for managing vocabulary CRUD operations
  * Abstracts storage implementation details
  */
-export function useVocabulary(storage: IVocabularyStorage): UseVocabularyReturn {
+export function useVocabulary(storage: IVocabularyStorage | null): UseVocabularyReturn {
   const [vocabulary, setVocabulary] = useState<VocabularyItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -25,6 +25,12 @@ export function useVocabulary(storage: IVocabularyStorage): UseVocabularyReturn 
    * Load all vocabulary items
    */
   const loadVocabulary = useCallback(async () => {
+    if (!storage) {
+      setVocabulary([]);
+      setLoading(false);
+      return;
+    }
+    
     try {
       setLoading(true);
       setError(null);
@@ -42,10 +48,15 @@ export function useVocabulary(storage: IVocabularyStorage): UseVocabularyReturn 
    * Create a new vocabulary item
    */
   const create = useCallback(async (data: CreateVocabularyDto) => {
+    if (!storage) {
+      throw new Error('Storage not initialized');
+    }
+    
     try {
       setError(null);
       const newItem = await storage.create(data);
       setVocabulary(prev => [...prev, newItem]);
+      return newItem;
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Failed to create vocabulary';
       setError(errorMsg);
@@ -57,12 +68,17 @@ export function useVocabulary(storage: IVocabularyStorage): UseVocabularyReturn 
    * Update an existing vocabulary item
    */
   const update = useCallback(async (id: string, data: UpdateVocabularyDto) => {
+    if (!storage) {
+      throw new Error('Storage not initialized');
+    }
+    
     try {
       setError(null);
       const updatedItem = await storage.update(id, data);
       setVocabulary(prev => 
         prev.map(item => item.id === id ? updatedItem : item)
       );
+      return updatedItem;
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Failed to update vocabulary';
       setError(errorMsg);
@@ -74,6 +90,10 @@ export function useVocabulary(storage: IVocabularyStorage): UseVocabularyReturn 
    * Delete a vocabulary item
    */
   const remove = useCallback(async (id: string) => {
+    if (!storage) {
+      throw new Error('Storage not initialized');
+    }
+    
     try {
       setError(null);
       await storage.delete(id);

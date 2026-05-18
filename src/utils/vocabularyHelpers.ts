@@ -363,6 +363,10 @@ export const CATEGORY_LABELS: Record<VocabularyCategory | 'other', string> = {
   number: 'Số đếm',
   honorific: 'Kính ngữ',
   phrase: 'Cụm từ',
+  verb: 'Động từ',
+  interjection: 'Thán từ',
+  transportation: 'Phương tiện',
+  time: 'Thời gian',
   other: 'Khác',
 };
 

@@ -1,26 +1,80 @@
-version: '3.8'
+version: "3.8"
 
 services:
+  # PostgreSQL Database with pgvector
+  db:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=nihongo_learning
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Backend API Server
+  server:
+    build:
+      context: ..
+      dockerfile: Dockerfile.server
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/nihongo_learning
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=nihongo_learning
+    ports:
+      - "3001:3001"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ..:/app
+    working_dir: /app/server
+    command: sh -c "cd /app/db && npm install && npm run db:push && cd /app/server && npm install && npm run dev"
+    tty: true
+
+  # Frontend React App
   app:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
-    
+
     working_dir: /app
-    
+
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
       - VITE_APP_ENV=development
-    
+      - VITE_API_BASE=http://localhost:3001/api
+      - VITE_ASSET_STORAGE_TYPE=r2
+      - VITE_R2_ACCOUNT_ID=
+      - VITE_R2_BUCKET_NAME=kanji
+      - VITE_R2_PUBLIC_DOMAIN=pub-5b960731e8a84853bb330dec843a0f02.r2.dev
+
     volumes:
       # Mount host project into /app
       - ..:/app:cached
       # Only dist needs a separate volume to avoid host contamination
       - /app/dist
-    
+
     ports:
       - "5173:5173"
-    
+
     tty: true
     stdin_open: true
+    depends_on:
+      - server
+
+volumes:
+  postgres-data:

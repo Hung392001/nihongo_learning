@@ -99,6 +99,26 @@ body {
   padding: 20px;
 }
 
+.app-main.with-sidebar {
+  margin-left: 280px;
+}
+
+/* Adjust main content when sidebar is collapsed */
+body.sidebar-collapsed .app-main.with-sidebar {
+  margin-left: 60px;
+}
+
+/* Mobile: sidebar goes over content (full height, fixed position) */
+@media (max-width: 768px) {
+  .app-main.with-sidebar {
+    margin-left: 0;
+  }
+  
+  body.sidebar-collapsed .app-main.with-sidebar {
+    margin-left: 0;
+  }
+}
+
 .loading,
 .error {
   display: flex;
@@ -231,6 +251,36 @@ body {
   border-radius: 20px;
 }
 
+.clear-deck-selection {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-deck-selection:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+[data-theme="dark"] .clear-deck-selection {
+  background: rgba(51, 65, 85, 0.6);
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .clear-deck-selection:hover {
+  background: rgba(51, 65, 85, 0.8);
+}
+
 [data-theme="dark"] .flashcard-unit-indicator {
   background: rgba(51, 65, 85, 0.6);
   border-color: rgba(148, 163, 184, 0.2);
@@ -240,6 +290,91 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+/* Flashcard Management Controls */
+.flashcard-management-controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.manage-decks-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  color: #334155;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.manage-decks-btn:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Flashcard Deck Controls (for flashcards page) */
+.flashcard-deck-controls {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.flashcard-list-btn,
+.save-to-deck-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.flashcard-list-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.flashcard-list-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.save-to-deck-btn {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+}
+
+.save-to-deck-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.save-to-deck-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #94a3b8;
+}
+
+/* Dark mode support for new buttons */
+[data-theme="dark"] .flashcard-list-btn,
+[data-theme="dark"] .save-to-deck-btn {
+  color: white;
 }
 
 .auto-play-button {
@@ -274,6 +409,17 @@ body {
 .auto-play-button.active:hover {
   background: #5568d3;
   border-color: #5568d3;
+}
+
+[data-theme="dark"] .manage-decks-btn {
+  background: rgba(51, 65, 85, 0.6);
+  border-color: rgba(148, 163, 184, 0.2);
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .manage-decks-btn:hover {
+  background: rgba(51, 65, 85, 0.8);
+  border-color: rgba(148, 163, 184, 0.4);
 }
 
 [data-theme="dark"] .auto-play-button {
@@ -506,8 +652,57 @@ kbd {
 /* Vocabulary Page Styles */
 .vocabulary-page {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+}
+
+.load-unit-btn {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.load-unit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+[data-theme="dark"] .load-unit-btn {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+/* Migration Controls */
+.vocabulary-migration-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.migrate-all-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.migrate-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="dark"] .migrate-all-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
 }
 
 .page-header {

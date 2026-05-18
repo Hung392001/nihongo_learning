@@ -1,0 +1,5174 @@
+-- Drizzle Kit Migration
+-- Generated: 2026-05-15 16:36:53
+-- Seeds all vocabulary data for Units 1-5, 21
+
+-- Count: 272 total items
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-001',
+    'わたし',
+    '私',
+    'Tôi',
+    'pronoun',
+    '{"basic", "pronoun", "self"}',
+    '私は学生です。',
+    'わたしはがくせいです。',
+    'Tôi là sinh viên.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-002',
+    'わたしたち',
+    '私たち',
+    'Chúng tôi',
+    'pronoun',
+    '{"basic", "pronoun", "plural"}',
+    '私たちは日本人です。',
+    'わたしたちはにほんじんです。',
+    'Chúng tôi là người Nhật.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-003',
+    'あなた',
+    NULL,
+    'Anh/chị, ông/bà, bạn (ngôi thứ 2 số ít)',
+    'pronoun',
+    '{"basic", "pronoun", "second-person"}',
+    'あなたは先生ですか。',
+    'あなたはせんせいですか。',
+    'Anh/chị là giáo viên phải không?',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-004',
+    'あのひと',
+    'あの人',
+    'Người kia',
+    'pronoun',
+    '{"basic", "pronoun", "third-person"}',
+    'あの人は医者です。',
+    'あのひとはいしゃです。',
+    'Người kia là bác sĩ.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-005',
+    'あのかた',
+    'あの方',
+    'Vị này (Lịch sự tương đương với あのひと)',
+    'pronoun',
+    '{"polite", "pronoun", "third-person", "honorific"}',
+    'あの方は田中先生です。',
+    'あのかたはたなかせんせいです。',
+    'Vị kia là thầy Tanaka.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-006',
+    'みなさん',
+    '皆さん',
+    'Các bạn, các anh, các chị, mọi người',
+    'pronoun',
+    '{"polite", "pronoun", "plural"}',
+    '皆さん、おはようございます。',
+    'みなさん、おはようございます。',
+    'Chào buổi sáng mọi người.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-007',
+    '～さん',
+    NULL,
+    'Anh ~, Chị ~, Ông ~, Bà ~ (cách gọi người khác 1 cách lịch sự)',
+    'honorific',
+    '{"suffix", "polite", "honorific"}',
+    '田中さんは会社員です。',
+    'たなかさんはかいしゃいんです。',
+    'Anh/chị Tanaka là nhân viên công ty.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-008',
+    '～ちゃん',
+    NULL,
+    'Bé (dùng cho nữ) hoặc gọi thân mật cho trẻ con (cả nam lẫn nữ)',
+    'honorific',
+    '{"suffix", "casual", "cute", "children"}',
+    'さくらちゃんは5歳です。',
+    'さくらちゃんは5さいです。',
+    'Bé Sakura 5 tuổi.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-009',
+    '～くん',
+    NULL,
+    'Bé (dùng cho nam) hoặc gọi thân mật',
+    'honorific',
+    '{"suffix", "casual", "male"}',
+    '山田くんは学生です。',
+    'やまだくんはがくせいです。',
+    'Bạn Yamada là sinh viên.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-010',
+    '～じん',
+    '～人',
+    'Người nước ~',
+    'grammar',
+    '{"suffix", "nationality", "pattern"}',
+    '私はベトナム人です。',
+    'わたしはベトナムじんです。',
+    'Tôi là người Việt Nam.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-011',
+    'せんせい',
+    '先生',
+    'Giáo viên',
+    'occupation',
+    '{"job", "teacher", "honorific"}',
+    '山田さんは先生です。',
+    'やまださんはせんせいです。',
+    'Anh/chị Yamada là giáo viên.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-012',
+    'きょうし',
+    '教師',
+    'Giáo viên (dùng để nói đến nghề nghiệp)',
+    'occupation',
+    '{"job", "teacher", "profession"}',
+    '私の仕事は教師です。',
+    'わたしのしごとはきょうしです。',
+    'Công việc của tôi là giáo viên.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-013',
+    'がくせい',
+    '学生',
+    'Học sinh, sinh viên',
+    'occupation',
+    '{"job", "student"}',
+    '私は大学の学生です。',
+    'わたしはだいがくのがくせいです。',
+    'Tôi là sinh viên đại học.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-014',
+    'かいしゃいん',
+    '会社員',
+    'Nhân viên công ty',
+    'occupation',
+    '{"job", "office-worker"}',
+    '父は会社員です。',
+    'ちちはかいしゃいんです。',
+    'Bố tôi là nhân viên công ty.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-015',
+    '～しゃいん',
+    '～社員',
+    'Nhân viên công ty ～',
+    'grammar',
+    '{"suffix", "job", "pattern"}',
+    '田中さんは銀行社員です。',
+    'たなかさんはぎんこうしゃいんです。',
+    'Anh/chị Tanaka là nhân viên ngân hàng.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-016',
+    'ぎんこういん',
+    '銀行員',
+    'Nhân viên ngân hàng',
+    'occupation',
+    '{"job", "bank", "finance"}',
+    '兄は銀行員です。',
+    'あにはぎんこういんです。',
+    'Anh trai tôi là nhân viên ngân hàng.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-017',
+    'いしゃ',
+    '医者',
+    'Bác sĩ',
+    'occupation',
+    '{"job", "medical", "doctor"}',
+    '母は医者です。',
+    'ははいしゃです。',
+    'Mẹ tôi là bác sĩ.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-018',
+    'けんきゅうしゃ',
+    '研究者',
+    'Nhà nghiên cứu',
+    'occupation',
+    '{"job", "research", "academic"}',
+    '彼は大学の研究者です。',
+    'かれはだいがくのけんきゅうしゃです。',
+    'Anh ấy là nhà nghiên cứu đại học.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-019',
+    'エンジニア',
+    NULL,
+    'Kỹ sư',
+    'occupation',
+    '{"job", "engineer", "katakana"}',
+    '私はエンジニアです。',
+    'わたしはエンジニアです。',
+    'Tôi là kỹ sư.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-020',
+    'だいがく',
+    '大学',
+    'Trường đại học',
+    'place',
+    '{"place", "education", "university"}',
+    '大学で勉強します。',
+    'だいがくでべんきょうします。',
+    'Học ở đại học.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-021',
+    'びょういん',
+    '病院',
+    'Bệnh viện',
+    'place',
+    '{"place", "medical", "hospital"}',
+    '病院で働きます。',
+    'びょういんではたらきます。',
+    'Làm việc ở bệnh viện.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-022',
+    'でんき',
+    '電気',
+    'Điện, đèn điện',
+    'people',
+    '{"company-name", "field"}',
+    '電気会社の社員です。',
+    'でんきがいしゃのしゃいんです。',
+    'Là nhân viên công ty điện.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-023',
+    'だれ（どなた）',
+    '誰',
+    'Ai (ngài nào, vị nào)',
+    'question',
+    '{"question-word", "who"}',
+    'あの人は誰ですか。',
+    'あのひとはだれですか。',
+    'Người kia là ai?',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-024',
+    '～さい',
+    '～歳',
+    'Tuổi',
+    'number',
+    '{"age", "counter", "suffix"}',
+    '私は25歳です。',
+    'わたしは25さいです。',
+    'Tôi 25 tuổi.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-025',
+    'なんさい',
+    '何歳',
+    'Mấy tuổi',
+    'question',
+    '{"question-word", "age"}',
+    'あなたは何歳ですか。',
+    'あなたはなんさいですか。',
+    'Bạn mấy tuổi?',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-026',
+    'はい',
+    NULL,
+    'Vâng',
+    'greeting',
+    '{"response", "yes", "polite"}',
+    'はい、そうです。',
+    'はい、そうです。',
+    'Vâng, đúng vậy.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-027',
+    'いいえ',
+    NULL,
+    'Không',
+    'greeting',
+    '{"response", "no", "polite"}',
+    'いいえ、違います。',
+    'いいえ、ちがいます。',
+    'Không, sai rồi.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-028',
+    'しつれいですが',
+    '失礼ですが',
+    'Xin lỗi (khi muốn nhờ ai việc gì đó)',
+    'phrase',
+    '{"polite", "opening", "formal"}',
+    '失礼ですが、お名前は？',
+    'しつれいですが、おなまえは？',
+    'Xin lỗi, tên bạn là gì?',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-029',
+    'おなまえは',
+    'お名前は',
+    'Bạn tên gì?',
+    'phrase',
+    '{"question", "name", "polite"}',
+    'お名前は何ですか。',
+    'おなまえはなんですか。',
+    'Tên bạn là gì?',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-030',
+    'はじめまして',
+    '初めて',
+    'Chào lần đầu gặp nhau',
+    'greeting',
+    '{"greeting", "first-meeting", "polite"}',
+    'はじめまして。田中です。',
+    'はじめまして。たなかです。',
+    'Rất vui được gặp. Tôi là Tanaka.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-031',
+    'どうぞよろしく[おねがいします]',
+    'どうぞよろしく「お願いします」',
+    'Rất hân hạnh được làm quen',
+    'greeting',
+    '{"greeting", "first-meeting", "polite", "keigo"}',
+    'どうぞよろしくお願いします。',
+    'どうぞよろしくおねがいします。',
+    'Rất hân hạnh được làm quen.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-032',
+    'こちらは～さんです',
+    NULL,
+    'Đây là ngài ～',
+    'phrase',
+    '{"introduction", "pattern", "polite"}',
+    'こちらは田中さんです。',
+    'こちらはたなかさんです。',
+    'Đây là anh/chị Tanaka.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-033',
+    '～からきました',
+    '～から来ました',
+    'Đến từ ～',
+    'phrase',
+    '{"origin", "pattern", "self-introduction"}',
+    'ベトナムから来ました。',
+    'ベトナムからきました。',
+    'Tôi đến từ Việt Nam.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-034',
+    'アメリカ',
+    NULL,
+    'Mỹ',
+    'country',
+    '{"country", "katakana", "geography"}',
+    'アメリカから来ました。',
+    'アメリカからきました。',
+    'Tôi đến từ Mỹ.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-035',
+    'イギリス',
+    NULL,
+    'Anh',
+    'country',
+    '{"country", "katakana", "geography"}',
+    'イギリス人です。',
+    'イギリスじんです。',
+    'Tôi là người Anh.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-036',
+    'インド',
+    NULL,
+    'Ấn Độ',
+    'country',
+    '{"country", "katakana", "geography"}',
+    'インド料理が好きです。',
+    'インドりょうりがすきです。',
+    'Tôi thích món ăn Ấn Độ.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-037',
+    'インドネシア',
+    NULL,
+    'Indonesia',
+    'country',
+    '{"country", "katakana", "geography", "southeast-asia"}',
+    'インドネシアから来ました。',
+    'インドネシアからきました。',
+    'Tôi đến từ Indonesia.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-038',
+    'かんこく',
+    '韓国',
+    'Hàn Quốc',
+    'country',
+    '{"country", "geography", "east-asia"}',
+    '韓国の会社員です。',
+    'かんこくのかいしゃいんです。',
+    'Tôi là nhân viên công ty Hàn Quốc.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-039',
+    'タイ',
+    NULL,
+    'Thái Lan',
+    'country',
+    '{"country", "katakana", "geography", "southeast-asia"}',
+    'タイ人の友達です。',
+    'タイじんのともだちです。',
+    'Bạn người Thái.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-040',
+    'ちゅうごく',
+    '中国',
+    'Trung Quốc',
+    'country',
+    '{"country", "geography", "east-asia"}',
+    '中国語を勉強します。',
+    'ちゅうごくごをべんきょうします。',
+    'Học tiếng Trung.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-041',
+    'ドイツ',
+    NULL,
+    'Đức',
+    'country',
+    '{"country", "katakana", "geography", "europe"}',
+    'ドイツの大学です。',
+    'ドイツのだいがくです。',
+    'Đại học ở Đức.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-042',
+    'にほん',
+    '日本',
+    'Nhật Bản',
+    'country',
+    '{"country", "geography", "east-asia"}',
+    '日本語を勉強します。',
+    'にほんごをべんきょうします。',
+    'Học tiếng Nhật.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-043',
+    'フランス',
+    NULL,
+    'Pháp',
+    'country',
+    '{"country", "katakana", "geography", "europe"}',
+    'フランス人です。',
+    'フランスじんです。',
+    'Tôi là người Pháp.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-044',
+    'ブラジル',
+    NULL,
+    'Brazil',
+    'country',
+    '{"country", "katakana", "geography", "south-america"}',
+    'ブラジルから来ました。',
+    'ブラジルからきました。',
+    'Tôi đến từ Brazil.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit1-045',
+    'さくらだいがく',
+    'さくら大学',
+    'Trường ĐH Sakura (Hoa Anh Đào)',
+    'place',
+    '{"university", "proper-noun", "place"}',
+    'さくら大学の学生です。',
+    'さくらだいがくのがくせいです。',
+    'Tôi là sinh viên Đại học Sakura.',
+    1,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-001',
+    'これ',
+    NULL,
+    'Cái này, đây (vật ở gần người nói)',
+    'pronoun',
+    '{"demonstrative", "pronoun", "basic", "this"}',
+    'これは本です。',
+    'これはほんです。',
+    'Đây là sách.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-002',
+    'それ',
+    NULL,
+    'Cái đó, đó (vật ở gần người nghe)',
+    'pronoun',
+    '{"demonstrative", "pronoun", "basic", "that"}',
+    'それは何ですか。',
+    'それはなんですか。',
+    'Đó là cái gì?',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-003',
+    'あれ',
+    NULL,
+    'Cái kia, kia (vật ở xa cả người nói và người nghe)',
+    'pronoun',
+    '{"demonstrative", "pronoun", "basic", "that-over-there"}',
+    'あれは私の車です。',
+    'あれはわたしのくるまです。',
+    'Kia là xe của tôi.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-004',
+    'この～',
+    NULL,
+    '~ này',
+    'grammar',
+    '{"demonstrative", "determiner", "pattern", "this"}',
+    'この本は面白いです。',
+    'このほんはおもしろいです。',
+    'Cuốn sách này thú vị.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-005',
+    'その～',
+    NULL,
+    '~ đó',
+    'grammar',
+    '{"demonstrative", "determiner", "pattern", "that"}',
+    'その時計は高いです。',
+    'そのとけいはたかいです。',
+    'Chiếc đồng hồ đó đắt.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-006',
+    'あの～',
+    NULL,
+    '~ kia',
+    'grammar',
+    '{"demonstrative", "determiner", "pattern", "that-over-there"}',
+    'あのカメラは新しいです。',
+    'あのカメラはあたらしいです。',
+    'Máy ảnh kia mới.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-007',
+    'ほん',
+    '本',
+    'Sách',
+    'people',
+    '{"object", "reading", "education", "basic"}',
+    '本を読みます。',
+    'ほんをよみます。',
+    'Đọc sách.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-008',
+    'じしょ',
+    '辞書',
+    'Từ điển',
+    'people',
+    '{"object", "reading", "education", "reference"}',
+    '辞書で調べます。',
+    'じしょでしらべます。',
+    'Tra từ điển.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-009',
+    'ざっし',
+    '雑誌',
+    'Tạp chí',
+    'people',
+    '{"object", "reading", "media"}',
+    '雑誌を買います。',
+    'ざっしをかいます。',
+    'Mua tạp chí.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-010',
+    'しんぶん',
+    '新聞',
+    'Báo',
+    'people',
+    '{"object", "reading", "media", "news"}',
+    '新聞を読みます。',
+    'しんぶんをよみます。',
+    'Đọc báo.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-011',
+    'ノート',
+    NULL,
+    'Vở',
+    'people',
+    '{"stationery", "object", "education", "katakana"}',
+    'ノートに書きます。',
+    'ノートにかきます。',
+    'Viết vào vở.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-012',
+    'てちょう',
+    '手帳',
+    'Sổ tay',
+    'people',
+    '{"stationery", "object", "office"}',
+    '手帳にメモします。',
+    'てちょうにメモします。',
+    'Ghi vào sổ tay.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-013',
+    'めいし',
+    '名刺',
+    'Danh thiếp',
+    'people',
+    '{"object", "business", "office"}',
+    '名刺をください。',
+    'めいしをください。',
+    'Cho tôi xin danh thiếp.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-014',
+    'カード',
+    NULL,
+    'Thẻ, cạc',
+    'people',
+    '{"object", "katakana", "basic"}',
+    'カードで払います。',
+    'カードではらいます。',
+    'Trả bằng thẻ.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-015',
+    'テレホンカード',
+    NULL,
+    'Thẻ điện thoại',
+    'people',
+    '{"object", "katakana", "phone"}',
+    'テレホンカードを買います。',
+    'テレホンカードをかいます。',
+    'Mua thẻ điện thoại.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-016',
+    'えんぴつ',
+    '鉛筆',
+    'Bút chì',
+    'people',
+    '{"stationery", "object", "writing", "education"}',
+    '鉛筆で書きます。',
+    'えんぴつでかきます。',
+    'Viết bằng bút chì.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-017',
+    'ボールペン',
+    NULL,
+    'Bút bi',
+    'people',
+    '{"stationery", "object", "writing", "katakana"}',
+    'ボールペンを貸してください。',
+    'ボールペンをかしてください。',
+    'Cho tôi mượn bút bi.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-018',
+    'シャープペンシル',
+    NULL,
+    'Bút chì kim, bút chì bấm',
+    'people',
+    '{"stationery", "object", "writing", "katakana"}',
+    'シャープペンシルがあります。',
+    'シャープペンシルがあります。',
+    'Có bút chì kim.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-019',
+    'かぎ',
+    '鍵',
+    'Chìa khóa',
+    'people',
+    '{"object", "daily-life", "basic"}',
+    '鍵をなくしました。',
+    'かぎをなくしました。',
+    'Làm mất chìa khóa.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-020',
+    'とけい',
+    '時計',
+    'Đồng hồ',
+    'people',
+    '{"object", "time", "daily-life"}',
+    '時計を見ます。',
+    'とけいをみます。',
+    'Nhìn đồng hồ.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-021',
+    'かさ',
+    '傘',
+    'Ô, dù',
+    'people',
+    '{"object", "weather", "daily-life"}',
+    '傘を持っていきます。',
+    'かさをもっていきます。',
+    'Mang theo ô.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-022',
+    'かばん',
+    NULL,
+    'Cặp sách, túi sách',
+    'people',
+    '{"object", "daily-life", "bag"}',
+    'かばんを買います。',
+    'かばんをかいます。',
+    'Mua cặp sách.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-023',
+    '[カセット]テープ',
+    NULL,
+    'Băng [cát-xét]',
+    'people',
+    '{"electronics", "object", "media", "katakana"}',
+    'テープを聞きます。',
+    'テープをききます。',
+    'Nghe băng cassette.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-024',
+    'テープレコーダー',
+    NULL,
+    'Máy ghi âm',
+    'people',
+    '{"electronics", "object", "media", "katakana"}',
+    'テープレコーダーで録音します。',
+    'テープレコーダーでろくおんします。',
+    'Ghi âm bằng máy ghi âm.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-025',
+    'テレビ',
+    NULL,
+    'Tivi',
+    'people',
+    '{"electronics", "object", "media", "katakana", "basic"}',
+    'テレビを見ます。',
+    'テレビをみます。',
+    'Xem tivi.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-026',
+    'ラジオ',
+    NULL,
+    'Radio',
+    'people',
+    '{"electronics", "object", "media", "katakana"}',
+    'ラジオを聞きます。',
+    'ラジオをききます。',
+    'Nghe radio.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-027',
+    'カメラ',
+    NULL,
+    'Máy ảnh',
+    'people',
+    '{"electronics", "object", "photography", "katakana"}',
+    'カメラで写真を撮ります。',
+    'カメラでしゃしんをとります。',
+    'Chụp ảnh bằng máy ảnh.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-028',
+    'コンピュータ',
+    NULL,
+    'Máy vi tính',
+    'people',
+    '{"electronics", "object", "computer", "katakana"}',
+    'コンピュータで仕事をします。',
+    'コンピュータでしごとをします。',
+    'Làm việc trên máy vi tính.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-029',
+    'じどうしゃ',
+    '自動車',
+    'Ô tô, xe hơi',
+    'people',
+    '{"vehicle", "object", "transportation"}',
+    '自動車で行きます。',
+    'じどうしゃでいきます。',
+    'Đi bằng ô tô.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-030',
+    'つくえ',
+    '机',
+    'Cái bàn',
+    'people',
+    '{"furniture", "object", "daily-life"}',
+    '机の上に本があります。',
+    'つくえのうえにほんがあります。',
+    'Có sách trên bàn.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-031',
+    'いす',
+    '椅子',
+    'Ghế',
+    'people',
+    '{"furniture", "object", "daily-life"}',
+    '椅子に座ります。',
+    'いすにすわります。',
+    'Ngồi lên ghế.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-032',
+    'チョコレート',
+    NULL,
+    'Chocolate',
+    'people',
+    '{"food", "object", "katakana", "sweet"}',
+    'チョコレートが好きです。',
+    'チョコレートがすきです。',
+    'Thích chocolate.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-033',
+    'コーヒー',
+    NULL,
+    'Cà phê',
+    'people',
+    '{"drink", "object", "katakana", "beverage"}',
+    'コーヒーを飲みます。',
+    'コーヒーをのみます。',
+    'Uống cà phê.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-034',
+    'えいご',
+    '英語',
+    'Tiếng Anh',
+    'people',
+    '{"language", "education"}',
+    '英語を勉強します。',
+    'えいごをべんきょうします。',
+    'Học tiếng Anh.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-035',
+    'にほんご',
+    '日本語',
+    'Tiếng Nhật',
+    'people',
+    '{"language", "education"}',
+    '日本語を話します。',
+    'にほんごをはなします。',
+    'Nói tiếng Nhật.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-036',
+    '～ご',
+    '～語',
+    'Tiếng ~',
+    'grammar',
+    '{"suffix", "language", "pattern"}',
+    'フランス語が話せます。',
+    'フランスごがはなせます。',
+    'Nói được tiếng Pháp.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-037',
+    'なん',
+    '何',
+    'Cái gì',
+    'question',
+    '{"question-word", "what", "basic"}',
+    'これは何ですか。',
+    'これはなんですか。',
+    'Đây là cái gì?',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-038',
+    'そう',
+    NULL,
+    'Đúng vậy',
+    'phrase',
+    '{"expression", "agreement", "basic"}',
+    'そうです。',
+    'そうです。',
+    'Đúng vậy.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-039',
+    'ちがいます',
+    '違います',
+    'Nhầm rồi',
+    'phrase',
+    '{"expression", "disagreement", "basic"}',
+    'いいえ、違います。',
+    'いいえ、ちがいます。',
+    'Không, nhầm rồi.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-040',
+    'そうですか',
+    NULL,
+    'Thế à?',
+    'phrase',
+    '{"expression", "response", "surprise"}',
+    'そうですか。知りませんでした。',
+    'そうですか。しりませんでした。',
+    'Thế à? Tôi không biết.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-041',
+    'あのう',
+    NULL,
+    'À… (được sử dụng để thể hiện sự do dự)',
+    'phrase',
+    '{"expression", "hesitation", "filler"}',
+    'あのう、すみません。',
+    'あのう、すみません。',
+    'À… xin lỗi.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-042',
+    'ほんのきもちです',
+    'ほんの気持ちです',
+    'Đây là chút quà nhỏ của tôi',
+    'phrase',
+    '{"expression", "gift", "polite", "giving"}',
+    'ほんの気持ちです。どうぞ。',
+    'ほんのきもちです。どうぞ。',
+    'Đây là chút quà nhỏ của tôi. Xin mời.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-043',
+    'どうぞ',
+    NULL,
+    'Xin mời',
+    'phrase',
+    '{"expression", "offering", "polite"}',
+    'どうぞお入りください。',
+    'どうぞおはいりください。',
+    'Xin mời vào.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-044',
+    'どうも',
+    NULL,
+    'Cảm ơn',
+    'phrase',
+    '{"expression", "thanks", "casual"}',
+    'どうもありがとう。',
+    'どうもありがとう。',
+    'Cảm ơn nhiều.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-045',
+    '[どうも]ありがとう[ございます]',
+    NULL,
+    'Cảm ơn nhiều',
+    'phrase',
+    '{"expression", "thanks", "polite", "gratitude"}',
+    'どうもありがとうございます。',
+    'どうもありがとうございます。',
+    'Cảm ơn rất nhiều.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-046',
+    'これからおせわになります',
+    'これからお世話になります',
+    'Từ này mong được anh/chị giúp đỡ',
+    'phrase',
+    '{"expression", "polite", "formal", "greeting"}',
+    'これからお世話になります。',
+    'これからおせわになります。',
+    'Từ này mong được anh/chị giúp đỡ.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit2-047',
+    'こちらこそよろしく',
+    NULL,
+    'Chính tôi mới mong được anh/chị giúp đỡ',
+    'phrase',
+    '{"expression", "polite", "response", "greeting"}',
+    'こちらこそよろしくお願いします。',
+    'こちらこそよろしくおねがいします。',
+    'Chính tôi mới mong được anh/chị giúp đỡ.',
+    2,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-001',
+    'ここ',
+    NULL,
+    'Chỗ này, đây',
+    'pronoun',
+    '{"place", "demonstrative", "basic", "here"}',
+    'ここは教室です。',
+    'ここはきょうしつです。',
+    'Đây là lớp học.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-002',
+    'そこ',
+    NULL,
+    'Chỗ đó, đó',
+    'pronoun',
+    '{"place", "demonstrative", "basic", "there"}',
+    'そこは食堂です。',
+    'そこはしょくどうです。',
+    'Đó là nhà ăn.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-003',
+    'あそこ',
+    NULL,
+    'Chỗ kia, kia',
+    'pronoun',
+    '{"place", "demonstrative", "basic", "over-there"}',
+    'あそこは受付です。',
+    'あそこはうけつけです。',
+    'Kia là quầy lễ tân.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-004',
+    'どこ',
+    NULL,
+    'Chỗ nào, đâu',
+    'question',
+    '{"place", "question-word", "where"}',
+    'トイレはどこですか。',
+    'トイレはどこですか。',
+    'Nhà vệ sinh ở đâu?',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-005',
+    'こちら',
+    NULL,
+    'Phía này, đằng này, chỗ này, đây',
+    'pronoun',
+    '{"place", "demonstrative", "polite", "here"}',
+    'こちらへどうぞ。',
+    'こちらへどうぞ。',
+    'Xin mời phía này.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-006',
+    'そちら',
+    NULL,
+    'Phía đó, đằng đó, chỗ đó, đó',
+    'pronoun',
+    '{"place", "demonstrative", "polite", "there"}',
+    'そちらは事務所です。',
+    'そちらはじむしょです。',
+    'Đó là văn phòng.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-007',
+    'あちら',
+    NULL,
+    'Phía kia, đằng kia, chỗ kia, kia',
+    'pronoun',
+    '{"place", "demonstrative", "polite", "over-there"}',
+    'あちらにエレベーターがあります。',
+    'あちらにエレベーターがあります。',
+    'Có thang máy ở phía kia.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-008',
+    'どちら',
+    NULL,
+    'Phía nào, đằng nào, chỗ nào, đâu',
+    'question',
+    '{"place", "question-word", "polite", "where"}',
+    '受付はどちらですか。',
+    'うけつけはどちらですか。',
+    'Quầy lễ tân ở đâu?',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-009',
+    'きょうしつ',
+    '教室',
+    'Lớp học, phòng học',
+    'people',
+    '{"place", "school", "room", "education"}',
+    '教室で勉強します。',
+    'きょうしつでべんきょうします。',
+    'Học trong lớp học.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-010',
+    'しょくどう',
+    '食堂',
+    'Nhà ăn',
+    'people',
+    '{"place", "food", "building"}',
+    '食堂で昼ご飯を食べます。',
+    'しょくどうでひるごはんをたべます。',
+    'Ăn trưa ở nhà ăn.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-011',
+    'じむしょ',
+    '事務所',
+    'Văn phòng',
+    'people',
+    '{"place", "office", "business"}',
+    '事務所に田中さんがいます。',
+    'じむしょにたなかさんがいます。',
+    'Anh Tanaka ở văn phòng.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-012',
+    'かいぎしつ',
+    '会議室',
+    'Phòng họp',
+    'people',
+    '{"place", "office", "meeting"}',
+    '会議室で会議をします。',
+    'かいぎしつでかいぎをします。',
+    'Họp trong phòng họp.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-013',
+    'うけつけ',
+    '受付',
+    'Bộ phận tiếp tân, lễ tân',
+    'people',
+    '{"place", "office", "reception"}',
+    '受付で名前を書きます。',
+    'うけつけでなまえをかきます。',
+    'Viết tên ở quầy lễ tân.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-014',
+    'ロビー',
+    NULL,
+    'Hành lang, đại sảnh',
+    'people',
+    '{"place", "building", "katakana"}',
+    'ロビーで待ちます。',
+    'ロビーでまちます。',
+    'Đợi ở đại sảnh.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-015',
+    'へや',
+    '部屋',
+    'Căn phòng',
+    'people',
+    '{"place", "room", "basic"}',
+    '部屋を掃除します。',
+    'へやをそうじします。',
+    'Dọn phòng.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-016',
+    'トイレ（おてあらい）',
+    '（お手洗い）',
+    'Nhà vệ sinh, toa-lét',
+    'people',
+    '{"place", "facility", "katakana"}',
+    'トイレはあそこです。',
+    'トイレはあそこです。',
+    'Nhà vệ sinh ở kia.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-017',
+    'かいだん',
+    '階段',
+    'Cầu thang',
+    'people',
+    '{"place", "facility", "building"}',
+    '階段を上ります。',
+    'かいだんをのぼります。',
+    'Leo cầu thang.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-018',
+    'エレベーター',
+    NULL,
+    'Thang máy',
+    'people',
+    '{"place", "facility", "katakana"}',
+    'エレベーターを使います。',
+    'エレベーターをつかいます。',
+    'Sử dụng thang máy.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-019',
+    'エスカレーター',
+    NULL,
+    'Thang cuốn',
+    'people',
+    '{"place", "facility", "katakana"}',
+    'エスカレーターで行きます。',
+    'エスカレーターでいきます。',
+    'Đi bằng thang cuốn.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-020',
+    '[お]くに',
+    '[お]国',
+    'Đất nước',
+    'people',
+    '{"country", "polite", "basic"}',
+    'お国はどちらですか。',
+    'おくにはどちらですか。',
+    'Đất nước của bạn là nước nào?',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-021',
+    'かいしゃ',
+    '会社',
+    'Công ty',
+    'people',
+    '{"place", "business", "office"}',
+    '会社へ行きます。',
+    'かいしゃへいきます。',
+    'Đi đến công ty.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-022',
+    'うち',
+    NULL,
+    'Nhà',
+    'people',
+    '{"place", "home", "basic"}',
+    'うちへ帰ります。',
+    'うちへかえります。',
+    'Về nhà.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-023',
+    'でんわ',
+    '電話',
+    'Máy điện thoại, điện thoại',
+    'people',
+    '{"electronics", "object", "communication"}',
+    '電話をかけます。',
+    'でんわをかけます。',
+    'Gọi điện thoại.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-024',
+    'くつ',
+    '靴',
+    'Giày',
+    'people',
+    '{"object", "fashion", "daily-life"}',
+    '靴を買います。',
+    'くつをかいます。',
+    'Mua giày.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-025',
+    'ネクタイ',
+    NULL,
+    'Cà vạt',
+    'people',
+    '{"object", "fashion", "katakana"}',
+    'ネクタイを締めます。',
+    'ネクタイをしめます。',
+    'Đeo cà vạt.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-026',
+    'ワイン',
+    NULL,
+    'Rượu vang',
+    'people',
+    '{"drink", "object", "katakana"}',
+    'ワインを飲みます。',
+    'ワインをのみます。',
+    'Uống rượu vang.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-027',
+    'たばこ',
+    NULL,
+    'Thuốc lá',
+    'people',
+    '{"object", "daily-life"}',
+    'たばこを吸います。',
+    'たばこをすいます。',
+    'Hút thuốc lá.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-028',
+    'うりば',
+    '売り場',
+    'Quầy bán',
+    'people',
+    '{"shopping", "store", "place"}',
+    '靴売り場は二階です。',
+    'くつうりばはにかいです。',
+    'Quầy bán giày ở tầng hai.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-029',
+    'ちか',
+    '地下',
+    'Tầng hầm, dưới mặt đất',
+    'people',
+    '{"place", "building", "floor"}',
+    '地下に食堂があります。',
+    'ちかにしょくどうがあります。',
+    'Có nhà ăn ở tầng hầm.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-030',
+    '―かい（－がい）',
+    '－階',
+    'Tầng thứ ~',
+    'grammar',
+    '{"counter", "floor", "pattern"}',
+    'レストランは五階です。',
+    'レストランはごかいです。',
+    'Nhà hàng ở tầng năm.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-031',
+    'なんがい',
+    '何階',
+    'Tầng mấy',
+    'question',
+    '{"question-word", "floor", "basic"}',
+    '売り場は何階ですか。',
+    'うりばはなんがいですか。',
+    'Quầy bán hàng ở tầng mấy?',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-032',
+    '―えん',
+    '―円',
+    'Yên',
+    'grammar',
+    '{"currency", "money", "pattern"}',
+    'これは千円です。',
+    'これはせんえんです。',
+    'Cái này 1000 yên.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-033',
+    'いくら',
+    NULL,
+    'Bao nhiêu tiền',
+    'question',
+    '{"question-word", "shopping", "money"}',
+    'これはいくらですか。',
+    'これはいくらですか。',
+    'Cái này bao nhiêu tiền?',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-034',
+    'ひゃく',
+    '百',
+    'Trăm',
+    'number',
+    '{"number", "counting", "basic"}',
+    '百円です。',
+    'ひゃくえんです。',
+    '100 yên.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-035',
+    'せん',
+    '千',
+    'Nghìn',
+    'number',
+    '{"number", "counting", "basic"}',
+    '千円ください。',
+    'せんえんください。',
+    'Cho tôi 1000 yên.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-036',
+    'まん',
+    '万',
+    'Mười nghìn, vạn',
+    'number',
+    '{"number", "counting", "basic"}',
+    '一万円あります。',
+    'いちまんえんあります。',
+    'Có 10.000 yên.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-037',
+    'すみません',
+    NULL,
+    'Xin lỗi',
+    'phrase',
+    '{"expression", "polite", "basic"}',
+    'すみません、トイレはどこですか。',
+    'すみません、トイレはどこですか。',
+    'Xin lỗi, nhà vệ sinh ở đâu?',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-038',
+    '～でございます',
+    NULL,
+    '(Cách nói lịch sự của 「です」)',
+    'grammar',
+    '{"polite", "formal", "pattern"}',
+    'こちらは受付でございます。',
+    'こちらはうけつけでございます。',
+    'Đây là quầy lễ tân.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-039',
+    'みせてください',
+    '[～を]見せてください',
+    'Cho tôi xem [~]',
+    'phrase',
+    '{"shopping", "request", "polite"}',
+    'その靴を見せてください。',
+    'そのくつをみせてください。',
+    'Cho tôi xem đôi giày đó.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-040',
+    'じゃ',
+    NULL,
+    'Thế thì, vậy thì',
+    'phrase',
+    '{"expression", "conversation", "basic"}',
+    'じゃ、これをください。',
+    'じゃ、これをください。',
+    'Vậy thì cho tôi cái này.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-041',
+    '[～を]ください',
+    NULL,
+    'Cho tôi [~]',
+    'phrase',
+    '{"shopping", "request", "basic"}',
+    'コーヒーをください。',
+    'コーヒーをください。',
+    'Cho tôi cà phê.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-042',
+    'しんおおさか',
+    '新大阪',
+    'Tên một nhà ga ở Osaka',
+    'people',
+    '{"place", "station", "japan"}',
+    '新大阪へ行きます。',
+    'しんおおさかへいきます。',
+    'Đi đến Shin-Osaka.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-043',
+    'イタリア',
+    NULL,
+    'Ý',
+    'people',
+    '{"country", "katakana"}',
+    'イタリアへ行きたいです。',
+    'イタリアへいきたいです。',
+    'Muốn đi Ý.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-044',
+    'スイス',
+    NULL,
+    'Thụy Sĩ',
+    'people',
+    '{"country", "katakana"}',
+    'スイスはきれいな国です。',
+    'スイスはきれいなくにです。',
+    'Thụy Sĩ là đất nước đẹp.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit3-045',
+    'ＭＴ/ヨーネン/アキックス',
+    NULL,
+    'Tên các công ty giả tưởng',
+    'people',
+    '{"company", "fictional", "katakana"}',
+    'ＭＴ会社で働いています。',
+    'エムティーかいしゃではたらいています。',
+    'Làm việc tại công ty MT.',
+    3,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-001',
+    'おきます',
+    NULL,
+    'Thức dậy',
+    'verb',
+    '{"daily-life", "morning", "basic"}',
+    '毎朝六時に起きます。',
+    'まいあさろくじにおきます。',
+    'Mỗi sáng thức dậy lúc 6 giờ.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-002',
+    'ねます',
+    '寝ます',
+    'Ngủ',
+    'verb',
+    '{"daily-life", "night", "basic"}',
+    '毎晩十一時に寝ます。',
+    'まいばんじゅういちじにねます。',
+    'Mỗi tối ngủ lúc 11 giờ.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-003',
+    'はたらきます',
+    '働きます',
+    'Làm việc',
+    'verb',
+    '{"work", "daily-life", "basic"}',
+    '銀行で働きます。',
+    'ぎんこうではたらきます。',
+    'Làm việc ở ngân hàng.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-004',
+    'やすみます',
+    '休みます',
+    'Nghỉ ngơi',
+    'verb',
+    '{"rest", "daily-life", "basic"}',
+    '日曜日に休みます。',
+    'にちようびにやすみます。',
+    'Nghỉ vào chủ nhật.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-005',
+    'べんきょうします',
+    '勉強します',
+    'Học tập',
+    'verb',
+    '{"study", "education", "basic"}',
+    '図書館で勉強します。',
+    'としょかんでべんきょうします。',
+    'Học ở thư viện.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-006',
+    'おわります',
+    '終わります',
+    'Kết thúc',
+    'verb',
+    '{"daily-life", "basic"}',
+    '仕事は五時に終わります。',
+    'しごとはごじにおわります。',
+    'Công việc kết thúc lúc 5 giờ.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-007',
+    'デパート',
+    NULL,
+    'Cửa hàng bách hóa',
+    'people',
+    '{"shopping", "place", "katakana"}',
+    'デパートで買い物します。',
+    'デパートでかいものします。',
+    'Mua sắm ở cửa hàng bách hóa.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-008',
+    'ぎんこう',
+    '銀行',
+    'Ngân hàng',
+    'people',
+    '{"place", "business", "money"}',
+    '銀行へ行きます。',
+    'ぎんこうへいきます。',
+    'Đi đến ngân hàng.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-009',
+    'ゆうびんきょく',
+    '郵便局',
+    'Bưu điện',
+    'people',
+    '{"place", "service", "mail"}',
+    '郵便局で手紙を出します。',
+    'ゆうびんきょくでてがみをだします。',
+    'Gửi thư ở bưu điện.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-010',
+    'としょかん',
+    '図書館',
+    'Thư viện',
+    'people',
+    '{"place", "education", "books"}',
+    '図書館で本を読みます。',
+    'としょかんでほんをよみます。',
+    'Đọc sách ở thư viện.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-011',
+    'びじゅつかん',
+    '美術館',
+    'Viện bảo tàng',
+    'people',
+    '{"place", "museum", "art"}',
+    '美術館へ行きました。',
+    'びじゅつかんへいきました。',
+    'Đã đi viện bảo tàng.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-012',
+    'でんわばんごう',
+    '電話番号',
+    'Số điện thoại',
+    'people',
+    '{"phone", "number", "communication"}',
+    '電話番号を書きます。',
+    'でんわばんごうをかきます。',
+    'Viết số điện thoại.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-013',
+    'なんばん',
+    '何番',
+    'Số mấy',
+    'question',
+    '{"question-word", "number", "basic"}',
+    '電話番号は何番ですか。',
+    'でんわばんごうはなんばんですか。',
+    'Số điện thoại là số mấy?',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-014',
+    'いま',
+    '今',
+    'Bây giờ',
+    'time',
+    '{"time", "basic"}',
+    '今何時ですか。',
+    'いまなんじですか。',
+    'Bây giờ là mấy giờ?',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-015',
+    '～じ',
+    '～時',
+    '~ giờ',
+    'grammar',
+    '{"time", "counter", "pattern"}',
+    '七時に起きます。',
+    'しちじにおきます。',
+    'Thức dậy lúc 7 giờ.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-016',
+    '～ふん / ～ぷん',
+    '～分',
+    '~ phút',
+    'grammar',
+    '{"time", "counter", "pattern"}',
+    '五分待ってください。',
+    'ごふんまってください。',
+    'Vui lòng đợi 5 phút.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-017',
+    'はん',
+    '半',
+    'Phân nửa',
+    'time',
+    '{"time", "basic"}',
+    '七時半です。',
+    'しちじはんです。',
+    '7 giờ rưỡi.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-018',
+    'なんじ',
+    '何時',
+    'Mấy giờ',
+    'question',
+    '{"question-word", "time", "basic"}',
+    '今何時ですか。',
+    'いまなんじですか。',
+    'Bây giờ là mấy giờ?',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-019',
+    'なんぷん',
+    '何分',
+    'Mấy phút',
+    'question',
+    '{"question-word", "time", "basic"}',
+    '今何分ですか。',
+    'いまなんぷんですか。',
+    'Bây giờ là mấy phút?',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-020',
+    'ごぜん',
+    '午前',
+    'Sáng (AM)',
+    'time',
+    '{"time", "morning"}',
+    '午前九時です。',
+    'ごぜんくじです。',
+    '9 giờ sáng.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-021',
+    'ごご',
+    '午後',
+    'Chiều (PM)',
+    'time',
+    '{"time", "afternoon"}',
+    '午後三時です。',
+    'ごごさんじです。',
+    '3 giờ chiều.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-022',
+    'あさ',
+    '朝',
+    'Sáng',
+    'time',
+    '{"time", "morning", "basic"}',
+    '朝ご飯を食べます。',
+    'あさごはんをたべます。',
+    'Ăn sáng.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-023',
+    'ひる',
+    '昼',
+    'Trưa',
+    'time',
+    '{"time", "noon", "basic"}',
+    '昼にご飯を食べます。',
+    'ひるにごはんをたべます。',
+    'Ăn cơm trưa.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-024',
+    'ばん',
+    '晩',
+    'Tối',
+    'time',
+    '{"time", "night", "basic"}',
+    '晩にテレビを見ます。',
+    'ばんにテレビをみます。',
+    'Xem tivi vào buổi tối.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-025',
+    'よる',
+    '夜',
+    'Tối, đêm',
+    'time',
+    '{"time", "night", "basic"}',
+    '夜勉強します。',
+    'よるべんきょうします。',
+    'Học vào ban đêm.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-026',
+    'おととい',
+    NULL,
+    'Ngày hôm kia',
+    'time',
+    '{"day", "past", "basic"}',
+    'おととい休みました。',
+    'おとといやすみました。',
+    'Đã nghỉ hôm kia.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-027',
+    'きのう',
+    NULL,
+    'Ngày hôm qua',
+    'time',
+    '{"day", "past", "basic"}',
+    '昨日勉強しました。',
+    'きのうべんきょうしました。',
+    'Đã học hôm qua.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-028',
+    'きょう',
+    '今日',
+    'Hôm nay',
+    'time',
+    '{"day", "present", "basic"}',
+    '今日は忙しいです。',
+    'きょうはいそがしいです。',
+    'Hôm nay bận.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-029',
+    'あした',
+    '明日',
+    'Ngày mai',
+    'time',
+    '{"day", "future", "basic"}',
+    '明日働きます。',
+    'あしたはたらきます。',
+    'Ngày mai làm việc.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-030',
+    'あさって',
+    NULL,
+    'Ngày mốt',
+    'time',
+    '{"day", "future", "basic"}',
+    'あさって東京へ行きます。',
+    'あさってとうきょうへいきます。',
+    'Ngày mốt đi Tokyo.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-031',
+    'けさ',
+    '今朝',
+    'Sáng nay',
+    'time',
+    '{"time", "morning", "basic"}',
+    '今朝早く起きました。',
+    'けさはやくおきました。',
+    'Sáng nay đã thức dậy sớm.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-032',
+    'こんばん',
+    NULL,
+    'Tối nay',
+    'time',
+    '{"time", "night", "basic"}',
+    '今晩勉強します。',
+    'こんばんべんきょうします。',
+    'Tối nay học bài.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-033',
+    'ゆうべ',
+    NULL,
+    'Tối hôm qua',
+    'time',
+    '{"time", "past", "night"}',
+    'ゆうべテレビを見ました。',
+    'ゆうべテレビをみました。',
+    'Đã xem tivi tối hôm qua.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-034',
+    'やすみ',
+    '休み',
+    'Nghỉ ngơi',
+    'people',
+    '{"rest", "noun", "basic"}',
+    '今日は休みです。',
+    'きょうはやすみです。',
+    'Hôm nay nghỉ.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-035',
+    'ひるやすみ',
+    '昼休み',
+    'Nghỉ trưa',
+    'people',
+    '{"rest", "time", "daily-life"}',
+    '昼休みにご飯を食べます。',
+    'ひるやすみにごはんをたべます。',
+    'Ăn cơm vào giờ nghỉ trưa.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-036',
+    'まいあさ',
+    '毎朝',
+    'Mỗi sáng',
+    'time',
+    '{"frequency", "morning", "daily-life"}',
+    '毎朝コーヒーを飲みます。',
+    'まいあさコーヒーをのみます。',
+    'Mỗi sáng uống cà phê.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-037',
+    'まいばん',
+    '毎晩',
+    'Mỗi tối',
+    'time',
+    '{"frequency", "night", "daily-life"}',
+    '毎晩日本語を勉強します。',
+    'まいばんにほんごをべんきょうします。',
+    'Mỗi tối học tiếng Nhật.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-038',
+    'まいにち',
+    '毎日',
+    'Mỗi ngày',
+    'time',
+    '{"frequency", "daily-life", "basic"}',
+    '毎日働きます。',
+    'まいにはたらきます。',
+    'Làm việc mỗi ngày.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-039',
+    'ペキン',
+    NULL,
+    'Bắc Kinh',
+    'people',
+    '{"city", "katakana", "china"}',
+    'ペキンへ行きます。',
+    'ペキンへいきます。',
+    'Đi đến Bắc Kinh.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-040',
+    'バンコク',
+    NULL,
+    'Bangkok',
+    'people',
+    '{"city", "katakana", "thailand"}',
+    'バンコクに友達がいます。',
+    'バンコクにともだちがいます。',
+    'Có bạn ở Bangkok.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-041',
+    'ロンドン',
+    NULL,
+    'Luân Đôn',
+    'people',
+    '{"city", "katakana", "uk"}',
+    'ロンドンは大きいです。',
+    'ロンドンはおおきいです。',
+    'Luân Đôn lớn.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-042',
+    'ロサンゼルス',
+    NULL,
+    'Los Angeles',
+    'people',
+    '{"city", "katakana", "usa"}',
+    'ロサンゼルスへ行きたいです。',
+    'ロサンゼルスへいきたいです。',
+    'Muốn đi Los Angeles.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-043',
+    'たいへんですね',
+    '大変ですね',
+    'Vất vả nhỉ',
+    'phrase',
+    '{"expression", "sympathy", "basic"}',
+    '毎日残業ですか。大変ですね。',
+    'まいにちざんぎょうですか。たいへんですね。',
+    'Ngày nào cũng tăng ca à? Vất vả nhỉ.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-044',
+    'ばんごうあんない',
+    NULL,
+    'Dịch vụ 116 (hỏi số điện thoại)',
+    'people',
+    '{"service", "phone", "information"}',
+    '番号案内に電話します。',
+    'ばんごうあんないにでんわします。',
+    'Gọi đến dịch vụ hỏi số điện thoại.',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit4-045',
+    'おといあわせ',
+    NULL,
+    '(Số điện thoại) bạn muốn biết / hỏi là',
+    'phrase',
+    '{"phone", "service", "formal"}',
+    'お問い合わせの番号は何番ですか。',
+    'おといあわせのばんごうはなんばんですか。',
+    'Số điện thoại cần hỏi là số mấy?',
+    4,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-001',
+    'ばんせん',
+    '―番線',
+    'Sân ga số –',
+    'transportation',
+    '{"station", "train", "platform"}',
+    '三番線へ行ってください。',
+    'さんばんせんへいってください。',
+    'Hãy đi đến sân ga số 3.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-002',
+    'いきます',
+    '行きます',
+    'Đi',
+    'verb',
+    '{"movement", "basic", "travel"}',
+    '学校へ行きます。',
+    'がっこうへいきます。',
+    'Đi đến trường.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-003',
+    'きます',
+    '来ます',
+    'Đến',
+    'verb',
+    '{"movement", "basic", "travel"}',
+    '友達が来ます。',
+    'ともだちがきます。',
+    'Bạn đến.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-004',
+    'かえります',
+    '帰ります',
+    'Về',
+    'verb',
+    '{"movement", "daily-life", "basic"}',
+    '家へ帰ります。',
+    'うちへかえります。',
+    'Về nhà.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-005',
+    'がっこう',
+    '学校',
+    'Trường học',
+    'people',
+    '{"education", "place", "basic"}',
+    '学校で勉強します。',
+    'がっこうでべんきょうします。',
+    'Học ở trường.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-006',
+    'スーパー',
+    NULL,
+    'Siêu thị',
+    'people',
+    '{"shopping", "place", "katakana"}',
+    'スーパーで買い物します。',
+    'スーパーでかいものします。',
+    'Mua sắm ở siêu thị.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-007',
+    'えき',
+    '駅',
+    'Ga, nhà ga',
+    'people',
+    '{"transportation", "place", "station"}',
+    '駅で友達に会います。',
+    'えきでともだちにあいます。',
+    'Gặp bạn ở nhà ga.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-008',
+    'ひこうき',
+    '飛行機',
+    'Máy bay',
+    'people',
+    '{"vehicle", "transportation", "travel"}',
+    '飛行機で行きます。',
+    'ひこうきでいきます。',
+    'Đi bằng máy bay.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-009',
+    'ふね',
+    '船',
+    'Thuyền, tàu thủy',
+    'people',
+    '{"vehicle", "transportation", "water"}',
+    '船に乗ります。',
+    'ふねにのります。',
+    'Lên tàu thủy.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-010',
+    'でんしゃ',
+    '電車',
+    'Tàu điện',
+    'people',
+    '{"vehicle", "transportation", "train"}',
+    '電車で会社へ行きます。',
+    'でんしゃでかいしゃへいきます。',
+    'Đi công ty bằng tàu điện.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-011',
+    'ちかてつ',
+    '地下鉄',
+    'Tàu điện ngầm',
+    'people',
+    '{"vehicle", "transportation", "subway"}',
+    '地下鉄は便利です。',
+    'ちかてつはべんりです。',
+    'Tàu điện ngầm tiện lợi.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-012',
+    'しんかんせん',
+    '新幹線',
+    'Tàu Shinkansen',
+    'people',
+    '{"vehicle", "transportation", "train", "japan"}',
+    '新幹線で大阪へ行きます。',
+    'しんかんせんでおおさかへいきます。',
+    'Đi Osaka bằng Shinkansen.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-013',
+    'バス',
+    NULL,
+    'Xe buýt',
+    'people',
+    '{"vehicle", "transportation", "katakana"}',
+    'バスに乗ります。',
+    'バスにのります。',
+    'Lên xe buýt.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-014',
+    'タクシー',
+    NULL,
+    'Tắc-xi',
+    'people',
+    '{"vehicle", "transportation", "katakana"}',
+    'タクシーで帰ります。',
+    'タクシーでかえります。',
+    'Về bằng taxi.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-015',
+    'じてんしゃ',
+    '自転車',
+    'Xe đạp',
+    'people',
+    '{"vehicle", "transportation", "daily-life"}',
+    '自転車で学校へ行きます。',
+    'じてんしゃでがっこうへいきます。',
+    'Đi học bằng xe đạp.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-016',
+    'あるいて',
+    '歩いて',
+    'Đi bộ',
+    'verb',
+    '{"movement", "walking", "basic"}',
+    '駅まで歩いて行きます。',
+    'えきまであるいていきます。',
+    'Đi bộ đến ga.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-017',
+    'ひと',
+    '人',
+    'Người',
+    'people',
+    '{"person", "basic"}',
+    'あの人は先生です。',
+    'あのひとはせんせいです。',
+    'Người kia là giáo viên.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-018',
+    'ともだち',
+    '友達',
+    'Bạn, bạn bè',
+    'people',
+    '{"person", "friendship", "basic"}',
+    '友達と話します。',
+    'ともだちとはなします。',
+    'Nói chuyện với bạn.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-019',
+    'かれ',
+    '彼',
+    'Anh ấy, bạn trai',
+    'pronoun',
+    '{"person", "male", "basic"}',
+    '彼は学生です。',
+    'かれはがくせいです。',
+    'Anh ấy là học sinh.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-020',
+    'かのじょ',
+    '彼女',
+    'Chị ấy, bạn gái',
+    'pronoun',
+    '{"person", "female", "basic"}',
+    '彼女は日本人です。',
+    'かのじょはにほんじんです。',
+    'Cô ấy là người Nhật.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-021',
+    'かぞく',
+    '家族',
+    'Gia đình',
+    'people',
+    '{"family", "basic"}',
+    '家族と住んでいます。',
+    'かぞくとすんでいます。',
+    'Sống cùng gia đình.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-022',
+    'せんしゅう',
+    '先週',
+    'Tuần trước',
+    'time',
+    '{"week", "past", "basic"}',
+    '先週京都へ行きました。',
+    'せんしゅうきょうとへいきました。',
+    'Tuần trước đã đi Kyoto.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-023',
+    'こんしゅう',
+    '今週',
+    'Tuần này',
+    'time',
+    '{"week", "present", "basic"}',
+    '今週は忙しいです。',
+    'こんしゅうはいそがしいです。',
+    'Tuần này bận.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-024',
+    'らいしゅう',
+    '来週',
+    'Tuần sau',
+    'time',
+    '{"week", "future", "basic"}',
+    '来週東京へ行きます。',
+    'らいしゅうとうきょうへいきます。',
+    'Tuần sau đi Tokyo.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-025',
+    'せんげつ',
+    '先月',
+    'Tháng trước',
+    'time',
+    '{"month", "past", "basic"}',
+    '先月日本へ行きました。',
+    'せんげつにほんへいきました。',
+    'Tháng trước đã đi Nhật.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-026',
+    'こんげつ',
+    '今月',
+    'Tháng này',
+    'time',
+    '{"month", "present", "basic"}',
+    '今月は忙しいです。',
+    'こんげつはいそがしいです。',
+    'Tháng này bận.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-027',
+    'らいげつ',
+    '来月',
+    'Tháng sau',
+    'time',
+    '{"month", "future", "basic"}',
+    '来月大阪へ行きます。',
+    'らいげつおおさかへいきます。',
+    'Tháng sau đi Osaka.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-028',
+    'きょねん',
+    '去年',
+    'Năm ngoái',
+    'time',
+    '{"year", "past", "basic"}',
+    '去年日本語を勉強しました。',
+    'きょねんにほんごをべんきょうしました。',
+    'Năm ngoái đã học tiếng Nhật.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-029',
+    'ことし',
+    NULL,
+    'Năm nay',
+    'time',
+    '{"year", "present", "basic"}',
+    '今年大学を卒業します。',
+    'ことしだいがくをそつぎょうします。',
+    'Năm nay tốt nghiệp đại học.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-030',
+    'らいねん',
+    '来年',
+    'Năm sau',
+    'time',
+    '{"year", "future", "basic"}',
+    '来年結婚します。',
+    'らいねんけっこんします。',
+    'Năm sau kết hôn.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-031',
+    '―がつ',
+    '―月',
+    'Tháng –',
+    'grammar',
+    '{"month", "counter", "pattern"}',
+    '七月は暑いです。',
+    'しちがつはあついです。',
+    'Tháng 7 nóng.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-032',
+    'なんがつ',
+    '何月',
+    'Tháng mấy',
+    'question',
+    '{"month", "question-word", "basic"}',
+    '誕生日は何月ですか。',
+    'たんじょうびはなんがつですか。',
+    'Sinh nhật là tháng mấy?',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-033',
+    'ついたち',
+    '１日',
+    'Ngày mồng 1, 1 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '一日に帰ります。',
+    'ついたちにかえります。',
+    'Về vào ngày mồng 1.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-034',
+    'ふつか',
+    '２日',
+    'Ngày mồng 2, 2 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '二日に行きます。',
+    'ふつかにいきます。',
+    'Đi vào ngày mồng 2.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-035',
+    'みっか',
+    '３日',
+    'Ngày mồng 3, 3 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '三日休みます。',
+    'みっかやすみます。',
+    'Nghỉ 3 ngày.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-036',
+    'よっか',
+    '４日',
+    'Ngày mồng 4, 4 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '四日に来ます。',
+    'よっかにきます。',
+    'Đến vào ngày mồng 4.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-037',
+    'いつか',
+    '５日',
+    'Ngày mồng 5, 5 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '五日に学校へ行きます。',
+    'いつかにがっこうへいきます。',
+    'Đi học vào ngày mồng 5.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-038',
+    'むいか',
+    '６日',
+    'Ngày mồng 6, 6 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '六日に帰ります。',
+    'むいかにかえります。',
+    'Về vào ngày mồng 6.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-039',
+    'なのか',
+    '７日',
+    'Ngày mồng 7, 7 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '七日に会います。',
+    'なのかにあいます。',
+    'Gặp vào ngày mồng 7.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-040',
+    'ようか',
+    '８日',
+    'Ngày mồng 8, 8 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '八日に勉強します。',
+    'ようかにべんきょうします。',
+    'Học vào ngày mồng 8.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-041',
+    'ここのか',
+    '９日',
+    'Ngày mồng 9, 9 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '九日に出発します。',
+    'ここのかにしゅっぱつします。',
+    'Khởi hành vào ngày mồng 9.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-042',
+    'とおか',
+    '１０日',
+    'Ngày mồng 10, 10 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '十日に働きます。',
+    'とおかにはたらきます。',
+    'Làm việc vào ngày mồng 10.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-043',
+    'じゅうよっか',
+    '１４日',
+    'Ngày 14, 14 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '十四日に休みます。',
+    'じゅうよっかにやすみます。',
+    'Nghỉ vào ngày 14.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-044',
+    'はつか',
+    '２０日',
+    'Ngày 20, 20 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '二十日に誕生日があります。',
+    'はつかにたんじょうびがあります。',
+    'Sinh nhật vào ngày 20.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-045',
+    'にじゅうよっか',
+    '２４日',
+    'Ngày 24, 24 ngày',
+    'time',
+    '{"date", "day", "basic"}',
+    '二十四日に会議があります。',
+    'にじゅうよっかにかいぎがあります。',
+    'Có cuộc họp vào ngày 24.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-046',
+    '―にち',
+    '―日',
+    'Ngày –, – ngày',
+    'grammar',
+    '{"date", "counter", "pattern"}',
+    '十五日に行きます。',
+    'じゅうごにちにいきます。',
+    'Đi vào ngày 15.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-047',
+    'なんにち',
+    '何日',
+    'Ngày mấy, bao nhiêu ngày',
+    'question',
+    '{"date", "question-word", "basic"}',
+    '今日は何日ですか。',
+    'きょうはなんにちですか。',
+    'Hôm nay là ngày mấy?',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-048',
+    'いつ',
+    NULL,
+    'Bao giờ, khi nào',
+    'question',
+    '{"question-word", "time", "basic"}',
+    'いつ日本へ行きますか。',
+    'いつにほんへいきますか。',
+    'Bao giờ đi Nhật?',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-049',
+    'たんじょうび',
+    '誕生日',
+    'Sinh nhật',
+    'people',
+    '{"event", "birthday", "basic"}',
+    '誕生日は六月です。',
+    'たんじょうびはろくがつです。',
+    'Sinh nhật vào tháng 6.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-050',
+    'ふつう',
+    '普通',
+    'Tàu thường',
+    'transportation',
+    '{"train", "basic", "station"}',
+    '普通で行きます。',
+    'ふつうでいきます。',
+    'Đi bằng tàu thường.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-051',
+    'きゅうこう',
+    '急行',
+    'Tàu tốc hành',
+    'transportation',
+    '{"train", "express", "station"}',
+    '急行に乗ります。',
+    'きゅうこうにのります。',
+    'Lên tàu tốc hành.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-052',
+    'とっきゅう',
+    '特急',
+    'Tàu tốc hành đặc biệt',
+    'transportation',
+    '{"train", "express", "station"}',
+    '特急は速いです。',
+    'とっきゅうははやいです。',
+    'Tàu tốc hành đặc biệt nhanh.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-053',
+    'つぎの',
+    '次の',
+    'Tiếp theo',
+    'grammar',
+    '{"order", "basic"}',
+    '次の電車は九時です。',
+    'つぎのでんしゃはくじです。',
+    'Chuyến tàu tiếp theo lúc 9 giờ.',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit5-054',
+    'どういたしまして',
+    NULL,
+    'Không có chi',
+    'phrase',
+    '{"expression", "response", "polite"}',
+    '「ありがとう。」「どういたしまして。」',
+    '「ありがとう。」「どういたしまして。」',
+    '“Cảm ơn.” “Không có chi.”',
+    5,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+-- Unit 21 Vocabulary
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-001',
+    'おもいます',
+    '思います',
+    'nghĩ',
+    'verb',
+    '{"thinking", "verb", "basic"}',
+    '私はそう思います。',
+    'わたしはそうおもいます。',
+    'Tôi nghĩ như vậy.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-002',
+    'いいます',
+    '言います',
+    'nói',
+    'verb',
+    '{"speaking", "verb", "basic"}',
+    '彼はそう言いました。',
+    'かれはそういいました。',
+    'Anh ấy đã nói như vậy.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-003',
+    'たります',
+    '足ります',
+    'đủ',
+    'verb',
+    '{"sufficiency", "verb", "basic"}',
+    'お金が足りません。',
+    'おかねがたりません。',
+    'Tiền không đủ.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-004',
+    'かちます',
+    '勝ちます',
+    'thắng',
+    'verb',
+    '{"win", "verb", "competition"}',
+    'Tryehiclesには勝ちました。',
+    'トライアスロンにかちました。',
+    'Tôi đã thắng cuộc thi Ironman.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-005',
+    'まけます',
+    '負けます',
+    'thua',
+    'verb',
+    '{"lose", "verb", "competition"}',
+    '昨日の試合に負けました。',
+    'きのうのしあいにまけました。',
+    'Tôi đã thua trận đấu hôm qua.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-006',
+    'あります',
+    NULL,
+    'được tổ chức',
+    'verb',
+    '{"exist", "event", "held"}',
+    '明日会議があります。',
+    'あしたかいぎがあります。',
+    'Ngày mai có cuộc họp.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-007',
+    'やくにたちます',
+    '役に立ちます',
+    'giúp ích',
+    'phrase',
+    '{"useful", "help", "benefit"}',
+    'この本は勉強に役に立ちます。',
+    'このほんはべんきょうにやくにたちます。',
+    'Cuốn sách này giúp ích cho việc học.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-008',
+    'むだ',
+    NULL,
+    'vô ích',
+    'adjective',
+    '{"useless", "waste", "pointless"}',
+    'これは無駄なことです。',
+    'これはむだなことです。',
+    'Đây là việc vô ích.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-009',
+    'ふべん',
+    '不便',
+    'bất tiện',
+    'adjective',
+    '{"inconvenient", "difficult", "troublesome"}',
+    'ここは不便です。',
+    'ここはふべんです。',
+    'Ở đây bất tiện.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-010',
+    'おなじ',
+    '同じ',
+    'giốn',
+    'adjective',
+    '{"same", "equal", "identical"}',
+    '私と彼は同じです。',
+    'わたしとかれはおなじです。',
+    'Tôi và anh ấy giống nhau.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-011',
+    'すごい',
+    NULL,
+    'giỏi',
+    'adjective',
+    '{"amazing", "great", "awesome"}',
+    '彼はすごいです。',
+    'かれはすごいです。',
+    'Anh ấy giỏi.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-012',
+    'しゅしょう',
+    '首相',
+    'thủ tướng',
+    'title',
+    '{"prime-minister", "politics", "leader"}',
+    '彼は首相です。',
+    'かれはしゅしょうです。',
+    'Anh ấy là thủ tướng.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-013',
+    'だいとうりょう',
+    '大統領',
+    'tổng thống',
+    'title',
+    '{"president", "politics", "leader"}',
+    '彼は大統領です。',
+    'かれはだいとうりょうです。',
+    'Anh ấy là tổng thống.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-014',
+    'せいじ',
+    '政治',
+    'chính trị',
+    'noun',
+    '{"politics", "government"}',
+    '政治について話します。',
+    'せいじについてはなします。',
+    'Nói về chính trị.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-015',
+    'ニュース',
+    NULL,
+    'tin tức',
+    'noun',
+    '{"news", "information", "media"}',
+    'ニュースを見ます。',
+    'ニュースをみます。',
+    'Xem tin tức.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-016',
+    'スピーチ',
+    NULL,
+    'bài phát biểu',
+    'noun',
+    '{"speech", "presentation", "talk"}',
+    'スピーチをします。',
+    'スピーチをします。',
+    'Thực hiện bài phát biểu.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-017',
+    'しあい',
+    '試合',
+    'trận đấu',
+    'noun',
+    '{"match", "game", "competition"}',
+    'サッカーの試合をします。',
+    'サッカーのしあいをします。',
+    'Đá bóng.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-018',
+    'アルバイト',
+    NULL,
+    'việc làm thêm',
+    'noun',
+    '{"part-time-job", "work", "side-job"}',
+    'アルバイトをします。',
+    'アルバイトをします。',
+    'Làm việc part-time.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-019',
+    'いけん',
+    '意見',
+    'ý kiến',
+    'noun',
+    '{"opinion", "view", "thought"}',
+    '意見を言います。',
+    'いけんをいいます。',
+    'Nói ý kiến.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-020',
+    'はなし',
+    '話',
+    'câu chuyện',
+    'noun',
+    '{"story", "talk", "conversation"}',
+    '面白い話をします。',
+    'おもしろいはなしをします。',
+    'Kể câu chuyện thú vị.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-021',
+    'ユーモア',
+    NULL,
+    'hài hước',
+    'noun',
+    '{"humor", "funny", "comedy"}',
+    '彼はユーモアがあります。',
+    'かれはユーモアがあります。',
+    'Anh ấy có tính hài hước.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-022',
+    'デザイン',
+    NULL,
+    'thiết kế',
+    'noun',
+    '{"design", "art", "creative"}',
+    'デザインが好きです。',
+    'デザインがすきです。',
+    'Tôi thích thiết kế.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-023',
+    'こうつう',
+    '交通',
+    'giao thông',
+    'noun',
+    '{"traffic", "transportation", "movement"}',
+    '交通が便利です。',
+    'こうつうがべんりです。',
+    'Giao thông thuận tiện.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-024',
+    'ラッシュ',
+    NULL,
+    'giờ cao điểm',
+    'noun',
+    '{"rush-hour", "peak", "busy-time"}',
+    'ラッシュアワーです。',
+    'ラッシュアワーです。',
+    'Đang là giờ cao điểm.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-025',
+    'さいきん',
+    '最近',
+    'gần đây',
+    'adverb',
+    '{"recently", "lately", "these-days"}',
+    '最近忙しいです。',
+    'さいきんいそがしいです。',
+    'Dạo này bận.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-026',
+    'たぶん',
+    NULL,
+    'chắc, có thể',
+    'adverb',
+    '{"probably", "maybe", "perhaps"}',
+    'たぶん来ます。',
+    'たぶんきます。',
+    'Chắc là sẽ đến.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-027',
+    'きっと',
+    NULL,
+    'chắc chắn, nhất định',
+    'adverb',
+    '{"surely", "certainly", "definitely"}',
+    'きっと成功します。',
+    'きっとせいこうします。',
+    'Chắc chắn sẽ thành công.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-028',
+    'ほんとうに',
+    '本当に',
+    'thật sự',
+    'adverb',
+    '{"really", "truly", "actually"}',
+    '本当にそうです。',
+    'ほんとうにそうです。',
+    'Thật sự là như vậy.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-029',
+    'そんなに',
+    NULL,
+    '(không) ~ lắm',
+    'adverb',
+    '{"not-so", "that-much", "negation"}',
+    'そんなに高くありません。',
+    'そんなにたかくありません。',
+    'Không đắt lắm.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-030',
+    '～について',
+    NULL,
+    'theo ~ về',
+    'grammar',
+    '{"about", "concerning", "regarding"}',
+    '日本について話します。',
+    'にほんについてはなします。',
+    'Nói về Nhật Bản.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-031',
+    'しかたがありません',
+    NULL,
+    'không còn cách nào khác',
+    'phrase',
+    '{"no-choice", "helpless", "cannot-help"}',
+    '仕方がありません。',
+    'しかたがありません。',
+    'Không còn cách nào khác.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-032',
+    'しばらくですね',
+    NULL,
+    'Lâu rồi không gặp',
+    'phrase',
+    '{"long-time", "greeting", "reunion"}',
+    'お久しぶりですね。',
+    'おひさしぶりですね。',
+    'Lâu rồi không gặp nhỉ.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-033',
+    '～でものみませんか',
+    '～でも飲みませんか',
+    'Anh/chị uống (cà phê, rượu hay cái gì đó) nhé',
+    'phrase',
+    '{"invitation", "drink", "casual"}',
+    'コーヒーでも飲みませんか。',
+    'コーヒーでものみませんか。',
+    'Anh/chị uống cà phê nhé?',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-034',
+    'みないと。。。',
+    '見ないと。。。',
+    'phải xem…',
+    'phrase',
+    '{"must-see", "need-to-watch", "important"}',
+    'これは見ないと。',
+    'これはみないと。',
+    'Phải xem cái này.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-035',
+    'もちろん',
+    NULL,
+    'tất nhiên',
+    'adverb',
+    '{"of-course", "naturally", "obviously"}',
+    'もちろんです。',
+    'もちろんです。',
+    'Tất nhiên rồi.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );
+
+INSERT INTO vocabulary (id, hiragana, kanji, vietnamese, category, tags, example_sentence, example_sentence_hiragana, example_translation_vi, unit, difficulty, romaji, audio_url, is_favorite, note, is_built_in) VALUES (
+    'unit21-036',
+    'カンガルー',
+    NULL,
+    'Kanguru',
+    'noun',
+    '{"kangaroo", "animal", "australia"}',
+    'カンガルーがいます。',
+    'カンガルーがいます。',
+    'Có con Kanguru.',
+    21,
+    1,
+    NULL,
+    NULL,
+    false,
+    NULL,
+    true
+  );

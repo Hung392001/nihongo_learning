@@ -1,0 +1,411 @@
+/**
+ * AssetLoader Component Styles
+ * 
+ * Styles for loading states, error states, and animations
+ */
+
+/* ============================================
+   Asset Loader Base Styles
+   ============================================ */
+
+.asset-placeholder,
+.asset-loading,
+.asset-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  min-height: 100px;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.asset-placeholder {
+  background-color: transparent;
+}
+
+/* Loading State */
+.asset-loading {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.asset-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.spinner-ring {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Small spinner for inline loading */
+.small-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-top: 2px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+/* Error State */
+.asset-error {
+  background-color: rgba(255, 0, 0, 0.05);
+  border: 1px dashed var(--error-color);
+}
+
+.asset-error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 24px;
+  color: var(--error-color);
+}
+
+.error-message {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   Kanji Stroke Animation Styles
+   ============================================ */
+
+.kanji-stroke-animation {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  border-radius: 4px;
+}
+
+.kanji-stroke-animation img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* ============================================
+   Kanji Component Asset Styles
+   ============================================ */
+
+.kanji-gif-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--bg-card);
+  padding: 8px;
+}
+
+.kanji-gif-display:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.kanji-gif-display:active {
+  transform: scale(0.98);
+}
+
+.kanji-gif-img {
+  max-width: 200px;
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.gif-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  min-height: 100px;
+}
+
+/* Fallback for when GIF is not available */
+.kanji-large {
+  font-size: 120px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  min-height: 150px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border-radius: 8px;
+  background-color: var(--bg-card);
+}
+
+.kanji-large:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   Animation Modal Styles
+   ============================================ */
+
+.animation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animation-modal {
+  background-color: var(--bg-primary);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease-out;
+  position: relative;
+  overflow: auto;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animation-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+
+.animation-close-btn:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.animation-close-btn:active {
+  background-color: var(--bg-active);
+}
+
+.animation-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 300px;
+  min-height: 300px;
+  margin: 20px 0;
+}
+
+.animation-img {
+  max-width: 100%;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.animation-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px;
+}
+
+.animation-loading .spinner {
+  width: 48px;
+  height: 48px;
+  border-width: 4px;
+}
+
+.animation-loading p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.animation-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px;
+  text-align: center;
+  color: var(--error-color);
+}
+
+.animation-error p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.animation-error .error-path {
+  font-size: 12px;
+  opacity: 0.7;
+  font-family: monospace;
+  word-break: break-all;
+  max-width: 300px;
+}
+
+.animation-error .hint {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.animation-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px;
+  text-align: center;
+}
+
+.fallback-char {
+  font-size: 72px;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.animation-fallback p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.animation-hint {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* ============================================
+   Responsive Styles
+   ============================================ */
+
+@media (max-width: 768px) {
+  .animation-modal {
+    max-width: 95vw;
+    max-height: 95vh;
+    margin: 16px;
+    padding: 16px;
+  }
+  
+  .animation-container {
+    min-width: 200px;
+    min-height: 200px;
+  }
+  
+  .kanji-gif-img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+  
+  .kanji-large {
+    font-size: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .animation-modal {
+    margin: 8px;
+    padding: 12px;
+  }
+  
+  .animation-container {
+    min-width: 150px;
+    min-height: 150px;
+  }
+  
+  .kanji-large {
+    font-size: 60px;
+  }
+}
+
+/* ============================================
+   Performance Optimizations
+   ============================================ */
+
+/* Use will-change for smoother animations */
+.kanji-gif-display {
+  will-change: transform, box-shadow;
+}
+
+.animation-modal {
+  will-change: transform, opacity;
+}
+
+/* Hardware acceleration for animations */
+@media (prefers-reduced-motion: no-preference) {
+  .kanji-gif-display,
+  .animation-modal,
+  .spinner-ring {
+    transform: translateZ(0);
+  }
+}

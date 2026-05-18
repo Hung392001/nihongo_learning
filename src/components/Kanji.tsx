@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useKanji } from '../hooks/useKanji';
-import { KanjiData } from '../data/kanjiDatabase';
-import './Kanji.css';
+import React, { useState, useEffect } from "react";
+import { useKanji } from "../hooks/useKanji";
+import { KanjiData } from "../data/kanjiDatabase";
+import { AssetLoader } from "./AssetLoader";
+import * as AssetService from "../services/AssetService";
+import "./Kanji.css";
+import "./AssetLoader.css";
 
 interface KanjiProps {
   onNavigate: (page: string) => void;
@@ -10,18 +13,31 @@ interface KanjiProps {
 /**
  * Kanji learning component for numbers 1-10
  * Features: Search by kanji/romaji/hiragana, GIF animation on click
+ *
+ * Updated to use remote asset URLs from cloud storage (R2, S3, Supabase)
  */
 export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
-  const { kanji, loading, error, currentKanji, searchKanji, selectKanjiByCharacter, showAnimationForKanji } = useKanji();
-  const [searchQuery, setSearchQuery] = useState('');
+  const {
+    kanji,
+    loading,
+    error,
+    currentKanji,
+    searchKanji,
+    selectKanjiByCharacter,
+
+    getAnimationUrl,
+    hasAnimation,
+  } = useKanji();
+
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<KanjiData[]>([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [showStrokeGuide, setShowStrokeGuide] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
   const [animationSrc, setAnimationSrc] = useState<string | null>(null);
-  const [isKanjiSelected, setIsKanjiSelected] = useState(false); // Track if user selected a kanji
-  const [animationError, setAnimationError] = useState(false); // Track animation load error
-  const [gifPath, setGifPath] = useState<string | null>(null); // Store GIF path for display
+  const [isKanjiSelected, setIsKanjiSelected] = useState(false);
+  const [animationError, setAnimationError] = useState(false);
+  const [gifLoading, setGifLoading] = useState(false);
 
   // Handle search input change
   const handleSearchChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,47 +55,74 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
   };
 
   // Handle selecting a kanji from search results
-  const handleSelectKanji = (selectedKanji: KanjiData) => {
+  const handleSelectKanji = async (selectedKanji: KanjiData) => {
     selectKanjiByCharacter(selectedKanji.ka_utf);
     setSearchQuery(selectedKanji.ka_utf);
     setShowSearchResults(false);
     setShowStrokeGuide(false);
     setShowAnimation(false);
-    setIsKanjiSelected(true); // Mark kanji as selected
-    
-    // Set GIF path for display
-    const animPath = showAnimationForKanji(selectedKanji);
-    setGifPath(animPath);
+    setIsKanjiSelected(true);
     setAnimationError(false);
-  };
 
-  // Handle clicking on the kanji character to show animation
-  const handleKanjiClick = async () => {
-    if (currentKanji) {
-      const animPath = showAnimationForKanji(currentKanji);
-      setAnimationSrc(animPath);
-      setAnimationError(false);
-      setShowAnimation(true);
-      console.log('Loading animation from:', animPath);
+    // Pre-fetch animation URL in background
+    if (hasAnimation(selectedKanji)) {
+      setGifLoading(true);
+      try {
+        const url = await getAnimationUrl(selectedKanji);
+        if (url) {
+          setAnimationSrc(url);
+        }
+      } catch {
+        setAnimationError(true);
+      } finally {
+        setGifLoading(false);
+      }
     }
   };
 
   // Close animation when clicking outside or pressing Escape
   const handleCloseAnimation = (e: React.MouseEvent | React.KeyboardEvent) => {
-    if (e.type === 'keydown' && (e as React.KeyboardEvent).key !== 'Escape') return;
-    if (e.type === 'click' && (e.target as HTMLElement).className === 'animation-overlay') {
+    if (e.type === "keydown" && (e as React.KeyboardEvent).key !== "Escape")
+      return;
+    if (
+      e.type === "click" &&
+      (e.target as HTMLElement).className?.includes("animation-overlay")
+    ) {
       setShowAnimation(false);
+    }
+  };
+
+  // Handle click to show animation
+  const handleShowAnimation = async () => {
+    if (!currentKanji) return;
+
+    // Try to get animation URL
+    setGifLoading(true);
+    setAnimationError(false);
+
+    try {
+      const url = await getAnimationUrl(currentKanji);
+      if (url) {
+        setAnimationSrc(url);
+        setShowAnimation(true);
+      } else {
+        setAnimationError(true);
+      }
+    } catch {
+      setAnimationError(true);
+    } finally {
+      setGifLoading(false);
     }
   };
 
   useEffect(() => {
     const handleEscapeKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         setShowAnimation(false);
       }
     };
-    window.addEventListener('keydown', handleEscapeKey);
-    return () => window.removeEventListener('keydown', handleEscapeKey);
+    window.addEventListener("keydown", handleEscapeKey);
+    return () => window.removeEventListener("keydown", handleEscapeKey);
   }, []);
 
   if (loading) {
@@ -98,14 +141,27 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
       <main className="kanji-container">
         <div className="error-state">
           <h2>Error loading kanji</h2>
-          <p>{error || 'No kanji data available'}</p>
-          <button onClick={() => onNavigate('home')} className="back-home-btn">
+          <p>{error || "No kanji data available"}</p>
+          <button onClick={() => onNavigate("home")} className="back-home-btn">
             ← Back to Home
           </button>
         </div>
       </main>
     );
   }
+
+  // Get animation URL candidates for current kanji (synchronous for immediate display)
+  const animationCandidates = currentKanji
+    ? AssetService.getStrokeAnimationUrls(
+        currentKanji.ka_id,
+        currentKanji.ka_utf,
+      )
+    : [];
+  const imageAnimationCandidates = animationCandidates.filter(
+    (url) => !url.endsWith(".mp4"),
+  );
+  const currentAnimationUrl = imageAnimationCandidates[0] || null;
+  const animationAvailable = currentKanji ? hasAnimation(currentKanji) : false;
 
   return (
     <main className="kanji-container">
@@ -123,13 +179,15 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
             placeholder="Search: 一, ichi, いち..."
             value={searchQuery}
             onChange={handleSearchChange}
-            onFocus={() => searchQuery.trim().length > 0 && setShowSearchResults(true)}
+            onFocus={() =>
+              searchQuery.trim().length > 0 && setShowSearchResults(true)
+            }
           />
           {searchQuery && (
-            <button 
+            <button
               className="search-clear-btn"
               onClick={() => {
-                setSearchQuery('');
+                setSearchQuery("");
                 setSearchResults([]);
                 setShowSearchResults(false);
               }}
@@ -154,14 +212,19 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
                     <span className="suggestion-kanji">{result.ka_utf}</span>
                     <span className="suggestion-info">
                       <span className="suggestion-romaji">{result.kname}</span>
-                      <span className="suggestion-meaning">{result.meaning}</span>
+                      <span className="suggestion-meaning">
+                        {result.meaning}
+                      </span>
                     </span>
                   </button>
                 ))}
               </div>
             ) : (
               <div className="no-results">
-                <p>No kanji found. Try searching for 一, 二, 三... or ichi, ni, san...</p>
+                <p>
+                  No kanji found. Try searching for 一, 二, 三... or ichi, ni,
+                  san...
+                </p>
               </div>
             )}
           </div>
@@ -175,24 +238,29 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
             <div className="kanji-card">
               {/* Kanji character - clickable for animation */}
               <div className="kanji-visualization">
-                {gifPath && !animationError ? (
-                  <div 
+                {animationAvailable && currentAnimationUrl && !gifLoading ? (
+                  <div
                     className="kanji-gif-display"
-                    onClick={() => {
-                      setAnimationSrc(gifPath);
-                      setShowAnimation(true);
-                    }}
-                    style={{ cursor: 'pointer' }}
-                    title="Click to expand"
+                    onClick={handleShowAnimation}
+                    style={{ cursor: "pointer" }}
+                    title="Click to expand animation"
                   >
-                    <img 
-                      src={gifPath} 
-                      alt={`Writing animation for ${currentKanji?.ka_utf}`}
-                      onError={() => {
-                        console.error('Failed to load GIF:', gifPath);
-                        setAnimationError(true);
-                      }}
-                    />
+                    {gifLoading ? (
+                      <div className="gif-loading">
+                        <div className="small-spinner" />
+                      </div>
+                    ) : (
+                      <AssetLoader
+                        src={currentAnimationUrl}
+                        alt={`Writing animation for ${currentKanji.ka_utf}`}
+                        className="kanji-gif-img"
+                        fallbackUrls={imageAnimationCandidates.slice(1)}
+                        onError={() => setAnimationError(true)}
+                        lazyLoad={false}
+                        showLoading={true}
+                        showError={false}
+                      />
+                    )}
                   </div>
                 ) : animationError ? (
                   <div className="kanji-large" title="GIF not available">
@@ -217,11 +285,13 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
                 </div>
                 <div className="detail-row">
                   <span className="label">On-yomi:</span>
-                  <span className="value">{currentKanji.onyomi_ja} ({currentKanji.onyomi})</span>
+                  <span className="value">{currentKanji.onyomi_ja}</span>
                 </div>
                 <div className="detail-row">
                   <span className="label">Kun-yomi:</span>
-                  <span className="value">{currentKanji.kunyomi_ja} ({currentKanji.kunyomi})</span>
+                  <span className="value">
+                    {currentKanji.kunyomi_ja} ({currentKanji.kunyomi})
+                  </span>
                 </div>
                 <div className="detail-row">
                   <span className="label">Strokes:</span>
@@ -229,7 +299,9 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
                 </div>
                 <div className="detail-row">
                   <span className="label">Radical:</span>
-                  <span className="value">{currentKanji.rad_name} ({currentKanji.rad_utf})</span>
+                  <span className="value">
+                    {currentKanji.rad_name} ({currentKanji.rad_utf})
+                  </span>
                 </div>
               </div>
 
@@ -250,10 +322,10 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
 
               {/* Stroke guide toggle */}
               <button
-                className={`stroke-guide-btn ${showStrokeGuide ? 'active' : ''}`}
+                className={`stroke-guide-btn ${showStrokeGuide ? "active" : ""}`}
                 onClick={() => setShowStrokeGuide(!showStrokeGuide)}
               >
-                {showStrokeGuide ? '✓ Stroke Guide Shown' : 'Show Stroke Guide'}
+                {showStrokeGuide ? "✓ Stroke Guide Shown" : "Show Stroke Guide"}
               </button>
             </div>
 
@@ -262,10 +334,17 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
               <div className="stroke-guide">
                 <h3>✏️ How to Write</h3>
                 <p>This character has {currentKanji.kstroke} stroke(s).</p>
-                <p className="hint">Practice writing the character following proper stroke order:</p>
+                <p className="hint">
+                  Practice writing the character following proper stroke order:
+                </p>
                 <div className="stroke-info">
-                  <p>Stroke count: <strong>{currentKanji.kstroke}</strong></p>
-                  <p>Radical: <strong>{currentKanji.rad_name}</strong> ({currentKanji.rad_utf})</p>
+                  <p>
+                    Stroke count: <strong>{currentKanji.kstroke}</strong>
+                  </p>
+                  <p>
+                    Radical: <strong>{currentKanji.rad_name}</strong> (
+                    {currentKanji.rad_utf})
+                  </p>
                 </div>
               </div>
             )}
@@ -275,11 +354,26 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
           <section className="learning-tips">
             <h3>💡 Learning Tips</h3>
             <ul>
-              <li><strong>On-yomi (音読み):</strong> Chinese reading, used in most modern words</li>
-              <li><strong>Kun-yomi (訓読み):</strong> Japanese reading, often used in native words</li>
-              <li><strong>Radical (部首):</strong> The key component that groups kanji by meaning</li>
-              <li><strong>Animation:</strong> Click the kanji to view writing animation</li>
-              <li><strong>Practice:</strong> Write each kanji repeatedly to improve retention</li>
+              <li>
+                <strong>On-yomi (音読み):</strong> Chinese reading, used in most
+                modern words
+              </li>
+              <li>
+                <strong>Kun-yomi (訓読み):</strong> Japanese reading, often used
+                in native words
+              </li>
+              <li>
+                <strong>Radical (部首):</strong> The key component that groups
+                kanji by meaning
+              </li>
+              <li>
+                <strong>Animation:</strong> Click the kanji to view writing
+                animation
+              </li>
+              <li>
+                <strong>Practice:</strong> Write each kanji repeatedly to
+                improve retention
+              </li>
             </ul>
           </section>
         </>
@@ -288,9 +382,9 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
       {/* Animation Modal */}
       {showAnimation && animationSrc && (
         <div className="animation-overlay" onClick={handleCloseAnimation}>
-          <div className="animation-modal">
-            <button 
-              className="animation-close-btn" 
+          <div className="animation-modal" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="animation-close-btn"
               onClick={() => setShowAnimation(false)}
               title="Close (ESC)"
             >
@@ -298,20 +392,40 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
             </button>
             <h2>Writing Animation - {currentKanji?.ka_utf}</h2>
             <div className="animation-container">
-              {!animationError ? (
-                <img 
-                  src={animationSrc} 
-                  alt={`Writing animation for ${currentKanji?.ka_utf}`}
-                  onError={() => {
-                    console.error('Failed to load animation:', animationSrc);
-                    setAnimationError(true);
-                  }}
-                />
-              ) : (
+              {gifLoading ? (
+                <div className="animation-loading">
+                  <div className="spinner"></div>
+                  <p>Loading animation...</p>
+                </div>
+              ) : animationError ? (
                 <div className="animation-error">
                   <p>Unable to load animation</p>
                   <p className="error-path">{animationSrc}</p>
+                  <p className="hint">
+                    Try again later or check your connection.
+                  </p>
                 </div>
+              ) : (
+                <AssetLoader
+                  src={animationSrc}
+                  alt={`Writing animation for ${currentKanji?.ka_utf}`}
+                  className="animation-img"
+                  fallbackUrls={imageAnimationCandidates.filter(
+                    (url) => url !== animationSrc,
+                  )}
+                  onError={() => setAnimationError(true)}
+                  lazyLoad={false}
+                  showLoading={true}
+                  showError={true}
+                  fallbackContent={
+                    <div className="animation-fallback">
+                      <span className="fallback-char">
+                        {currentKanji?.ka_utf}
+                      </span>
+                      <p>Animation file not found</p>
+                    </div>
+                  }
+                />
               )}
             </div>
             <p className="animation-hint">Press ESC to close</p>
@@ -321,13 +435,12 @@ export const Kanji: React.FC<KanjiProps> = ({ onNavigate }) => {
 
       {/* Back button */}
       <div className="kanji-footer">
-        <button
-          className="back-home-btn"
-          onClick={() => onNavigate('home')}
-        >
+        <button className="back-home-btn" onClick={() => onNavigate("home")}>
           ← Back to Home
         </button>
       </div>
     </main>
   );
 };
+
+export default Kanji;

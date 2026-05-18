@@ -21,8 +21,13 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, vocabularyCount }) => {
         {/* Flashcards Section */}
         <div className="home-card flashcards-card" onClick={() => onNavigate('flashcards')}>
           <div className="card-icon">📇</div>
-          <h3>Flashcards</h3>
-          <p className="card-description">Practice vocabulary with interactive flashcards</p>
+          <h3>Flashcards Practice</h3>
+          <p className="card-description">Practice vocabulary with interactive flashcards with 3 display modes</p>
+          <div className="card-features">
+            <span className="feature-tag">Hiragana → Vietnamese</span>
+            <span className="feature-tag">Hiragana → Kanji</span>
+            <span className="feature-tag">Kanji → Hiragana</span>
+          </div>
           <div className="card-stats">
             <span className="stat-badge">{vocabularyCount} words</span>
           </div>
@@ -32,14 +37,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, vocabularyCount }) => {
         {/* Vocabulary Library Section */}
         <div className="home-card vocabulary-card" onClick={() => onNavigate('vocabulary')}>
           <div className="card-icon">📚</div>
-          <h3>Từ Vựng</h3>
-          <p className="card-description">Xem danh sách từ vựng theo dạng bảng, có thể chuyển sang flashcard</p>
+          <h3>Vocabulary</h3>
+          <p className="card-description">Browse vocabulary in a table format, can switch to flashcard practice</p>
           <div className="card-features">
-            <span className="feature-tag">Unit 1</span>
-            <span className="feature-tag">45 từ</span>
-            <span className="feature-tag">Bảng + Flashcard</span>
+            <span className="feature-tag">Unit 1-5</span>
+            <span className="feature-tag">45+ words</span>
+            <span className="feature-tag">Table + Flashcard</span>
           </div>
-          <div className="card-cta">Xem Từ Vựng →</div>
+          <div className="card-cta">View Vocabulary →</div>
         </div>
 
         {/* Alphabets Section */}
@@ -48,8 +53,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, vocabularyCount }) => {
           <h3>Hiragana & Katakana</h3>
           <p className="card-description">Learn and practice Japanese alphabets</p>
           <div className="card-features">
-            <span className="feature-tag">ひらがな</span>
-            <span className="feature-tag">カタカナ</span>
+            <span className="feature-tag">Hiragana</span>
+            <span className="feature-tag">Katakana</span>
           </div>
           <div className="card-cta">Learn Alphabets →</div>
         </div>
@@ -90,7 +95,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, vocabularyCount }) => {
           </div>
           <div className="stat-item">
             <div className="stat-number">3</div>
-            <div className="stat-label">Learning Modes</div>
+            <div className="stat-label">Flashcard Modes</div>
           </div>
           <div className="stat-item">
             <div className="stat-number">∞</div>

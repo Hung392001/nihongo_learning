@@ -9,7 +9,6 @@ export interface KanjiData {
   kname: string;
   kstroke: number;
   meaning: string;
-  onyomi: string;
   kunyomi: string;
   onyomi_ja: string;
   kunyomi_ja: string;
@@ -20,6 +19,21 @@ export interface KanjiData {
   rad_name: string;
   rad_meaning: string;
   grade: number;
+  /**
+   * URL for the stroke order animation GIF
+   * Can be a remote URL (Cloudflare R2, S3, Supabase Storage, CDN)
+   * or a local path in development
+   */
+  strokeGifUrl?: string;
+  /**
+   * Alternate URLs for different formats (WebP, MP4)
+   * Used for browser-optimized delivery
+   */
+  strokeAnimations?: {
+    gif?: string;
+    webp?: string;
+    mp4?: string;
+  };
 }
 
 export const kanjiDatabase: KanjiData[] = [
@@ -29,21 +43,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "ichi",
     kstroke: 1,
     meaning: "one",
-    onyomi: "イチ",
     kunyomi: "ひ",
     onyomi_ja: "いち",
     kunyomi_ja: "ひ",
     examples: [
       ["一日", "いちにち - one day"],
       ["一番", "いちばん - number one"],
-      ["一人", "ひとり - one person"]
+      ["一人", "ひとり - one person"],
     ],
     rad_utf: "一",
     rad_stroke: 1,
     rad_order: 1,
     rad_name: "one",
     rad_meaning: "一 (one)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_002",
@@ -51,21 +64,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "ni",
     kstroke: 2,
     meaning: "two",
-    onyomi: "ニ",
     kunyomi: "ふ",
     onyomi_ja: "に",
     kunyomi_ja: "ふ",
     examples: [
       ["二日", "ふつか - two days"],
       ["二人", "ふたり - two people"],
-      ["第二", "だいに - second"]
+      ["第二", "だいに - second"],
     ],
     rad_utf: "一",
     rad_stroke: 1,
     rad_order: 1,
     rad_name: "one",
     rad_meaning: "一 (one)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_003",
@@ -73,21 +85,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "san",
     kstroke: 3,
     meaning: "three",
-    onyomi: "サン",
     kunyomi: "み",
     onyomi_ja: "さん",
     kunyomi_ja: "み",
     examples: [
       ["三日", "みっか - three days"],
       ["三人", "さんにん - three people"],
-      ["三月", "さんがつ - March"]
+      ["三月", "さんがつ - March"],
     ],
     rad_utf: "一",
     rad_stroke: 1,
     rad_order: 1,
     rad_name: "one",
     rad_meaning: "一 (one)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_004",
@@ -95,21 +106,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "shi",
     kstroke: 5,
     meaning: "four",
-    onyomi: "シ",
     kunyomi: "よ",
     onyomi_ja: "し",
     kunyomi_ja: "よ",
     examples: [
       ["四日", "よんか - four days"],
       ["四人", "よんにん - four people"],
-      ["四月", "しがつ - April"]
+      ["四月", "しがつ - April"],
     ],
     rad_utf: "囗",
     rad_stroke: 3,
     rad_order: 36,
     rad_name: "enclosure",
     rad_meaning: "囗 (enclosure)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_005",
@@ -117,21 +127,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "go",
     kstroke: 4,
     meaning: "five",
-    onyomi: "ゴ",
     kunyomi: "いつ",
     onyomi_ja: "ご",
     kunyomi_ja: "いつ",
     examples: [
       ["五日", "いつか - five days"],
       ["五人", "ごにん - five people"],
-      ["五月", "ごがつ - May"]
+      ["五月", "ごがつ - May"],
     ],
     rad_utf: "二",
     rad_stroke: 2,
     rad_order: 2,
     rad_name: "two",
     rad_meaning: "二 (two)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_006",
@@ -139,21 +148,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "roku",
     kstroke: 4,
     meaning: "six",
-    onyomi: "ロク",
     kunyomi: "む",
     onyomi_ja: "ろく",
     kunyomi_ja: "む",
     examples: [
       ["六日", "むいか - six days"],
       ["六人", "ろくにん - six people"],
-      ["六月", "ろくがつ - June"]
+      ["六月", "ろくがつ - June"],
     ],
     rad_utf: "八",
     rad_stroke: 2,
     rad_order: 12,
     rad_name: "eight",
     rad_meaning: "八 (eight)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_007",
@@ -161,21 +169,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "shichi",
     kstroke: 2,
     meaning: "seven",
-    onyomi: "シチ",
     kunyomi: "なな",
     onyomi_ja: "しち",
     kunyomi_ja: "なな",
     examples: [
       ["七日", "なのか - seven days"],
       ["七人", "ななにん - seven people"],
-      ["七月", "しちがつ - July"]
+      ["七月", "しちがつ - July"],
     ],
     rad_utf: "一",
     rad_stroke: 1,
     rad_order: 1,
     rad_name: "one",
     rad_meaning: "一 (one)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_008",
@@ -183,21 +190,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "hachi",
     kstroke: 2,
     meaning: "eight",
-    onyomi: "ハチ",
     kunyomi: "や",
     onyomi_ja: "はち",
     kunyomi_ja: "や",
     examples: [
       ["八日", "ようか - eight days"],
       ["八人", "はちにん - eight people"],
-      ["八月", "はちがつ - August"]
+      ["八月", "はちがつ - August"],
     ],
     rad_utf: "八",
     rad_stroke: 2,
     rad_order: 12,
     rad_name: "eight",
     rad_meaning: "八 (eight)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_009",
@@ -205,21 +211,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "kyuu",
     kstroke: 2,
     meaning: "nine",
-    onyomi: "キュウ",
     kunyomi: "ここ",
     onyomi_ja: "きゅう",
     kunyomi_ja: "ここ",
     examples: [
       ["九日", "ここのか - nine days"],
       ["九人", "きゅうにん - nine people"],
-      ["九月", "くがつ - September"]
+      ["九月", "くがつ - September"],
     ],
     rad_utf: "弋",
     rad_stroke: 3,
     rad_order: 56,
     rad_name: "crossroads",
     rad_meaning: "弋 (crossroads)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_010",
@@ -227,21 +232,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "juu",
     kstroke: 2,
     meaning: "ten",
-    onyomi: "ジュウ",
     kunyomi: "と",
     onyomi_ja: "じゅう",
     kunyomi_ja: "と",
     examples: [
       ["十日", "とおか - ten days"],
       ["十人", "じゅうにん - ten people"],
-      ["十月", "じゅうがつ - October"]
+      ["十月", "じゅうがつ - October"],
     ],
     rad_utf: "十",
     rad_stroke: 2,
     rad_order: 24,
     rad_name: "ten",
     rad_meaning: "十 (ten)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_011",
@@ -249,7 +253,6 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "hyaku",
     kstroke: 3,
     meaning: "hundred",
-    onyomi: "ヒャク",
     kunyomi: "もも",
     onyomi_ja: "ひゃく",
     kunyomi_ja: "もも",
@@ -261,14 +264,14 @@ export const kanjiDatabase: KanjiData[] = [
       ["六百", "ろっぴゃく - six hundred"],
       ["七百", "ななひゃく - seven hundred"],
       ["八百", "はっぴゃく - eight hundred"],
-      ["九百", "きゅうひゃく - nine hundred"]
+      ["九百", "きゅうひゃく - nine hundred"],
     ],
     rad_utf: "白",
     rad_stroke: 3,
     rad_order: 100,
     rad_name: "white",
     rad_meaning: "白 (white)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_012",
@@ -276,21 +279,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "sen",
     kstroke: 3,
     meaning: "thousand",
-    onyomi: "セン",
     kunyomi: "ち",
     onyomi_ja: "せん",
     kunyomi_ja: "ち",
     examples: [
       ["千年", "せんねん - a thousand years"],
       ["千人", "せんにん - a thousand people"],
-      ["千円", "せんえん - a thousand yen"]
+      ["千円", "せんえん - a thousand yen"],
     ],
     rad_utf: "千",
     rad_stroke: 3,
     rad_order: 101,
     rad_name: "thousand",
     rad_meaning: "千 (thousand)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_013",
@@ -298,7 +300,6 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "man",
     kstroke: 3,
     meaning: "ten thousand",
-    onyomi: "マン",
     kunyomi: "よろず",
     onyomi_ja: "まん",
     kunyomi_ja: "よろず",
@@ -311,7 +312,7 @@ export const kanjiDatabase: KanjiData[] = [
     rad_order: 102,
     rad_name: "ten thousand",
     rad_meaning: "万 (ten thousand)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_014",
@@ -319,7 +320,6 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "oku",
     kstroke: 3,
     meaning: "yen",
-    onyomi: "エン",
     kunyomi: "えん",
     onyomi_ja: "えん",
     kunyomi_ja: "えん",
@@ -332,7 +332,7 @@ export const kanjiDatabase: KanjiData[] = [
     rad_order: 103,
     rad_name: "circle",
     rad_meaning: "円 (circle)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_015",
@@ -340,19 +340,16 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "kuchi",
     kstroke: 3,
     meaning: "mouth",
-    onyomi: "コウ",
     kunyomi: "くち",
     onyomi_ja: "こう",
     kunyomi_ja: "くち",
-    examples: [
-      ["入口", "ぐい - entrance"]
-    ],
+    examples: [["入口", "ぐい - entrance"]],
     rad_utf: "口",
     rad_stroke: 3,
     rad_order: 104,
     rad_name: "mouth",
     rad_meaning: "口 (mouth)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_016",
@@ -360,20 +357,19 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "me",
     kstroke: 5,
     meaning: "eye",
-    onyomi: "モク",
     kunyomi: "め",
     onyomi_ja: "もく",
     kunyomi_ja: "め",
     examples: [
       ["目", "め - eye"],
-      ["一日目", "いちにちめ - first day"]
+      ["一日目", "いちにちめ - first day"],
     ],
     rad_utf: "目",
     rad_stroke: 5,
     rad_order: 105,
     rad_name: "eye",
     rad_meaning: "目 (eye)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_017",
@@ -381,7 +377,6 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "hi",
     kstroke: 4,
     meaning: "day",
-    onyomi: "ニチ",
     kunyomi: "ひ",
     onyomi_ja: "にち",
     kunyomi_ja: "ひ",
@@ -390,14 +385,14 @@ export const kanjiDatabase: KanjiData[] = [
       ["日本", "にほん - Japan"],
       ["今日", "きょう - today"],
       ["毎日", "まいにち - every day"],
-      ["日記", "にっき - diary"]
+      ["日記", "にっき - diary"],
     ],
     rad_utf: "日",
     rad_stroke: 4,
     rad_order: 106,
     rad_name: "sun",
     rad_meaning: "日 (sun)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_018",
@@ -405,7 +400,6 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "tsuki",
     kstroke: 4,
     meaning: "moon",
-    onyomi: "ゲツ",
     kunyomi: "つき",
     onyomi_ja: "げつ",
     kunyomi_ja: "つき",
@@ -414,14 +408,14 @@ export const kanjiDatabase: KanjiData[] = [
       ["今月", "こんげつ - this month"],
       ["月", "つき - moon"],
       ["毎月", "まいつき - every month"],
-      ["来月", "らいげつ - next month"]
+      ["来月", "らいげつ - next month"],
     ],
     rad_utf: "月",
     rad_stroke: 4,
     rad_order: 107,
     rad_name: "moon",
     rad_meaning: "月 (moon)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_019",
@@ -429,7 +423,6 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "hi",
     kstroke: 4,
     meaning: "fire",
-    onyomi: "カ",
     kunyomi: "ひ",
     onyomi_ja: "か",
     kunyomi_ja: "ひ",
@@ -442,7 +435,7 @@ export const kanjiDatabase: KanjiData[] = [
     rad_order: 108,
     rad_name: "fire",
     rad_meaning: "火 (fire)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_020",
@@ -450,7 +443,6 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "mizu",
     kstroke: 4,
     meaning: "water",
-    onyomi: "スイ",
     kunyomi: "みず",
     onyomi_ja: "すい",
     kunyomi_ja: "みず",
@@ -463,7 +455,7 @@ export const kanjiDatabase: KanjiData[] = [
     rad_order: 109,
     rad_name: "water",
     rad_meaning: "水 (water)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_021",
@@ -471,7 +463,6 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "ki",
     kstroke: 4,
     meaning: "tree",
-    onyomi: "モク",
     kunyomi: "き",
     onyomi_ja: "もく",
     kunyomi_ja: "き",
@@ -484,7 +475,7 @@ export const kanjiDatabase: KanjiData[] = [
     rad_order: 110,
     rad_name: "tree",
     rad_meaning: "木 (tree)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_022",
@@ -492,21 +483,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "kane",
     kstroke: 8,
     meaning: "gold",
-    onyomi: "キン",
     kunyomi: "かね",
     onyomi_ja: "きん",
     kunyomi_ja: "かね",
     examples: [
       ["金曜日", "きんようび - Friday"],
       ["お金", "おかね - money"],
-      ["現金", "げんきん - cash"]
+      ["現金", "げんきん - cash"],
     ],
     rad_utf: "金",
     rad_stroke: 8,
     rad_order: 111,
     rad_name: "gold",
     rad_meaning: "金 (gold)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_023",
@@ -514,7 +504,6 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "tsuchi",
     kstroke: 3,
     meaning: "earth",
-    onyomi: "ド",
     kunyomi: "つち",
     onyomi_ja: "ど",
     kunyomi_ja: "つち",
@@ -527,7 +516,7 @@ export const kanjiDatabase: KanjiData[] = [
     rad_order: 112,
     rad_name: "earth",
     rad_meaning: "土 (earth)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_024",
@@ -535,7 +524,6 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "you",
     kstroke: 4,
     meaning: "day of the week",
-    onyomi: "ヨウ",
     kunyomi: "",
     onyomi_ja: "よう",
     kunyomi_ja: "",
@@ -546,14 +534,14 @@ export const kanjiDatabase: KanjiData[] = [
       ["水曜日", "すいようび - Wednesday"],
       ["木曜日", "もくようび - Thursday"],
       ["金曜日", "きんようび - Friday"],
-      ["土曜日", "どようび - Saturday"]
+      ["土曜日", "どようび - Saturday"],
     ],
     rad_utf: "曜",
     rad_stroke: 4,
     rad_order: 106,
     rad_name: "day of the week",
     rad_meaning: "曜 (day of the week)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_025",
@@ -561,20 +549,19 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "honn",
     kstroke: 5,
     meaning: "book",
-    onyomi: "ホン",
     kunyomi: "ほん",
     onyomi_ja: "ほん",
     kunyomi_ja: "ほん",
     examples: [
       ["本", "ほん - book"],
-      ["山本さん", "やまもとさん - Mr. Yamamoto"]
+      ["山本さん", "やまもとさん - Mr. Yamamoto"],
     ],
     rad_utf: "本",
     rad_stroke: 5,
     rad_order: 113,
     rad_name: "book",
     rad_meaning: "本 (book)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_026",
@@ -582,20 +569,19 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "hito",
     kstroke: 2,
     meaning: "person",
-    onyomi: "ジン",
     kunyomi: "ひと",
     onyomi_ja: "じん",
     kunyomi_ja: "ひと",
     examples: [
       ["日本人", "にほんじん - Japanese person"],
-      ["一人", "ひとり - one person"]
+      ["一人", "ひとり - one person"],
     ],
     rad_utf: "人",
     rad_stroke: 2,
     rad_order: 114,
     rad_name: "person",
     rad_meaning: "人 (person)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_027",
@@ -603,20 +589,19 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "ima",
     kstroke: 4,
     meaning: "now",
-    onyomi: "コン",
     kunyomi: "いま",
     onyomi_ja: "こん",
     kunyomi_ja: "いま",
     examples: [
       ["今", "いま - now"],
-      ["今年", "ことし - this year"]
+      ["今年", "ことし - this year"],
     ],
     rad_utf: "今",
     rad_stroke: 4,
     rad_order: 115,
     rad_name: "now",
     rad_meaning: "今 (now)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_028",
@@ -624,19 +609,16 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "tera",
     kstroke: 6,
     meaning: "temple",
-    onyomi: "ジ",
     kunyomi: "てら",
     onyomi_ja: "じ",
     kunyomi_ja: "てら",
-    examples: [
-      ["お寺", "おてら - temple"]
-    ],
+    examples: [["お寺", "おてら - temple"]],
     rad_utf: "寺",
     rad_stroke: 6,
     rad_order: 116,
     rad_name: "temple",
     rad_meaning: "寺 (temple)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_029",
@@ -644,21 +626,20 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "toki",
     kstroke: 13,
     meaning: "time",
-    onyomi: "ジ",
     kunyomi: "とき",
     onyomi_ja: "じ",
     kunyomi_ja: "とき",
     examples: [
       ["時間", "じかん - time"],
       ["時々", "ときどき - sometimes"],
-      ["時計", "とけい - clock"]
+      ["時計", "とけい - clock"],
     ],
     rad_utf: "時",
     rad_stroke: 13,
     rad_order: 117,
     rad_name: "time",
     rad_meaning: "時 (time)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_030",
@@ -666,20 +647,19 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "hatsu",
     kstroke: 8,
     meaning: "half",
-    onyomi: "ハン",
     kunyomi: "はん",
     onyomi_ja: "はん",
     kunyomi_ja: "はん",
     examples: [
       ["半分", "はんぶん - half"],
-      ["三時半", "さんじはん - half past three"]
+      ["三時半", "さんじはん - half past three"],
     ],
     rad_utf: "半",
     rad_stroke: 8,
     rad_order: 118,
     rad_name: "half",
     rad_meaning: "半 (half)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_031",
@@ -687,20 +667,19 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "to",
     kstroke: 11,
     meaning: "sword",
-    onyomi: "トウ",
     kunyomi: "かたな",
     onyomi_ja: "とう",
     kunyomi_ja: "かたな",
     examples: [
       ["刀", "かたな - sword"],
-      ["日本刀", "にほんとう - Japanese sword"]
+      ["日本刀", "にほんとう - Japanese sword"],
     ],
     rad_utf: "刀",
     rad_stroke: 11,
     rad_order: 119,
     rad_name: "sword",
     rad_meaning: "刀 (sword)",
-    grade: 1
+    grade: 1,
   },
   {
     ka_id: "kanji_032",
@@ -708,19 +687,343 @@ export const kanjiDatabase: KanjiData[] = [
     kname: "fun",
     kstroke: 4,
     meaning: "minute",
-    onyomi: "ブン",
     kunyomi: "ふん",
     onyomi_ja: "ぶん",
     kunyomi_ja: "ふん",
     examples: [
       ["一分", "いっぷん - one minute"],
-      ["分かる", "わかる - to understand"]
+      ["分かる", "わかる - to understand"],
     ],
     rad_utf: "分",
     rad_stroke: 4,
     rad_order: 120,
     rad_name: "minute",
     rad_meaning: "分 (minute)",
-    grade: 1
-  }
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_033",
+    ka_utf: "上",
+    kname: "ue",
+    kstroke: 3,
+    meaning: "above",
+    kunyomi: "うえ",
+    onyomi_ja: "じょう",
+    kunyomi_ja: "うえ",
+    examples: [
+      ["上", "うえ - above"],
+      ["上げる", "あげる - to raise"],
+      ["上手", "じょうず - skillful"],
+    ],
+    rad_utf: "上",
+    rad_stroke: 3,
+    rad_order: 121,
+    rad_name: "above",
+    rad_meaning: "上 (above)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_034",
+    ka_utf: "下",
+    kname: "shita",
+    kstroke: 3,
+    meaning: "below",
+    kunyomi: "した",
+    onyomi_ja: "か",
+    kunyomi_ja: "した",
+    examples: [
+      ["下", "した - below"],
+      ["下げる", "さげる - to lower"],
+      ["下手", "へた - unskilled"],
+    ],
+    rad_utf: "下",
+    rad_stroke: 3,
+    rad_order: 122,
+    rad_name: "below",
+    rad_meaning: "下 (below)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_035",
+    ka_utf: "中",
+    kname: "naka",
+    kstroke: 4,
+    meaning: "middle",
+    kunyomi: "なか",
+    onyomi_ja: "ちゅう",
+    kunyomi_ja: "なか",
+    examples: [
+      ["中", "なか - middle"],
+      ["中心", "しんしん - center"],
+    ],
+    rad_utf: "中",
+    rad_stroke: 4,
+    rad_order: 123,
+    rad_name: "middle",
+    rad_meaning: "中 (middle)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_036",
+    ka_utf: "外",
+    kname: "soto",
+    kstroke: 5,
+    meaning: "outside",
+    kunyomi: "そと",
+    onyomi_ja: "がい",
+    kunyomi_ja: "そと",
+    examples: [
+      ["外", "そと - outside"],
+      ["外国人", "がいこくじん - foreigner"],
+    ],
+    rad_utf: "外",
+    rad_stroke: 5,
+    rad_order: 124,
+    rad_name: "outside",
+    rad_meaning: "外 (outside)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_037",
+    ka_utf: "右",
+    kname: "migi",
+    kstroke: 5,
+    meaning: "right",
+    kunyomi: "みぎ",
+    onyomi_ja: "う",
+    kunyomi_ja: "みぎ",
+    examples: [
+      ["右", "みぎ - right"],
+      ["左右", "さゆう - left and right"],
+    ],
+    rad_utf: "右",
+    rad_stroke: 5,
+    rad_order: 125,
+    rad_name: "right",
+    rad_meaning: "右 (right)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_038",
+    ka_utf: "工",
+    kname: "kou",
+    kstroke: 3,
+    meaning: "work",
+    kunyomi: "たく",
+    onyomi_ja: "こう",
+    kunyomi_ja: "たく",
+    examples: [["工場", "こうじょう - factory"]],
+    rad_utf: "工",
+    rad_stroke: 3,
+    rad_order: 126,
+    rad_name: "work",
+    rad_meaning: "工 (work)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_039",
+    ka_utf: "左",
+    kname: "hidari",
+    kstroke: 5,
+    meaning: "left",
+    kunyomi: "ひだり",
+    onyomi_ja: "さ",
+    kunyomi_ja: "ひだり",
+    examples: [
+      ["左", "ひだり - left"],
+      ["左に", "ひだりに - to the left"],
+    ],
+    rad_utf: "左",
+    rad_stroke: 5,
+    rad_order: 127,
+    rad_name: "left",
+    rad_meaning: "左 (left)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_040",
+    ka_utf: "前",
+    kname: "mae",
+    kstroke: 9,
+    meaning: "front",
+    kunyomi: "まえ",
+    onyomi_ja: "ぜん",
+    kunyomi_ja: "まえ",
+    examples: [
+      ["前", "まえ - front"],
+      ["午前", "ごぜん - morning"],
+      ["名前", "なまえ - name"],
+    ],
+    rad_utf: "前",
+    rad_stroke: 9,
+    rad_order: 128,
+    rad_name: "front",
+    rad_meaning: "前 (front)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_041",
+    ka_utf: "後",
+    kname: "ato",
+    kstroke: 9,
+    meaning: "behind",
+    kunyomi: "あと",
+    onyomi_ja: "こ",
+    kunyomi_ja: "あと",
+    examples: [
+      ["後ろ", "うしろ - behind"],
+      ["後で", "あとで - later"],
+      ["午後", "ごご - afternoon"],
+    ],
+    rad_utf: "後",
+    rad_stroke: 9,
+    rad_order: 129,
+    rad_name: "behind",
+    rad_meaning: "後 (behind)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_042",
+    ka_utf: "午",
+    kname: "go",
+    kstroke: 8,
+    meaning: "noon",
+    kunyomi: "ひる",
+    onyomi_ja: "ご",
+    kunyomi_ja: "ひる",
+    examples: [
+      ["午前", "ごぜん - morning"],
+      ["午後", "ごご - afternoon"],
+    ],
+    rad_utf: "午",
+    rad_stroke: 8,
+    rad_order: 130,
+    rad_name: "noon",
+    rad_meaning: "午 (noon)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_043",
+    ka_utf: "門",
+    kname: "mon",
+    kstroke: 10,
+    meaning: "gate",
+    kunyomi: "かど",
+    onyomi_ja: "もん",
+    kunyomi_ja: "かど",
+    examples: [
+      ["門", "かど - gate"],
+      ["専門", "もんぜん - specialized field"],
+    ],
+    rad_utf: "門",
+    rad_stroke: 10,
+    rad_order: 131,
+    rad_name: "gate",
+    rad_meaning: "門 (gate)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_044",
+    ka_utf: "間",
+    kname: "ma",
+    kstroke: 10,
+    meaning: "interval",
+    kunyomi: "あいだ",
+    onyomi_ja: "かん",
+    kunyomi_ja: "あいだ",
+    examples: [
+      ["間", "あいだ - interval"],
+      ["時間", "じかん - time"],
+    ],
+    rad_utf: "間",
+    rad_stroke: 10,
+    rad_order: 132,
+    rad_name: "interval",
+    rad_meaning: "間 (interval)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_045",
+    ka_utf: "東",
+    kname: "higashi",
+    kstroke: 8,
+    meaning: "east",
+    kunyomi: "ひがし",
+    onyomi_ja: "とう",
+    kunyomi_ja: "ひがし",
+    examples: [
+      ["東京", "とうきょう - Tokyo"],
+      ["東", "ひがし - east"],
+      ["東口", "ひがしぐち - east exit"],
+    ],
+    rad_utf: "東",
+    rad_stroke: 8,
+    rad_order: 133,
+    rad_name: "east",
+    rad_meaning: "東 (east)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_046",
+    ka_utf: "西",
+    kname: "nishi",
+    kstroke: 6,
+    meaning: "west",
+    kunyomi: "にし",
+    onyomi_ja: "せい",
+    kunyomi_ja: "にし",
+    examples: [
+      ["西", "にし - west"],
+      ["西口", "にしぐち - west exit"],
+      ["東西", "とうざい - east and west"],
+    ],
+    rad_utf: "西",
+    rad_stroke: 6,
+    rad_order: 134,
+    rad_name: "west",
+    rad_meaning: "西 (west)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_047",
+    ka_utf: "南",
+    kname: "minami",
+    kstroke: 9,
+    meaning: "south",
+    kunyomi: "みなみ",
+    onyomi_ja: "なん",
+    kunyomi_ja: "みなみ",
+    examples: [
+      ["南", "みなみ - south"],
+      ["南口", "みなみぐち - south exit"],
+      ["東南", "とうなん - southeast"],
+    ],
+    rad_utf: "南",
+    rad_stroke: 9,
+    rad_order: 135,
+    rad_name: "south",
+    rad_meaning: "南 (south)",
+    grade: 1,
+  },
+  {
+    ka_id: "kanji_048",
+    ka_utf: "北",
+    kname: "kita",
+    kstroke: 5,
+    meaning: "north",
+    kunyomi: "きた",
+    onyomi_ja: "ほく",
+    kunyomi_ja: "きた",
+    examples: [
+      ["北", "きた - north"],
+      ["北口", "きたぐち - north exit"],
+      ["東北", "とうほく - northeast"],
+    ],
+    rad_utf: "北",
+    rad_stroke: 5,
+    rad_order: 136,
+    rad_name: "north",
+    rad_meaning: "北 (north)",
+    grade: 1,
+  },
 ];

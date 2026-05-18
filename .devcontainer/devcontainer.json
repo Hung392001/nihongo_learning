@@ -1,44 +1,33 @@
 {
-<<<<<<< HEAD
-  "name": "Nihongo Learning Dev Container",
+  "name": "Nihongo Learning Development",
   "dockerComposeFile": "docker-compose.dev.yml",
   "service": "app",
-  "forwardPorts": [5173],
-  "remoteUser": "node",
-  "containerUser": "node",
-  "workspaceFolder": "/app",
-  "postCreateCommand": "rm -rf node_modules && npm install",
-  "postStartCommand": "npx vite --host --no-open",
-=======
-  "name": "Nihongo Learning Development",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:20-bullseye",
-  "features": {
-    "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
-  },
-  "forwardPorts": [5173, 3000],
+  "forwardPorts": [5173, 3001, 5432],
   "portsAttributes": {
     "5173": {
       "label": "Vite Dev Server",
       "onAutoForward": "notify"
     },
-    "3000": {
-      "label": "Backend Server",
+    "3001": {
+      "label": "Backend API Server",
+      "onAutoForward": "notify"
+    },
+    "5432": {
+      "label": "PostgreSQL Database",
       "onAutoForward": "notify"
     }
   },
-  "postCreateCommand": "npm install && npm run build",
-  "postStartCommand": "npm run dev",
   "remoteUser": "node",
->>>>>>> b32eda69e4c2070d9fe51df9237dc688cece2390
+  "containerUser": "node",
+  "workspaceFolder": "/app",
+  "postCreateCommand": "npm install",
+  "postStartCommand": "npm run dev",
   "customizations": {
     "vscode": {
       "extensions": [
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-<<<<<<< HEAD
         "ms-vscode.vscode-typescript-next",
-        "ms-vscode.vscode-node-azure-pack",
         "mtxr.sqltools",
         "mtxr.sqltools-driver-pg",
         "redhat.vscode-yaml",
@@ -62,29 +51,8 @@
         "remote.containers.reopenFolders": "onStart"
       }
     }
-  }
-=======
-        "ms-vscode.vscode-typescript-vue",
-        "React-Orthodox.react-debugger",
-        "bradlc.vscode-tailwindcss"
-      ],
-      "settings": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true,
-        "[javascript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[typescript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[typescriptreact]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        }
-      }
-    }
   },
   "mounts": [
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/node/.ssh,readonly"
   ]
->>>>>>> b32eda69e4c2070d9fe51df9237dc688cece2390
 }

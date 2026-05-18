@@ -53,6 +53,9 @@ export interface VocabularyItem {
   
   /** Personal note or memory hint */
   note?: string;
+
+  /** Whether this item is built-in (from initial data) vs user-created */
+  isBuiltIn?: boolean;
 }
 
 export type VocabularyCategory = 
@@ -91,6 +94,17 @@ export interface CreateVocabularyDto {
   vietnamese: string;
   hiragana: string;
   kanji?: string | null;
+  romaji?: string;
+  category?: VocabularyCategory;
+  tags?: string[];
+  exampleSentence?: string;
+  exampleSentenceHiragana?: string;
+  exampleTranslationVi?: string;
+  unit?: number;
+  difficulty?: 1 | 2 | 3 | 4 | 5;
+  audioUrl?: string;
+  isFavorite?: boolean;
+  note?: string;
 }
 
 /**
@@ -197,4 +211,28 @@ export interface UserPreferences {
   autoPlayEnabled: boolean;
   autoPlaySpeed: number; // milliseconds
   defaultSort: SortOption;
+}
+
+/**
+ * Custom list for organizing vocabulary
+ */
+export interface CustomList {
+  id: string;
+  name: string;
+  description?: string | null;
+  color?: string | null;
+  icon?: string | null;
+  createdAt: number;
+  updatedAt: number;
+}
+
+/**
+ * Item in a custom list, linking vocabulary to a list
+ */
+export interface ListItem {
+  id: string;
+  listId: string;
+  vocabularyId: string;
+  addedAt: number;
+  note?: string | null;
 }

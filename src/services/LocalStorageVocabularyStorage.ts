@@ -1,16 +1,10 @@
-import { VocabularyItem, CreateVocabularyDto, UpdateVocabularyDto } from '../types/vocabulary';
-import { IVocabularyStorage } from './IVocabularyStorage';
+import type { VocabularyItem, CreateVocabularyDto, UpdateVocabularyDto, CustomList, ListItem } from '../types/vocabulary';
+import type { IVocabularyStorage } from './IVocabularyStorage';
 import { generateId, getCurrentTimestamp } from '../utils/flashcardHelpers';
-import { unit1Vocabulary } from '../data/unit1Vocabulary';
-import { unit2Vocabulary } from '../data/unit2Vocabulary';
-import { unit3Vocabulary } from '../data/unit3Vocabulary';
-import { unit4Vocabulary } from '../data/unit4Vocabulary';
-import { unit5Vocabulary } from '../data/unit5Vocabulary';
 
 const STORAGE_KEY = 'nihongo_vocabulary';
-const INITIALIZED_KEY = 'nihongo_vocabulary_initialized';
-const VERSION_KEY = 'nihongo_vocabulary_version';
-const CURRENT_VERSION = '1.1.3'; // Updated to include Unit 2 and Unit 3
+const LISTS_KEY = 'nihongo_custom_lists';
+const LIST_ITEMS_KEY = 'nihongo_list_items';
 
 /**
  * localStorage implementation of vocabulary storage
@@ -56,37 +50,9 @@ export class LocalStorageVocabularyStorage implements IVocabularyStorage {
     }
   }
 
-  /**
-   * Initialize storage with Unit 1 & Unit 2 vocabulary if empty or outdated
-   */
-  private initializeIfEmpty(): void {
-    const items = this.loadFromStorage();
-    const storedVersion = localStorage.getItem(VERSION_KEY);
-    
-    // Re-initialize if storage is empty OR version is outdated
-    const needsInitialization = items.length === 0 || storedVersion !== CURRENT_VERSION;
-    
-    if (needsInitialization) {
-      const timestamp = getCurrentTimestamp();
-      
-      // Combine Unit 1, Unit 2, Unit 3, Unit 4, and Unit 5 vocabulary
-      const allVocabulary = [...unit1Vocabulary, ...unit2Vocabulary, ...unit3Vocabulary, ...unit4Vocabulary, ...unit5Vocabulary];
-      
-      const initializedVocabulary: VocabularyItem[] = allVocabulary.map(item => ({
-        ...item,
-        createdAt: timestamp,
-        updatedAt: timestamp,
-      }));
-      
-      this.saveToStorage(initializedVocabulary);
-      localStorage.setItem(INITIALIZED_KEY, 'true');
-      localStorage.setItem(VERSION_KEY, CURRENT_VERSION);
-      console.log(`✅ Initialized with ${initializedVocabulary.length} vocabulary items (Unit 1: ${unit1Vocabulary.length}, Unit 2: ${unit2Vocabulary.length}, Unit 3: ${unit3Vocabulary.length}, Unit 4: ${unit4Vocabulary.length}, Unit 5: ${unit5Vocabulary.length})`);
-    }
-  }
+
 
   async getAll(): Promise<VocabularyItem[]> {
-    this.initializeIfEmpty();
     return this.loadFromStorage();
   }
 
@@ -103,6 +69,18 @@ export class LocalStorageVocabularyStorage implements IVocabularyStorage {
       vietnamese: data.vietnamese.trim(),
       hiragana: data.hiragana.trim(),
       kanji: data.kanji?.trim() || null,
+      romaji: data.romaji?.trim(),
+      category: data.category,
+      tags: data.tags,
+      exampleSentence: data.exampleSentence?.trim(),
+      exampleSentenceHiragana: data.exampleSentenceHiragana?.trim(),
+      exampleTranslationVi: data.exampleTranslationVi?.trim(),
+      unit: data.unit,
+      difficulty: data.difficulty,
+      audioUrl: data.audioUrl?.trim(),
+      isFavorite: data.isFavorite || false,
+      note: data.note?.trim(),
+      isBuiltIn: false,
       createdAt: getCurrentTimestamp(),
       updatedAt: getCurrentTimestamp(),
     };
@@ -152,5 +130,156 @@ export class LocalStorageVocabularyStorage implements IVocabularyStorage {
 
   async clear(): Promise<void> {
     localStorage.removeItem(STORAGE_KEY);
+  }
+
+  // ============ Custom List Methods ============
+
+  /**
+   * Load all custom lists from localStorage
+   */
+  private loadListsFromStorage(): CustomList[] {
+    try {
+      const data = localStorage.getItem(LISTS_KEY);
+      if (!data) return [];
+      return JSON.parse(data) as CustomList[];
+    } catch (error) {
+      console.error('Error loading lists from localStorage:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Save all custom lists to localStorage
+   */
+  private saveListsToStorage(lists: CustomList[]): void {
+    try {
+      localStorage.setItem(LISTS_KEY, JSON.stringify(lists));
+    } catch (error) {
+      console.error('Error saving lists to localStorage:', error);
+      throw new Error('Failed to save custom lists');
+    }
+  }
+
+  /**
+   * Load all list items from localStorage
+   */
+  private loadItemsFromStorage(): ListItem[] {
+    try {
+      const data = localStorage.getItem(LIST_ITEMS_KEY);
+      if (!data) return [];
+      return JSON.parse(data) as ListItem[];
+    } catch (error) {
+      console.error('Error loading items from localStorage:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Save all list items to localStorage
+   */
+  private saveItemsToStorage(items: ListItem[]): void {
+    try {
+      localStorage.setItem(LIST_ITEMS_KEY, JSON.stringify(items));
+    } catch (error) {
+      console.error('Error saving items to localStorage:', error);
+      throw new Error('Failed to save list items');
+    }
+  }
+
+  async getAllCustomLists(): Promise<CustomList[]> {
+    return this.loadListsFromStorage();
+  }
+
+  async getCustomListById(id: string): Promise<CustomList | null> {
+    const lists = this.loadListsFromStorage();
+    return lists.find(list => list.id === id) || null;
+  }
+
+  async createCustomList(name: string, description?: string, color?: string, icon?: string): Promise<string> {
+    const lists = this.loadListsFromStorage();
+    const timestamp = getCurrentTimestamp();
+
+    const newList: CustomList = {
+      id: generateId(),
+      name: name.trim(),
+      description: description?.trim(),
+      createdAt: timestamp,
+      updatedAt: timestamp,
+      color: color || '#3b82f6',
+      icon: icon || '📝',
+    };
+
+    lists.push(newList);
+    this.saveListsToStorage(lists);
+    return newList.id;
+  }
+
+  async updateCustomList(id: string, updates: Partial<CustomList>): Promise<void> {
+    const lists = this.loadListsFromStorage();
+    const index = lists.findIndex(list => list.id === id);
+
+    if (index === -1) {
+      throw new Error(`Custom list with id ${id} not found`);
+    }
+
+    const updatedList: CustomList = {
+      ...lists[index],
+      ...updates,
+      name: updates.name ? updates.name.trim() : lists[index].name,
+      description: updates.description ? updates.description?.trim() : lists[index].description,
+      updatedAt: getCurrentTimestamp(),
+    };
+
+    lists[index] = updatedList;
+    this.saveListsToStorage(lists);
+  }
+
+  async deleteCustomList(id: string): Promise<void> {
+    let lists = this.loadListsFromStorage();
+    lists = lists.filter(list => list.id !== id);
+    this.saveListsToStorage(lists);
+
+    // Also remove all items in this list
+    let items = this.loadItemsFromStorage();
+    items = items.filter(item => item.listId !== id);
+    this.saveItemsToStorage(items);
+  }
+
+  async addToCustomList(listId: string, vocabularyId: string, note?: string): Promise<string> {
+    const items = this.loadItemsFromStorage();
+    const timestamp = getCurrentTimestamp();
+
+    const newItem: ListItem = {
+      id: generateId(),
+      listId,
+      vocabularyId,
+      addedAt: timestamp,
+      note: note?.trim(),
+    };
+
+    items.push(newItem);
+    this.saveItemsToStorage(items);
+    return newItem.id;
+  }
+
+  async removeFromCustomList(itemId: string): Promise<void> {
+    let items = this.loadItemsFromStorage();
+    items = items.filter(item => item.id !== itemId);
+    this.saveItemsToStorage(items);
+  }
+
+  async getVocabularyInList(listId: string): Promise<VocabularyItem[]> {
+    const items = this.loadItemsFromStorage().filter(item => item.listId === listId);
+    const allVocabulary = this.loadFromStorage();
+    return allVocabulary.filter(vocab => items.some(item => item.vocabularyId === vocab.id));
+  }
+
+  async getListItems(listId: string): Promise<ListItem[]> {
+    return this.loadItemsFromStorage().filter(item => item.listId === listId);
+  }
+
+  async isInList(listId: string, vocabularyId: string): Promise<boolean> {
+    const items = this.loadItemsFromStorage();
+    return items.some(item => item.listId === listId && item.vocabularyId === vocabularyId);
   }
 }

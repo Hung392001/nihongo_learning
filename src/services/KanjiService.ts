@@ -70,8 +70,7 @@ export const searchKanji = async (params: KanjiSearchParams): Promise<KanjiData[
           k.meaning.toLowerCase().includes(query) ||
           // Search by romaji (kname like "ichi", "ni", etc.)
           k.kname.toLowerCase().includes(query) ||
-          // Search by on-yomi (both katakana and hiragana)
-          k.onyomi.toLowerCase().includes(query) ||
+          // Search by on-yomi (hiragana)
           k.onyomi_ja.toLowerCase().includes(query) ||
           // Search by kun-yomi (both katakana and hiragana)
           k.kunyomi.toLowerCase().includes(query) ||

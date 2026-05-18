@@ -1,6 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { FlashcardMode } from './types/vocabulary';
-import { LocalStorageVocabularyStorage } from './services/LocalStorageVocabularyStorage';
+import type { FlashcardItem } from './types/flashcard';
+import { IVocabularyStorage } from './services/IVocabularyStorage';
+import { IndexedDBVocabularyStorage, indexedDBStorage } from './services/IndexedDBVocabularyStorage';
+import { ApiVocabularyStorage, apiStorage } from './services/ApiVocabularyStorage';
+import type { CustomList, ListItem } from './types/vocabulary';
 import { useVocabulary } from './hooks/useVocabulary';
 import { useFlashcardManager } from './hooks/useFlashcardManager';
 import { getAvailableModes, calculateStatistics } from './utils/flashcardHelpers';
@@ -14,10 +18,12 @@ import { Home } from './components/Home';
 import { Navigation } from './components/Navigation';
 import { Grammar } from './components/Grammar';
 import { Kanji } from './components/Kanji';
+import { UnitSelector } from './components/UnitSelector';
+import { CustomListModal } from './components/CustomListModal';
+import { FlashcardDeckModal } from './components/FlashcardDeckModal';
+import { LocalStorageFlashcardStorage } from './services/LocalStorageFlashcardStorage';
+import { useFlashcards } from './hooks/useFlashcards';
 import './App.css';
-
-// Initialize storage (can be swapped with ApiVocabularyStorage)
-const storage = new LocalStorageVocabularyStorage();
 
 function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'flashcards' | 'vocabulary' | 'alphabet' | 'grammar' | 'kanji'>('home');
@@ -29,8 +35,50 @@ function App() {
   const [autoPlay, setAutoPlay] = useState(false);
   const [autoPlaySpeed] = useState(3000); // 3 seconds
   const [showStats] = useState(false);
-  const [selectedFlashcardUnit, setSelectedFlashcardUnit] = useState<number | 'all'>('all');
-  const [selectedVocabularyUnit, setSelectedVocabularyUnit] = useState<number | 'all'>('all');
+  const [selectedFlashcardUnit, setSelectedFlashcardUnit] = useState<number | 'all' | string>('all');
+  const [selectedVocabularyUnit, setSelectedVocabularyUnit] = useState<number | 'all' | string>('all');
+  const [isListModalOpen, setIsListModalOpen] = useState(false);
+  const [selectedListId, setSelectedListId] = useState<string | null>(null);
+  const [storage, setStorage] = useState<IVocabularyStorage | null>(null);
+  const [flashcardStorage] = useState<LocalStorageFlashcardStorage>(new LocalStorageFlashcardStorage());
+  const [isDeckModalOpen, setIsDeckModalOpen] = useState(false);
+  const [selectedDeckId, setSelectedDeckId] = useState<string | null>(null);
+
+  // Custom lists state
+  const [customLists, setCustomLists] = useState<CustomList[]>([]);
+  const [listVocabularyMap, setListVocabularyMap] = useState<Map<string, any[]>>(new Map());
+  const [listItemsMap, setListItemsMap] = useState<Map<string, ListItem[]>>(new Map());
+
+  // Initialize storage on mount
+  useEffect(() => {
+    const initStorage = async () => {
+      // Fast path: Check IndexedDB first (synchronous check)
+      if (IndexedDBVocabularyStorage.isSupported()) {
+        console.log('💾 Using IndexedDB');
+        setStorage(indexedDBStorage);
+        
+        // Try API in background - if it becomes available, switch to it
+        try {
+          const isApiAvailable = await ApiVocabularyStorage.isSupported();
+          if (isApiAvailable) {
+            console.log('🔗 API detected, switching to PostgreSQL');
+            setStorage(apiStorage);
+          }
+        } catch {
+          // API not available, stay with IndexedDB
+        }
+        return;
+      }
+
+      // Fall back to LocalStorage
+      console.log('📦 Using LocalStorage fallback');
+      // @ts-ignore - Dynamic import
+      const { LocalStorageVocabularyStorage } = require('./services/LocalStorageVocabularyStorage');
+      setStorage(new LocalStorageVocabularyStorage());
+    };
+
+    initStorage();
+  }, []);
 
   // Navigation handler
   const handleNavigate = (page: string) => {
@@ -38,10 +86,62 @@ function App() {
   };
 
   // Handle flashcard practice start with unit selection
-  const handleStartPractice = (unit: number | 'all') => {
+  const handleStartPractice = (unit: number | 'all' | string) => {
     setSelectedFlashcardUnit(unit);
-    setSelectedVocabularyUnit(unit); // Sync vocabulary unit with flashcard unit
+    setSelectedVocabularyUnit(unit);
     setCurrentPage('flashcards');
+  };
+
+  // Handle saving current vocabulary as flashcards to a deck
+  const handleSaveToDeck = async () => {
+    if (flashcardVocabulary.length === 0) return;
+    
+    // Create a new deck for this vocabulary
+    const deckName = `Unit ${selectedFlashcardUnit === 'all' ? 'All' : selectedFlashcardUnit} - ${new Date().toLocaleDateString()}`;
+    
+    try {
+      // Create the deck first
+      const newDeck = await createDeck({ name: deckName });
+      
+      // Convert vocabulary items to flashcards and add to the deck
+      for (const vocab of flashcardVocabulary) {
+        const flashcard = await createFlashcard({
+          front: vocab.kanji || vocab.hiragana,
+          back: vocab.vietnamese,
+          kana: vocab.hiragana,
+          note: vocab.note,
+          tags: vocab.tags,
+          difficulty: vocab.difficulty,
+          isFavorite: vocab.isFavorite,
+        });
+        
+        // Add to the new deck
+        await addToDeck(newDeck.id, flashcard.id);
+      }
+      
+      // Show success message
+      alert(`✅ Saved ${flashcardVocabulary.length} flashcards to deck: ${newDeck.name}`);
+      
+      // Optionally open the deck manager
+      setIsDeckModalOpen(true);
+    } catch (error) {
+      alert(`❌ Failed to save flashcards: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  };
+
+  // Handle selecting a deck for practice
+  const handleSelectDeck = (deckId: string | null) => {
+    setSelectedDeckId(deckId);
+    if (deckId) {
+      // Close the modal when a deck is selected
+      setIsDeckModalOpen(false);
+    }
+  };
+
+  // Handle clearing deck selection to go back to vocabulary-based practice
+  const handleClearDeckSelection = () => {
+    setSelectedDeckId(null);
+    setSelectedFlashcardUnit('all');
   };
 
   // Apply dark mode
@@ -49,24 +149,117 @@ function App() {
     document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
     localStorage.setItem('darkMode', darkMode.toString());
   }, [darkMode]);
+
   // Vocabulary management
   const { vocabulary, loading, error, create, update, remove, refresh } = useVocabulary(storage);
 
-  // Filter vocabulary for flashcards based on selected unit
+  // Flashcard management (independent system for custom flashcards)
+  const {
+    flashcards,
+    decks,
+    deckItems,
+    createFlashcard,
+    updateFlashcard,
+    createDeck,
+    updateDeck,
+    deleteDeck,
+    addToDeck,
+    removeFromDeck,
+    exportDeck,
+    importDeck,
+  } = useFlashcards(flashcardStorage);
+
+  // Custom lists management
+  const loadCustomLists = useCallback(async () => {
+    if (!storage) return;
+    
+    try {
+      // @ts-ignore - storage might be ApiVocabularyStorage
+      const lists = await storage.getAllCustomLists?.();
+      if (lists) {
+        setCustomLists(lists);
+        
+        // Load vocabulary for each list
+        const vocabMap = new Map<string, any[]>();
+        const itemsMap = new Map<string, ListItem[]>();
+        
+        for (const list of lists) {
+          // @ts-ignore
+          const vocabInList = await storage.getVocabularyInList?.(list.id);
+          // @ts-ignore
+          const listItems = await storage.getListItems?.(list.id);
+          if (vocabInList) vocabMap.set(list.id, vocabInList);
+          if (listItems) itemsMap.set(list.id, listItems);
+        }
+        
+        setListVocabularyMap(vocabMap);
+        setListItemsMap(itemsMap);
+      }
+    } catch (error) {
+      console.error('Failed to load custom lists:', error);
+    }
+  }, [storage]);
+
+  // Load custom lists when storage is ready
+  useEffect(() => {
+    if (storage) {
+      loadCustomLists();
+    }
+  }, [storage, loadCustomLists]);
+
+  // Filter vocabulary for flashcards based on selected unit or deck
   const flashcardVocabulary = useMemo(() => {
+    if (!storage) return [];
+    
+    // If a deck is selected, get flashcards from that deck and convert to vocabulary format
+    if (selectedDeckId) {
+      const deckFlashcards = deckItems.get(selectedDeckId) || [];
+      const flashcardsInDeck = deckFlashcards
+        .map(item => flashcards.find(f => f.id === item.flashcardId))
+        .filter((f): f is FlashcardItem => f !== undefined);
+      
+      return flashcardsInDeck.map(flashcard => ({
+          // Convert FlashcardItem to VocabularyItem format
+          id: flashcard.id,
+          vietnamese: flashcard.back,
+          hiragana: flashcard.kana || flashcard.front,
+          kanji: flashcard.front.includes(flashcard.kana || '') ? null : flashcard.front,
+          romaji: undefined,
+          category: undefined,
+          tags: flashcard.tags,
+          unit: undefined,
+          difficulty: flashcard.difficulty,
+          isFavorite: flashcard.isFavorite || false,
+          note: flashcard.note,
+          createdAt: flashcard.createdAt,
+          updatedAt: flashcard.updatedAt,
+        }));
+    }
+    
+    // Otherwise use vocabulary filtered by unit
     if (selectedFlashcardUnit === 'all') {
       return vocabulary;
     }
+    if (typeof selectedFlashcardUnit === 'string' && selectedFlashcardUnit !== 'all') {
+      // Custom list - get vocabulary from the list
+      return listVocabularyMap.get(selectedFlashcardUnit) || [];
+    }
     return vocabulary.filter(v => v.unit === selectedFlashcardUnit);
-  }, [vocabulary, selectedFlashcardUnit]);
+  }, [vocabulary, selectedFlashcardUnit, listVocabularyMap, storage, selectedDeckId, deckItems, flashcards]);
 
   // Filter vocabulary for management based on selected unit
   const managedVocabulary = useMemo(() => {
+    if (!storage) return [];
+    
     if (selectedVocabularyUnit === 'all') {
       return vocabulary;
     }
+    if (typeof selectedVocabularyUnit === 'string' && selectedVocabularyUnit !== 'all') {
+      // Custom list
+      return listVocabularyMap.get(selectedVocabularyUnit) || [];
+    }
     return vocabulary.filter(v => v.unit === selectedVocabularyUnit);
-  }, [vocabulary, selectedVocabularyUnit]);
+  }, [vocabulary, selectedVocabularyUnit, listVocabularyMap, storage]);
 
   // Flashcard management
   const {
@@ -92,6 +285,48 @@ function App() {
   useEffect(() => {
     reset();
   }, [selectedFlashcardUnit, reset]);
+
+  // Custom list handlers
+  const handleCreateCustomList = async (name: string, description?: string) => {
+    if (!storage) return;
+    // @ts-ignore
+    await storage.createCustomList?.(name, description);
+    await loadCustomLists();
+  };
+
+  const handleDeleteCustomList = async (id: string) => {
+    if (!storage) return;
+    // @ts-ignore
+    await storage.deleteCustomList?.(id);
+    await loadCustomLists();
+    if (selectedVocabularyUnit === id) {
+      setSelectedVocabularyUnit('all');
+    }
+    if (selectedFlashcardUnit === id) {
+      setSelectedFlashcardUnit('all');
+    }
+  };
+
+  const handleUpdateCustomList = async (id: string, updates: Partial<CustomList>) => {
+    if (!storage) return;
+    // @ts-ignore
+    await storage.updateCustomList?.(id, updates);
+    await loadCustomLists();
+  };
+
+  const handleAddToCustomList = async (listId: string, vocabularyId: string) => {
+    if (!storage) return;
+    // @ts-ignore
+    await storage.addToCustomList?.(listId, vocabularyId);
+    await loadCustomLists();
+  };
+
+  const handleRemoveFromCustomList = async (itemId: string) => {
+    if (!storage) return;
+    // @ts-ignore
+    await storage.removeFromCustomList?.(itemId);
+    await loadCustomLists();
+  };
 
   // Auto-play functionality
   useEffect(() => {
@@ -146,13 +381,45 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [flip, next, previous, shuffle]);
 
-  if (loading) {
+  if (!storage) {
     return (
       <div className="app">
         <div className="loading">
           <div className="spinner"></div>
-          <p>Loading vocabulary...</p>
+          <p>Initializing storage...</p>
         </div>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="app">
+        {currentPage === 'vocabulary' && (
+          <UnitSelector
+            selectedUnit={selectedVocabularyUnit}
+            onUnitSelect={(unit) => {
+              setSelectedVocabularyUnit(unit);
+              setSelectedFlashcardUnit(unit);
+            }}
+            customLists={customLists}
+            onCreateCustomList={() => setIsListModalOpen(true)}
+            unitCounts={{}}
+            customListCounts={{}}
+          />
+        )}
+        <Navigation
+          currentPage={currentPage}
+          onNavigate={handleNavigate}
+          darkMode={darkMode}
+          onThemeToggle={() => setDarkMode(!darkMode)}
+        />
+        <main className={`app-main ${currentPage === 'vocabulary' ? 'with-sidebar' : ''}`}>
+          <div className="loading">
+            <div className="spinner"></div>
+            <p>Loading vocabulary...</p>
+          </div>
+        </main>
       </div>
     );
   }
@@ -160,25 +427,55 @@ function App() {
   if (error) {
     return (
       <div className="app">
+        {currentPage === 'vocabulary' && (
+          <UnitSelector
+            selectedUnit={selectedVocabularyUnit}
+            onUnitSelect={(unit) => {
+              setSelectedVocabularyUnit(unit);
+              setSelectedFlashcardUnit(unit);
+            }}
+            customLists={customLists}
+            onCreateCustomList={() => setIsListModalOpen(true)}
+            unitCounts={{}}
+            customListCounts={{}}
+          />
+        )}
         <Navigation
           currentPage={currentPage}
           onNavigate={handleNavigate}
           darkMode={darkMode}
           onThemeToggle={() => setDarkMode(!darkMode)}
         />
-        <div className="error-container">
-          <div className="error">
-            <h2>Error</h2>
-            <p>{error}</p>
-            <button onClick={refresh}>Retry</button>
+        <main className={`app-main ${currentPage === 'vocabulary' ? 'with-sidebar' : ''}`}>
+          <div className="error-container">
+            <div className="error">
+              <h2>Error</h2>
+              <p>{error}</p>
+              <button onClick={refresh}>Retry</button>
+            </div>
           </div>
-        </div>
+        </main>
       </div>
     );
   }
 
   return (
     <div className="app">
+      {/* Left Sidebar - Unit Selector (only show on Vocabulary page) */}
+      {currentPage === 'vocabulary' && (
+        <UnitSelector
+          selectedUnit={selectedVocabularyUnit}
+          onUnitSelect={(unit) => {
+            setSelectedVocabularyUnit(unit);
+            setSelectedFlashcardUnit(unit);
+          }}
+          customLists={customLists}
+          onCreateCustomList={() => setIsListModalOpen(true)}
+          unitCounts={{}}
+          customListCounts={{}}
+        />
+      )}
+
       <Navigation
         currentPage={currentPage}
         onNavigate={handleNavigate}
@@ -187,107 +484,169 @@ function App() {
       />
 
       {currentPage === 'home' ? (
-        <Home onNavigate={handleNavigate} vocabularyCount={vocabulary.length} />
+        <main className="app-main">
+          <Home onNavigate={handleNavigate} vocabularyCount={vocabulary.length} />
+        </main>
       ) : currentPage === 'flashcards' ? (
         <main className="app-main">
           {showStats && vocabulary.length > 0 && (
             <StatisticsPanel statistics={statistics} />
           )}
 
-          {vocabulary.length === 0 ? (
-            <div className="empty-vocabulary">
-              <div className="empty-icon">📚</div>
-              <h2>No vocabulary yet!</h2>
-              <p>Add your first Japanese word to start learning</p>
-              <button onClick={() => setCurrentPage('home')} className="back-to-home-btn">
-                ← Back to Home
+          {flashcardVocabulary.length === 0 ? (
+              <div className="empty-vocabulary">
+                <div className="empty-icon">📚</div>
+                <h2>No vocabulary!</h2>
+                <p>Please select a unit or list</p>
+                <button onClick={() => setCurrentPage('home')} className="back-to-home-btn">
+                  ← Back to Home
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="flashcard-unit-indicator">
+                  <span className="unit-label">
+                    {selectedDeckId ? (
+                      <>
+                        {decks.find(d => d.id === selectedDeckId)?.icon || '🎴'}
+                        Practice: {decks.find(d => d.id === selectedDeckId)?.name || 'Selected Deck'}
+                        <button
+                          onClick={handleClearDeckSelection}
+                          className="clear-deck-selection"
+                          title="Back to vocabulary"
+                        >
+                          ×
+                        </button>
+                      </>
+                    ) : selectedFlashcardUnit === 'all' ? (
+                      <>📚 Practice: All Units</>
+                    ) : typeof selectedFlashcardUnit === 'number' ? (
+                      <>📖 Practice: Unit {selectedFlashcardUnit}</>
+                    ) : (
+                      <>
+                        {customLists.find(l => l.id === selectedFlashcardUnit)?.icon || '📝'}
+                        Practice: {customLists.find(l => l.id === selectedFlashcardUnit)?.name || 'Custom List'}
+                      </>
+                    )}
+                  </span>
+                  <span className="unit-count">
+                    {flashcardVocabulary.length} words
+                  </span>
+                </div>
+
+                <ModeSelector
+                  currentMode={state.mode}
+                  availableModes={availableModes}
+                  onModeChange={changeMode}
+                />
+
+                {state.content && (
+                  <>
+                    <Flashcard
+                      front={state.content.front}
+                      back={state.content.back}
+                      isFlipped={state.isFlipped}
+                      onFlip={flip}
+                    />
+
+                    <FlashcardControls
+                      currentIndex={state.currentIndex}
+                      totalCards={state.totalCards}
+                      onPrevious={previous}
+                      onNext={next}
+                      onShuffle={shuffle}
+                      canGoPrevious={state.currentIndex > 0}
+                      canGoNext={state.currentIndex < state.totalCards - 1}
+                    />
+
+                    <div className="extra-controls">
+                      <button
+                        onClick={() => setAutoPlay(!autoPlay)}
+                        className={`auto-play-button ${autoPlay ? 'active' : ''}`}
+                        title={autoPlay ? 'Stop autoplay' : 'Start autoplay'}
+                      >
+                        {autoPlay ? '⏸️ Stop' : '▶️ Autoplay'}
+                      </button>
+                    </div>
+
+                    <div className="keyboard-hints">
+                      <span>💡 Lối tắt bàn phím:</span>
+                      <kbd>Space</kbd> Lật thẻ
+                      <kbd>←</kbd> Previous
+                      <kbd>→</kbd> Next
+                      <kbd>S</kbd> Shuffle
+                      <kbd>M</kbd> Change Mode
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+
+            {/* Flashcard Deck Controls */}
+            <div className="flashcard-deck-controls">
+              <button
+                onClick={() => setIsDeckModalOpen(true)}
+                className="flashcard-list-btn"
+                title="View all flashcard decks"
+              >
+                📚 Flashcard List
+              </button>
+              <button
+                onClick={handleSaveToDeck}
+                className="save-to-deck-btn"
+                title="Save current vocabulary as flashcards"
+                disabled={flashcardVocabulary.length === 0}
+              >
+                💾 Save to Deck
               </button>
             </div>
-          ) : (
-            <>
-              <div className="flashcard-unit-indicator">
-                <span className="unit-label">
-                  {selectedFlashcardUnit === 'all' 
-                    ? '📚 Luyện tập: Tất cả Units' 
-                    : `📖 Luyện tập: Unit ${selectedFlashcardUnit}`}
-                </span>
-                <span className="unit-count">
-                  {flashcardVocabulary.length} từ vựng
-                </span>
+          </main>
+        ) : currentPage === 'vocabulary' ? (
+          <main className={`app-main with-sidebar`}>
+            <div className="vocabulary-page">
+              <div className="page-header">
+                <h2>📚 Vocabulary</h2>
+                <p>
+                  {selectedVocabularyUnit === 'all' ? (
+                    <>All Units - {vocabulary.length} words</>
+                  ) : typeof selectedVocabularyUnit === 'number' ? (
+                    <>Unit {selectedVocabularyUnit} - {managedVocabulary.length} words</>
+                  ) : (
+                    <>
+                      {customLists.find(l => l.id === selectedVocabularyUnit)?.name || 'Custom List'} - {managedVocabulary.length} words
+                    </>
+                  )}
+                </p>
+                <button
+                  onClick={async () => {
+                    if (confirm('⚠️ MIGRATE ALL DATA: This will REPLACE all existing vocabulary with sample data. Are you sure?')) {
+                      try {
+                        // Clear all existing vocabulary
+                        await storage?.clear?.();
+                        
+                        // Load all sample data from migration
+                        const { seedMigrationData } = await import('./data/migrationVocabulary');
+                        await seedMigrationData(storage!);
+                        
+                        await refresh();
+                        alert(`✅ Database migrated! All sample vocabulary loaded.`);
+                      } catch (error) {
+                        alert(`❌ Migration failed: ${error instanceof Error ? error.message : String(error)}`);
+                      }
+                    }
+                  }}
+                  className="migrate-all-btn"
+                  title="Replace all data with sample vocabulary"
+                >
+                  🔄 Migrate All Data
+                </button>
               </div>
-
-              <ModeSelector
-                currentMode={state.mode}
-                availableModes={availableModes}
-                onModeChange={changeMode}
-              />
-
-              {state.content && (
-                <>
-                  <Flashcard
-                    front={state.content.front}
-                    back={state.content.back}
-                    isFlipped={state.isFlipped}
-                    onFlip={flip}
-                  />
-
-                  <FlashcardControls
-                    currentIndex={state.currentIndex}
-                    totalCards={state.totalCards}
-                    onPrevious={previous}
-                    onNext={next}
-                    onShuffle={shuffle}
-                    canGoPrevious={state.currentIndex > 0}
-                    canGoNext={state.currentIndex < state.totalCards - 1}
-                  />
-
-                  <div className="extra-controls">
-                    <button
-                      onClick={() => setAutoPlay(!autoPlay)}
-                      className={`auto-play-button ${autoPlay ? 'active' : ''}`}
-                      title={autoPlay ? 'Stop autoplay' : 'Start autoplay'}
-                    >
-                      {autoPlay ? '⏸️ Stop' : '▶️ Autoplay'}
-                    </button>
-                  </div>
-
-                  <div className="keyboard-hints">
-                    <span>💡 Keyboard shortcuts:</span>
-                    <kbd>Space</kbd> Flip
-                    <kbd>←</kbd> Previous
-                    <kbd>→</kbd> Next
-                    <kbd>S</kbd> Shuffle
-                  </div>
-                </>
-              )}
-            </>
-          )}
-
-          <VocabularyManager
-            vocabulary={flashcardVocabulary}
-            onCreate={create}
-            onUpdate={update}
-            onDelete={remove}
-          />
-        </main>
-      ) : currentPage === 'vocabulary' ? (
-        <main className="app-main">
-          <div className="vocabulary-page">
-            <div className="page-header">
-              <h2>📚 Từ Vựng</h2>
-              <p>
-                {selectedVocabularyUnit === 'all' 
-                  ? `Tất cả Units - ${vocabulary.length} từ vựng`
-                  : `Unit ${selectedVocabularyUnit} - ${managedVocabulary.length} từ vựng`}
-              </p>
-            </div>
             
             {vocabulary.length === 0 ? (
               <div className="empty-vocabulary">
                 <div className="empty-icon">📚</div>
-                <h3>Chào mừng đến Unit 1!</h3>
-                <p>Thư viện từ vựng của bạn sẽ được khởi tạo với 45 từ của Unit 1</p>
-                <p className="hint">Nếu bạn không thấy từ vựng, click nút bên dưới để tải Unit 1</p>
+                <h3>Welcome!</h3>
+                <p>Your vocabulary library is ready</p>
                 <button 
                   onClick={async () => {
                     // Force clear and reload
@@ -296,7 +655,7 @@ function App() {
                   }}
                   className="back-to-home-btn"
                 >
-                  Tải Từ Vựng Unit 1
+                  Load Sample Vocabulary
                 </button>
               </div>
             ) : (
@@ -310,7 +669,7 @@ function App() {
 
                 <div className="vocabulary-actions">
                   <details className="advanced-management">
-                    <summary>⚙️ Quản lý nâng cao</summary>
+                    <summary>⚙️ Advanced Management</summary>
                     <VocabularyManager
                       vocabulary={managedVocabulary}
                       onCreate={create}
@@ -340,8 +699,47 @@ function App() {
         </div>
       )}
 
+      {/* Custom List Modal */}
+      <CustomListModal
+        isOpen={isListModalOpen}
+        onClose={() => setIsListModalOpen(false)}
+        customLists={customLists}
+        onCreateList={handleCreateCustomList}
+        onDeleteList={handleDeleteCustomList}
+        onUpdateList={handleUpdateCustomList}
+        allVocabulary={vocabulary}
+        onAddToList={handleAddToCustomList}
+        onRemoveFromList={handleRemoveFromCustomList}
+        onCreateVocabulary={create}
+        onUpdateVocabulary={update}
+        selectedListId={selectedListId}
+        onSelectList={setSelectedListId}
+        listVocabulary={listVocabularyMap}
+        listItems={listItemsMap}
+      />
+
+      {/* Flashcard Deck Modal */}
+      <FlashcardDeckModal
+        isOpen={isDeckModalOpen}
+        onClose={() => setIsDeckModalOpen(false)}
+        decks={decks}
+        allFlashcards={flashcards}
+        deckItems={deckItems}
+        onCreateDeck={createDeck}
+        onUpdateDeck={updateDeck}
+        onDeleteDeck={deleteDeck}
+        onCreateFlashcard={createFlashcard}
+        onUpdateFlashcard={updateFlashcard}
+        onAddToDeck={addToDeck}
+        onRemoveFromDeck={removeFromDeck}
+        selectedDeckId={selectedDeckId}
+        onSelectDeck={handleSelectDeck}
+        onImportDeck={importDeck}
+        onExportDeck={exportDeck}
+      />
+
       <footer className="app-footer">
-        <p>Built with React + TypeScript | Data persisted in localStorage</p>
+        <p>Built with React + TypeScript | Data persisted in {storage instanceof ApiVocabularyStorage ? 'PostgreSQL' : storage instanceof IndexedDBVocabularyStorage ? 'IndexedDB' : 'localStorage'}</p>
       </footer>
     </div>
   );

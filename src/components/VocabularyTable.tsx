@@ -4,9 +4,9 @@ import './VocabularyTable.css';
 
 interface VocabularyTableProps {
   vocabulary: VocabularyItem[];
-  onStartPractice?: (unit: number | 'all') => void;
-  selectedUnit?: number | 'all';
-  onUnitChange?: (unit: number | 'all') => void;
+  onStartPractice?: (unit: number | 'all' | string) => void;
+  selectedUnit?: number | 'all' | string;
+  onUnitChange?: (unit: number | 'all' | string) => void;
 }
 
 /**
@@ -20,12 +20,12 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [internalSelectedUnit, setInternalSelectedUnit] = useState<number | 'all'>('all');
+  const [internalSelectedUnit, setInternalSelectedUnit] = useState<number | 'all' | string>('all');
   const [showUnitModal, setShowUnitModal] = useState(false);
 
   // Use controlled or internal state
   const selectedUnit = controlledSelectedUnit !== undefined ? controlledSelectedUnit : internalSelectedUnit;
-  const setSelectedUnit = (unit: number | 'all') => {
+  const setSelectedUnit = (unit: number | 'all' | string) => {
     if (onUnitChange) {
       onUnitChange(unit);
     } else {
@@ -41,7 +41,7 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
 
   const availableUnits = useMemo(() => {
     const units = new Set(vocabulary.map(item => item.unit || 1));
-    return Array.from(units).sort((a, b) => a - b);
+    return Array.from(units).sort((a, b) => (a as number) - (b as number));
   }, [vocabulary]);
 
   // Filter vocabulary

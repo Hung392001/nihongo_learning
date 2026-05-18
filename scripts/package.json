@@ -1,0 +1,22 @@
+{
+  "name": "nihongo-asset-upload",
+  "version": "1.0.0",
+  "description": "Asset upload script for migrating GIFs to cloud storage",
+  "type": "module",
+  "scripts": {
+    "upload": "node upload-assets.mjs",
+    "upload:r2": "VITE_ASSET_STORAGE_TYPE=r2 node upload-assets.mjs",
+    "upload:s3": "VITE_ASSET_STORAGE_TYPE=s3 node upload-assets.mjs",
+    "upload:supabase": "VITE_ASSET_STORAGE_TYPE=supabase node upload-assets.mjs",
+    "generate-manifest": "node upload-assets.mjs --generate-manifest"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.583.0",
+    "@cloudflare/workers-types": "^4.20240515.0",
+    "bun": "^1.1.27"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.2.2"
+  }
+}

@@ -19,13 +19,13 @@ export const Navigation: React.FC<NavigationProps> = ({
 }) => {
   const isHome = currentPage === 'home';
 
-  // Page names in Vietnamese
+  // Page names in English
   const pageNames: Record<string, string> = {
-    home: 'Trang chủ',
-    flashcards: 'Flashcards',
-    vocabulary: 'Từ vựng',
-    alphabet: 'Bảng chữ cái',
-    grammar: 'Ngữ pháp',
+    home: 'Home',
+    flashcards: 'Flashcards Practice',
+    vocabulary: 'Vocabulary',
+    alphabet: 'Alphabets',
+    grammar: 'Grammar',
     kanji: 'Kanji',
   };
 
@@ -45,7 +45,7 @@ export const Navigation: React.FC<NavigationProps> = ({
         {!isHome && (
           <div className="nav-breadcrumb">
             <button className="breadcrumb-item" onClick={() => onNavigate('home')}>
-              Trang chủ
+              Home
             </button>
             <span className="breadcrumb-separator">/</span>
             <span className="breadcrumb-item current">

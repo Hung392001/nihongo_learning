@@ -5,8 +5,8 @@ import './VocabularyManager.css';
 
 interface VocabularyManagerProps {
   vocabulary: VocabularyItem[];
-  onCreate: (data: CreateVocabularyDto) => Promise<void>;
-  onUpdate: (id: string, data: UpdateVocabularyDto) => Promise<void>;
+  onCreate: (data: CreateVocabularyDto) => Promise<VocabularyItem | void>;
+  onUpdate: (id: string, data: UpdateVocabularyDto) => Promise<VocabularyItem | void>;
   onDelete: (id: string) => Promise<void>;
 }
 
