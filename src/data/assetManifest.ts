@@ -13,6 +13,7 @@
  * - assets: Mapping of kanjiId to asset metadata
  */
 
+import Kanji from "../components/Kanji";
 import { AssetManifest, AssetMetadata } from "../services/AssetService";
 
 // Default base URLs for different environments
@@ -414,7 +415,7 @@ export const assetManifest: AssetManifest = {
     },
     kanji_033: {
       kanjiId: "kanji_033",
-      kanjiChar: "切",
+      kanjiChar: "上",
       fileName: "kanji_033.gif",
       url: `${getDefaultBaseUrl()}/kanji_033.gif`,
       alternateUrls: [
@@ -425,12 +426,166 @@ export const assetManifest: AssetManifest = {
     },
     kanji_034: {
       kanjiId: "kanji_034",
-      kanjiChar: "力",
+      kanjiChar: "下",
       fileName: "kanji_034.gif",
       url: `${getDefaultBaseUrl()}/kanji_034.gif`,
       alternateUrls: [
         `${getDefaultBaseUrl()}/kanji_034.webp`,
         `${getDefaultBaseUrl()}/kanji_034.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_035: {
+      kanjiId: "kanji_035",
+      kanjiChar: "中",
+      fileName: "kanji_035.gif",
+      url: `${getDefaultBaseUrl()}/kanji_035.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_035.webp`,
+        `${getDefaultBaseUrl()}/kanji_035.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_036: {
+      kanjiId: "kanji_036",
+      kanjiChar: "外",
+      fileName: "kanji_036.gif",
+      url: `${getDefaultBaseUrl()}/kanji_036.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_036.webp`,
+        `${getDefaultBaseUrl()}/kanji_036.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_037: {
+      kanjiId: "kanji_037",
+      kanjiChar: "右",
+      fileName: "kanji_037.gif",
+      url: `${getDefaultBaseUrl()}/kanji_037.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_037.webp`,
+        `${getDefaultBaseUrl()}/kanji_037.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_038: {
+      kanjiId: "kanji_038",
+      kanjiChar: "工",
+      fileName: "kanji_038.gif",
+      url: `${getDefaultBaseUrl()}/kanji_038.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_038.webp`,
+        `${getDefaultBaseUrl()}/kanji_038.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_039: {
+      kanjiId: "kanji_039",
+      kanjiChar: "左",
+      fileName: "kanji_039.gif",
+      url: `${getDefaultBaseUrl()}/kanji_039.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_039.webp`,
+        `${getDefaultBaseUrl()}/kanji_039.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_040: {
+      kanjiId: "kanji_040",
+      kanjiChar: "右",
+      fileName: "kanji_040.gif",
+      url: `${getDefaultBaseUrl()}/kanji_040.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_040.webp`,
+        `${getDefaultBaseUrl()}/kanji_040.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_041: {
+      kanjiId: "kanji_041",
+      kanjiChar: "後",
+      fileName: "kanji_041.gif",
+      url: `${getDefaultBaseUrl()}/kanji_041.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_041.webp`,
+        `${getDefaultBaseUrl()}/kanji_041.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_042: {
+      kanjiId: "kanji_042",
+      kanjiChar: "午",
+      fileName: "kanji_042.gif",
+      url: `${getDefaultBaseUrl()}/kanji_042.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_042.webp`,
+        `${getDefaultBaseUrl()}/kanji_042.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_043: {
+      kanjiId: "kanji_043",
+      kanjiChar: "門",
+      fileName: "kanji_043.gif",
+      url: `${getDefaultBaseUrl()}/kanji_043.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_043.webp`,
+        `${getDefaultBaseUrl()}/kanji_043.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_044: {
+      kanjiId: "kanji_044",
+      kanjiChar: "問",
+      fileName: "kanji_044.gif",
+      url: `${getDefaultBaseUrl()}/kanji_044.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_044.webp`,
+        `${getDefaultBaseUrl()}/kanji_044.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_045: {
+      kanjiId: "kanji_045",
+      kanjiChar: "東",
+      fileName: "kanji_045.gif",
+      url: `${getDefaultBaseUrl()}/kanji_045.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_045.webp`,
+        `${getDefaultBaseUrl()}/kanji_045.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_046: {
+      kanjiId: "kanji_046",
+      kanjiChar: "西",
+      fileName: "kanji_046.gif",
+      url: `${getDefaultBaseUrl()}/kanji_046.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_046.webp`,
+        `${getDefaultBaseUrl()}/kanji_046.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_047: {
+      kanjiId: "kanji_047",
+      kanjiChar: "南",
+      fileName: "kanji_047.gif",
+      url: `${getDefaultBaseUrl()}/kanji_047.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_047.webp`,
+        `${getDefaultBaseUrl()}/kanji_047.mp4`,
+      ],
+      contentType: "image/gif",
+    },
+    kanji_048: {
+      kanjiId: "kanji_048",
+      kanjiChar: "北",
+      fileName: "kanji_048.gif",
+      url: `${getDefaultBaseUrl()}/kanji_048.gif`,
+      alternateUrls: [
+        `${getDefaultBaseUrl()}/kanji_048.webp`,
+        `${getDefaultBaseUrl()}/kanji_048.mp4`,
       ],
       contentType: "image/gif",
     },

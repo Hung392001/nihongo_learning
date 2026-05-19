@@ -187,6 +187,7 @@
   color: #1e293b;
   font-size: 0.95rem;
   outline: none;
+  line-height: 1;
 }
 
 .search-box input:focus {

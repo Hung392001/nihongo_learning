@@ -107,6 +107,7 @@
   font-size: 0.9rem;
   outline: none;
   transition: all 0.2s ease;
+  line-height: 1;
 }
 
 .search-input:focus {
