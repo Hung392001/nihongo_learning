@@ -30,6 +30,7 @@ export const UnitSelector: React.FC<UnitSelectorProps> = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
 
   // Build unit metadata
   const units: UnitMetadata[] = [
@@ -112,18 +113,50 @@ export const UnitSelector: React.FC<UnitSelectorProps> = ({
       </div>
 
       {isExpanded && (
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="Tìm kiếm..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
-          {searchQuery && (
-            <button onClick={() => setSearchQuery("")} className="clear-search">
-              ×
-            </button>
+        <div
+          className={`selector-search ${isSearchExpanded ? "expanded" : "collapsed"}`}
+        >
+          {!isSearchExpanded ? (
+            <div className="search-icon-box">
+              <button
+                className="search-toggle-button"
+                onClick={() => setIsSearchExpanded(true)}
+                title="Tìm kiếm units"
+                aria-label="Search"
+              >
+                🔍
+              </button>
+            </div>
+          ) : (
+            <>
+              <button
+                className="search-back-button"
+                onClick={() => {
+                  setIsSearchExpanded(false);
+                  setSearchQuery("");
+                }}
+                title="Đóng tìm kiếm"
+                aria-label="Close search"
+              >
+                ←
+              </button>
+              <input
+                type="text"
+                placeholder="Tìm kiếm..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+                autoFocus
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="clear-search"
+                >
+                  ×
+                </button>
+              )}
+            </>
           )}
         </div>
       )}
