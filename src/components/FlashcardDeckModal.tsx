@@ -13,8 +13,8 @@ interface FlashcardDeckModalProps {
   onCreateDeck: (data: CreateDeckDto) => Promise<FlashcardDeck>;
   onUpdateDeck: (id: string, data: UpdateDeckDto) => Promise<FlashcardDeck>;
   onDeleteDeck: (id: string, deleteCards?: boolean) => Promise<void>;
-  onCreateFlashcard: (data: CreateFlashcardDto) => Promise<FlashcardItem>;
   onUpdateFlashcard: (id: string, data: UpdateFlashcardDto) => Promise<FlashcardItem>;
+  onDeleteFlashcard: (id: string) => Promise<void>;
   onAddToDeck: (deckId: string, flashcardId: string, note?: string) => Promise<DeckItem>;
   onRemoveFromDeck: (deckItemId: string) => Promise<void>;
   selectedDeckId: string | null;
@@ -23,7 +23,7 @@ interface FlashcardDeckModalProps {
   onExportDeck: (deckId: string) => Promise<FlashcardExport>;
 }
 
-type ActiveTab = 'manage' | 'add' | 'create' | 'practice';
+type ActiveTab = 'manage' | 'add' | 'practice';
 
 export const FlashcardDeckModal: React.FC<FlashcardDeckModalProps> = ({
   isOpen,
@@ -34,8 +34,8 @@ export const FlashcardDeckModal: React.FC<FlashcardDeckModalProps> = ({
   onCreateDeck,
   onUpdateDeck,
   onDeleteDeck,
-  onCreateFlashcard,
   onUpdateFlashcard,
+  onDeleteFlashcard,
   onAddToDeck,
   onRemoveFromDeck,
   selectedDeckId,
@@ -50,10 +50,11 @@ export const FlashcardDeckModal: React.FC<FlashcardDeckModalProps> = ({
   const [editingDeckName, setEditingDeckName] = useState('');
   const [editingDeckDescription, setEditingDeckDescription] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [isCreatingCard, setIsCreatingCard] = useState(false);
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [showImportModal, setShowImportModal] = useState(false);
   const [importData, setImportData] = useState('');
+  const [selectedFlashcards, setSelectedFlashcards] = useState<Set<string>>(new Set());
+  const [expandedDeckId, setExpandedDeckId] = useState<string | null>(null);
 
   // Reset state when modal opens/closes
   useEffect(() => {
@@ -63,12 +64,66 @@ export const FlashcardDeckModal: React.FC<FlashcardDeckModalProps> = ({
       setNewDeckDescription('');
       setEditingDeckId(null);
       setSearchQuery('');
-      setIsCreatingCard(false);
       setEditingCardId(null);
       setShowImportModal(false);
       setImportData('');
+      setSelectedFlashcards(new Set());
     }
   }, [isOpen]);
+
+  // Reset selection when expanded deck changes
+  useEffect(() => {
+    setSelectedFlashcards(new Set());
+  }, [expandedDeckId]);
+
+  const toggleSelect = (flashcardId: string) => {
+    setSelectedFlashcards(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(flashcardId)) {
+        newSet.delete(flashcardId);
+      } else {
+        newSet.add(flashcardId);
+      }
+      return newSet;
+    });
+  };
+
+  const handleDeleteSelected = async () => {
+    if (selectedFlashcards.size === 0) {
+      alert('Please select at least one card to delete');
+      return;
+    }
+
+    if (!confirm(`Are you sure you want to delete ${selectedFlashcards.size} card(s)? This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      for (const flashcardId of selectedFlashcards) {
+        await onDeleteFlashcard(flashcardId);
+      }
+      setSelectedFlashcards(new Set());
+    } catch (error) {
+      alert('Cannot delete cards: ' + (error as Error).message);
+    }
+  };
+
+  const handleDeleteFlashcard = async (flashcardId: string) => {
+    if (!confirm('Are you sure you want to delete this card? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      await onDeleteFlashcard(flashcardId);
+      setSelectedFlashcards(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(flashcardId);
+        return newSet;
+      });
+    } catch (error) {
+      alert('Cannot delete card: ' + (error as Error).message);
+    }
+  };
 
   // Reset editing state when editingDeckId changes
   useEffect(() => {
@@ -119,21 +174,6 @@ export const FlashcardDeckModal: React.FC<FlashcardDeckModalProps> = ({
     }
   };
 
-  const handleDeleteDeck = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this deck? All cards in the deck will be removed from the deck but kept.')) {
-      return;
-    }
-
-    try {
-      await onDeleteDeck(id, false);
-      if (selectedDeckId === id) {
-        onSelectDeck(null);
-      }
-    } catch (error) {
-      alert('Cannot delete deck: ' + (error as Error).message);
-    }
-  };
-
   const handleDeleteDeckWithCards = async (id: string) => {
     if (!confirm('Are you sure you want to delete this deck AND all cards inside? This action cannot be undone.')) {
       return;
@@ -143,6 +183,9 @@ export const FlashcardDeckModal: React.FC<FlashcardDeckModalProps> = ({
       await onDeleteDeck(id, true);
       if (selectedDeckId === id) {
         onSelectDeck(null);
+      }
+      if (expandedDeckId === id) {
+        setExpandedDeckId(null);
       }
     } catch (error) {
       alert('Cannot delete deck: ' + (error as Error).message);
@@ -251,12 +294,6 @@ export const FlashcardDeckModal: React.FC<FlashcardDeckModalProps> = ({
           >
             Add Existing Cards
           </button>
-          <button
-            className={`deck-tab-button ${activeTab === 'create' ? 'active' : ''}`}
-            onClick={() => setActiveTab('create')}
-          >
-            Create New Card
-          </button>
         </div>
 
         {activeTab === 'manage' && (
@@ -299,96 +336,195 @@ export const FlashcardDeckModal: React.FC<FlashcardDeckModalProps> = ({
                 <p className="empty-message">No decks yet. Create your first deck!</p>
               ) : (
                 <div className="decks-grid">
-                  {decks.map((deck) => (
-                    <div key={deck.id} className="deck-card">
-                      <div className="deck-header">
-                        <span className="deck-icon" style={{ fontSize: '1.5rem' }}>
-                          {deck.icon || '🎴'}
-                        </span>
-                        {editingDeckId === deck.id ? (
-                          <form onSubmit={handleUpdateDeck} className="edit-form">
-                            <input
-                              type="text"
-                              value={editingDeckName}
-                              onChange={(e) => setEditingDeckName(e.target.value)}
-                              autoFocus
-                            />
-                            <button type="submit" className="btn-save" title="Save">
-                              ✓
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => setEditingDeckId(null)}
-                              className="btn-cancel"
-                              title="Cancel"
-                            >
-                              ×
-                            </button>
-                          </form>
-                        ) : (
-                          <>
-                            <span className="deck-name">{deck.name}</span>
-                            <div className="deck-actions">
-                              <button
-                                onClick={() => setEditingDeckId(deck.id)}
-                                className="btn-edit"
-                                title="Edit"
-                              >
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                </svg>
+                  {decks.map((deck) => {
+                    const deckFlashcards = (deckItems.get(deck.id) || [])
+                      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+                      .map(item => allFlashcards.find(f => f.id === item.flashcardId))
+                      .filter((f): f is FlashcardItem => f !== undefined);
+
+                    return (
+                      <div key={deck.id} className="deck-card">
+                        <div className="deck-header">
+                          <span className="deck-icon" style={{ fontSize: '1.5rem' }}>
+                            {deck.icon || '🎴'}
+                          </span>
+                          {editingDeckId === deck.id ? (
+                            <form onSubmit={handleUpdateDeck} className="edit-form">
+                              <input
+                                type="text"
+                                value={editingDeckName}
+                                onChange={(e) => setEditingDeckName(e.target.value)}
+                                autoFocus
+                              />
+                              <button type="submit" className="btn-save" title="Save">
+                                ✓
                               </button>
                               <button
-                                onClick={() => handleDeleteDeck(deck.id)}
-                                className="btn-delete"
-                                title="Remove from deck (keep card)"
+                                type="button"
+                                onClick={() => setEditingDeckId(null)}
+                                className="btn-cancel"
+                                title="Cancel"
                               >
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                  <polyline points="3 6 5 6 21 6"></polyline>
-                                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                </svg>
+                                ×
                               </button>
-                              <button
-                                onClick={() => handleDeleteDeckWithCards(deck.id)}
-                                className="btn-delete-all"
-                                title="Delete deck + all cards"
-                              >
-                                🗑️
-                              </button>
+                            </form>
+                          ) : (
+                            <>
+                              <span className="deck-name">{deck.name}</span>
+                              <div className="deck-actions">
+                                <button
+                                  onClick={() => setEditingDeckId(deck.id)}
+                                  className="btn-edit"
+                                  title="Edit"
+                                >
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                  </svg>
+                                </button>
+                                <button
+                                  onClick={() => setExpandedDeckId(expandedDeckId === deck.id ? null : deck.id)}
+                                  className="btn-manage"
+                                  title="Manage flashcards"
+                                >
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                  </svg>
+                                </button>
+                                <button
+                                  onClick={() => handleDeleteDeckWithCards(deck.id)}
+                                  className="btn-delete-all"
+                                  title="Delete deck + all cards"
+                                >
+                                  🗑️
+                                </button>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                        <div className="deck-info">
+                          <span className="deck-count">
+                            {deckFlashcards.length} cards
+                          </span>
+                          <span className="deck-date">
+                            Created: {new Date(deck.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
+                        <div className="deck-description">
+                          {deck.description || 'No description'}
+                        </div>
+                        <div className="deck-action-buttons">
+                          <button
+                            className={`btn-select-deck ${selectedDeckId === deck.id ? 'selected' : ''}`}
+                            onClick={() => onSelectDeck(selectedDeckId === deck.id ? null : deck.id)}
+                          >
+                            {selectedDeckId === deck.id ? 'Selected' : 'Select'}
+                          </button>
+                          <button
+                            className="btn-export"
+                            onClick={async () => {
+                              await handleExport();
+                            }}
+                          >
+                            📥 Export
+                          </button>
+                        </div>
+                        
+                        {/* Flashcards in this deck */}
+                        {expandedDeckId === deck.id && deckFlashcards.length > 0 && (
+                          <div className="deck-flashcards-preview">
+                            <div className="deck-flashcards-header">
+                              <label className="select-all-checkbox">
+                                <input
+                                  type="checkbox"
+                                  checked={selectedFlashcards.size === deckFlashcards.length && deckFlashcards.length > 0}
+                                  onChange={(e) => {
+                                    e.stopPropagation();
+                                    if (selectedFlashcards.size === deckFlashcards.length) {
+                                      setSelectedFlashcards(new Set());
+                                    } else {
+                                      setSelectedFlashcards(new Set(deckFlashcards.map(f => f.id)));
+                                    }
+                                  }}
+                                />
+                                <span>Select All</span>
+                              </label>
+                              {selectedFlashcards.size > 0 && (
+                                <button
+                                  className="btn-delete-selected"
+                                  onClick={handleDeleteSelected}
+                                  title={`Delete ${selectedFlashcards.size} selected card(s)`}
+                                >
+                                  🗑️ Delete Selected
+                                </button>
+                              )}
                             </div>
-                          </>
+                            <div className="deck-flashcards-grid">
+                              {deckFlashcards.map((card) => {
+                                const isSelected = selectedFlashcards.has(card.id);
+                                
+                                return (
+                                  <div
+                                    key={card.id}
+                                    className={`deck-flashcard-item ${isSelected ? 'selected' : ''}`}
+                                    onClick={(e) => {
+                                      if ((e.target as HTMLElement).tagName !== 'BUTTON') {
+                                        toggleSelect(card.id);
+                                      }
+                                    }}
+                                  >
+                                    <div className="deck-flashcard-checkbox">
+                                      <input
+                                        type="checkbox"
+                                        checked={isSelected}
+                                        onChange={(e) => {
+                                          e.stopPropagation();
+                                          toggleSelect(card.id);
+                                        }}
+                                      />
+                                    </div>
+                                    <div className="deck-flashcard-preview-content">
+                                      <div className="deck-flashcard-preview-front">{card.front}</div>
+                                      {card.kana && <div className="deck-flashcard-preview-kana">{card.kana}</div>}
+                                      <div className="deck-flashcard-preview-back">{card.back}</div>
+                                    </div>
+                                    <div className="deck-flashcard-preview-actions">
+                                      <button
+                                        className="btn-edit-flashcard"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          setEditingCardId(card.id);
+                                        }}
+                                        title="Edit"
+                                      >
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                      </button>
+                                      <button
+                                        className="btn-delete-flashcard"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleDeleteFlashcard(card.id);
+                                        }}
+                                        title="Delete card completely"
+                                      >
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                          <polyline points="3 6 5 6 21 6"></polyline>
+                                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
                         )}
                       </div>
-                      <div className="deck-info">
-                        <span className="deck-count">
-                          {(deckItems.get(deck.id) || []).length} cards
-                        </span>
-                        <span className="deck-date">
-                          Created: {new Date(deck.createdAt).toLocaleDateString()}
-                        </span>
-                      </div>
-                      <div className="deck-description">
-                        {deck.description || 'No description'}
-                      </div>
-                      <div className="deck-action-buttons">
-                        <button
-                          className={`btn-select-deck ${selectedDeckId === deck.id ? 'selected' : ''}`}
-                          onClick={() => onSelectDeck(selectedDeckId === deck.id ? null : deck.id)}
-                        >
-                          {selectedDeckId === deck.id ? 'Selected' : 'Select'}
-                        </button>
-                        <button
-                          className="btn-export"
-                          onClick={async () => {
-                            await handleExport();
-                          }}
-                        >
-                          📥 Export
-                        </button>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -494,55 +630,7 @@ export const FlashcardDeckModal: React.FC<FlashcardDeckModalProps> = ({
           </div>
         )}
 
-        {/* Create New Flashcard Tab */}
-        {activeTab === 'create' && (
-          <div className="deck-create-tab">
-            {selectedDeckId ? (
-              <div className="deck-create-content">
-                <div className="selected-deck-info">
-                  <h3>
-                    Create New Card for "{decks.find(d => d.id === selectedDeckId)?.name}"
-                  </h3>
-                  <p>
-                    The new card will be added directly to this deck.
-                  </p>
-                </div>
 
-                <FlashcardForm
-                  onSubmit={async (data: CreateFlashcardDto | UpdateFlashcardDto) => {
-                    setIsCreatingCard(true);
-                    try {
-                      // Create the flashcard
-                      const newCard = await onCreateFlashcard(data as CreateFlashcardDto);
-
-                      // After creating, add it to the selected deck
-                      if (selectedDeckId && newCard?.id) {
-                        await onAddToDeck(selectedDeckId, newCard.id);
-                      }
-
-                      // Reset and go back to add tab
-                      setIsCreatingCard(false);
-                      setActiveTab('add');
-                    } catch (error) {
-                      setIsCreatingCard(false);
-                      alert('Cannot create card: ' + (error as Error).message);
-                    }
-                  }}
-                  onCancel={() => setActiveTab('add')}
-                  isLoading={isCreatingCard}
-                  allFlashcards={allFlashcards}
-                />
-              </div>
-            ) : (
-              <div className="no-deck-selected">
-                <p>Please select a deck before creating a new card</p>
-                <button onClick={() => setActiveTab('manage')} className="btn-primary">
-                  Select Deck
-                </button>
-              </div>
-            )}
-          </div>
-        )}
 
         {/* Edit Flashcard Modal */}
         {editingCardId && (

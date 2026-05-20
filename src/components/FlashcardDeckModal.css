@@ -256,7 +256,8 @@
 
 .btn-edit,
 .btn-delete,
-.btn-delete-all {
+.btn-delete-all,
+.btn-manage {
   width: 32px;
   height: 32px;
   display: flex;
@@ -286,6 +287,172 @@
   color: #ea580c;
   border-color: #ea580c;
   background: rgba(234, 88, 12, 0.05);
+}
+
+.btn-manage:hover {
+  color: #3b82f6;
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.05);
+}
+
+/* Deck Flashcards Preview */
+.deck-flashcards-preview {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.deck-flashcards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.select-all-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+}
+
+.select-all-checkbox input {
+  width: 18px;
+  height: 18px;
+  accent-color: #667eea;
+  cursor: pointer;
+}
+
+.btn-delete-selected {
+  padding: 6px 12px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-delete-selected:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.deck-flashcards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.deck-flashcard-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.deck-flashcard-item:hover {
+  border-color: #667eea;
+  background: #f1f5f9;
+}
+
+.deck-flashcard-item.selected {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.deck-flashcard-checkbox {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deck-flashcard-checkbox input {
+  width: 18px;
+  height: 18px;
+  accent-color: #667eea;
+  cursor: pointer;
+}
+
+.deck-flashcard-preview-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.deck-flashcard-preview-front {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.deck-flashcard-preview-kana {
+  font-size: 0.85rem;
+  color: #475569;
+  margin-bottom: 2px;
+}
+
+.deck-flashcard-preview-back {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.deck-flashcard-preview-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-edit-flashcard,
+.btn-delete-flashcard {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.btn-edit-flashcard:hover {
+  color: #667eea;
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.btn-delete-flashcard:hover {
+  color: #ef4444;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.btn-delete-flashcard svg {
+  width: 14px;
+  height: 14px;
 }
 
 .edit-form {
@@ -1330,4 +1497,73 @@
 
 [data-theme="dark"] .btn-cancel:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark mode for deck flashcards */
+[data-theme="dark"] .deck-flashcards-preview {
+  border-top-color: var(--border-color);
+}
+
+[data-theme="dark"] .deck-flashcards-header {
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .select-all-checkbox {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .deck-flashcard-item {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .deck-flashcard-item:hover {
+  border-color: #667eea;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .deck-flashcard-item.selected {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.15);
+}
+
+[data-theme="dark"] .deck-flashcard-preview-front {
+  color: var(--card-text);
+}
+
+[data-theme="dark"] .deck-flashcard-preview-kana {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .deck-flashcard-preview-back {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .btn-edit-flashcard,
+[data-theme="dark"] .btn-delete-flashcard {
+  border-color: var(--border-color);
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .btn-edit-flashcard:hover {
+  color: #667eea;
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+[data-theme="dark"] .btn-delete-flashcard:hover {
+  color: #ef4444;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+[data-theme="dark"] .btn-manage {
+  border-color: var(--border-color);
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .btn-manage:hover {
+  color: #3b82f6;
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
 }

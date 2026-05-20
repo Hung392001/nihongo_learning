@@ -23,15 +23,21 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--bg-gradient-start) 0%,
+    var(--bg-gradient-end) 100%
+  );
   min-height: 100vh;
   color: var(--text-primary);
-  transition: background 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 .app {
@@ -39,7 +45,11 @@ body {
   display: flex;
   flex-direction: column;
   padding: 0;
-  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--bg-gradient-start) 0%,
+    var(--bg-gradient-end) 100%
+  );
 }
 
 .app-header {
@@ -113,7 +123,7 @@ body.sidebar-collapsed .app-main.with-sidebar {
   .app-main.with-sidebar {
     margin-left: 0;
   }
-  
+
   body.sidebar-collapsed .app-main.with-sidebar {
     margin-left: 0;
   }
@@ -289,7 +299,34 @@ body.sidebar-collapsed .app-main.with-sidebar {
 .extra-controls {
   display: flex;
   justify-content: center;
+  gap: 12px;
   margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.add-word-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-word-button:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.add-word-button:active {
+  transform: translateY(0);
 }
 
 /* Flashcard Management Controls */
@@ -457,7 +494,7 @@ kbd {
   background: white;
   border: 2px solid #e2e8f0;
   border-radius: 6px;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   font-size: 0.85rem;
   font-weight: 600;
   color: #334155;
@@ -554,7 +591,8 @@ kbd {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -740,7 +778,9 @@ kbd {
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .stat-card:hover {
@@ -792,20 +832,20 @@ kbd {
   .page-header h2 {
     font-size: 1.5rem;
   }
-  
+
   .page-header p {
     font-size: 0.95rem;
   }
-  
+
   .vocabulary-stats {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  
+
   .stat-card {
     padding: 20px;
   }
-  
+
   .stat-number {
     font-size: 2rem;
   }
@@ -843,7 +883,7 @@ kbd {
 }
 
 .advanced-management summary::before {
-  content: '▶';
+  content: "▶";
   display: inline-block;
   transition: transform 0.3s;
   font-size: 12px;

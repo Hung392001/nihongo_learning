@@ -1,5 +1,5 @@
-import React from 'react';
-import './FlashcardControls.css';
+import React from "react";
+import "./FlashcardControls.css";
 
 interface FlashcardControlsProps {
   currentIndex: number;
@@ -31,7 +31,7 @@ export const FlashcardControls: React.FC<FlashcardControlsProps> = ({
           Card {currentIndex + 1} of {totalCards}
         </span>
         <div className="progress-bar">
-          <div 
+          <div
             className="progress-fill"
             style={{ width: `${((currentIndex + 1) / totalCards) * 100}%` }}
           />
@@ -46,7 +46,14 @@ export const FlashcardControls: React.FC<FlashcardControlsProps> = ({
           aria-label="Previous card"
           title="Previous (←)"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
           Previous
@@ -58,7 +65,14 @@ export const FlashcardControls: React.FC<FlashcardControlsProps> = ({
           aria-label="Shuffle cards"
           title="Shuffle deck"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <polyline points="16 3 21 3 21 8"></polyline>
             <line x1="4" y1="20" x2="21" y2="3"></line>
             <polyline points="21 16 21 21 16 21"></polyline>
@@ -76,7 +90,14 @@ export const FlashcardControls: React.FC<FlashcardControlsProps> = ({
           title="Next (→)"
         >
           Next
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </button>
