@@ -63,7 +63,7 @@ function usePageFromRoute() {
     else if (page === "alphabet") navigate("/alphabet");
     else if (page === "grammar") navigate("/grammar");
     else if (page === "kanji") navigate("/kanji");
-    else if (page === "dynamic-vocabulary") navigate("/vocabulary/units");
+    else if (page === "dynamic-vocabulary" || page === "vocabulary/units") navigate("/vocabulary/units");
   };
 
   return { currentPage, handleNavigate };
