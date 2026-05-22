@@ -12,8 +12,8 @@ export const UnitList: React.FC = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [deletingUnitId, setDeletingUnitId] = useState<string | null>(null);
 
-  // Load all units
-  const loadUnits = useCallback(async () => {
+  // Load all units with retry mechanism
+  const loadUnits = useCallback(async (retryCount: number = 0) => {
     try {
       setLoading(true);
       setError(null);
@@ -21,11 +21,19 @@ export const UnitList: React.FC = () => {
       // Sort by displayOrder
       const sortedUnits = [...fetchedUnits].sort((a, b) => a.displayOrder - b.displayOrder);
       setUnits(sortedUnits);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load units');
-      console.error('Error loading units:', err);
-    } finally {
       setLoading(false);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to load units';
+      console.error('Error loading units:', err);
+      
+      // If it's a connection error and we haven't retried too many times, try again
+      if (retryCount < 10 && (errorMessage.includes('Failed to fetch') || errorMessage.includes('ECONNREFUSED') || errorMessage.includes('500'))) {
+        setTimeout(() => loadUnits(retryCount + 1), 2000);
+        setError(`Waiting for server... (attempt ${retryCount + 1}/10)`);
+      } else {
+        setError(errorMessage);
+        setLoading(false);
+      }
     }
   }, []);
 
@@ -136,10 +144,26 @@ export const UnitList: React.FC = () => {
     return (
       <div className="dynamic-vocab-container">
         <div className="error-state">
-          <p>⚠️ {error}</p>
-          <button onClick={loadUnits} className="retry-button">
-            Retry
-          </button>
+          {error.startsWith('Waiting for server') ? (
+            <>
+              <p>⏳ {error}</p>
+              <p style={{ fontSize: '0.9em', color: '#666', marginTop: '0.5em' }}>
+                Server is starting up. Please wait...
+              </p>
+            </>
+          ) : (
+            <>
+              <p>⚠️ {error}</p>
+              <div style={{ display: 'flex', gap: '1em', marginTop: '1em' }}>
+                <button onClick={() => loadUnits()} className="retry-button">
+                  Retry
+                </button>
+                <button onClick={() => window.location.reload()} className="retry-button">
+                  Reload Page
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     );

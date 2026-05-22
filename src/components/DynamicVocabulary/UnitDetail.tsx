@@ -20,8 +20,8 @@ export const UnitDetail: React.FC = () => {
   const [reordering, setReordering] = useState(false);
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
 
-  // Load unit and items
-  const loadData = useCallback(async () => {
+  // Load unit and items with retry mechanism
+  const loadData = useCallback(async (retryCount: number = 0) => {
     if (!unitId) return;
 
     try {
@@ -35,6 +35,7 @@ export const UnitDetail: React.FC = () => {
 
       if (!unitData) {
         setError('Unit not found');
+        setLoading(false);
         return;
       }
 
@@ -42,11 +43,19 @@ export const UnitDetail: React.FC = () => {
       const sortedItems = [...itemsData].sort((a, b) => a.displayOrder - b.displayOrder);
       setUnit(unitData);
       setItems(sortedItems);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load unit data');
-      console.error('Error loading unit data:', err);
-    } finally {
       setLoading(false);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to load unit data';
+      console.error('Error loading unit data:', err);
+      
+      // If it's a connection error and we haven't retried too many times, try again
+      if (retryCount < 10 && (errorMessage.includes('Failed to fetch') || errorMessage.includes('ECONNREFUSED') || errorMessage.includes('500'))) {
+        setTimeout(() => loadData(retryCount + 1), 2000);
+        setError(`Waiting for server... (attempt ${retryCount + 1}/10)`);
+      } else {
+        setError(errorMessage);
+        setLoading(false);
+      }
     }
   }, [unitId]);
 
@@ -213,13 +222,29 @@ export const UnitDetail: React.FC = () => {
     return (
       <div className="dynamic-vocab-container">
         <div className="error-state">
-          <p>⚠️ {error}</p>
-          <button onClick={loadData} className="retry-button">
-            Retry
-          </button>
-          <Link to="/vocabulary" className="back-button">
-            Back to Units
-          </Link>
+          {error.startsWith('Waiting for server') ? (
+            <>
+              <p>⏳ {error}</p>
+              <p style={{ fontSize: '0.9em', color: '#666', marginTop: '0.5em' }}>
+                Server is starting up. Please wait...
+              </p>
+            </>
+          ) : (
+            <>
+              <p>⚠️ {error}</p>
+              <div style={{ display: 'flex', gap: '1em', marginTop: '1em', flexWrap: 'wrap' }}>
+                <button onClick={() => loadData()} className="retry-button">
+                  Retry
+                </button>
+                <button onClick={() => window.location.reload()} className="retry-button">
+                  Reload Page
+                </button>
+                <Link to="/vocabulary/units" className="back-button">
+                  Back to Units
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </div>
     );
