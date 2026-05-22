@@ -10,13 +10,30 @@
 .page-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 30px;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .header-content {
   flex: 1;
+  min-width: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Header with actions on the left */
+.page-header.left-actions .header-content {
+  order: 2;
+}
+
+.page-header.left-actions .header-actions {
+  order: 1;
 }
 
 .header-content h1 {

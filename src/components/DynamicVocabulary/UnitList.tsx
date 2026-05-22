@@ -171,19 +171,21 @@ export const UnitList: React.FC = () => {
 
   return (
     <div className="dynamic-vocab-container">
-      <div className="page-header">
+      <div className="page-header left-actions">
+        <div className="header-actions">
+          <button 
+            onClick={() => setShowCreateModal(true)}
+            className="create-unit-button"
+          >
+            + Create Unit
+          </button>
+        </div>
         <div className="header-content">
           <h1>📚 Vocabulary Units</h1>
           <p className="subtitle">
             Organize your Japanese vocabulary into custom units
           </p>
         </div>
-        <button 
-          onClick={() => setShowCreateModal(true)}
-          className="create-unit-button"
-        >
-          + Create Unit
-        </button>
       </div>
 
       {units.length === 0 ? (
@@ -191,12 +193,6 @@ export const UnitList: React.FC = () => {
           <div className="empty-icon">📖</div>
           <h2>No Units Yet</h2>
           <p>Start by creating your first vocabulary unit</p>
-          <button 
-            onClick={() => setShowCreateModal(true)}
-            className="primary-button"
-          >
-            Create Your First Unit
-          </button>
         </div>
       ) : (
         <div className="units-grid">
