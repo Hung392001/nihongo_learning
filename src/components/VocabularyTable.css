@@ -334,6 +334,14 @@
   line-height: 1.6;
 }
 
+.col-example {
+  width: 30%;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
 .empty-message {
   text-align: center;
   padding: 60px 20px !important;
@@ -462,6 +470,10 @@
 
 [data-theme="dark"] .col-vietnamese {
   color: #cbd5e1;
+}
+
+[data-theme="dark"] .col-example {
+  color: #94a3b8;
 }
 
 [data-theme="dark"] .col-romaji {
@@ -876,7 +888,12 @@
     display: none;
   }
 
-  .vocabulary-table th:nth-child(3) {
+  .col-example {
+    display: none;
+  }
+
+  .vocabulary-table th:nth-child(3),
+  .vocabulary-table th:nth-child(5) {
     display: none;
   }
 

@@ -23,11 +23,15 @@ export const Navigation: React.FC<NavigationProps> = ({
   const pageNames: Record<string, string> = {
     home: 'Home',
     flashcards: 'Flashcards Practice',
-    vocabulary: 'Vocabulary',
+    vocabulary: 'Vocabulary (Old)',
+    'dynamic-vocabulary': 'Vocabulary Units',
     alphabet: 'Alphabets',
     grammar: 'Grammar',
     kanji: 'Kanji',
   };
+
+  // Show breadcrumb only for non-home pages
+  const showBreadcrumb = !isHome && currentPage !== 'dynamic-vocabulary';
 
   return (
     <nav className="app-navigation">
@@ -42,7 +46,7 @@ export const Navigation: React.FC<NavigationProps> = ({
       </div>
 
       <div className="nav-center">
-        {!isHome && (
+        {!isHome && showBreadcrumb && (
           <div className="nav-breadcrumb">
             <button className="breadcrumb-item" onClick={() => onNavigate('home')}>
               Home
@@ -53,9 +57,28 @@ export const Navigation: React.FC<NavigationProps> = ({
             </span>
           </div>
         )}
+        {currentPage === 'dynamic-vocabulary' && (
+          <div className="nav-breadcrumb">
+            <button className="breadcrumb-item" onClick={() => onNavigate('home')}>
+              Home
+            </button>
+            <span className="breadcrumb-separator">/</span>
+            <button className="breadcrumb-item" onClick={() => onNavigate('vocabulary/units')}>
+              Vocabulary Units
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="nav-right">
+        {/* Quick navigation to Vocabulary Units */}
+        <button
+          className="nav-quick-link"
+          onClick={() => onNavigate('vocabulary/units')}
+          title="Dynamic Vocabulary Units"
+        >
+          📖 Units
+        </button>
         <button
           className="nav-theme-toggle"
           onClick={onThemeToggle}

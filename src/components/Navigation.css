@@ -112,6 +112,27 @@
   transform: rotate(20deg);
 }
 
+/* Quick Link Button */
+.nav-quick-link {
+  background: none;
+  border: 1px solid var(--border-color, #e0e0e0);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: var(--text-primary, #333);
+}
+
+.nav-quick-link:hover {
+  background: var(--hover-bg, rgba(102, 126, 234, 0.1));
+  border-color: #667eea;
+  color: #667eea;
+}
+
 /* Dark Mode */
 [data-theme='dark'] .app-navigation {
   --nav-bg: #1a1a1a;

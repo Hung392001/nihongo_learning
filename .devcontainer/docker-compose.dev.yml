@@ -39,13 +39,13 @@ services:
     volumes:
       - ..:/app
     working_dir: /app/server
-    command: sh -c "(cd /app && npm install) && (cd /app/db && npm install && npm run db:migrate) && (cd /app && npm run db:seed) && (cd /app/server && npm install && npm run dev)"
+    command: sh -c "(cd /app && npm install) && (cd /app/db && npm install) && (cd /app/server && npm install && npm run dev)"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
       interval: 5s
       timeout: 5s
       retries: 20
-      start_period: 30s
+      start_period: 45s
     tty: true
 
   # Frontend React App

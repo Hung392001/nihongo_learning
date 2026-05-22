@@ -236,3 +236,108 @@ export interface ListItem {
   addedAt: number;
   note?: string | null;
 }
+
+// ============ Dynamic Vocabulary Unit Types ============
+
+/**
+ * Vocabulary Unit - a user-created group of vocabulary items
+ */
+export interface VocabularyUnit {
+  /** Unique identifier */
+  id: string;
+  
+  /** Unit name (user-defined, e.g., "JLPT N5 Lesson 1", "Travel Vocabulary") */
+  name: string;
+  
+  /** Optional description of the unit */
+  description?: string;
+  
+  /** Display order for sorting */
+  displayOrder: number;
+  
+  /** Creation timestamp */
+  createdAt: number;
+  
+  /** Last update timestamp */
+  updatedAt: number;
+}
+
+/**
+ * Individual vocabulary item within a unit
+ */
+export interface VocabularyUnitItem {
+  /** Unique identifier */
+  id: string;
+  
+  /** Reference to the parent unit */
+  unitId: string;
+  
+  /** Hiragana representation (required) */
+  hiragana: string;
+  
+  /** Kanji representation (optional) */
+  kanji?: string;
+  
+  /** Vietnamese meaning/translation (required) */
+  vietnamese: string;
+  
+  /** Example sentence in hiragana (optional) */
+  hiraganaSentence?: string;
+  
+  /** Display order within the unit */
+  displayOrder: number;
+  
+  /** Creation timestamp */
+  createdAt: number;
+  
+  /** Last update timestamp */
+  updatedAt: number;
+}
+
+/**
+ * DTO for creating a new vocabulary unit
+ */
+export interface CreateVocabularyUnitDto {
+  name: string;
+  description?: string;
+  displayOrder?: number;
+}
+
+/**
+ * DTO for updating a vocabulary unit
+ */
+export interface UpdateVocabularyUnitDto {
+  name?: string;
+  description?: string;
+  displayOrder?: number;
+}
+
+/**
+ * DTO for creating a new vocabulary item in a unit
+ */
+export interface CreateVocabularyUnitItemDto {
+  unitId: string;
+  hiragana: string;
+  kanji?: string;
+  vietnamese: string;
+  hiraganaSentence?: string;
+  displayOrder?: number;
+}
+
+/**
+ * DTO for updating a vocabulary item in a unit
+ */
+export interface UpdateVocabularyUnitItemDto {
+  hiragana?: string;
+  kanji?: string;
+  vietnamese?: string;
+  hiraganaSentence?: string;
+  displayOrder?: number;
+}
+
+/**
+ * Response type for unit with its vocabulary items
+ */
+export interface VocabularyUnitWithItems extends VocabularyUnit {
+  items: VocabularyUnitItem[];
+}

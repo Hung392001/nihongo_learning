@@ -80,3 +80,47 @@ export const listItem = pgTable(
     ),
   }),
 );
+
+// ============ Dynamic Vocabulary Unit Tables ============
+
+export const vocabularyUnit = pgTable(
+  "vocabulary_unit",
+  {
+    id: text("id").primaryKey(),
+    name: text("name").notNull(),
+    description: text("description"),
+    displayOrder: integer("display_order").default(0),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (table) => ({
+    nameIdx: index("vocabulary_unit_name_idx").on(table.name),
+    orderIdx: index("vocabulary_unit_order_idx").on(table.displayOrder),
+    createdAtIdx: index("vocabulary_unit_created_at_idx").on(table.createdAt),
+  }),
+);
+
+export const vocabularyItem = pgTable(
+  "vocabulary_item",
+  {
+    id: text("id").primaryKey(),
+    unitId: text("unit_id")
+      .notNull()
+      .references(() => vocabularyUnit.id, { onDelete: "cascade" }),
+    hiragana: text("hiragana").notNull(),
+    kanji: text("kanji"),
+    vietnamese: text("vietnamese").notNull(),
+    hiraganaSentence: text("hiragana_sentence"),
+    displayOrder: integer("display_order").default(0),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (table) => ({
+    unitIdIdx: index("vocabulary_item_unit_id_idx").on(table.unitId),
+    unitOrderIdx: index("vocabulary_item_unit_order_idx").on(
+      table.unitId,
+      table.displayOrder,
+    ),
+    createdAtIdx: index("vocabulary_item_created_at_idx").on(table.createdAt),
+  }),
+);

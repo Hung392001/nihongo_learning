@@ -10,7 +10,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=simstudio
+      - POSTGRES_DB=nihongo_learning
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     healthcheck:
@@ -31,7 +31,7 @@ services:
       - POSTGRES_PORT=5432
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=simstudio
+      - POSTGRES_DB=nihongo_learning
       - SERVER_PORT=3001
     ports:
       - "3001:3001"

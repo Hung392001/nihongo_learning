@@ -40,7 +40,7 @@ RUN echo "DATABASE_URL=postgresql://\${POSTGRES_USER}:\${POSTGRES_PASSWORD}@\${P
     echo "POSTGRES_PORT=\${POSTGRES_PORT:-5432}" >> /app/.env && \
     echo "POSTGRES_USER=\${POSTGRES_USER:-postgres}" >> /app/.env && \
     echo "POSTGRES_PASSWORD=\${POSTGRES_PASSWORD:-postgres}" >> /app/.env && \
-    echo "POSTGRES_DB=\${POSTGRES_DB:-simstudio}" >> /app/.env && \
+    echo "POSTGRES_DB=\${POSTGRES_DB:-nihongo_learning}" >> /app/.env && \
     echo "SERVER_PORT=\${SERVER_PORT:-3001}" >> /app/.env
 
 WORKDIR /app/server

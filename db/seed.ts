@@ -150,33 +150,29 @@ function parseSqlVocabulary(sqlPath: string): any[] {
     for (let i = 0; i < valuesStr.length; i++) {
       const char = valuesStr[i];
       
-      // Handle quotes
-      if ((char === "'" || char === '"') && depth === 0 && inArray === 0) {
-        if (inQuotes) {
-          if (char === quoteChar) {
-            inQuotes = false;
-            quoteChar = null;
-          }
-          current += char;
-        } else {
-          inQuotes = true;
-          quoteChar = char;
-          current += char;
-        }
+      // Handle quotes - always process quotes regardless of array state
+      if ((char === "'" || char === '"') && !inQuotes) {
+        inQuotes = true;
+        quoteChar = char;
+        current += char;
+      } else if (char === quoteChar && inQuotes) {
+        inQuotes = false;
+        quoteChar = null;
+        current += char;
       }
-      // Handle parentheses
-      else if (char === '(' && !inQuotes && inArray === 0) {
+      // Handle parentheses (only when not in quotes)
+      else if (char === '(' && !inQuotes) {
         depth++;
         current += char;
-      } else if (char === ')' && !inQuotes && inArray === 0) {
+      } else if (char === ')' && !inQuotes) {
         depth--;
         current += char;
       }
-      // Handle PostgreSQL array braces
-      else if (char === '{' && !inQuotes && depth === 0) {
+      // Handle PostgreSQL array braces (only when not in quotes)
+      else if (char === '{' && !inQuotes) {
         inArray++;
         current += char;
-      } else if (char === '}' && !inQuotes && depth === 0) {
+      } else if (char === '}' && !inQuotes) {
         inArray--;
         current += char;
       }

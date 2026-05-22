@@ -296,12 +296,13 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
               <th className="col-hiragana">Hiragana</th>
               <th className="col-kanji">Kanji</th>
               <th className="col-vietnamese">Tiếng Việt</th>
+              <th className="col-example">Ví dụ (Hiragana)</th>
             </tr>
           </thead>
           <tbody>
             {filteredVocabulary.length === 0 ? (
               <tr>
-                <td colSpan={4} className="empty-message">
+                <td colSpan={5} className="empty-message">
                   Không tìm thấy từ vựng nào
                 </td>
               </tr>
@@ -321,6 +322,7 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
                   <td className="col-hiragana">{item.hiragana}</td>
                   <td className="col-kanji">{item.kanji || "—"}</td>
                   <td className="col-vietnamese">{item.vietnamese}</td>
+                  <td className="col-example">{item.exampleSentenceHiragana || "—"}</td>
                 </tr>
               ))
             )}
