@@ -200,25 +200,6 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
 
   return (
     <div className="vocabulary-table-container">
-      {/* Unit Tabs */}
-      <div className="unit-tabs">
-        <button
-          className={`unit-tab ${selectedUnit === "all" ? "active" : ""}`}
-          onClick={() => setSelectedUnit("all")}
-        >
-          Tất cả
-        </button>
-        {availableUnits.map((unit) => (
-          <button
-            key={unit}
-            className={`unit-tab ${selectedUnit === unit ? "active" : ""}`}
-            onClick={() => setSelectedUnit(unit)}
-          >
-            Unit {unit}
-          </button>
-        ))}
-      </div>
-
       <div className="table-header">
         <div className="table-controls">
           <div className="search-box">
