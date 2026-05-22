@@ -5,8 +5,8 @@ FROM node:20-bookworm
 
 WORKDIR /app
 
-# Install git (needed for some npm packages)
-RUN apt-get update && apt-get install -y --no-install-recommends git && \
+# Install git and curl (needed for some npm packages and health checks)
+RUN apt-get update && apt-get install -y --no-install-recommends git curl && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy package files for both db and server

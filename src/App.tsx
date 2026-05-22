@@ -3,10 +3,6 @@ import { FlashcardMode } from "./types/vocabulary";
 import type { FlashcardItem } from "./types/flashcard";
 import { IVocabularyStorage } from "./services/IVocabularyStorage";
 import {
-  IndexedDBVocabularyStorage,
-  indexedDBStorage,
-} from "./services/IndexedDBVocabularyStorage";
-import {
   ApiVocabularyStorage,
   apiStorage,
 } from "./services/ApiVocabularyStorage";
@@ -74,34 +70,23 @@ function App() {
     new Map(),
   );
 
-  // Initialize storage on mount
+  // Initialize storage on mount - Use only PostgreSQL
   useEffect(() => {
     const initStorage = async () => {
-      // Fast path: Check IndexedDB first (synchronous check)
-      if (IndexedDBVocabularyStorage.isSupported()) {
-        console.log("💾 Using IndexedDB");
-        setStorage(indexedDBStorage);
-
-        // Try API in background - if it becomes available, switch to it
-        try {
-          const isApiAvailable = await ApiVocabularyStorage.isSupported();
-          if (isApiAvailable) {
-            console.log("🔗 API detected, switching to PostgreSQL");
-            setStorage(apiStorage);
-          }
-        } catch {
-          // API not available, stay with IndexedDB
+      try {
+        const isApiAvailable = await ApiVocabularyStorage.isSupported();
+        if (isApiAvailable) {
+          console.log("🔗 Using PostgreSQL");
+          setStorage(apiStorage);
+          return;
         }
-        return;
+      } catch {
+        // API not available
       }
 
-      // Fall back to LocalStorage
-      console.log("📦 Using LocalStorage fallback");
-      // @ts-ignore - Dynamic import
-      const {
-        LocalStorageVocabularyStorage,
-      } = require("./services/LocalStorageVocabularyStorage");
-      setStorage(new LocalStorageVocabularyStorage());
+      // PostgreSQL is not available - show error
+      console.error("❌ PostgreSQL API is not available. Please start the backend server.");
+      setStorage(null);
     };
 
     initStorage();
@@ -522,7 +507,10 @@ function App() {
       <div className="app">
         <div className="loading">
           <div className="spinner"></div>
-          <p>Initializing storage...</p>
+          <p>Waiting for PostgreSQL API...</p>
+          <p style={{ fontSize: '0.8em', color: '#666', marginTop: '10px' }}>
+            Please start the backend server: <code>cd server && npm start</code>
+          </p>
         </div>
       </div>
     );
@@ -905,12 +893,7 @@ function App() {
 
       <footer className="app-footer">
         <p>
-          Built with React + TypeScript | Data persisted in{" "}
-          {storage instanceof ApiVocabularyStorage
-            ? "PostgreSQL"
-            : storage instanceof IndexedDBVocabularyStorage
-              ? "IndexedDB"
-              : "localStorage"}
+          Built with React + TypeScript | Data persisted in PostgreSQL
         </p>
       </footer>
     </div>

@@ -24,7 +24,10 @@ if [ ! -d "node_modules" ]; then
 fi
 
 # Run migrations using drizzle-kit
-echo "🗄️  Applying database migrations..."
+echo "🗄️  Applying database schema migrations..."
 npm run db:push
 
-echo "✅ Migrations completed successfully!"
+echo "🌱 Seeding database with vocabulary data..."
+npm run db:migrate-all
+
+echo "✅ Database setup completed successfully!"
