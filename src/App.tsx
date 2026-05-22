@@ -74,34 +74,11 @@ function App() {
     new Map(),
   );
 
-  // Initialize storage on mount
+  // Initialize storage on mount - FORCE API for debugging
   useEffect(() => {
     const initStorage = async () => {
-      // Fast path: Check IndexedDB first (synchronous check)
-      if (IndexedDBVocabularyStorage.isSupported()) {
-        console.log("💾 Using IndexedDB");
-        setStorage(indexedDBStorage);
-
-        // Try API in background - if it becomes available, switch to it
-        try {
-          const isApiAvailable = await ApiVocabularyStorage.isSupported();
-          if (isApiAvailable) {
-            console.log("🔗 API detected, switching to PostgreSQL");
-            setStorage(apiStorage);
-          }
-        } catch {
-          // API not available, stay with IndexedDB
-        }
-        return;
-      }
-
-      // Fall back to LocalStorage
-      console.log("📦 Using LocalStorage fallback");
-      // @ts-ignore - Dynamic import
-      const {
-        LocalStorageVocabularyStorage,
-      } = require("./services/LocalStorageVocabularyStorage");
-      setStorage(new LocalStorageVocabularyStorage());
+      console.log("🔗 FORCING API storage (bypassing IndexedDB check)");
+      setStorage(apiStorage);
     };
 
     initStorage();
