@@ -5,8 +5,8 @@ FROM node:20-bookworm
 
 WORKDIR /app
 
-# Install git and curl (needed for some npm packages and health checks)
-RUN apt-get update && apt-get install -y --no-install-recommends git curl && \
+# Install git, curl, netcat, and postgresql-client (needed for some npm packages and health checks)
+RUN apt-get update && apt-get install -y --no-install-recommends git curl netcat-openbsd postgresql-client && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy package files for both db and server
@@ -20,6 +20,7 @@ COPY db/schema.ts db/db.ts db/index.ts db/drizzle.config.ts db/tsconfig.json ./d
 # Copy server source files (TypeScript)
 COPY server/index.ts ./server/
 COPY server/tsconfig.json ./server/
+COPY server/start.sh ./server/
 
 # Install root dependencies
 RUN npm ci
@@ -50,5 +51,5 @@ RUN npm run build || true
 
 EXPOSE 3001
 
-# Run migrations and start server
-CMD ["sh", "-c", "npm --prefix=.. run db:push && npm start"]
+# Wait for database to be ready, run migrations, and start server
+CMD ["sh", "-c", "echo 'Waiting for database to be ready...' && while ! nc -z db 5432; do sleep 1; done && sleep 2 && npm --prefix=.. run db:push && npm start"]
