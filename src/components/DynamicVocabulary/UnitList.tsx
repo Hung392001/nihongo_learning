@@ -44,7 +44,7 @@ export const UnitList: React.FC = () => {
   // Handle unit creation
   const handleCreateUnit = async (name: string, description?: string) => {
     try {
-      const maxOrder = Math.max(...units.map(u => u.displayOrder), 0);
+      const maxOrder = Math.max(...units.map(u => u.displayOrder), -1); // Start at 0 if no units
       const newUnit = await dynamicVocabularyStorage.createUnit({
         name,
         description,
@@ -53,7 +53,17 @@ export const UnitList: React.FC = () => {
       setUnits(prev => [...prev, newUnit].sort((a, b) => a.displayOrder - b.displayOrder));
       setShowCreateModal(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create unit');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create unit';
+      // Provide more helpful error messages
+      let userFriendlyMessage = errorMessage;
+      if (errorMessage.includes('Failed to fetch') || errorMessage.includes('ECONNREFUSED')) {
+        userFriendlyMessage = 'Cannot connect to server. Please make sure the backend server is running.';
+      } else if (errorMessage.includes('500') || errorMessage.includes('database')) {
+        userFriendlyMessage = 'Database error. Please run: npm run db:migrate';
+      } else if (errorMessage.includes('400') || errorMessage.includes('Name is required')) {
+        userFriendlyMessage = 'Please enter a unit name.';
+      }
+      setError(userFriendlyMessage);
       console.error('Error creating unit:', err);
     }
   };
