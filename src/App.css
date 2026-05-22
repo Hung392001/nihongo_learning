@@ -722,26 +722,7 @@ kbd {
   flex-wrap: wrap;
 }
 
-.migrate-all-btn {
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
 
-.migrate-all-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-}
-
-[data-theme="dark"] .migrate-all-btn {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-}
 
 .page-header {
   text-align: center;

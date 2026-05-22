@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nihongo Learning - Data Migration Tool</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        h1 span {
+            font-size: 0.8em;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .stats {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        .stats h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .progress-container {
+            margin: 20px 0;
+        }
+        .progress-bar {
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .success {
+            background: #28a745 !important;
+        }
+        .danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+        }
+        .logs {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .log-entry {
+            margin-bottom: 5px;
+        }
+        .log-success {
+            color: #00ff00;
+        }
+        .log-error {
+            color: #ff0000;
+        }
+        .log-info {
+            color: #00ffff;
+        }
+        .log-warn {
+            color: #ffff00;
+        }
+        .summary {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px solid #667eea;
+        }
+        .summary h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .unit-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .unit-badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 Nihongo Learning <span>Data Migration</span></h1>
+        <p class="subtitle">Migrate all vocabulary data to your browser's IndexedDB storage</p>
+        
+        <div class="stats">
+            <h3>📊 Migration Statistics</h3>
+            <p>Total items to migrate: <strong id="total-items">0</strong></p>
+            <p>Progress: <strong id="progress-text">0%</strong></p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-bar" style="width: 0%">0%</div>
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0;">
+            <button id="migrate-btn" onclick="startMigration()">
+                ✅ Start Migration
+            </button>
+            <button id="clear-btn" onclick="clearData()" class="danger">
+                🗑️ Clear All Data
+            </button>
+            <button id="refresh-btn" onclick="refreshStats()">
+                🔄 Refresh Stats
+            </button>
+        </div>
+        
+        <div class="logs" id="logs">
+            <div class="log-entry log-info">Ready to migrate. Click "Start Migration" to begin.</div>
+        </div>
+        
+        <div class="summary" id="summary" style="display: none;">
+            <h3>✨ Migration Summary</h3>
+            <p id="summary-text"></p>
+            <div class="unit-stats" id="unit-stats"></div>
+        </div>
+    </div>
+    
+    <script type="module">
+        // Import the migration data - we'll need to embed it directly
+        const migrationVocabulary = [
+            // This will be populated from the actual data
+        ];
+        
+        // Since we can't directly import ES6 modules in a standalone HTML,
+        // we'll use a different approach
+        let vocabData = [];
+        
+        // Try to load from the parent window if in iframe
+        function loadDataFromParent() {
+            if (window.parent && window.parent.migrationVocabulary) {
+                vocabData = window.parent.migrationVocabulary;
+                document.getElementById('total-items').textContent = vocabData.length;
+                log('📦 Loaded ' + vocabData.length + ' vocabulary items from parent', 'info');
+                return true;
+            }
+            return false;
+        }
+        
+        // Try to fetch from a JSON file
+        async function loadDataFromJson() {
+            try {
+                const response = await fetch('./migrationVocabulary.json');
+                if (response.ok) {
+                    vocabData = await response.json();
+                    document.getElementById('total-items').textContent = vocabData.length;
+                    log('📦 Loaded ' + vocabData.length + ' vocabulary items from JSON', 'info');
+                    return true;
+                }
+            } catch (e) {
+                // Ignore
+            }
+            return false;
+        }
+        
+        // Initialize
+        async function init() {
+            log('🚀 Initializing migration tool...', 'info');
+            
+            // Try different loading methods
+            if (!loadDataFromParent()) {
+                if (!await loadDataFromJson()) {
+                    log('⚠️  Could not load migration data. Please ensure this page is opened from the Nihongo Learning app directory.', 'warn');
+                    log('💡 Alternative: Open this in your browser dev tools console on the Nihongo Learning app and run: migrateAllData()', 'info');
+                    document.getElementById('migrate-btn').disabled = true;
+                    return;
+                }
+            }
+            
+            refreshStats();
+        }
+        
+        // Refresh current database stats
+        async function refreshStats() {
+            try {
+                const db = await openDB();
+                const tx = db.transaction(['vocabulary'], 'readonly');
+                const store = tx.objectStore('vocabulary');
+                const count = await store.count();
+                
+                log('📊 Current vocabulary count: ' + count, 'info');
+                
+                // Get by unit
+                const units = {};
+                const request = store.getAll();
+                request.onsuccess = () => {
+                    request.result.forEach(item => {
+                        const unit = item.unit || 'N/A';
+                        units[unit] = (units[unit] || 0) + 1;
+                    });
+                    log('📊 Vocabulary by unit: ' + JSON.stringify(units), 'info');
+                };
+                
+            } catch (e) {
+                log('⚠️  Could not read current stats: ' + e.message, 'warn');
+            }
+        }
+        
+        // Open IndexedDB
+        function openDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open('NihongoLearningDB', 1);
+                request.onerror = () => reject(new Error('Failed to open database'));
+                request.onsuccess = () => resolve(request.result);
+            });
+        }
+        
+        // Clear all data
+        async function clearData() {
+            if (!confirm('⚠️  WARNING: This will delete ALL your vocabulary data, custom lists, and flashcards. This cannot be undone! Are you sure?')) {
+                return;
+            }
+            
+            try {
+                log('🗑️  Clearing all data...', 'warn');
+                const db = await openDB();
+                
+                const stores = ['vocabulary', 'customLists', 'listItems'];
+                for (const storeName of stores) {
+                    if (db.objectStoreNames.contains(storeName)) {
+                        const tx = db.transaction(storeName, 'readwrite');
+                        const store = tx.objectStore(storeName);
+                        await new Promise((resolve, reject) => {
+                            const request = store.clear();
+                            request.onsuccess = resolve;
+                            request.onerror = reject;
+                        });
+                        log('🗑️  Cleared: ' + storeName, 'success');
+                    }
+                }
+                
+                log('✅ All data cleared successfully', 'success');
+                refreshStats();
+            } catch (e) {
+                log('❌ Failed to clear data: ' + e.message, 'error');
+            }
+        }
+        
+        // Start migration
+        async function startMigration() {
+            if (vocabData.length === 0) {
+                log('❌ No data to migrate. Please check data loading.', 'error');
+                return;
+            }
+            
+            if (!confirm('⚠️  WARNING: This will REPLACE all your vocabulary with the migration data (' + vocabData.length + ' items). Existing data will be lost! Continue?')) {
+                return;
+            }
+            
+            const migrateBtn = document.getElementById('migrate-btn');
+            migrateBtn.disabled = true;
+            migrateBtn.textContent = '🔄 Migrating...';
+            
+            try {
+                log('🚀 Starting migration of ' + vocabData.length + ' items...', 'info');
+                
+                // Clear existing data
+                log('🗑️  Clearing existing vocabulary...', 'warn');
+                const db = await openDB();
+                
+                // Clear vocabulary
+                if (db.objectStoreNames.contains('vocabulary')) {
+                    const tx = db.transaction('vocabulary', 'readwrite');
+                    await new Promise((resolve, reject) => {
+                        tx.objectStore('vocabulary').clear().onsuccess = resolve;
+                        tx.objectStore('vocabulary').clear().onerror = reject;
+                    });
+                }
+                
+                // Clear custom lists and items
+                if (db.objectStoreNames.contains('listItems')) {
+                    const tx = db.transaction('listItems', 'readwrite');
+                    await new Promise((resolve, reject) => {
+                        tx.objectStore('listItems').clear().onsuccess = resolve;
+                        tx.objectStore('listItems').clear().onerror = reject;
+                    });
+                }
+                if (db.objectStoreNames.contains('customLists')) {
+                    const tx = db.transaction('customLists', 'readwrite');
+                    await new Promise((resolve, reject) => {
+                        tx.objectStore('customLists').clear().onsuccess = resolve;
+                        tx.objectStore('customLists').clear().onerror = reject;
+                    });
+                }
+                
+                log('✅ Database cleared', 'success');
+                
+                // Migrate data
+                const now = Date.now();
+                let successCount = 0;
+                let errorCount = 0;
+                
+                for (let i = 0; i < vocabData.length; i++) {
+                    const item = vocabData[i];
+                    try {
+                        const tx = db.transaction('vocabulary', 'readwrite');
+                        await new Promise((resolve, reject) => {
+                            const store = tx.objectStore('vocabulary');
+                            const request = store.put({
+                                id: item.id || `migrated-${i}`,
+                                hiragana: item.hiragana,
+                                kanji: item.kanji || null,
+                                vietnamese: item.vietnamese,
+                                romaji: item.romaji || null,
+                                category: item.category || null,
+                                tags: item.tags || [],
+                                exampleSentence: item.exampleSentence || null,
+                                exampleSentenceHiragana: item.exampleSentenceHiragana || null,
+                                exampleTranslationVi: item.exampleTranslationVi || null,
+                                unit: item.unit || null,
+                                difficulty: item.difficulty || null,
+                                audioUrl: item.audioUrl || null,
+                                isFavorite: item.isFavorite || false,
+                                note: item.note || null,
+                                isBuiltIn: true,
+                                createdAt: now - (vocabData.length - i) * 1000,
+                                updatedAt: now - (vocabData.length - i) * 1000,
+                            });
+                            request.onsuccess = resolve;
+                            request.onerror = reject;
+                        });
+                        successCount++;
+                    } catch (e) {
+                        errorCount++;
+                        log(`❌ Failed to migrate item ${item.id}: ${e.message}`, 'error');
+                    }
+                    
+                    // Update progress
+                    const progress = Math.round(((i + 1) / vocabData.length) * 100);
+                    document.getElementById('progress-bar').style.width = progress + '%';
+                    document.getElementById('progress-bar').textContent = progress + '%';
+                    document.getElementById('progress-text').textContent = progress + '%';
+                }
+                
+                log(`✅ Successfully migrated ${successCount} items`, 'success');
+                if (errorCount > 0) {
+                    log(`⚠️  Failed to migrate ${errorCount} items`, 'warn');
+                }
+                
+                // Show summary
+                showSummary();
+                
+            } catch (e) {
+                log('❌ Migration failed: ' + e.message, 'error');
+            } finally {
+                migrateBtn.disabled = false;
+                migrateBtn.textContent = '✅ Start Migration';
+            }
+        }
+        
+        // Show summary
+        async function showSummary() {
+            const db = await openDB();
+            const tx = db.transaction('vocabulary', 'readonly');
+            const store = tx.objectStore('vocabulary');
+            
+            const count = await new Promise(resolve => {
+                store.count().onsuccess = () => resolve(store.count().result);
+            });
+            
+            // Get by unit
+            const units = {};
+            const allItems = await new Promise(resolve => {
+                const request = store.getAll();
+                request.onsuccess = () => resolve(request.result);
+            });
+            
+            allItems.forEach(item => {
+                const unit = item.unit || 'N/A';
+                units[unit] = (units[unit] || 0) + 1;
+            });
+            
+            // Display
+            const summary = document.getElementById('summary');
+            const summaryText = document.getElementById('summary-text');
+            const unitStats = document.getElementById('unit-stats');
+            
+            summaryText.innerHTML = `✨ Successfully migrated <strong>${count}</strong> vocabulary items across <strong>${Object.keys(units).length}</strong> units.`;
+            
+            unitStats.innerHTML = Object.entries(units)
+                .sort((a, b) => parseInt(a[0] || '0') - parseInt(b[0] || '0'))
+                .map(([unit, count]) => `<span class="unit-badge">Unit ${unit}: ${count}</span>`)
+                .join('');
+            
+            summary.style.display = 'block';
+            
+            log('🎉 Migration complete!', 'success');
+        }
+        
+        // Log function
+        function log(message, type = 'info') {
+            const logs = document.getElementById('logs');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            entry.textContent = message;
+            logs.appendChild(entry);
+            logs.scrollTop = logs.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+        
+        // Expose function for console use
+        window.migrateAllData = startMigration;
+        window.clearAllData = clearData;
+        
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>

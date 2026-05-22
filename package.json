@@ -14,7 +14,8 @@
     "type-check": "tsc --noEmit",
     "db:seed": "tsx db/seed.ts",
     "db:migrate": "tsx db/migrate.ts",
-    "db:reset": "tsx db/reset.ts"
+    "db:reset": "tsx db/reset.ts",
+    "db:migrate-all": "node --env-file=db/.env node_modules/.bin/tsx db/migrate-all.ts"
   },
   "dependencies": {
     "react": "^18.2.0",

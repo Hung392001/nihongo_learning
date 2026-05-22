@@ -795,38 +795,7 @@ function App() {
                   </>
                 )}
               </p>
-              <button
-                onClick={async () => {
-                  if (
-                    confirm(
-                      "⚠️ MIGRATE ALL DATA: This will REPLACE all existing vocabulary with sample data. Are you sure?",
-                    )
-                  ) {
-                    try {
-                      // Clear all existing vocabulary
-                      await storage?.clear?.();
 
-                      // Load all sample data from migration
-                      const { seedMigrationData } =
-                        await import("./data/migrationVocabulary");
-                      await seedMigrationData(storage!);
-
-                      await refresh();
-                      alert(
-                        `✅ Database migrated! All sample vocabulary loaded.`,
-                      );
-                    } catch (error) {
-                      alert(
-                        `❌ Migration failed: ${error instanceof Error ? error.message : String(error)}`,
-                      );
-                    }
-                  }
-                }}
-                className="migrate-all-btn"
-                title="Replace all data with sample vocabulary"
-              >
-                🔄 Migrate All Data
-              </button>
             </div>
 
             {vocabulary.length === 0 ? (
