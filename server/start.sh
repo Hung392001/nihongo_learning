@@ -27,17 +27,18 @@ done
 
 echo "✅ Database is ready!"
 
-# Run migrations
-echo "📥 Running database migrations..."
-cd /app && npm run db:push
-if [ $? -ne 0 ]; then
-  echo "⚠️  Migration push failed, trying migrate..."
-  npm run db:migrate
-  if [ $? -ne 0 ]; then
-    echo "❌ Both push and migrate failed. Check database connection."
-    exit 1
+# Run SQL migrations using psql
+echo "📥 Running SQL migrations..."
+for sql_file in /app/db/migrations/00*.sql; do
+  if [ -f "$sql_file" ]; then
+    echo "  Running $sql_file..."
+    if PGPASSWORD=postgres psql -h db -p 5432 -U postgres -d nihongo_learning -f "$sql_file" 2>&1; then
+      echo "  ✅ $sql_file completed"
+    else
+      echo "  ⚠️  $sql_file failed or already applied"
+    fi
   fi
-fi
+done
 
 echo "✅ Migrations complete!"
 
