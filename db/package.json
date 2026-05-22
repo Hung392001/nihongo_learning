@@ -20,7 +20,8 @@
   },
   "scripts": {
     "db:push": "drizzle-kit push --config=./drizzle.config.ts",
-    "db:migrate": "node --env-file=.env ./scripts/migrate.ts",
+    "db:migrate": "drizzle-kit migrate --config=./drizzle.config.ts",
+    "db:seed": "tsx seed.ts",
     "db:studio": "drizzle-kit studio --config=./drizzle.config.ts",
     "test": "vitest run",
     "type-check": "tsc --noEmit",

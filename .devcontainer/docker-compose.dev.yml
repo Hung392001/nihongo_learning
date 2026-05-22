@@ -39,7 +39,7 @@ services:
     volumes:
       - ..:/app
     working_dir: /app/server
-    command: sh -c "(cd /app && npm install) && (cd /app/db && npm install && npm run db:push) && (cd /app && npm run db:migrate-all) && (cd /app/server && npm install && npm run dev)"
+    command: sh -c "(cd /app && npm install) && (cd /app/db && npm install && npm run db:migrate) && (cd /app && npm run db:seed) && (cd /app/server && npm install && npm run dev)"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
       interval: 5s
@@ -65,6 +65,12 @@ services:
       - VITE_R2_ACCOUNT_ID=
       - VITE_R2_BUCKET_NAME=kanji
       - VITE_R2_PUBLIC_DOMAIN=pub-5b960731e8a84853bb330dec843a0f02.r2.dev
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/nihongo_learning
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=nihongo_learning
 
     volumes:
       # Mount host project into /app

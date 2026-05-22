@@ -12,10 +12,10 @@
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "type-check": "tsc --noEmit",
-    "db:seed": "tsx db/seed.ts",
-    "db:migrate": "tsx db/migrate.ts",
+    "db:seed": "cd db && npm run db:seed",
+    "db:migrate": "cd db && npm run db:migrate",
     "db:reset": "tsx db/reset.ts",
-    "db:migrate-all": "node --env-file=db/.env node_modules/.bin/tsx db/migrate-all.ts",
+    "db:push": "cd db && npm run db:push",
     "start:backend": "cd server && npm start"
   },
   "dependencies": {

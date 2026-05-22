@@ -389,6 +389,6 @@ app.get("/api/health", async (req: Request, res: Response) => {
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
   console.log(`📝 API available at http://localhost:${PORT}/api`);
-  console.log(`💡 Tip: Run database migration with: npm run db:migrate-all`);
+  console.log(`💡 Tip: Run database migration with: npm run db:migrate && npm run db:seed`);
 });
 
