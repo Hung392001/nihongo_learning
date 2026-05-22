@@ -7,13 +7,20 @@ echo "🚀 Starting server..."
 echo "⏳ Waiting for database to be ready..."
 
 # Wait for PostgreSQL to be ready
-MAX_RETRIES=30
+# Try both pg_isready and nc for maximum compatibility
+MAX_RETRIES=60
 RETRY_COUNT=0
-while ! pg_isready -h db -p 5432 -U postgres 2>/dev/null; do
+while true; do
+  if pg_isready -h db -p 5432 -U postgres 2>/dev/null; then
+    break
+  fi
   RETRY_COUNT=$((RETRY_COUNT + 1))
   if [ $RETRY_COUNT -ge $MAX_RETRIES ]; then
     echo "❌ Database not ready after $MAX_RETRIES attempts"
     exit 1
+  fi
+  if [ $((RETRY_COUNT % 5)) -eq 0 ]; then
+    echo "  Still waiting for database... ($RETRY_COUNT/$MAX_RETRIES)"
   fi
   sleep 1
 done
@@ -26,6 +33,10 @@ cd /app && npm run db:push
 if [ $? -ne 0 ]; then
   echo "⚠️  Migration push failed, trying migrate..."
   npm run db:migrate
+  if [ $? -ne 0 ]; then
+    echo "❌ Both push and migrate failed. Check database connection."
+    exit 1
+  fi
 fi
 
 echo "✅ Migrations complete!"
