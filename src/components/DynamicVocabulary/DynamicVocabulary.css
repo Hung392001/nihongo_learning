@@ -21,19 +21,10 @@
   min-width: 0;
 }
 
-.header-actions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-/* Header with actions on the left */
-.page-header.left-actions .header-content {
-  order: 2;
-}
-
-.page-header.left-actions .header-actions {
-  order: 1;
+/* Page Actions - bottom-left corner */
+.page-actions {
+  margin-top: 30px;
+  text-align: left;
 }
 
 .header-content h1 {
