@@ -73,7 +73,7 @@ export const UnitDetail: React.FC = () => {
     if (!unitId) return;
 
     try {
-      const maxOrder = Math.max(...items.map(i => i.displayOrder), 0);
+      const maxOrder = Math.max(...items.map(i => i.displayOrder), -1); // Start at 0 if no items
       const newItem = await dynamicVocabularyStorage.createItem(unitId, {
         ...data,
         displayOrder: maxOrder + 1,
@@ -81,7 +81,17 @@ export const UnitDetail: React.FC = () => {
       setItems(prev => [...prev, newItem].sort((a, b) => a.displayOrder - b.displayOrder));
       setShowCreateModal(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create vocabulary item');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create vocabulary item';
+      // Provide more helpful error messages
+      let userFriendlyMessage = errorMessage;
+      if (errorMessage.includes('Failed to fetch') || errorMessage.includes('ECONNREFUSED')) {
+        userFriendlyMessage = 'Cannot connect to server. Please make sure the backend server is running.';
+      } else if (errorMessage.includes('500') || errorMessage.includes('database')) {
+        userFriendlyMessage = 'Database tables missing. Please run: npm run db:migrate';
+      } else if (errorMessage.includes('400') || errorMessage.includes('required')) {
+        userFriendlyMessage = 'Hiragana and Vietnamese are required fields.';
+      }
+      setError(userFriendlyMessage);
       console.error('Error creating item:', err);
     }
   };

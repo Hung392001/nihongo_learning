@@ -569,13 +569,19 @@ app.post("/api/units/:unitId/items", async (req: Request, res: Response) => {
       return res.status(400).json({ error: "hiragana and vietnamese are required" });
     }
     
-    // Get the next display order for this unit
-    const maxOrder = await db
-      .select({ maxOrder: db.max(vocabularyItem.displayOrder) })
-      .from(vocabularyItem)
-      .where(eq(vocabularyItem.unitId, req.params.unitId));
-    
-    const nextOrder = (maxOrder[0]?.maxOrder || 0) + 1;
+    // Get the next display order for this unit (handle case where table doesn't exist yet)
+    let nextOrder = 0;
+    try {
+      const maxOrder = await db
+        .select({ maxOrder: db.max(vocabularyItem.displayOrder) })
+        .from(vocabularyItem)
+        .where(eq(vocabularyItem.unitId, req.params.unitId));
+      nextOrder = (maxOrder[0]?.maxOrder || 0) + 1;
+    } catch (error) {
+      // Table might not exist yet, start at 0
+      console.log("vocabulary_item table not found, using default order 0");
+      nextOrder = 0;
+    }
     
     const id = generateId();
     const result = await db
@@ -594,6 +600,14 @@ app.post("/api/units/:unitId/items", async (req: Request, res: Response) => {
     res.status(201).json(result[0]);
   } catch (error) {
     console.error("Error creating vocabulary item:", error);
+    // Provide more specific error message
+    if (error instanceof Error) {
+      if (error.message.includes('relation "vocabulary_item" does not exist')) {
+        return res.status(500).json({ 
+          error: "Database tables not created. Please run: npm run db:migrate" 
+        });
+      }
+    }
     res.status(500).json({ error: "Failed to create vocabulary item" });
   }
 });
