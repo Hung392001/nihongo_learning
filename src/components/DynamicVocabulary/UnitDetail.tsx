@@ -255,7 +255,7 @@ export const UnitDetail: React.FC = () => {
       <div className="dynamic-vocab-container">
         <div className="error-state">
           <p>Unit not found</p>
-          <Link to="/vocabulary" className="back-button">
+          <Link to="/vocabulary/units" className="back-button">
             Back to Units
           </Link>
         </div>
@@ -267,7 +267,7 @@ export const UnitDetail: React.FC = () => {
     <div className="dynamic-vocab-container">
       <div className="page-header">
         <div className="header-content">
-          <button className="back-button" onClick={() => navigate('/vocabulary')}>
+          <button className="back-button" onClick={() => navigate('/vocabulary/units')}>
             ← Back to Units
           </button>
           <div className="unit-header-info">

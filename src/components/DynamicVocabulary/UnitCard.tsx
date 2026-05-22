@@ -128,7 +128,7 @@ export const UnitCard: React.FC<UnitCardProps> = ({
 
       <div className="unit-card-footer">
         <Link 
-          to={`/unit/${unit.id}`}
+          to={`/vocabulary/units/${unit.id}`}
           className="view-unit-button"
         >
           View Vocabulary ({itemCount ?? '...'})
