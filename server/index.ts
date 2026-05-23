@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { db, vocabulary, customList, listItem, vocabularyUnit, vocabularyItem } from "../db";
+import { db, vocabulary, customList, listItem, vocabularyUnit, vocabularyItem, flashcardDeck, flashcardItem, deckItem } from "../db";
 import { eq, ilike, and, desc, asc } from "drizzle-orm";
 
 // Load environment variables
@@ -736,6 +736,413 @@ app.get("/api/health", async (req: Request, res: Response) => {
           error: dbError.message,
         });
     }
+  }
+});
+
+// Flashcard API Endpoints
+
+// Standalone Flashcard Item Endpoints (for backward compatibility)
+
+// Get all standalone flashcard items
+app.get("/api/flashcards/items", async (req: Request, res: Response) => {
+  try {
+    const items = await db
+      .select()
+      .from(flashcardItem)
+      .orderBy(desc(flashcardItem.createdAt));
+    res.json(items);
+  } catch (error) {
+    console.error("Error getting flashcard items:", error);
+    res.status(500).json({ error: "Failed to get flashcard items" });
+  }
+});
+
+// Get a specific standalone flashcard item
+app.get("/api/flashcards/items/:itemId", async (req: Request, res: Response) => {
+  try {
+    const itemId = req.params.itemId;
+    const item = await db
+      .select()
+      .from(flashcardItem)
+      .where(eq(flashcardItem.id, itemId))
+      .limit(1);
+    if (!item.length) {
+      return res.status(404).json({ error: "Flashcard item not found" });
+    }
+    res.json(item[0]);
+  } catch (error) {
+    console.error("Error getting flashcard item:", error);
+    res.status(500).json({ error: "Failed to get flashcard item" });
+  }
+});
+
+// Create a new standalone flashcard item
+app.post("/api/flashcards/items", async (req: Request, res: Response) => {
+  try {
+    const { front, back, kana, note, tags, difficulty, isFavorite } = req.body;
+    if (!front || !back) {
+      return res.status(400).json({ error: "front and back are required" });
+    }
+    const itemId = generateId();
+    const now = new Date();
+    await db.insert(flashcardItem).values({
+      id: itemId,
+      front,
+      back,
+      kana: kana || null,
+      note: note || null,
+      tags: tags || [],
+      difficulty: difficulty || null,
+      isFavorite: isFavorite || false,
+      createdAt: now,
+      updatedAt: now,
+    });
+    const newItem = await db
+      .select()
+      .from(flashcardItem)
+      .where(eq(flashcardItem.id, itemId))
+      .limit(1);
+    res.json(newItem[0]);
+  } catch (error) {
+    console.error("Error creating flashcard item:", error);
+    res.status(500).json({ error: "Failed to create flashcard item" });
+  }
+});
+
+// Update a standalone flashcard item
+app.put("/api/flashcards/items/:itemId", async (req: Request, res: Response) => {
+  try {
+    const itemId = req.params.itemId;
+    const { front, back, kana, note, tags, difficulty, isFavorite } = req.body;
+    const updatedItem = await db
+      .update(flashcardItem)
+      .set({
+        front,
+        back,
+        kana,
+        note,
+        tags,
+        difficulty,
+        isFavorite,
+        updatedAt: new Date(),
+      })
+      .where(eq(flashcardItem.id, itemId))
+      .returning();
+    if (!updatedItem.length) {
+      return res.status(404).json({ error: "Flashcard item not found" });
+    }
+    res.json(updatedItem[0]);
+  } catch (error) {
+    console.error("Error updating flashcard item:", error);
+    res.status(500).json({ error: "Failed to update flashcard item" });
+  }
+});
+
+// Delete a standalone flashcard item
+app.delete("/api/flashcards/items/:itemId", async (req: Request, res: Response) => {
+  try {
+    const itemId = req.params.itemId;
+    const deletedItem = await db
+      .delete(flashcardItem)
+      .where(eq(flashcardItem.id, itemId))
+      .returning();
+    if (!deletedItem.length) {
+      return res.status(404).json({ error: "Flashcard item not found" });
+    }
+    res.json(deletedItem[0]);
+  } catch (error) {
+    console.error("Error deleting flashcard item:", error);
+    res.status(500).json({ error: "Failed to delete flashcard item" });
+  }
+});
+
+// Get all decks for a user
+app.get("/api/flashcards/decks", async (req: Request, res: Response) => {
+  try {
+    const userId = (req.query.userId as string) || "default-user";
+    const decks = await db
+      .select()
+      .from(flashcardDeck)
+      .where(eq(flashcardDeck.userId, userId))
+      .orderBy(desc(flashcardDeck.createdAt));
+    res.json(decks);
+  } catch (error) {
+    console.error("Error getting decks:", error);
+    res.status(500).json({ error: "Failed to get decks" });
+  }
+});
+
+// Get a specific deck with its items
+app.get("/api/flashcards/decks/:deckId", async (req: Request, res: Response) => {
+  try {
+    const deckId = req.params.deckId;
+    const deck = await db
+      .select()
+      .from(flashcardDeck)
+      .where(eq(flashcardDeck.id, deckId))
+      .limit(1);
+    if (!deck.length) {
+      return res.status(404).json({ error: "Deck not found" });
+    }
+    const items = await db
+      .select()
+      .from(deckItem)
+      .where(eq(deckItem.deckId, deckId))
+      .orderBy(asc(deckItem.createdAt));
+    res.json({ ...deck[0], items });
+  } catch (error) {
+    console.error("Error getting deck:", error);
+    res.status(500).json({ error: "Failed to get deck" });
+  }
+});
+
+// Create a new deck
+app.post("/api/flashcards/decks", async (req: Request, res: Response) => {
+  try {
+    const { userId, name, description, sourceType, sourceId, vocabularyListId } = req.body;
+    if (!name) {
+      return res.status(400).json({ error: "name is required" });
+    }
+    // Use default user for single-user mode if not provided
+    const effectiveUserId = userId || "default-user";
+    const deckId = generateId();
+    const now = new Date();
+    await db.insert(flashcardDeck).values({
+      id: deckId,
+      userId: effectiveUserId,
+      name,
+      description: description || null,
+      sourceType,
+      sourceId,
+      vocabularyListId,
+      createdAt: now,
+      updatedAt: now,
+    });
+    const newDeck = await db
+      .select()
+      .from(flashcardDeck)
+      .where(eq(flashcardDeck.id, deckId))
+      .limit(1);
+    res.json(newDeck[0]);
+  } catch (error) {
+    console.error("Error creating deck:", error);
+    res.status(500).json({ error: "Failed to create deck" });
+  }
+});
+
+// Update a deck
+app.put("/api/flashcards/decks/:deckId", async (req: Request, res: Response) => {
+  try {
+    const deckId = req.params.deckId;
+    const { name, description } = req.body;
+    const updatedDeck = await db
+      .update(flashcardDeck)
+      .set({ name, description, updatedAt: new Date() })
+      .where(eq(flashcardDeck.id, deckId))
+      .returning();
+    if (!updatedDeck.length) {
+      return res.status(404).json({ error: "Deck not found" });
+    }
+    res.json(updatedDeck[0]);
+  } catch (error) {
+    console.error("Error updating deck:", error);
+    res.status(500).json({ error: "Failed to update deck" });
+  }
+});
+
+// Delete a deck
+app.delete("/api/flashcards/decks/:deckId", async (req: Request, res: Response) => {
+  try {
+    const deckId = req.params.deckId;
+    await db.delete(deckItem).where(eq(deckItem.deckId, deckId));
+    const deletedDeck = await db
+      .delete(flashcardDeck)
+      .where(eq(flashcardDeck.id, deckId))
+      .returning();
+    if (!deletedDeck.length) {
+      return res.status(404).json({ error: "Deck not found" });
+    }
+    res.json(deletedDeck[0]);
+  } catch (error) {
+    console.error("Error deleting deck:", error);
+    res.status(500).json({ error: "Failed to delete deck" });
+  }
+});
+
+// Add an item to a deck
+app.post("/api/flashcards/decks/:deckId/items", async (req: Request, res: Response) => {
+  try {
+    const deckId = req.params.deckId;
+    const { flashcardId, front, back, furigana, example, exampleFurigana, exampleTranslation, level, type, tags, note, order } = req.body;
+    
+    // Support both flashcardId (reference existing flashcard) and direct front/back
+    let itemData: any;
+    
+    if (flashcardId) {
+      // Look up existing flashcard and copy its data
+      const existingFlashcard = await db
+        .select()
+        .from(flashcardItem)
+        .where(eq(flashcardItem.id, flashcardId))
+        .limit(1);
+      if (!existingFlashcard.length) {
+        return res.status(404).json({ error: "Flashcard not found" });
+      }
+      itemData = { ...existingFlashcard[0] };
+    } else if (front && back) {
+      // Use direct front/back data
+      itemData = { front, back, furigana, example, exampleFurigana, exampleTranslation, level, type, tags };
+    } else {
+      return res.status(400).json({ error: "Either flashcardId or front+back are required" });
+    }
+    
+    const itemId = generateId();
+    const now = new Date();
+    await db.insert(deckItem).values({
+      id: itemId,
+      deckId,
+      front: itemData.front,
+      back: itemData.back,
+      furigana: itemData.furigana || null,
+      example: itemData.example || null,
+      exampleFurigana: itemData.exampleFurigana || null,
+      exampleTranslation: itemData.exampleTranslation || null,
+      level: itemData.level || 1,
+      type: itemData.type || "vocabulary",
+      tags: itemData.tags || [],
+      note: note || null,
+      displayOrder: order || 0,
+      createdAt: now,
+      updatedAt: now,
+    });
+    const newItem = await db
+      .select()
+      .from(deckItem)
+      .where(eq(deckItem.id, itemId))
+      .limit(1);
+    res.json(newItem[0]);
+  } catch (error) {
+    console.error("Error adding item to deck:", error);
+    res.status(500).json({ error: "Failed to add item to deck" });
+  }
+});
+
+// Update an item in a deck
+app.put("/api/flashcards/items/:itemId", async (req: Request, res: Response) => {
+  try {
+    const itemId = req.params.itemId;
+    const { front, back, furigana, example, exampleFurigana, exampleTranslation, level, type, tags, lastReviewedAt, reviewCount, correctness } = req.body;
+    const updatedItem = await db
+      .update(deckItem)
+      .set({
+        front,
+        back,
+        furigana,
+        example,
+        exampleFurigana,
+        exampleTranslation,
+        level,
+        type,
+        tags,
+        lastReviewedAt,
+        reviewCount,
+        correctness,
+        updatedAt: new Date(),
+      })
+      .where(eq(deckItem.id, itemId))
+      .returning();
+    if (!updatedItem.length) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+    res.json(updatedItem[0]);
+  } catch (error) {
+    console.error("Error updating item:", error);
+    res.status(500).json({ error: "Failed to update item" });
+  }
+});
+
+// Delete an item from a deck
+app.delete("/api/flashcards/items/:itemId", async (req: Request, res: Response) => {
+  try {
+    const itemId = req.params.itemId;
+    const deletedItem = await db
+      .delete(deckItem)
+      .where(eq(deckItem.id, itemId))
+      .returning();
+    if (!deletedItem.length) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+    res.json(deletedItem[0]);
+  } catch (error) {
+    console.error("Error deleting item:", error);
+    res.status(500).json({ error: "Failed to delete item" });
+  }
+});
+
+// Get flashcards for a specific unit
+app.get("/api/flashcards/unit/:unitId", async (req: Request, res: Response) => {
+  try {
+    const unitId = req.params.unitId;
+    const items = await db
+      .select()
+      .from(deckItem)
+      .where(eq(deckItem.unitId, unitId))
+      .orderBy(asc(deckItem.createdAt));
+    res.json(items);
+  } catch (error) {
+    console.error("Error getting flashcards for unit:", error);
+    res.status(500).json({ error: "Failed to get flashcards for unit" });
+  }
+});
+
+// Create flashcards from vocabulary for a unit
+app.post("/api/flashcards/from-vocabulary/:unitId", async (req: Request, res: Response) => {
+  try {
+    const unitId = req.params.unitId;
+    const { deckName, userId } = req.body;
+    const effectiveUserId = userId || "default-user";
+    const vocabularyItems = await db
+      .select()
+      .from(vocabularyItem)
+      .where(eq(vocabularyItem.unitId, unitId))
+      .orderBy(asc(vocabularyItem.displayOrder));
+    const deckId = generateId();
+    const now = new Date();
+    await db.insert(flashcardDeck).values({
+      id: deckId,
+      userId: effectiveUserId,
+      name: deckName || `Unit ${unitId} Flashcards`,
+      sourceType: "unit",
+      sourceId: unitId,
+      createdAt: now,
+      updatedAt: now,
+    });
+    const flashcardItems = vocabularyItems.map((item) => ({
+      id: generateId(),
+      deckId,
+      front: item.word,
+      back: item.meaning,
+      furigana: item.furigana,
+      example: item.example,
+      exampleFurigana: item.exampleFurigana,
+      exampleTranslation: item.exampleTranslation,
+      level: 1,
+      type: "vocabulary" as const,
+      unitId,
+      tags: ["vocabulary", `unit-${unitId}`],
+      createdAt: now,
+      updatedAt: now,
+    }));
+    await db.insert(deckItem).values(flashcardItems);
+    const newDeck = await db
+      .select()
+      .from(flashcardDeck)
+      .where(eq(flashcardDeck.id, deckId))
+      .limit(1);
+    res.json({ deck: newDeck[0], items: flashcardItems });
+  } catch (error) {
+    console.error("Error creating flashcards from vocabulary:", error);
+    res.status(500).json({ error: "Failed to create flashcards from vocabulary" });
   }
 });
 

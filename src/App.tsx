@@ -1,34 +1,36 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
-import { FlashcardMode } from "./types/vocabulary";
-import { IVocabularyStorage } from "./services/IVocabularyStorage";
-import { ApiVocabularyStorage, apiStorage } from "./services/ApiVocabularyStorage";
-import { useVocabulary } from "./hooks/useVocabulary";
-import { useFlashcardManager } from "./hooks/useFlashcardManager";
-import { getAvailableModes, calculateStatistics } from "./utils/flashcardHelpers";
-import { Flashcard } from "./components/Flashcard";
-import { FlashcardControls } from "./components/FlashcardControls";
-import { ModeSelector } from "./components/ModeSelector";
-import { VocabularyTable } from "./components/VocabularyTable";
-import { StatisticsPanel } from "./components/StatisticsPanel";
-import { Home } from "./components/Home";
-import { Navigation } from "./components/Navigation";
-import { Grammar } from "./components/Grammar";
-import { Kanji } from "./components/Kanji";
-import { UnitSelector } from "./components/UnitSelector";
-import { CustomListModal } from "./components/CustomListModal";
-import { FlashcardDeckModal } from "./components/FlashcardDeckModal";
-import { QuickAddWordModal } from "./components/QuickAddWordModal";
-import { LocalStorageFlashcardStorage } from "./services/LocalStorageFlashcardStorage";
-import { useFlashcards } from "./hooks/useFlashcards";
-import type { CreateFlashcardDto, FlashcardItem } from "./types/flashcard";
-import type { CustomList, ListItem, VocabularyUnitItem, VocabularyItem } from "./types/vocabulary";
+import { FlashcardMode } from "./features/vocabulary/vocabulary";
+import { IVocabularyStorage } from "./features/vocabulary/IVocabularyStorage";
+import { ApiVocabularyStorage, apiStorage } from "./features/vocabulary/ApiVocabularyStorage";
+import { useVocabulary } from "./features/vocabulary/useVocabulary";
+import { useFlashcardManager } from "./features/flashcards/useFlashcardManager";
+import { getAvailableModes, calculateStatistics } from "./features/flashcards/flashcardHelpers";
+import { Flashcard } from "./features/flashcards/Flashcard";
+import { FlashcardControls } from "./features/flashcards/FlashcardControls";
+import { ModeSelector } from "./features/flashcards/ModeSelector";
+import { VocabularyTable } from "./features/vocabulary/VocabularyTable";
+import { StatisticsPanel } from "./features/shared/StatisticsPanel";
+import { Home } from "./features/shared/Home";
+import { Navigation } from "./features/shared/Navigation";
+import { Grammar } from "./features/grammar/Grammar";
+import { Kanji } from "./features/kanji/Kanji";
+import { UnitSelector } from "./features/vocabulary/UnitSelector";
+import { CustomListModal } from "./features/vocabulary/CustomListModal";
+import { FlashcardDeckModal } from "./features/flashcards/FlashcardDeckModal";
+import { QuickAddWordModal } from "./features/vocabulary/QuickAddWordModal";
+
+import { useFlashcards } from "./features/flashcards/useFlashcards";
+import { ApiFlashcardStorage, apiFlashcardStorage } from "./features/flashcards/ApiFlashcardStorage";
+import type { IFlashcardStorage } from "./features/flashcards/IFlashcardStorage";
+import type { CreateFlashcardDto, FlashcardItem } from "./features/flashcards/flashcard";
+import type { CustomList, ListItem, VocabularyUnitItem, VocabularyItem } from "./features/vocabulary/vocabulary";
 // Dynamic Vocabulary imports
-import { UnitList } from "./components/DynamicVocabulary/UnitList";
-import { UnitDetail } from "./components/DynamicVocabulary/UnitDetail";
-import { CreateVocabularyItemModal } from "./components/DynamicVocabulary/CreateVocabularyItemModal";
-import { EditVocabularyItemModal } from "./components/DynamicVocabulary/EditVocabularyItemModal";
-import { dynamicVocabularyStorage } from "./services/DynamicVocabularyStorage";
+import { UnitList } from "./features/vocabulary/DynamicVocabulary/UnitList";
+import { UnitDetail } from "./features/vocabulary/DynamicVocabulary/UnitDetail";
+import { CreateVocabularyItemModal } from "./features/vocabulary/DynamicVocabulary/CreateVocabularyItemModal";
+import { EditVocabularyItemModal } from "./features/vocabulary/DynamicVocabulary/EditVocabularyItemModal";
+import { dynamicVocabularyStorage } from "./features/vocabulary/DynamicVocabularyStorage";
 import "./App.css";
 
 // Convert dynamic vocabulary unit items to legacy VocabularyItem format
@@ -109,7 +111,7 @@ function AppContent() {
   const [isListModalOpen, setIsListModalOpen] = useState(false);
   const [selectedListId, setSelectedListId] = useState<string | null>(null);
   const [storage, setStorage] = useState<IVocabularyStorage | null>(null);
-  const [flashcardStorage] = useState<LocalStorageFlashcardStorage>(new LocalStorageFlashcardStorage());
+  const [flashcardStorage, setFlashcardStorage] = useState<IFlashcardStorage | null>(null);
   const [isDeckModalOpen, setIsDeckModalOpen] = useState(false);
   const [selectedDeckId, setSelectedDeckId] = useState<string | null>(null);
   const [isQuickAddWordOpen, setIsQuickAddWordOpen] = useState(false);
@@ -127,9 +129,13 @@ function AppContent() {
     const initStorage = async () => {
       try {
         const isApiAvailable = await ApiVocabularyStorage.isSupported();
+        const isFlashcardApiAvailable = await ApiFlashcardStorage.isSupported();
         if (isApiAvailable) {
           console.log("🔗 Using PostgreSQL");
           setStorage(apiStorage);
+          if (isFlashcardApiAvailable) {
+            setFlashcardStorage(apiFlashcardStorage);
+          }
           return;
         }
       } catch {}
