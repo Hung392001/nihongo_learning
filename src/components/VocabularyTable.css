@@ -249,6 +249,54 @@
   letter-spacing: 0.5px;
 }
 
+.col-actions {
+  width: 100px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.edit-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  color: #3b82f6;
+  margin-right: 4px;
+}
+
+.edit-button:hover {
+  background: rgba(59, 130, 246, 0.1);
+  transform: scale(1.1);
+}
+
+.edit-button:active {
+  transform: scale(0.95);
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  color: #ef4444;
+  margin-left: 4px;
+}
+
+.delete-button:hover {
+  background: rgba(239, 68, 68, 0.1);
+  transform: scale(1.1);
+}
+
+.delete-button:active {
+  transform: scale(0.95);
+}
+
 .vocabulary-table td {
   padding: 16px 20px;
   border-bottom: 1px solid #e2e8f0;
@@ -347,6 +395,46 @@
   padding: 60px 20px !important;
   color: #64748b;
   font-size: 16px;
+}
+
+/* Add Vocabulary Row */
+.add-vocab-row {
+  border-top: 2px solid #e2e8f0;
+}
+
+.add-vocab-cell {
+  padding: 20px !important;
+  text-align: center;
+  background: #f8fafc !important;
+}
+
+.add-vocabulary-button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-vocabulary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.add-vocabulary-button:active {
+  transform: translateY(0);
+}
+
+.add-vocabulary-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
 }
 
 .table-footer {
@@ -501,6 +589,23 @@
 
 [data-theme="dark"] .table-footer p {
   color: #fbbf24;
+}
+
+[data-theme="dark"] .add-vocab-cell {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border-top-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .add-vocabulary-button {
+  background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+}
+
+[data-theme="dark"] .add-vocabulary-button:hover {
+  box-shadow: 0 4px 12px rgba(129, 140, 248, 0.3);
+}
+
+[data-theme="dark"] .add-vocabulary-button:focus {
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.3);
 }
 
 /* Modal Styles */
@@ -836,6 +941,72 @@
 
 [data-theme="dark"] .modal-footer {
   border-top-color: #334155;
+}
+
+/* Delete Confirmation Modal */
+.delete-confirm-modal {
+  max-width: 400px;
+}
+
+.delete-confirm-modal .modal-body {
+  text-align: center;
+}
+
+.warning-text {
+  color: #ef4444;
+  font-weight: 600;
+  margin: 10px 0 0 0;
+}
+
+.cancel-button {
+  padding: 10px 24px;
+  background: #e2e8f0;
+  color: #334155;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-button:hover {
+  background: #cbd5e1;
+}
+
+.confirm-delete-button {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.confirm-delete-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Dark Mode - Delete Confirmation */
+[data-theme="dark"] .delete-confirm-modal {
+  background: #1e293b;
+}
+
+[data-theme="dark"] .warning-text {
+  color: #fca5a5;
+}
+
+[data-theme="dark"] .cancel-button {
+  background: #334155;
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .cancel-button:hover {
+  background: #475569;
 }
 
 /* Responsive design */

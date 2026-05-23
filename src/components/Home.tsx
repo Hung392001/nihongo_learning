@@ -18,19 +18,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, vocabularyCount }) => {
       </section>
 
       <div className="home-grid">
-        {/* Dynamic Vocabulary Units - NEW SYSTEM */}
-        <div className="home-card vocabulary-units-card" onClick={() => onNavigate('vocabulary/units')}>
-          <div className="card-icon">📖</div>
-          <h3>Vocabulary Units (New)</h3>
-          <p className="card-description">Create and manage custom vocabulary units with full CRUD operations</p>
-          <div className="card-features">
-            <span className="feature-tag">Custom Units</span>
-            <span className="feature-tag">Drag & Drop</span>
-            <span className="feature-tag">Dynamic</span>
-          </div>
-          <div className="card-cta">Manage Units →</div>
-        </div>
-
         {/* Flashcards Section */}
         <div className="home-card flashcards-card" onClick={() => onNavigate('flashcards')}>
           <div className="card-icon">📇</div>
@@ -117,15 +104,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, vocabularyCount }) => {
         </div>
       </section>
 
-      <section className="home-info">
-        <div className="info-card new-feature">
-          <h4>✨ New: Dynamic Vocabulary Units</h4>
-          <p>Try out our new vocabulary management system! Create custom units with any name, add vocabulary items, and organize them your way. Perfect for JLPT preparation, themed vocabulary, or any custom study plan.</p>
-          <button onClick={() => onNavigate('vocabulary/units')} className="info-button">
-            Try It Now →
-          </button>
-        </div>
-      </section>
+
     </div>
   );
 };

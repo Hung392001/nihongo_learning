@@ -10,7 +10,6 @@ import { Flashcard } from "./components/Flashcard";
 import { FlashcardControls } from "./components/FlashcardControls";
 import { ModeSelector } from "./components/ModeSelector";
 import { VocabularyTable } from "./components/VocabularyTable";
-import { VocabularyManager } from "./components/VocabularyManager";
 import { StatisticsPanel } from "./components/StatisticsPanel";
 import { Home } from "./components/Home";
 import { Navigation } from "./components/Navigation";
@@ -23,11 +22,36 @@ import { QuickAddWordModal } from "./components/QuickAddWordModal";
 import { LocalStorageFlashcardStorage } from "./services/LocalStorageFlashcardStorage";
 import { useFlashcards } from "./hooks/useFlashcards";
 import type { CreateFlashcardDto, FlashcardItem } from "./types/flashcard";
-import type { CustomList, ListItem } from "./types/vocabulary";
+import type { CustomList, ListItem, VocabularyUnitItem, VocabularyItem } from "./types/vocabulary";
 // Dynamic Vocabulary imports
 import { UnitList } from "./components/DynamicVocabulary/UnitList";
 import { UnitDetail } from "./components/DynamicVocabulary/UnitDetail";
+import { CreateVocabularyItemModal } from "./components/DynamicVocabulary/CreateVocabularyItemModal";
+import { EditVocabularyItemModal } from "./components/DynamicVocabulary/EditVocabularyItemModal";
+import { dynamicVocabularyStorage } from "./services/DynamicVocabularyStorage";
 import "./App.css";
+
+// Convert dynamic vocabulary unit items to legacy VocabularyItem format
+function convertToLegacyFormat(items: VocabularyUnitItem[]): VocabularyItem[] {
+  return items.map((item) => ({
+    id: item.id,
+    hiragana: item.hiragana,
+    kanji: item.kanji || null,
+    vietnamese: item.vietnamese,
+    unit: item.unitId, // Keep as string to match selected unit
+    exampleSentenceHiragana: item.hiraganaSentence,
+    category: undefined,
+    tags: [],
+    difficulty: undefined,
+    romaji: undefined,
+    audioUrl: undefined,
+    isFavorite: false,
+    note: undefined,
+    isBuiltIn: false,
+    createdAt: item.createdAt,
+    updatedAt: item.updatedAt,
+  }));
+}
 
 // Helper component to sync route with page state
 function usePageFromRoute() {
@@ -90,9 +114,13 @@ function AppContent() {
   const [selectedDeckId, setSelectedDeckId] = useState<string | null>(null);
   const [isQuickAddWordOpen, setIsQuickAddWordOpen] = useState(false);
   const [isAddingWord, setIsAddingWord] = useState(false);
+  const [isAddVocabularyOpen, setIsAddVocabularyOpen] = useState(false);
   const [customLists, setCustomLists] = useState<CustomList[]>([]);
   const [listVocabularyMap, setListVocabularyMap] = useState<Map<string, any[]>>(new Map());
   const [listItemsMap, setListItemsMap] = useState<Map<string, ListItem[]>>(new Map());
+  const [dynamicVocabularyItems, setDynamicVocabularyItems] = useState<VocabularyItem[]>([]);
+  const [isEditVocabularyOpen, setIsEditVocabularyOpen] = useState(false);
+  const [editingVocabularyItem, setEditingVocabularyItem] = useState<VocabularyUnitItem | null>(null);
 
   // Initialize storage on mount
   useEffect(() => {
@@ -111,6 +139,47 @@ function AppContent() {
     initStorage();
   }, []);
 
+  // Fetch vocabulary items for the selected dynamic unit
+  useEffect(() => {
+    const fetchDynamicVocabulary = async () => {
+      if (!storage) {
+        setDynamicVocabularyItems([]);
+        return;
+      }
+      
+      try {
+        // selectedVocabularyUnit can be a number (old system) or string (new system)
+        const unitId = typeof selectedVocabularyUnit === "number" 
+          ? selectedVocabularyUnit.toString() 
+          : selectedVocabularyUnit;
+        
+        if (unitId === "all") {
+          // Fetch all items from all units
+          const allItems: VocabularyUnitItem[] = [];
+          const units = await dynamicVocabularyStorage.getAllUnits();
+          for (const unit of units) {
+            const items = await dynamicVocabularyStorage.getItemsByUnit(unit.id);
+            // Ensure each item has the correct unitId
+            const itemsWithUnit = items.map(item => ({ ...item, unitId: unit.id }));
+            allItems.push(...itemsWithUnit);
+          }
+          setDynamicVocabularyItems(convertToLegacyFormat(allItems));
+        } else {
+          // Fetch items for specific unit
+          const items = await dynamicVocabularyStorage.getItemsByUnit(unitId);
+          // Ensure each item has the correct unitId
+          const itemsWithUnit = items.map(item => ({ ...item, unitId }));
+          setDynamicVocabularyItems(convertToLegacyFormat(itemsWithUnit));
+        }
+      } catch (error) {
+        console.error("Failed to fetch dynamic vocabulary:", error);
+        setDynamicVocabularyItems([]);
+      }
+    };
+    
+    fetchDynamicVocabulary();
+  }, [storage, selectedVocabularyUnit]);
+
   // Apply dark mode
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", darkMode ? "dark" : "light");
@@ -118,7 +187,7 @@ function AppContent() {
   }, [darkMode]);
 
   // Vocabulary management
-  const { vocabulary, loading, error, create, update, remove, refresh } = useVocabulary(storage);
+  const { vocabulary, loading, error, create, update, refresh } = useVocabulary(storage);
 
   // Flashcard management
   const {
@@ -188,22 +257,16 @@ function AppContent() {
         updatedAt: flashcard.updatedAt,
       }));
     }
-    if (selectedFlashcardUnit === "all") return vocabulary;
+    if (selectedFlashcardUnit === "all") return dynamicVocabularyItems;
     if (typeof selectedFlashcardUnit === "string" && selectedFlashcardUnit !== "all") {
-      return listVocabularyMap.get(selectedFlashcardUnit) || [];
+      // Check if it's a custom list
+      const listVocab = listVocabularyMap.get(selectedFlashcardUnit);
+      if (listVocab) return listVocab;
+      // Otherwise, filter dynamic vocabulary by unit
+      return dynamicVocabularyItems.filter((v) => String(v.unit) === String(selectedFlashcardUnit));
     }
-    return vocabulary.filter((v) => v.unit === selectedFlashcardUnit);
-  }, [vocabulary, selectedFlashcardUnit, listVocabularyMap, storage, selectedDeckId, deckItems, flashcards]);
-
-  // Filter vocabulary for management
-  const managedVocabulary = useMemo(() => {
-    if (!storage) return [];
-    if (selectedVocabularyUnit === "all") return vocabulary;
-    if (typeof selectedVocabularyUnit === "string" && selectedVocabularyUnit !== "all") {
-      return listVocabularyMap.get(selectedVocabularyUnit) || [];
-    }
-    return vocabulary.filter((v) => v.unit === selectedVocabularyUnit);
-  }, [vocabulary, selectedVocabularyUnit, listVocabularyMap, storage]);
+    return dynamicVocabularyItems.filter((v) => v.unit === selectedFlashcardUnit);
+  }, [dynamicVocabularyItems, selectedFlashcardUnit, listVocabularyMap, storage, selectedDeckId, deckItems, flashcards]);
 
   // Flashcard manager
   const { state, flip, next, previous, changeMode, shuffle, reset } = useFlashcardManager({
@@ -211,8 +274,8 @@ function AppContent() {
     initialMode: FlashcardMode.VI_TO_HIRA,
   });
 
-  const availableModes = useMemo(() => getAvailableModes(vocabulary), [vocabulary]);
-  const statistics = useMemo(() => calculateStatistics(vocabulary), [vocabulary]);
+  const availableModes = useMemo(() => getAvailableModes(dynamicVocabularyItems), [dynamicVocabularyItems]);
+  const statistics = useMemo(() => calculateStatistics(dynamicVocabularyItems), [dynamicVocabularyItems]);
 
   useEffect(() => { reset(); }, [selectedFlashcardUnit, reset]);
 
@@ -299,6 +362,147 @@ function AppContent() {
     if (!storage) return;
     await (storage as any).removeFromCustomList?.(itemId);
     await loadCustomLists();
+  };
+
+  // Dynamic vocabulary handlers
+  const handleCreateVocabularyItem = async (data: { hiragana: string; kanji?: string; vietnamese: string }) => {
+    if (!selectedVocabularyUnit || selectedVocabularyUnit === "all") {
+      alert("Please select a unit first");
+      return;
+    }
+    
+    try {
+      const unitId = typeof selectedVocabularyUnit === "number" 
+        ? selectedVocabularyUnit.toString() 
+        : selectedVocabularyUnit;
+      
+      await dynamicVocabularyStorage.createItem(unitId, {
+        hiragana: data.hiragana,
+        vietnamese: data.vietnamese,
+        kanji: data.kanji,
+      });
+      
+      // Refresh vocabulary for the selected unit
+      if (selectedVocabularyUnit === "all") {
+        const allItems: VocabularyUnitItem[] = [];
+        const units = await dynamicVocabularyStorage.getAllUnits();
+        for (const unit of units) {
+          const items = await dynamicVocabularyStorage.getItemsByUnit(unit.id);
+          const itemsWithUnit = items.map(item => ({ ...item, unitId: unit.id, unitName: unit.name }));
+          allItems.push(...itemsWithUnit);
+        }
+        setDynamicVocabularyItems(convertToLegacyFormat(allItems));
+      } else {
+        const items = await dynamicVocabularyStorage.getItemsByUnit(unitId);
+        const itemsWithUnit = items.map(item => ({ ...item, unitId }));
+        setDynamicVocabularyItems(convertToLegacyFormat(itemsWithUnit));
+      }
+      setIsAddVocabularyOpen(false);
+      
+      alert(`✅ Vocabulary item created!`);
+    } catch (error) {
+      alert(`❌ Failed to create vocabulary item: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  };
+
+  // Handle edit vocabulary item
+  const handleEditVocabulary = (item: VocabularyItem) => {
+    // Find the corresponding unit item
+    const findUnitItem = async () => {
+      try {
+        // Since the item might be from any unit, we need to find it
+        const allUnits = await dynamicVocabularyStorage.getAllUnits();
+        for (const unit of allUnits) {
+          const items = await dynamicVocabularyStorage.getItemsByUnit(unit.id);
+          const foundItem = items.find(i => i.id === item.id);
+          if (foundItem) {
+            setEditingVocabularyItem(foundItem);
+            setIsEditVocabularyOpen(true);
+            return;
+          }
+        }
+        alert("❌ Vocabulary item not found for editing");
+      } catch (error) {
+        alert(`❌ Failed to find vocabulary item: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    };
+    findUnitItem();
+  };
+
+  // Handle update vocabulary item
+  const handleUpdateVocabulary = async (data: { hiragana: string; kanji?: string; vietnamese: string }) => {
+    if (!editingVocabularyItem) return;
+    
+    try {
+      await dynamicVocabularyStorage.updateItem(editingVocabularyItem.id, {
+        hiragana: data.hiragana,
+        kanji: data.kanji,
+        vietnamese: data.vietnamese,
+      });
+      
+      // Refresh vocabulary for the current view
+      if (selectedVocabularyUnit === "all") {
+        const allItems: VocabularyUnitItem[] = [];
+        const units = await dynamicVocabularyStorage.getAllUnits();
+        for (const unit of units) {
+          const items = await dynamicVocabularyStorage.getItemsByUnit(unit.id);
+          const itemsWithUnit = items.map(item => ({ ...item, unitId: unit.id }));
+          allItems.push(...itemsWithUnit);
+        }
+        setDynamicVocabularyItems(convertToLegacyFormat(allItems));
+      } else {
+        const unitId = typeof selectedVocabularyUnit === "number" 
+          ? selectedVocabularyUnit.toString() 
+          : selectedVocabularyUnit;
+        const items = await dynamicVocabularyStorage.getItemsByUnit(unitId);
+        const itemsWithUnit = items.map(item => ({ ...item, unitId }));
+        setDynamicVocabularyItems(convertToLegacyFormat(itemsWithUnit));
+      }
+      setIsEditVocabularyOpen(false);
+      setEditingVocabularyItem(null);
+      
+      alert(`✅ Vocabulary item updated!`);
+    } catch (error) {
+      alert(`❌ Failed to update vocabulary item: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  };
+
+  // Handle delete vocabulary item
+  const handleDeleteVocabulary = async (id: string) => {
+    try {
+      await dynamicVocabularyStorage.deleteItem(id);
+      
+      // Refresh vocabulary for the current view
+      if (selectedVocabularyUnit === "all") {
+        const allItems: VocabularyUnitItem[] = [];
+        const units = await dynamicVocabularyStorage.getAllUnits();
+        for (const unit of units) {
+          const items = await dynamicVocabularyStorage.getItemsByUnit(unit.id);
+          const itemsWithUnit = items.map(item => ({ ...item, unitId: unit.id }));
+          allItems.push(...itemsWithUnit);
+        }
+        setDynamicVocabularyItems(convertToLegacyFormat(allItems));
+      } else {
+        const unitId = typeof selectedVocabularyUnit === "number" 
+          ? selectedVocabularyUnit.toString() 
+          : selectedVocabularyUnit;
+        const items = await dynamicVocabularyStorage.getItemsByUnit(unitId);
+        const itemsWithUnit = items.map(item => ({ ...item, unitId }));
+        setDynamicVocabularyItems(convertToLegacyFormat(itemsWithUnit));
+      }
+      
+      alert(`✅ Vocabulary item deleted!`);
+    } catch (error) {
+      alert(`❌ Failed to delete vocabulary item: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  };
+
+  // Get selected unit ID for modal
+  const getSelectedUnitId = (): string | null => {
+    if (!selectedVocabularyUnit || selectedVocabularyUnit === "all") return null;
+    return typeof selectedVocabularyUnit === "number" 
+      ? selectedVocabularyUnit.toString() 
+      : selectedVocabularyUnit;
   };
 
   // Auto-play
@@ -413,7 +617,7 @@ function AppContent() {
         {/* Home */}
         <Route path="/" element={
           <main className="app-main">
-            <Home onNavigate={handleNavigate} vocabularyCount={vocabulary.length} />
+            <Home onNavigate={handleNavigate} vocabularyCount={dynamicVocabularyItems.length} />
           </main>
         } />
 
@@ -465,42 +669,26 @@ function AppContent() {
           </main>
         } />
 
-        {/* Old Vocabulary Table */}
+        {/* Vocabulary */}
         <Route path="/vocabulary" element={
           <main className="app-main with-sidebar">
-            <div className="vocabulary-page">
-              <div className="page-header">
-                <h2>📚 Vocabulary</h2>
-                <p>
-                  {selectedVocabularyUnit === "all" ? `All Units - ${vocabulary.length} words` :
-                   typeof selectedVocabularyUnit === "number" ? `Unit ${selectedVocabularyUnit} - ${managedVocabulary.length} words` :
-                   `${customLists.find((l) => l.id === selectedVocabularyUnit)?.name || "Custom List"} - ${managedVocabulary.length} words`}
-                </p>
-              </div>
-              {vocabulary.length === 0 ? (
-                <div className="empty-vocabulary">
-                  <div className="empty-icon">📚</div>
-                  <h3>Welcome!</h3>
-                  <p>Your vocabulary library is ready</p>
-                  <button onClick={async () => { localStorage.removeItem("nihongo_vocabulary_initialized"); await refresh(); }} className="back-to-home-btn">Load Sample Vocabulary</button>
-                </div>
-              ) : (
-                <>
-                  <VocabularyTable vocabulary={vocabulary} onStartPractice={handleStartPractice} selectedUnit={selectedVocabularyUnit} onUnitChange={setSelectedVocabularyUnit} />
-                  <div className="vocabulary-actions">
-                    <details className="advanced-management">
-                      <summary>⚙️ Advanced Management</summary>
-                      <VocabularyManager vocabulary={managedVocabulary} onCreate={create} onUpdate={update} onDelete={remove} />
-                    </details>
-                  </div>
-                </>
-              )}
-            </div>
+            <VocabularyTable
+              vocabulary={dynamicVocabularyItems}
+              onStartPractice={handleStartPractice}
+              selectedUnit={selectedVocabularyUnit}
+              onAddVocabulary={() => setIsAddVocabularyOpen(true)}
+              onEditVocabulary={handleEditVocabulary}
+              onDeleteVocabulary={handleDeleteVocabulary}
+            />
           </main>
         } />
 
-        {/* Dynamic Vocabulary - New System */}
-        <Route path="/vocabulary/units" element={<main className="app-main"><UnitList /></main>} />
+        {/* Dynamic Vocabulary - New system */}
+        <Route path="/vocabulary/units" element={
+          <main className="app-main">
+            <UnitList />
+          </main>
+        } />
         <Route path="/vocabulary/units/:unitId" element={<main className="app-main"><UnitDetail /></main>} />
 
         {/* Alphabet */}
@@ -562,6 +750,25 @@ function AppContent() {
         onImportDeck={importDeck}
         onExportDeck={exportDeck}
       />
+
+      {isAddVocabularyOpen && getSelectedUnitId() && (
+        <CreateVocabularyItemModal
+          unitId={getSelectedUnitId()!}
+          onClose={() => setIsAddVocabularyOpen(false)}
+          onCreate={handleCreateVocabularyItem}
+        />
+      )}
+
+      {isEditVocabularyOpen && editingVocabularyItem && (
+        <EditVocabularyItemModal
+          item={editingVocabularyItem}
+          onClose={() => {
+            setIsEditVocabularyOpen(false);
+            setEditingVocabularyItem(null);
+          }}
+          onUpdate={handleUpdateVocabulary}
+        />
+      )}
 
       <QuickAddWordModal
         isOpen={isQuickAddWordOpen}

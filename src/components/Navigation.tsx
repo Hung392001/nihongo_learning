@@ -71,14 +71,6 @@ export const Navigation: React.FC<NavigationProps> = ({
       </div>
 
       <div className="nav-right">
-        {/* Quick navigation to Vocabulary Units */}
-        <button
-          className="nav-quick-link"
-          onClick={() => onNavigate('vocabulary/units')}
-          title="Dynamic Vocabulary Units"
-        >
-          📖 Units
-        </button>
         <button
           className="nav-theme-toggle"
           onClick={onThemeToggle}

@@ -33,8 +33,8 @@ export interface VocabularyItem {
   /** Vietnamese translation of example sentence */
   exampleTranslationVi?: string;
   
-  /** Unit/lesson number for curriculum organization */
-  unit?: number;
+  /** Unit/lesson number or ID for curriculum organization */
+  unit?: number | string;
   
   /** Difficulty level (N5 = 1, N4 = 2, N3 = 3, N2 = 4, N1 = 5) */
   difficulty?: 1 | 2 | 3 | 4 | 5;

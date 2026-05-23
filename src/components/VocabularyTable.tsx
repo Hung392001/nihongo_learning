@@ -7,7 +7,9 @@ interface VocabularyTableProps {
   vocabulary: VocabularyItem[];
   onStartPractice?: (unit: number | "all" | string) => void;
   selectedUnit?: number | "all" | string;
-  onUnitChange?: (unit: number | "all" | string) => void;
+  onAddVocabulary?: () => void;
+  onEditVocabulary?: (item: VocabularyItem) => void;
+  onDeleteVocabulary?: (id: string) => void;
 }
 
 /**
@@ -17,14 +19,12 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
   vocabulary,
   onStartPractice,
   selectedUnit: controlledSelectedUnit,
-  onUnitChange,
+  onAddVocabulary,
+  onEditVocabulary,
+  onDeleteVocabulary,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [internalSelectedUnit, setInternalSelectedUnit] = useState<
-    number | "all" | string
-  >("all");
-  const [showUnitModal, setShowUnitModal] = useState(false);
   const [playingId, setPlayingId] = useState<string | null>(null);
   const [femaleVoices, setFemaleVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoiceIndex, setSelectedVoiceIndex] = useState<number>(0);
@@ -32,6 +32,8 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
   const [testingVoiceIndex, setTestingVoiceIndex] = useState<number | null>(
     null,
   );
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deletingItemId, setDeletingItemId] = useState<string | null>(null);
 
   // Load female voices on component mount
   useEffect(() => {
@@ -65,28 +67,13 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
     };
   }, []);
 
-  // Use controlled or internal state
-  const selectedUnit =
-    controlledSelectedUnit !== undefined
-      ? controlledSelectedUnit
-      : internalSelectedUnit;
-  const setSelectedUnit = (unit: number | "all" | string) => {
-    if (onUnitChange) {
-      onUnitChange(unit);
-    } else {
-      setInternalSelectedUnit(unit);
-    }
-  };
+  // Use the selectedUnit prop directly
+  const selectedUnit = controlledSelectedUnit;
 
-  // Get unique categories and units
+  // Get unique categories
   const categories = useMemo(() => {
     const cats = new Set(vocabulary.map((item) => item.category || "other"));
     return ["all", ...Array.from(cats)];
-  }, [vocabulary]);
-
-  const availableUnits = useMemo(() => {
-    const units = new Set(vocabulary.map((item) => item.unit || 1));
-    return Array.from(units).sort((a, b) => (a as number) - (b as number));
   }, [vocabulary]);
 
   // Filter vocabulary
@@ -95,7 +82,7 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
 
     // Filter by unit
     if (selectedUnit !== "all") {
-      result = result.filter((item) => (item.unit || 1) === selectedUnit);
+      result = result.filter((item) => String(item.unit || 1) === String(selectedUnit));
     }
 
     // Filter by category
@@ -198,6 +185,44 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
     }
   };
 
+  /**
+   * Handle edit vocabulary item
+   */
+  const handleEdit = (item: VocabularyItem) => {
+    if (onEditVocabulary) {
+      onEditVocabulary(item);
+    }
+  };
+
+  /**
+   * Handle delete vocabulary item
+   */
+  const handleDelete = (id: string) => {
+    setDeletingItemId(id);
+    setShowDeleteConfirm(true);
+  };
+
+  /**
+   * Confirm delete action
+   */
+  const confirmDelete = () => {
+    if (deletingItemId && onDeleteVocabulary) {
+      onDeleteVocabulary(deletingItemId);
+    }
+    setShowDeleteConfirm(false);
+    setDeletingItemId(null);
+  };
+
+  /**
+   * Cancel delete action
+   */
+  const cancelDelete = () => {
+    setShowDeleteConfirm(false);
+    setDeletingItemId(null);
+  };
+
+
+
   return (
     <div className="vocabulary-table-container">
       <div className="table-header">
@@ -273,7 +298,7 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
 
           {onStartPractice && (
             <button
-              onClick={() => setShowUnitModal(true)}
+              onClick={() => onStartPractice?.(selectedUnit || "all")}
               className="practice-button"
             >
               🎴 Luyện tập Flashcard
@@ -296,7 +321,6 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
               <th className="col-hiragana">Hiragana</th>
               <th className="col-kanji">Kanji</th>
               <th className="col-vietnamese">Tiếng Việt</th>
-              <th className="col-example">Ví dụ (Hiragana)</th>
             </tr>
           </thead>
           <tbody>
@@ -322,9 +346,45 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
                   <td className="col-hiragana">{item.hiragana}</td>
                   <td className="col-kanji">{item.kanji || "—"}</td>
                   <td className="col-vietnamese">{item.vietnamese}</td>
-                  <td className="col-example">{item.exampleSentenceHiragana || "—"}</td>
+                  {(onEditVocabulary || onDeleteVocabulary) && (
+                    <td className="col-actions">
+                      {onEditVocabulary && (
+                        <button
+                          className="edit-button"
+                          onClick={() => handleEdit(item)}
+                          title="Edit vocabulary"
+                          aria-label="Edit vocabulary"
+                        >
+                          ✏️
+                        </button>
+                      )}
+                      {onDeleteVocabulary && (
+                        <button
+                          className="delete-button"
+                          onClick={() => handleDelete(item.id)}
+                          title="Delete vocabulary"
+                          aria-label="Delete vocabulary"
+                        >
+                          🗑️
+                        </button>
+                      )}
+                    </td>
+                  )}
                 </tr>
               ))
+            )}
+            {onAddVocabulary && (
+              <tr className="add-vocab-row">
+                <td colSpan={5} className="add-vocab-cell">
+                  <button
+                    className="add-vocabulary-button"
+                    onClick={onAddVocabulary}
+                    title="Add new vocabulary"
+                  >
+                    + Add Vocabulary
+                  </button>
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
@@ -333,21 +393,22 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
       {filteredVocabulary.length > 0 && (
         <div className="table-footer">
           <p>
-            💡 Mẹo: Click vào "Luyện tập Flashcard" để học từ vựng một cách hiệu
-            quả!
+            💡 Mẹo: Click vào "Luyện tập Flashcard" để luyện tập với unit đã chọn!
           </p>
         </div>
       )}
 
-      {/* Unit Selection Modal */}
-      {showUnitModal && (
-        <div className="modal-overlay" onClick={() => setShowUnitModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="modal-overlay" onClick={cancelDelete}>
+          <div className="modal-content delete-confirm-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h3>Chọn Unit để luyện tập</h3>
+              <h3>⚠️ Xác nhận xóa</h3>
               <button
                 className="modal-close"
-                onClick={() => setShowUnitModal(false)}
+                onClick={cancelDelete}
                 aria-label="Đóng"
               >
                 ×
@@ -355,38 +416,25 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
             </div>
             <div className="modal-body">
               <p className="modal-description">
-                Chọn unit bạn muốn luyện tập với flashcard:
+                Bạn có chắc chắn muốn xóa từ vựng này không?
               </p>
-              <div className="unit-options">
-                <button
-                  className="unit-option-button"
-                  onClick={() => {
-                    onStartPractice?.("all");
-                    setShowUnitModal(false);
-                  }}
-                >
-                  <span className="unit-icon">📚</span>
-                  <span className="unit-name">Tất cả Units</span>
-                  <span className="unit-count">{vocabulary.length} từ</span>
-                </button>
-                {availableUnits.map((unit) => {
-                  const unitVocab = vocabulary.filter((v) => v.unit === unit);
-                  return (
-                    <button
-                      key={unit}
-                      className="unit-option-button"
-                      onClick={() => {
-                        onStartPractice?.(unit);
-                        setShowUnitModal(false);
-                      }}
-                    >
-                      <span className="unit-icon">📖</span>
-                      <span className="unit-name">Unit {unit}</span>
-                      <span className="unit-count">{unitVocab.length} từ</span>
-                    </button>
-                  );
-                })}
-              </div>
+              <p className="warning-text">
+                Hành động này không thể hoàn tác!
+              </p>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="cancel-button"
+                onClick={cancelDelete}
+              >
+                Hủy
+              </button>
+              <button
+                className="confirm-delete-button"
+                onClick={confirmDelete}
+              >
+                ✓ Xóa
+              </button>
             </div>
           </div>
         </div>

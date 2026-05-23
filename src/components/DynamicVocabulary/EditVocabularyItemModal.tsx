@@ -8,7 +8,6 @@ interface EditVocabularyItemModalProps {
     hiragana: string;
     kanji?: string;
     vietnamese: string;
-    hiraganaSentence?: string;
   }) => void;
 }
 
@@ -20,7 +19,6 @@ export const EditVocabularyItemModal: React.FC<EditVocabularyItemModalProps> = (
   const [hiragana, setHiragana] = useState(item.hiragana);
   const [kanji, setKanji] = useState(item.kanji || '');
   const [vietnamese, setVietnamese] = useState(item.vietnamese);
-  const [hiraganaSentence, setHiraganaSentence] = useState(item.hiraganaSentence || '');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hiraganaInputRef = useRef<HTMLInputElement>(null);
 
@@ -43,7 +41,6 @@ export const EditVocabularyItemModal: React.FC<EditVocabularyItemModalProps> = (
       hiragana: hiragana.trim(),
       kanji: kanji.trim() || undefined,
       vietnamese: vietnamese.trim(),
-      hiraganaSentence: hiraganaSentence.trim() || undefined,
     });
   };
 
@@ -111,19 +108,6 @@ export const EditVocabularyItemModal: React.FC<EditVocabularyItemModalProps> = (
               required
               autoComplete="off"
             />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="edit-hiragana-sentence">Hiragana Sentence (Optional)</label>
-            <input
-              id="edit-hiragana-sentence"
-              type="text"
-              value={hiraganaSentence}
-              onChange={(e) => setHiraganaSentence(e.target.value)}
-              className="form-input"
-              autoComplete="off"
-            />
-            <p className="hint">Example sentence in hiragana</p>
           </div>
         </form>
 
