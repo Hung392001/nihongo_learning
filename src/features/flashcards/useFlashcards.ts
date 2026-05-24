@@ -234,7 +234,7 @@ export function useFlashcards(storage: IFlashcardStorage | null): UseFlashcardsR
       setDeckItems(prev => {
         const newMap = new Map(prev);
         const currentItems = newMap.get(deckId) || [];
-        newMap.set(deckId, [...currentItems, newItem].sort((a, b) => (a.order ?? 0) - (b.order ?? 0)));
+        newMap.set(deckId, [...currentItems, newItem].sort((a, b) => (a.displayOrder ?? a.order ?? 0) - (b.displayOrder ?? b.order ?? 0)));
         return newMap;
       });
       
@@ -296,9 +296,29 @@ export function useFlashcards(storage: IFlashcardStorage | null): UseFlashcardsR
   const getDeckContents = useCallback((deckId: string): FlashcardItem[] => {
     const items = deckItems.get(deckId) || [];
     return items
-      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-      .map(item => flashcards.find(f => f.id === item.flashcardId))
-      .filter((f): f is FlashcardItem => f !== undefined);
+      .sort((a, b) => (a.displayOrder ?? a.order ?? 0) - (b.displayOrder ?? b.order ?? 0))
+      .map(item => {
+        // Try to find the flashcard by ID first
+        if (item.flashcardId) {
+          const found = flashcards.find(f => f.id === item.flashcardId);
+          if (found) return found;
+        }
+        // If flashcard not found or no flashcardId, use denormalized data from deckItem
+        if (item.front && item.back) {
+          return {
+            id: item.id,
+            front: item.front,
+            back: item.back,
+            kana: item.furigana || item.kana,
+            note: item.note,
+            tags: [],
+            createdAt: item.createdAt || Date.now(),
+            updatedAt: item.updatedAt || Date.now(),
+          };
+        }
+        return null;
+      })
+      .filter((f): f is FlashcardItem => f !== null);
   }, [deckItems, flashcards]);
 
   // Import/Export

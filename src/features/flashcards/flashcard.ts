@@ -133,16 +133,31 @@ export interface DeckItem {
   deckId: string;
   
   /** The flashcard item ID */
-  flashcardId: string;
+  flashcardId?: string | null;
   
   /** When it was added to the deck */
-  addedAt: number;
+  addedAt?: number;
+  createdAt?: number;
+  updatedAt?: number;
   
   /** Custom note for this item in the deck (optional) */
   note?: string;
   
   /** Order within the deck (optional) */
   order?: number;
+  displayOrder?: number;
+  
+  // Flashcard data (denormalized for performance)
+  front?: string;
+  back?: string;
+  furigana?: string;
+  kana?: string;
+  
+  // Additional fields from database
+  level?: number;
+  type?: string;
+  tags?: string[];
+  unitId?: string;
 }
 
 /**

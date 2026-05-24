@@ -75,7 +75,9 @@ export const FlashcardManager: React.FC<FlashcardManagerProps> = ({
     // Apply deck filter if a deck is selected
     if (selectedDeckId) {
       const deckFlashcardIds = new Set(
-        (deckItems.get(selectedDeckId) || []).map(item => item.flashcardId)
+        (deckItems.get(selectedDeckId) || [])
+          .filter(item => item.flashcardId)
+          .map(item => item.flashcardId!)
       );
       result = result.filter(f => deckFlashcardIds.has(f.id));
     }

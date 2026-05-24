@@ -226,9 +226,29 @@ export const FlashcardDeckModal: React.FC<FlashcardDeckModalProps> = ({
   // Get flashcards for selected deck
   const selectedDeckFlashcards = selectedDeckId ? (
     (deckItems.get(selectedDeckId) || [])
-      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-      .map(item => allFlashcards.find(f => f.id === item.flashcardId))
-      .filter((f): f is FlashcardItem => f !== undefined)
+      .sort((a, b) => (a.displayOrder ?? a.order ?? 0) - (b.displayOrder ?? b.order ?? 0))
+      .map(item => {
+        // Try to find the flashcard by ID first
+        if (item.flashcardId) {
+          const found = allFlashcards.find(f => f.id === item.flashcardId);
+          if (found) return found;
+        }
+        // If flashcard not found or no flashcardId, use denormalized data from deckItem
+        if (item.front && item.back) {
+          return {
+            id: item.id,
+            front: item.front,
+            back: item.back,
+            kana: item.furigana || item.kana,
+            note: item.note,
+            tags: [],
+            createdAt: item.createdAt || Date.now(),
+            updatedAt: item.updatedAt || Date.now(),
+          };
+        }
+        return null;
+      })
+      .filter((f): f is FlashcardItem => f !== null)
   ) : [];
 
   const selectedDeckItems = selectedDeckId ? deckItems.get(selectedDeckId) || [] : [];
@@ -338,9 +358,29 @@ export const FlashcardDeckModal: React.FC<FlashcardDeckModalProps> = ({
                 <div className="decks-grid">
                   {decks.map((deck) => {
                     const deckFlashcards = (deckItems.get(deck.id) || [])
-                      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-                      .map(item => allFlashcards.find(f => f.id === item.flashcardId))
-                      .filter((f): f is FlashcardItem => f !== undefined);
+                      .sort((a, b) => (a.displayOrder ?? a.order ?? 0) - (b.displayOrder ?? b.order ?? 0))
+                      .map(item => {
+                        // Try to find the flashcard by ID first
+                        if (item.flashcardId) {
+                          const found = allFlashcards.find(f => f.id === item.flashcardId);
+                          if (found) return found;
+                        }
+                        // If flashcard not found or no flashcardId, use denormalized data from deckItem
+                        if (item.front && item.back) {
+                          return {
+                            id: item.id,
+                            front: item.front,
+                            back: item.back,
+                            kana: item.furigana || item.kana,
+                            note: item.note,
+                            tags: [],
+                            createdAt: item.createdAt || Date.now(),
+                            updatedAt: item.updatedAt || Date.now(),
+                          };
+                        }
+                        return null;
+                      })
+                      .filter((f): f is FlashcardItem => f !== null);
 
                     return (
                       <div key={deck.id} className="deck-card">

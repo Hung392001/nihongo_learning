@@ -24,7 +24,7 @@ import { useFlashcards } from "./features/flashcards/useFlashcards";
 import { ApiFlashcardStorage, apiFlashcardStorage } from "./features/flashcards/ApiFlashcardStorage";
 import type { IFlashcardStorage } from "./features/flashcards/IFlashcardStorage";
 import type { CreateFlashcardDto, FlashcardItem } from "./features/flashcards/flashcard";
-import type { CustomList, ListItem, VocabularyUnitItem, VocabularyItem } from "./features/vocabulary/vocabulary";
+import type { CustomList, ListItem, VocabularyUnitItem, VocabularyItem, VocabularyUnit } from "./features/vocabulary/vocabulary";
 // Dynamic Vocabulary imports
 import { UnitList } from "./features/vocabulary/DynamicVocabulary/UnitList";
 import { UnitDetail } from "./features/vocabulary/DynamicVocabulary/UnitDetail";
@@ -121,6 +121,7 @@ function AppContent() {
   const [listVocabularyMap, setListVocabularyMap] = useState<Map<string, any[]>>(new Map());
   const [listItemsMap, setListItemsMap] = useState<Map<string, ListItem[]>>(new Map());
   const [dynamicVocabularyItems, setDynamicVocabularyItems] = useState<VocabularyItem[]>([]);
+  const [vocabularyUnits, setVocabularyUnits] = useState<VocabularyUnit[]>([]);
   const [isEditVocabularyOpen, setIsEditVocabularyOpen] = useState(false);
   const [editingVocabularyItem, setEditingVocabularyItem] = useState<VocabularyUnitItem | null>(null);
 
@@ -144,6 +145,24 @@ function AppContent() {
     };
     initStorage();
   }, []);
+
+  // Fetch vocabulary units
+  useEffect(() => {
+    const fetchUnits = async () => {
+      if (!storage) {
+        setVocabularyUnits([]);
+        return;
+      }
+      try {
+        const units = await dynamicVocabularyStorage.getAllUnits();
+        setVocabularyUnits(units);
+      } catch (error) {
+        console.error("Failed to fetch vocabulary units:", error);
+        setVocabularyUnits([]);
+      }
+    };
+    fetchUnits();
+  }, [storage]);
 
   // Fetch vocabulary items for the selected dynamic unit
   useEffect(() => {
@@ -245,8 +264,28 @@ function AppContent() {
     if (selectedDeckId) {
       const deckFlashcards = deckItems.get(selectedDeckId) || [];
       const flashcardsInDeck = deckFlashcards
-        .map((item) => flashcards.find((f) => f.id === item.flashcardId))
-        .filter((f): f is FlashcardItem => f !== undefined);
+        .map((item) => {
+          // Try to find the flashcard by ID first
+          if (item.flashcardId) {
+            const found = flashcards.find((f) => f.id === item.flashcardId);
+            if (found) return found;
+          }
+          // If flashcard not found or no flashcardId, use denormalized data from deckItem
+          if (item.front && item.back) {
+            return {
+              id: item.id,
+              front: item.front,
+              back: item.back,
+              kana: item.furigana || item.kana,
+              note: item.note,
+              tags: [],
+              createdAt: item.createdAt || Date.now(),
+              updatedAt: item.updatedAt || Date.now(),
+            };
+          }
+          return null;
+        })
+        .filter((f): f is FlashcardItem => f !== null);
       return flashcardsInDeck.map((flashcard) => ({
         id: flashcard.id,
         vietnamese: flashcard.back,
@@ -285,6 +324,23 @@ function AppContent() {
 
   useEffect(() => { reset(); }, [selectedFlashcardUnit, reset]);
 
+  // Helper function to get unit name from ID
+  const getUnitName = (unitId: number | "all" | string): string => {
+    if (unitId === "all") return "All Units";
+    if (typeof unitId === "number") return `Unit ${unitId}`;
+    
+    // Look up the unit by ID in vocabularyUnits (already loaded)
+    const unit = vocabularyUnits.find(u => u.id === unitId);
+    if (unit) return unit.name;
+    
+    // If unit not found, check if it's a custom list
+    const customList = customLists.find(l => l.id === unitId);
+    if (customList) return customList.name;
+    
+    // Fallback to the ID itself
+    return String(unitId);
+  };
+
   // Practice handlers
   const handleStartPractice = (unit: number | "all" | string) => {
     setSelectedFlashcardUnit(unit);
@@ -294,7 +350,27 @@ function AppContent() {
 
   const handleSaveToDeck = async () => {
     if (flashcardVocabulary.length === 0) return;
-    const deckName = `Unit ${selectedFlashcardUnit === "all" ? "All" : selectedFlashcardUnit} - ${new Date().toLocaleDateString()}`;
+    
+    // Get unit name - ensure vocabulary units are loaded
+    let unitName = getUnitName(selectedFlashcardUnit);
+    
+    // If the unit name looks like an ID (contains hyphens), try to fetch the actual name
+    if (typeof selectedFlashcardUnit === "string" && selectedFlashcardUnit.includes("-") && 
+        (vocabularyUnits.length === 0 || !vocabularyUnits.some(u => u.id === selectedFlashcardUnit))) {
+      try {
+        const units = await dynamicVocabularyStorage.getAllUnits();
+        const unit = units.find(u => u.id === selectedFlashcardUnit);
+        if (unit) {
+          unitName = unit.name;
+          // Update the state for future use
+          setVocabularyUnits(units);
+        }
+      } catch (error) {
+        console.error("Failed to fetch unit name:", error);
+      }
+    }
+    
+    const deckName = `${unitName} - ${new Date().toLocaleDateString()}`;
     try {
       const newDeck = await createDeck({ name: deckName });
       for (const vocab of flashcardVocabulary) {
