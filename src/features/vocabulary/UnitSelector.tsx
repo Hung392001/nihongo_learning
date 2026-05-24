@@ -17,7 +17,7 @@ interface UnitSelectorProps {
   onUnitSelect: (unit: number | "all" | string) => void;
   customLists: CustomList[];
   onCreateCustomList: () => void;
-  unitCounts: Record<number, number>;
+  unitCounts: Record<string, number>;
   customListCounts: Record<string, number>;
 }
 
@@ -41,6 +41,8 @@ export const UnitSelector: React.FC<UnitSelectorProps> = ({
   const [editingName, setEditingName] = useState("");
   const [creatingUnit, setCreatingUnit] = useState(false);
   const [newUnitName, setNewUnitName] = useState("");
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dropIndex, setDropIndex] = useState<number | null>(null);
 
   // Load dynamic vocabulary units
   useEffect(() => {
@@ -202,6 +204,58 @@ export const UnitSelector: React.FC<UnitSelectorProps> = ({
     setEditingName("");
   };
 
+  // Handle drag and drop reordering
+  const handleDragStart = (e: React.DragEvent, index: number) => {
+    e.dataTransfer.setData('text/plain', index.toString());
+    e.dataTransfer.effectAllowed = 'move';
+    setDraggedIndex(index);
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    setDropIndex(index);
+  };
+
+  const handleDragLeave = () => {
+    setDropIndex(null);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDropIndex(null);
+  };
+
+  const handleDrop = async (e: React.DragEvent, dropIndex: number) => {
+    e.preventDefault();
+    const dragIndex = parseInt(e.dataTransfer.getData('text/plain'));
+    
+    if (dragIndex === dropIndex) return;
+    
+    // Reorder the allItems array
+    const newItems = [...allItems];
+    const [removed] = newItems.splice(dragIndex, 1);
+    newItems.splice(dropIndex, 0, removed);
+    
+    // Extract just the unit IDs (excluding "all" and custom lists for now)
+    // Actually, we need to handle all types
+    const unitIds = newItems
+      .filter(item => item.type === "unit")
+      .map(item => item.unit as string);
+    
+    try {
+      await dynamicVocabularyStorage.reorderUnits(unitIds);
+      // Refresh units to get updated displayOrder
+      const units = await dynamicVocabularyStorage.getAllUnits();
+      setDynamicUnits(units);
+    } catch (error) {
+      console.error("Failed to reorder units:", error);
+    } finally {
+      setDraggedIndex(null);
+      setDropIndex(null);
+    }
+  };
+
   if (loading) {
     return (
       <aside
@@ -292,11 +346,21 @@ export const UnitSelector: React.FC<UnitSelectorProps> = ({
         {filteredItems.length === 0 ? (
           <div className="no-results">Không tìm thấy kết quả</div>
         ) : (
-          filteredItems.map((item) => (
+          filteredItems.map((item, index) => (
             <div
               key={String(item.unit)}
-              className={`nav-item-container ${item.type}`}
+              className={`nav-item-container ${item.type} ${
+                draggedIndex === index ? 'dragging' : ''
+              } ${
+                dropIndex === index ? 'drop-target' : ''
+              }`}
               title={`${item.name} (${item.count} từ)`}
+              draggable={isExpanded && item.type === "unit"}
+              onDragStart={(e) => handleDragStart(e, index)}
+              onDragOver={(e) => handleDragOver(e, index)}
+              onDragLeave={handleDragLeave}
+              onDragEnd={handleDragEnd}
+              onDrop={(e) => handleDrop(e, index)}
             >
               <button
                 className={`nav-item ${selectedUnit === item.unit ? "active" : ""} ${item.type}`}

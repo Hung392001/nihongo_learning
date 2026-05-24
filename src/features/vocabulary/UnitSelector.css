@@ -285,10 +285,39 @@
   display: flex;
   align-items: center;
   position: relative;
+  transition: all 0.2s ease;
 }
 
 .nav-item-container:hover .unit-actions {
   opacity: 1;
+}
+
+/* Drag and drop styles for units */
+.nav-item-container.unit.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+  transform: scale(0.98);
+}
+
+.nav-item-container.unit.drop-target {
+  border: 2px dashed #667eea;
+  background: rgba(102, 126, 234, 0.08);
+  border-radius: 8px;
+  margin: 2px 4px;
+}
+
+.nav-item-container.unit.dragging.drop-target {
+  opacity: 0.5;
+  border: 2px dashed #667eea;
+  background: rgba(102, 126, 234, 0.12);
+}
+
+.nav-item-container.unit {
+  cursor: grab;
+}
+
+.nav-item-container.unit:active {
+  cursor: grabbing;
 }
 
 /* Unit action buttons (edit and delete) */
@@ -561,6 +590,15 @@
 [data-theme="dark"] .nav-item.active {
   background: rgba(102, 126, 234, 0.2);
   border-right-color: #667eea;
+}
+
+[data-theme="dark"] .nav-item-container.unit.drop-target {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.12);
+}
+
+[data-theme="dark"] .nav-item-container.unit.dragging.drop-target {
+  background: rgba(102, 126, 234, 0.16);
 }
 
 [data-theme="dark"] .selector-search .search-input {

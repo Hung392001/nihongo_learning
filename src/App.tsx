@@ -26,8 +26,6 @@ import type { IFlashcardStorage } from "./features/flashcards/IFlashcardStorage"
 import type { CreateFlashcardDto, FlashcardItem } from "./features/flashcards/flashcard";
 import type { CustomList, ListItem, VocabularyUnitItem, VocabularyItem, VocabularyUnit } from "./features/vocabulary/vocabulary";
 // Dynamic Vocabulary imports
-import { UnitList } from "./features/vocabulary/DynamicVocabulary/UnitList";
-import { UnitDetail } from "./features/vocabulary/DynamicVocabulary/UnitDetail";
 import { CreateVocabularyItemModal } from "./features/vocabulary/DynamicVocabulary/CreateVocabularyItemModal";
 import { EditVocabularyItemModal } from "./features/vocabulary/DynamicVocabulary/EditVocabularyItemModal";
 import { dynamicVocabularyStorage } from "./features/vocabulary/DynamicVocabularyStorage";
@@ -764,14 +762,6 @@ function AppContent() {
             />
           </main>
         } />
-
-        {/* Dynamic Vocabulary - New system */}
-        <Route path="/vocabulary/units" element={
-          <main className="app-main">
-            <UnitList />
-          </main>
-        } />
-        <Route path="/vocabulary/units/:unitId" element={<main className="app-main"><UnitDetail /></main>} />
 
         {/* Alphabet */}
         <Route path="/alphabet" element={
