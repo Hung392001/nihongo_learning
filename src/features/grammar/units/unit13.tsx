@@ -3,7 +3,6 @@ import { GrammarLesson } from "./types";
 export const unit13: GrammarLesson = {
   id: "unit13",
   title: "Unit 13: Wants and Purposes",
-  japaneseTitle: "ユニット１３：きぼう・もくてき",
   content: [
     {
       type: "explanation",

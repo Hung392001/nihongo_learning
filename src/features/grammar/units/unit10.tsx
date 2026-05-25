@@ -3,7 +3,6 @@ import { GrammarLesson } from './types';
 export const unit10: GrammarLesson = {
   id: 'unit10',
   title: 'Unit 10: Existence & Location - あります・います',
-  japaneseTitle: 'ユニット１０：ばしょ・そんざい',
       content: [
         {
           type: 'explanation',

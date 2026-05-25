@@ -3,7 +3,6 @@ import { GrammarLesson } from './types';
 export const unit9: GrammarLesson = {
   id: 'unit9',
   title: 'Unit 9: Preferences & Possession - が Particle',
-  japaneseTitle: 'ユニット９：このみ・しょゆう｜が',
       content: [
         {
           type: 'explanation',

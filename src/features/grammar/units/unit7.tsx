@@ -3,7 +3,6 @@ import { GrammarLesson } from './types';
 export const unit7: GrammarLesson = {
   id: 'unit7',
   title: 'Unit 7: Giving & Receiving - Transfer Actions',
-  japaneseTitle: 'ユニット７：あげます・もらいます・ならいます',
       content: [
         {
           type: 'explanation',

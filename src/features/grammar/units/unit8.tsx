@@ -3,7 +3,6 @@ import { GrammarLesson } from './types';
 export const unit8: GrammarLesson = {
   id: 'unit8',
   title: 'Unit 8: Adjectives - Descriptions & Qualities',
-  japaneseTitle: 'ユニット８：けいようし・せつめい',
       content: [
         {
           type: 'explanation',

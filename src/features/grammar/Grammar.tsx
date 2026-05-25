@@ -62,9 +62,9 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
             <p className="english">{content.text}</p>
             {content.vietnamese && (
               <p className="vietnamese">
-                {content.vietnamese.startsWith("Cấu trúc: ") ? (
+                {content.vietnamese.startsWith("Structure: ") ? (
                   <span className="formula-block">
-                    {content.vietnamese.replace("Cấu trúc: ", "")}
+                    {content.vietnamese.replace("Structure: ", "")}
                   </span>
                 ) : (
                   content.vietnamese
@@ -92,7 +92,10 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
         return (
           <div key={index} className="grammar-note">
             <p>
-              <strong>💡{content.text ? ` ${content.text}` : ''}{content.vietnamese && ` ${content.vietnamese}`}</strong>
+              <strong>
+                💡{content.text ? ` ${content.text}` : ""}
+                {content.vietnamese && ` ${content.vietnamese}`}
+              </strong>
             </p>
           </div>
         );
@@ -231,7 +234,6 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
       <div className="grammar-main">
         <div className="grammar-header">
           <h1 className="grammar-title">{lesson.title}</h1>
-          <p className="grammar-subtitle">{lesson.japaneseTitle}</p>
         </div>
         <div className="grammar-content">
           {lesson.content.map((content, index) =>

@@ -3,7 +3,6 @@ import { GrammarLesson } from "./types";
 export const unit14: GrammarLesson = {
   id: "unit14",
   title: "Unit 14: Te-form and Related Expressions",
-  japaneseTitle: "ユニット１４：てけい・かんれんぶんけい",
   content: [
     {
       type: "explanation",

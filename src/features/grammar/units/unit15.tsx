@@ -3,7 +3,6 @@ import { GrammarLesson } from "./types";
 export const unit15: GrammarLesson = {
   id: "unit15",
   title: "Unit 15: Permission, Prohibition, and States",
-  japaneseTitle: "ユニット１５：きょか・きんし・じょうたい",
   content: [
     {
       type: "explanation",

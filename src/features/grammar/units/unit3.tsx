@@ -3,7 +3,6 @@ import { GrammarLesson } from "./types";
 export const unit3: GrammarLesson = {
   id: "unit3",
   title: "Unit 3: Locations & Direction - ここ・そこ・あそこ",
-  japaneseTitle: "ユニット３：ばしょ・ほうこう｜ここ・そこ・あそこ・どこ",
   content: [
     {
       type: "explanation",

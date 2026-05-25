@@ -3,7 +3,6 @@ import { GrammarLesson } from './types';
 export const unit6: GrammarLesson = {
   id: 'unit6',
   title: 'Unit 6: Direct Objects & Actions',
-  japaneseTitle: 'ユニット６：ちょくせつもくてき・どうさ',
       content: [
         {
           type: 'explanation',

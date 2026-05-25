@@ -3,7 +3,6 @@ import { GrammarLesson } from './types';
 export const unit12: GrammarLesson = {
   id: 'unit12',
   title: 'Unit 12: Past Tense and Comparisons',
-  japaneseTitle: 'ユニット１２：かこけい・ひかく',
       content: [
         {
           type: 'explanation',

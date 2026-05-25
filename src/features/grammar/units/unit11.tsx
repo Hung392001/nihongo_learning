@@ -3,7 +3,6 @@ import { GrammarLesson } from './types';
 export const unit11: GrammarLesson = {
   id: 'unit11',
   title: 'Unit 11: Counters and Quantities',
-  japaneseTitle: 'ユニット１１：かぞえかた・りょう・ひんど',
         content: [
             {
                 type: 'explanation',

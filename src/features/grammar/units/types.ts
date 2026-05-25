@@ -24,6 +24,5 @@ export interface GrammarContent {
 export interface GrammarLesson {
   id: string;
   title: string;
-  japaneseTitle: string;
   content: GrammarContent[];
 }

@@ -3,7 +3,6 @@ import { GrammarLesson } from "./types";
 export const unit1: GrammarLesson = {
   id: "unit1",
   title: "Unit 1: Thì / Là",
-  japaneseTitle: "ユニット１：です・は・の・も・さん",
   content: [
     {
       type: "title",
@@ -16,7 +15,7 @@ export const unit1: GrammarLesson = {
     {
       type: "explanation",
       text: "Affirmative form",
-      vietnamese: "Cấu trúc: N₁ は N₂ です。",
+      vietnamese: "Structure: N₁ は N₂ です。",
     },
     {
       type: "example",
@@ -35,7 +34,7 @@ export const unit1: GrammarLesson = {
     {
       type: "explanation",
       text: "Negative form",
-      vietnamese: "Cấu trúc: N₁ は N₂ じゃ ありません。",
+      vietnamese: "Structure: N₁ は N₂ じゃ ありません。",
     },
     {
       type: "example",
@@ -54,7 +53,7 @@ export const unit1: GrammarLesson = {
     {
       type: "explanation",
       text: "Question form",
-      vietnamese: "Cấu trúc: N₁ は N₂ ですか。",
+      vietnamese: "Structure: N₁ は N₂ ですか。",
     },
     {
       type: "example",
@@ -151,7 +150,7 @@ export const unit1: GrammarLesson = {
       type: "explanation",
       text: "Possession pattern",
       vietnamese:
-        "Cấu trúc: N₁ の N₂. Trợ từ の nối N₁ (đứng trước) để bổ nghĩa cho N₂ (đứng sau). N₁ biểu thị nơi sở thuộc của N₂.",
+        "Structure: N₁ の N₂. Trợ từ の nối N₁ (đứng trước) để bổ nghĩa cho N₂ (đứng sau). N₁ biểu thị nơi sở thuộc của N₂.",
     },
     {
       type: "example",
@@ -176,7 +175,7 @@ export const unit1: GrammarLesson = {
       type: "explanation",
       text: "Also/too particle",
       vietnamese:
-        "Cấu trúc: N も. Trợ từ も dùng trình bày một nội dung tương tự ở câu văn trước.",
+        "Structure: N も. Trợ từ も dùng trình bày một nội dung tương tự ở câu văn trước.",
     },
     {
       type: "example",
