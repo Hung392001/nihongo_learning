@@ -5,184 +5,149 @@ export const unit3: GrammarLesson = {
   title: "Unit 3: Locations & Direction - ここ・そこ・あそこ",
   content: [
     {
+      type: "title",
+      text: "1. ここ / そこ / あそこ / こちら / そちら / あちら",
+    },
+    {
       type: "explanation",
-      text: "In Unit 3, you will learn location words and how to describe where places and people are located.",
       vietnamese:
-        "ユニット３では、場所を示す単語と、場所や人がどこに位置するかを説明する方法を学びます。",
+        'ここ, そこ, あそこ: chỉ địa điểm (vị trí cụ thể - "đứng đâu nói đó").',
+    },
+    {
+      type: "explanation",
+      vietnamese:
+        "こちら, そちら, あちら: đại từ chỉ phương hướng, vừa chỉ hướng / chỗ, mang sắc thái lịch sự - kính ngữ (dùng nói chuyện lịch sự / chỉ đường / chỉ hướng).",
     },
     {
       type: "title",
-      text: "１. ここ・そこ・あそこ・どこ - Place Words",
+      text: "2. Nouns indicating places です",
     },
     {
       type: "explanation",
-      text: 'ここ, そこ, あそこ are location words (different from これ, それ, あれ which refer to objects). どこ is used to ask "where".',
+      text: "Used to express where an object, a person, or a place is located.",
       vietnamese:
-        "ここ、そこ、あそこは場所を示す単語です（これ、それ、あれは物を指す単語とは異なります）。",
+        "Structure: N₁ \u3000は \u3000N₂です。<br/> N<sub>Place</sub> \u3000は \u3000Nです。",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "ここ：話者の近い場所",
-          vietnamese: "ここ (đây): Nơi gần người nói",
-          english: "ここ (here): Place near the speaker",
+          japanese: "でんわは \u3000そこです",
+          vietnamese: "(でんわは そこです。)",
+          english: "The phone is there.",
+        },
+      ],
+    },
+    {
+      type: "example",
+      examples: [
+        {
+          japanese: "おてあらいは \u3000あそこです。",
+          vietnamese: "Nhà vệ sinh ở đằng kia.",
+          english: "The restroom is over there.",
         },
         {
-          japanese: "そこ：聞き手の近い場所",
-          vietnamese: "そこ (đó): Nơi gần người nghe",
-          english: "そこ (there): Place near the listener",
+          japanese: "でんわは \u30002かいです。",
+          vietnamese: "Điện thoại ở tầng hai.",
+          english: "The phone is on the 2nd floor.",
         },
         {
-          japanese: "あそこ：二人から遠い場所",
-          vietnamese: "あそこ (ở kia): Nơi xa cả hai",
-          english: "あそこ (over there): Place far from both",
-        },
-        {
-          japanese: "どこ：質問「どこですか」",
-          vietnamese: 'どこ (đâu): Câu hỏi "Ở đâu?"',
-          english: 'どこ (where): Question "Where is it?"',
+          japanese: "やまださんは \u3000じむしょです。",
+          vietnamese: "Anh Yamada ở văn phòng.",
+          english: "Mr. Yamada is in the office.",
         },
       ],
     },
     {
       type: "title",
-      text: "２. Danh từ は ～です - Place Description Pattern",
+      text: "3. どこ / どちら",
     },
     {
       type: "explanation",
-      text: "Use this pattern to describe what a place is or what is located at a place. Pattern: N1 は N2 です。",
+      text: "Question words for location and direction",
+      vietnamese: "Structure: N は どこ / どちら ですか。",
+    },
+    {
+      type: "explanation",
       vietnamese:
-        "このパターンは、場所が何であるか、または場所に何があるかを説明するために使用されます。",
+        "どこ: nghi vấn từ hỏi về địa điểm. <br/><br/> どちら: nghi vấn từ hỏi về phương hướng (cũng có thể dùng để hỏi về địa điểm), mang sắc thái lịch sự - kính ngữ.",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "あそこは トイレです。",
-          vietnamese: "Ở kia là phòng tắm.",
-          english: "That over there is a restroom.",
-        },
-        {
-          japanese: "あそこは ほんやです。",
-          vietnamese: "Ở kia là tiệm sách.",
-          english: "That over there is a bookstore.",
-        },
-        {
-          japanese: "やまださんは あのへやです。",
-          vietnamese: "Anh Yamada ở phòng nọ.",
-          english: "Mr. Yamada is in that room.",
-        },
-      ],
-    },
-    {
-      type: "title",
-      text: "３. ここ・そこ・あそこ + です - Indicating Location",
-    },
-    {
-      type: "explanation",
-      text: "When answering where something is located, use N1 は ここ/そこ/あそこ です。",
-      vietnamese:
-        "ある物や人がどこにあるかを示す場合、「N1 は ここ/そこ/あそこ です」という形式を使用します。",
-    },
-    {
-      type: "example",
-      examples: [
-        {
-          japanese: "エレベーターは どこですか。",
+          japanese: "エレベーターは \u3000どこですか。",
           vietnamese: "Thang máy ở đâu?",
           english: "Where is the elevator?",
         },
         {
-          japanese: "あそこは ぎんこうです。",
-          vietnamese: "Ở kia là ngân hàng.",
-          english: "That over there is a bank.",
-        },
-        {
-          japanese: "N1 の かいしゃは どこですか。",
-          vietnamese: "Công ty của N1 ở đâu?",
-          english: "Where is N1's company?",
+          japanese: "ぎんこうは \u3000どちらですか。",
+          vietnamese: "Ngân hàng ở chỗ nào vậy?",
+          english: "Which way is the bank?",
         },
       ],
     },
     {
-      type: "title",
-      text: "４. Quests about Location",
-    },
-    {
       type: "explanation",
-      text: "When asking about the location of an object or person, you can use: どこですか。",
+      text: "Ngoài ra, khi hỏi về tên của nơi chốn hay tổ chức (quốc gia, công ty, trường học...) thì nghi vấn từ dùng どこ / どちら không phải là なん。",
       vietnamese:
-        "物や人の位置について質問する場合、「どこですか」を使用できます。",
+        "Structure: N <sub>place, organization</sub> は \u3000どこ / どちら ですか。",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "トレインは どこですか。",
-          vietnamese: "Tàu ở đâu?",
-          english: "Where is the train?",
+          japanese: "かいしゃは \u3000どこですか。",
+          vietnamese: "Bạn làm ở công ty nào?",
+          english: "Which company do you work for?",
         },
         {
-          japanese: "TYLは どこですか。",
-          vietnamese: "TYL ở đâu?",
-          english: "Where is TYL?",
-        },
-        {
-          japanese: "わたしは どこですか。",
-          vietnamese: "Tôi ở đâu?",
-          english: "Where am I?",
+          japanese: "おくには \u3000どちらですか。",
+          vietnamese: "Anh đến từ đâu?",
+          english: "Which country are you from?",
         },
       ],
     },
     {
       type: "title",
-      text: "５. の を使った質問 - Using の for Origin/Affiliation",
+      text: "4. N₁ の N₂",
     },
     {
       type: "explanation",
-      text: "Pattern: これ/それ/あれ は どこの N ですか。Use の to indicate what country or company something belongs to.",
+      text: "Used to ask about the origin of an object.",
       vietnamese:
-        "どこの に続く名詞は、対象物がどこから来たか、どこに属するかを示します。",
+        "Structure: これ / それ / あれ は \u3000どこの \u3000N<sub>object</sub> ですか。",
+    },
+    {
+      type: "explanation",
+      vietnamese: "N₁: quốc gia còn N₂: sản phẩm → sản phẩm của nước đó.",
+    },
+    {
+      type: "explanation",
+      vietnamese: "N₁: công ty còn N₂: sản phẩm → sản phẩm của công ty đó.",
+    },
+    {
+      type: "explanation",
+      vietnamese:
+        "→ 2 trường hợp này dùng どこ để hỏi (Hỏi về nguồn gốc đồ vật)",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "これは どこの パソコンですか。",
-          vietnamese: "Máy vi tính này từ đâu?",
-          english: "Where is this computer from?",
+          japanese: "これは \u3000どこの \u3000とけいですか。",
+          vietnamese: "Đây là đồng hồ của nước nào / hãng nào?",
+          english: "Which country's watch is this?",
         },
         {
-          japanese: "これは どこの いんさつきですか。",
-          vietnamese: "Máy in này từ đâu?",
-          english: "Where is this printer from?",
+          japanese: "... にほんの \u3000とけいです。",
+          vietnamese: "... Đây là máy của Nhật.",
+          english: "... This is a Japanese watch.",
         },
         {
-          japanese: "パワーでんきの カメラです。",
-          vietnamese: "Đó là máy ảnh của công ty Power Electric.",
-          english: "It is a camera from Power Electric company.",
-        },
-      ],
-    },
-    {
-      type: "practice",
-      items: [
-        {
-          meaning: "The bank is over there.",
-          usage: "ぎんこう + は + あそこ + です",
-        },
-        {
-          meaning: "Where is the library?",
-          usage: "としょかん + は + どこ + ですか",
-        },
-        {
-          meaning: "This is from the United States.",
-          usage: "これ + は + アメリカ + の + です",
-        },
-        {
-          meaning: "The restroom is here.",
-          usage: "トイレ + は + ここ + です",
+          japanese: "... パワーでんきの \u3000とけいです。",
+          vietnamese: "... Đây là máy tính của công ty điện lực Power.",
+          english: "... This is a Power Electric watch.",
         },
       ],
     },

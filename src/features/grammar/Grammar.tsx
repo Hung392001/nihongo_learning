@@ -60,14 +60,22 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
         return (
           <div key={index} className="grammar-explanation">
             <p className="english">{content.text}</p>
+
             {content.vietnamese && (
               <p className="vietnamese">
                 {content.vietnamese.startsWith("Structure: ") ? (
-                  <span className="formula-block">
-                    {content.vietnamese.replace("Structure: ", "")}
-                  </span>
+                  <span
+                    className="formula-block"
+                    dangerouslySetInnerHTML={{
+                      __html: content.vietnamese.replace("Structure: ", ""),
+                    }}
+                  />
                 ) : (
-                  content.vietnamese
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: content.vietnamese,
+                    }}
+                  />
                 )}
               </p>
             )}
