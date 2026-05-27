@@ -2,204 +2,241 @@ import { GrammarLesson } from "./types";
 
 export const unit4: GrammarLesson = {
   id: "unit4",
-  title: "Unit 4: Verb Forms & Time Expressions",
+  title: "Unit 4: Telling Time and Verb Conjugations",
   content: [
     {
-      type: "explanation",
-      text: "In Unit 4, you will learn verb conjugations, time expressions, and how to indicate when and for how long actions occur.",
-      vietnamese:
-        "ユニット４では、動詞の活用、時間表現、および行動がいつどのくらいの期間発生するかを示す方法を学びます。",
-    },
-    {
       type: "title",
-      text: "１. Vます・ません・ました・ませんでした - Verb Conjugations",
+      text: "１. Time Expressions",
     },
     {
       type: "explanation",
-      text: "Japanese verbs conjugate based on tense and politeness. The ます form is polite present/future. Pattern: Vます (do), Vません (don't do), Vました (did), Vませんでした (didn't do).",
+      text: "To ask and tell time in Japanese. Pattern: N (time) です。For minutes, use ふん or ぷん. For exact hours, just use じ.",
       vietnamese:
-        "動詞の活用形：Vます（する）、Vません（しない）、Vました（した）、Vませんでした（しなかった）",
+        "Structure: いま \u3000なんじですか。<br/> ...じ ふん / ぷんです。",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "きょう べんきょうします。",
-          vietnamese: "Tôi học bài hôm nay.",
+          japanese: "いま \u3000なんじですか。",
+          vietnamese: "Bây giờ là mấy giờ?",
+          english: "What time is it now?",
+        },
+        {
+          japanese: "10じ \u300020ふんです。",
+          vietnamese: "Là 10 giờ 20 phút.",
+          english: "It's 10:20.",
+        },
+        {
+          japanese: "にほんは \u3000いま \u3000なんじですか。",
+          vietnamese: "Bây giờ ở Nhật Bản là mấy giờ?",
+          english: "What time is it in Japan now?",
+        },
+        {
+          japanese: "4じ \u300045ふんです。",
+          vietnamese: "Là 4 giờ 45 phút.",
+          english: "It's 4:45.",
+        },
+      ],
+    },
+    {
+      type: "title",
+      text: "２. Verb Conjugations: ます / ません / ました / ませんでした",
+    },
+    {
+      type: "explanation",
+      text: [
+        {
+          text: "The ます form makes the verb polite and is used for present/future tense. It becomes the predicate in a sentence and shows the speaker's polite attitude toward the listener. Used for truths, customs, present actions, and future events.<br/><br/>",
+        },
+        {
+          text: "Present/Future - Affirmative:",
+          vietnamese: "Structure: V + ます (do)",
+        },
+        {
+          text: "<br/><br/>Present/Future - Negative:",
+          vietnamese: "Structure: V + ません (don't do)",
+        },
+        {
+          text: "<br/><br/>Past - Affirmative:",
+          vietnamese: "Structure: V + ました (did)",
+        },
+        {
+          text: "<br/><br/>Past - Negative:",
+          vietnamese: "Structure: V + ませんでした (didn't do)",
+        },
+      ],
+    },
+    {
+      type: "example",
+      examples: [
+        {
+          japanese: "きょう \u3000べんきょうします。",
+          vietnamese: "Hôm nay tôi học bài.",
           english: "I study today.",
         },
         {
-          japanese: "きょう べんきょうしません。",
-          vietnamese: "Tôi không học bài hôm nay.",
+          japanese: "きょう \u3000べんきょうしません。",
+          vietnamese: "Hôm nay tôi không học bài.",
           english: "I don't study today.",
         },
         {
-          japanese: "きのう べんきょうしました。",
-          vietnamese: "Tôi đã học bài hôm qua.",
+          japanese: "きのう \u3000べんきょうしました。",
+          vietnamese: "Hôm qua tôi đã học bài.",
           english: "I studied yesterday.",
         },
         {
-          japanese: "きのう べんきょうしませんでした。",
-          vietnamese: "Tôi không học bài hôm qua.",
+          japanese: "きのう \u3000べんきょうしませんでした。",
+          vietnamese: "Hôm qua tôi không học bài.",
           english: "I didn't study yesterday.",
         },
       ],
     },
     {
-      type: "note",
-      text: "When the subject is clear, the subject noun can be omitted. Verbs always come at the end of the clause in Japanese.",
-      vietnamese:
-        "主語が明確な場合、主語の名詞は省略できます。動詞は常に句の最後に来ます。",
-    },
-    {
-      type: "title",
-      text: "２. Danh từ (thời gian) + に + Động từ - Time Particle",
-    },
-    {
       type: "explanation",
-      text: "The particle に indicates a specific time when an action occurs. Pattern: N は V に ～。 Do not use に with relative time words like きょう, あした, きのう.",
-      vietnamese:
-        "じょし「に」は、アクションが発生する具体的な時間を示します。「は」「V」「に」を含みます。",
+      text: "Interrogative form: Add か at the end of the sentence. Do not change the word order. For questions, repeat the verb in the interrogative sentence.",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "けさ（あなたは）なんじに おきましたか。",
-          vietnamese: "Sáng nay bạn thức dậy lúc mấy giờ?",
-          english: "What time did you wake up this morning?",
-        },
-        {
-          japanese: "こんばん（わたしは）どこへ いきますか。",
-          vietnamese: "Tối nay (tôi) sẽ đi đâu?",
-          english: "Where will I go tonight?",
-        },
-        {
-          japanese: "きのう（あなたは）べんきょうしましたか。",
-          vietnamese: "Hôm qua (bạn) có học bài không?",
+          japanese: "きのう \u3000べんきょうしましたか。",
+          vietnamese: "Hôm qua bạn có học không?",
           english: "Did you study yesterday?",
         },
         {
-          japanese: "はい、わたしは べんきょうしました。",
-          vietnamese: "Có, tôi đã học bài.",
+          japanese: "はい、\u3000べんきょうしました。",
+          vietnamese: "Vâng, tôi đã học.",
           english: "Yes, I studied.",
         },
+        {
+          japanese: "いいえ、\u3000べんきょうしませんでした。",
+          vietnamese: "Không, tôi không học.",
+          english: "No, I didn't study.",
+        },
       ],
     },
     {
       type: "note",
-      text: "Do NOT use に with: きょう (today), あした (tomorrow), きのう (yesterday), まいにち (every day), まいあさ (every morning), せんしゅう (last week), こんしゅう (this week), らいしゅう (next week), まいしゅう (every week), まいげつ (every month), ことし (this year), らいねん (next year), せんねん (last year)",
-      vietnamese:
-        "に を使わない時間表現：きょう、あした、きのう、まいにち、まいあさ、せんしゅう、こんしゅう、らいしゅう、まいしゅう、まいげつ、ことし、らいねん、せんねん",
+      text: "そうです and ちがいます (Unit 2) are NOT used in verb interrogative sentences.",
     },
     {
       type: "title",
-      text: "３. N から N まで - Duration or Range",
+      text: "３. Time Particle: Danh từ (thời gian) に Động từ",
     },
     {
       type: "explanation",
-      text: "から indicates the starting point and まで indicates the endpoint. Pattern: N1 から N2 まで です。",
-      vietnamese:
-        "から は開始点、まで は終了点を示します。「N1 から N2 まで」という形式で使われます。",
+      text: "Particle に: Add after time nouns to indicate when an action occurs.",
+      vietnamese: "Structure: N<sub>time</sub> + に + V.",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "9じから 5じまで はたらきます。",
-          vietnamese: "Tôi làm việc từ 9 giờ sáng đến 5 giờ chiều.",
-          english: "I work from 9 AM to 5 PM.",
+          japanese: "けさ \u3000なんじに \u3000おきましたか。",
+          vietnamese: "Sáng nay bạn dậy lúc mấy giờ?",
+          english: "What time did you wake up this morning?",
         },
         {
-          japanese: "10じから べんきょうします。",
-          vietnamese: "Tôi sẽ học bài từ 10 giờ.",
-          english: "I will start studying from 10 AM.",
+          japanese: "こんばん \u300011じに \u3000ねます。",
+          vietnamese: "Tối nay tôi ngủ lúc 11 giờ.",
+          english: "I will sleep at 11 PM tonight.",
+        },
+        {
+          japanese: "きのう \u3000べんきょうしましたか。",
+          vietnamese: "Hôm qua bạn có học không?",
+          english: "Did you study yesterday?",
+        },
+        {
+          japanese: "いいえ、\u3000わたしは \u3000べんきょうしませんでした。",
+          vietnamese: "Không, tôi không học.",
+          english: "No, I didn't study.",
+        },
+      ],
+    },
+    {
+      type: "note",
+      text: "Do NOT use particle に after these time nouns: きょう, あした, あさって, きのう, おととい, けさ, こんばん, いま, まいあさ, まいばん, まいにち, せんしゅう, こんしゅう, らいしゅう, いつ, せんげつ, こんげつ, らいげつ, ことし, らいねん, きょねん.",
+    },
+    {
+      type: "note",
+      text: "Particle に can be used or omitted with these time nouns: ~ようび, あさ, ひる, ばん / よる.",
+    },
+    {
+      type: "title",
+      text: "４. Time Range: Danh từ から Danh từ まで (From... To...)",
+    },
+    {
+      type: "explanation",
+      text: "から indicates the starting point and まで indicates the endpoint. から and まで don't have to be used together; they can be used separately.",
+      vietnamese: "Structure: N1から \u3000N2まで \u3000V/です。",
+    },
+    {
+      type: "example",
+      examples: [
+        {
+          japanese:
+            "おおさかから \u3000とうきょうまで \u30003じかん \u3000かかります。",
+          vietnamese: "Từ Osaka đến Tokyo mất 3 tiếng.",
+          english: "It takes 3 hours from Osaka to Tokyo.",
+        },
+        {
+          japanese: "9じから \u30005じまで \u3000べんきょうします。",
+          vietnamese: "Tôi học bài từ 9 giờ đến 5 giờ.",
+          english: "I study from 9 AM to 5 PM.",
+        },
+        {
+          japanese: "10じから \u3000はたらきます。",
+          vietnamese: "Tôi làm việc từ 10 giờ.",
+          english: "I work from 10 AM.",
+        },
+        {
+          japanese: "ぎんこうは \u30009じから \u30004じまでです。",
+          vietnamese: "Ngân hàng mở cửa từ 9 giờ đến 4 giờ.",
+          english: "The bank is open from 9 AM to 4 PM.",
+        },
+        {
+          japanese: "ひるやすみは \u300012じからです。",
+          vietnamese: "Giờ nghỉ trưa bắt đầu từ 12 giờ.",
+          english: "Lunch break starts from 12 PM.",
         },
       ],
     },
     {
       type: "title",
-      text: "４. N と N - Conjunction Particle",
+      text: "５. Conjunction Particle: Danh từ と Danh từ",
     },
     {
       type: "explanation",
-      text: "と is used to connect two nouns or to indicate companionship. Pattern: N1 と N2 で V。",
-      vietnamese:
-        "と は二つの名詞を接続するために使用され、友情を示します。「N1 と N2 で V」という形式で使われます。",
+      text: "Used to connect two nouns of equal status.",
+      vietnamese: "Structure: N1 と N2.",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "こうえん で ともだち と はなします。",
-          vietnamese: "Tôi nói chuyện với bạn ở công viên.",
-          english: "I talk with my friend in the park.",
-        },
-        {
-          japanese: "すしと てんぷら を たべます。",
-          vietnamese: "Tôi ăn sushi và tempura.",
-          english: "I eat sushi and tempura.",
+          japanese:
+            "ぎんこうの \u3000やすみは \u3000どようびと \u3000にちようびです。",
+          vietnamese: "Ngày nghỉ của ngân hàng là thứ Bảy và Chủ Nhật.",
+          english: "The bank's days off are Saturday and Sunday.",
         },
       ],
     },
     {
       type: "title",
-      text: "５. ね - Particle for Confirmation",
+      text: "６. Confirmation Particle: ~ ね (nhỉ, ạ)",
     },
     {
       type: "explanation",
-      text: "The particle ね is placed at the end of a sentence to express empathy, confirmation, or to seek agreement from the listener.",
-      vietnamese:
-        "じょし「ね」は、共感、確認、または聞き手からの同意を求めるために文の最後に付けられます。",
+      text: "Particle ね: Used at the end of a sentence to express the speaker's expectation of the listener's agreement, confirmation, or reminder.",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "きょう は いい てんき ですね。",
-          vietnamese: "Hôm nay thời tiết đẹp phải không?",
-          english: "It's nice weather today, isn't it?",
-        },
-        {
-          japanese: "あなたも にほんご を べんきょう していますね。",
+          japanese: "あなたも \u3000にほんご を \u3000べんきょうしていますね。",
           vietnamese: "Bạn cũng đang học tiếng Nhật, phải không?",
           english: "You are also studying Japanese, aren't you?",
-        },
-        {
-          japanese: "これは こわいですね。",
-          vietnamese: "Cái này đáng sợ phải không?",
-          english: "This is scary, isn't it?",
-        },
-      ],
-    },
-    {
-      type: "title",
-      text: "６. Common Patterns Summary",
-    },
-    {
-      type: "note",
-      text: "Pattern 1: N + は + V（ます/ません/ました/ませんでした）| Pattern 2: N + は + V + に （時間） | Pattern 3: N1 + から + N2 + まで + V | Pattern 4: N1 + と + N2 | Pattern 5: V + ね",
-      vietnamese:
-        "パターン1：N + は + V（ます/ません/ました/ませんでした）| パターン2：N + は + に（時間）+ V | パターン3：N1 + から + N2 + まで + V | パターン4：N1 + と + N2 | パターン5：V + ね",
-    },
-    {
-      type: "practice",
-      items: [
-        {
-          meaning: "Did you study yesterday?",
-          usage: "きのう + は + べんきょう + しました + か",
-        },
-        {
-          meaning: "I work from 8 AM to 5 PM.",
-          usage: "8じ + から + 5じ + まで + はたらきます",
-        },
-        {
-          meaning: "I talk with my friend.",
-          usage: "ともだち + と + はなします",
-        },
-        {
-          meaning: "What time did you wake up?",
-          usage: "なんじ + に + おきました + か",
         },
       ],
     },

@@ -20,6 +20,7 @@ import {
   GrammarContent,
   GrammarExample,
   GrammarItem,
+  TextItem,
 } from "./units/types";
 
 interface GrammarProps {
@@ -47,21 +48,63 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
     unit15,
   };
 
-  const renderContent = (content: GrammarContent, index: number) => {
+  const renderTextContent = (text: string | TextItem[] | undefined): React.ReactNode => {
+    if (!text) return null;
+    
+    if (Array.isArray(text)) {
+      return (
+        <div className="multi-text-content">
+          {text.map((item: TextItem, idx: number) => (
+            <div key={idx} className="text-item">
+              <p 
+                className="english"
+                dangerouslySetInnerHTML={{ __html: item.text }}
+              />
+              {item.vietnamese && (
+                <p className="vietnamese">
+                  {item.vietnamese.startsWith("Structure: ") ? (
+                    <span
+                      className="formula-block"
+                      dangerouslySetInnerHTML={{
+                        __html: item.vietnamese.replace("Structure: ", ""),
+                      }}
+                    />
+                  ) : (
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: item.vietnamese,
+                      }}
+                    />
+                  )}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      );
+    }
+    
+    return <p className="english" dangerouslySetInnerHTML={{ __html: text }} />;
+  };
+
+  const renderContent = (content: GrammarContent, index: number): React.ReactNode => {
     switch (content.type) {
       case "title":
         return (
-          <h3 key={index} className="grammar-section-title">
-            {content.text}
-          </h3>
+          <h3 
+            key={index} 
+            className="grammar-section-title"
+            dangerouslySetInnerHTML={{
+              __html: typeof content.text === 'string' ? content.text : String(content.text)
+            }}
+          />
         );
 
       case "explanation":
         return (
           <div key={index} className="grammar-explanation">
-            <p className="english">{content.text}</p>
-
-            {content.vietnamese && (
+            {renderTextContent(content.text)}
+            {content.vietnamese && !Array.isArray(content.text) && (
               <p className="vietnamese">
                 {content.vietnamese.startsWith("Structure: ") ? (
                   <span
@@ -88,8 +131,14 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
             {content.examples?.map((ex, idx) => (
               <div key={idx} className="example-item">
                 <div key={idx} className="example-text">
-                  <p className="example-japanese">{ex.japanese}</p>
-                  <p className="example-english">{ex.english}</p>
+                  <p 
+                    className="example-japanese" 
+                    dangerouslySetInnerHTML={{ __html: ex.japanese }}
+                  />
+                  <p 
+                    className="example-english" 
+                    dangerouslySetInnerHTML={{ __html: ex.english }}
+                  />
                 </div>
               </div>
             ))}
@@ -101,8 +150,13 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
           <div key={index} className="grammar-note">
             <p>
               <strong>
-                💡{content.text ? ` ${content.text}` : ""}
-                {content.vietnamese && ` ${content.vietnamese}`}
+                💡
+                {content.text && (
+                  <span dangerouslySetInnerHTML={{ __html: content.text }} />
+                )}
+                {content.vietnamese && (
+                  <span dangerouslySetInnerHTML={{ __html: content.vietnamese }} />
+                )}
               </strong>
             </p>
           </div>
@@ -113,8 +167,13 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
           <div key={index} className="grammar-practice">
             {content.items?.map((item, idx) => (
               <div key={idx} className="practice-item">
-                <div className="practice-meaning">{item.meaning}</div>
-                <div className="practice-hint">💡 {item.usage}</div>
+                <div 
+                  className="practice-meaning" 
+                  dangerouslySetInnerHTML={{ __html: item.meaning }}
+                />
+                <div className="practice-hint">
+                  💡 <span dangerouslySetInnerHTML={{ __html: item.usage }} />
+                </div>
               </div>
             ))}
           </div>

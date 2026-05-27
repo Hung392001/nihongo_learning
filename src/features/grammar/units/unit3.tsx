@@ -120,16 +120,8 @@ export const unit3: GrammarLesson = {
     },
     {
       type: "explanation",
-      vietnamese: "N₁: quốc gia còn N₂: sản phẩm → sản phẩm của nước đó.",
-    },
-    {
-      type: "explanation",
-      vietnamese: "N₁: công ty còn N₂: sản phẩm → sản phẩm của công ty đó.",
-    },
-    {
-      type: "explanation",
       vietnamese:
-        "→ 2 trường hợp này dùng どこ để hỏi (Hỏi về nguồn gốc đồ vật)",
+        "N₁: quốc gia còn N₂: sản phẩm → sản phẩm của nước đó. <br/><br/> N₁: công ty còn N₂: sản phẩm → sản phẩm của công ty đó. <br/><br/> → 2 trường hợp này dùng どこ để hỏi (Hỏi về nguồn gốc đồ vật).",
     },
     {
       type: "example",

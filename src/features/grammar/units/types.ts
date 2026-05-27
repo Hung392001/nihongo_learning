@@ -12,9 +12,14 @@ export interface GrammarItem {
   examples?: string[];
 }
 
+export interface TextItem {
+  text: string;
+  vietnamese?: string;
+}
+
 export interface GrammarContent {
   type: 'title' | 'explanation' | 'particle' | 'example' | 'note' | 'practice';
-  text?: string;
+  text?: string | TextItem[];
   japanese?: string;
   vietnamese?: string;
   examples?: GrammarExample[];
