@@ -6,13 +6,16 @@ export const unit4: GrammarLesson = {
   content: [
     {
       type: "title",
-      text: "１. Time Expressions",
+      vietnamese: "１. Time Expressions",
+      english: "1. Time Expressions",
     },
     {
       type: "explanation",
-      text: "To ask and tell time in Japanese. Pattern: N (time) です。For minutes, use ふん or ぷん. For exact hours, just use じ.",
+      english:
+        "To ask and tell time in Japanese. Pattern: N (time) です。For minutes, use ふん or ぷん. For exact hours, just use じ.",
       vietnamese:
-        "Structure: いま \u3000なんじですか。<br/> ...じ ふん / ぷんです。",
+        "Hỏi và nói về thời gian trong tiếng Nhật. Mẫu câu: N (thời gian) です。Đối với phút, sử dụng ふん hoặc ぷん. Đối với giờ chính xác, chỉ cần sử dụng じ.",
+      structure: "いま \u3000なんじですか。",
     },
     {
       type: "example",
@@ -41,29 +44,33 @@ export const unit4: GrammarLesson = {
     },
     {
       type: "title",
-      text: "２. Verb Conjugations: ます / ません / ました / ませんでした",
+      vietnamese: "２. Chia động từ: ます / ません / ました / ませんでした",
+      english: "2. Verb Conjugations: ます / ません / ました / ませんでした",
     },
     {
       type: "explanation",
       text: [
         {
-          text: "The ます form makes the verb polite and is used for present/future tense. It becomes the predicate in a sentence and shows the speaker's polite attitude toward the listener. Used for truths, customs, present actions, and future events.<br/><br/>",
+          english:
+            "The ます form makes the verb polite and is used for present/future tense. It becomes the predicate in a sentence and shows the speaker's polite attitude toward the listener. Used for truths, customs, present actions, and future events.<br/><br/>",
+          vietnamese:
+            "Dạng ます làm cho động từ trở nên lịch sự và được sử dụng cho thì hiện tại/tương lai. Nó trở thành vị ngữ trong câu và thể hiện thái độ lịch sự của người nói đối với người nghe. Dùng cho sự thật, thói quen, hành động hiện tại và sự kiện tương lai.<br/><br/>",
         },
         {
-          text: "Present/Future - Affirmative:",
-          vietnamese: "Structure: V + ます (do)",
+          english: "Present/Future - Affirmative:",
+          structure: "V + ます (do)",
         },
         {
-          text: "<br/><br/>Present/Future - Negative:",
-          vietnamese: "Structure: V + ません (don't do)",
+          english: "<br/><br/>Present/Future - Negative:",
+          structure: "V + ません (don't do)",
         },
         {
-          text: "<br/><br/>Past - Affirmative:",
-          vietnamese: "Structure: V + ました (did)",
+          english: "<br/><br/>Past - Affirmative:",
+          structure: "V + ました (did)",
         },
         {
-          text: "<br/><br/>Past - Negative:",
-          vietnamese: "Structure: V + ませんでした (didn't do)",
+          english: "<br/><br/>Past - Negative:",
+          structure: "V + ませんでした (didn't do)",
         },
       ],
     },
@@ -94,7 +101,9 @@ export const unit4: GrammarLesson = {
     },
     {
       type: "explanation",
-      text: "Interrogative form: Add か at the end of the sentence. Do not change the word order. For questions, repeat the verb in the interrogative sentence.",
+      english:
+        "Interrogative form: Add か at the end of the sentence. Do not change the word order. For questions, repeat the verb in the interrogative sentence.",
+      vietnamese: "",
     },
     {
       type: "example",
@@ -118,16 +127,21 @@ export const unit4: GrammarLesson = {
     },
     {
       type: "note",
-      text: "そうです and ちがいます (Unit 2) are NOT used in verb interrogative sentences.",
+      english:
+        "そうです and ちがいます (Unit 2) are NOT used in verb interrogative sentences.",
+      vietnamese: "",
     },
     {
       type: "title",
-      text: "３. Time Particle: Danh từ (thời gian) に Động từ",
+      vietnamese: "３. Time Particle: Danh từ (thời gian) に Động từ",
+      english: "3. Time Particle: Noun (time) に Verb",
     },
     {
       type: "explanation",
-      text: "Particle に: Add after time nouns to indicate when an action occurs.",
-      vietnamese: "Structure: N<sub>time</sub> + に + V.",
+      english:
+        "Particle に: Add after time nouns to indicate when an action occurs.",
+      vietnamese: "",
+      structure: "N<sub>time</sub> + に + V.",
     },
     {
       type: "example",
@@ -156,20 +170,27 @@ export const unit4: GrammarLesson = {
     },
     {
       type: "note",
-      text: "Do NOT use particle に after these time nouns: きょう, あした, あさって, きのう, おととい, けさ, こんばん, いま, まいあさ, まいばん, まいにち, せんしゅう, こんしゅう, らいしゅう, いつ, せんげつ, こんげつ, らいげつ, ことし, らいねん, きょねん.",
+      english:
+        "Do NOT use particle に after these time nouns: きょう, あした, あさって, きのう, おととい, けさ, こんばん, いま, まいあさ, まいばん, まいにち, せんしゅう, こんしゅう, らいしゅう, いつ, せんげつ, こんげつ, らいげつ, ことし, らいねん, きょねん.",
+      vietnamese: "",
     },
     {
       type: "note",
-      text: "Particle に can be used or omitted with these time nouns: ~ようび, あさ, ひる, ばん / よる.",
+      english:
+        "Particle に can be used or omitted with these time nouns: ~ようび, あさ, ひる, ばん / よる.",
+      vietnamese: "",
     },
     {
       type: "title",
-      text: "４. Time Range: Danh từ から Danh từ まで (From... To...)",
+      vietnamese: "４. Time Range: Danh từ から Danh từ まで (From... To...)",
+      english: "4. Time Range: Noun から Noun まで (From... To...)",
     },
     {
       type: "explanation",
-      text: "から indicates the starting point and まで indicates the endpoint. から and まで don't have to be used together; they can be used separately.",
-      vietnamese: "Structure: N1から \u3000N2まで \u3000V/です。",
+      english:
+        "から indicates the starting point and まで indicates the endpoint. から and まで don't have to be used together; they can be used separately.",
+      vietnamese: "",
+      structure: "N1から \u3000N2まで \u3000V/です。",
     },
     {
       type: "example",
@@ -204,12 +225,14 @@ export const unit4: GrammarLesson = {
     },
     {
       type: "title",
-      text: "５. Conjunction Particle: Danh từ と Danh từ",
+      vietnamese: "５. Conjunction Particle: Danh từ と Danh từ",
+      english: "5. Conjunction Particle: Noun と Noun",
     },
     {
       type: "explanation",
-      text: "Used to connect two nouns of equal status.",
-      vietnamese: "Structure: N1 と N2.",
+      english: "Used to connect two nouns of equal status.",
+      vietnamese: "",
+      structure: "N1 と N2.",
     },
     {
       type: "example",
@@ -224,11 +247,14 @@ export const unit4: GrammarLesson = {
     },
     {
       type: "title",
-      text: "６. Confirmation Particle: ~ ね (nhỉ, ạ)",
+      vietnamese: "６. Confirmation Particle: ~ ね (nhỉ, ạ)",
+      english: "6. Confirmation Particle: ~ ね (right?)",
     },
     {
       type: "explanation",
-      text: "Particle ね: Used at the end of a sentence to express the speaker's expectation of the listener's agreement, confirmation, or reminder.",
+      english:
+        "Particle ね: Used at the end of a sentence to express the speaker's expectation of the listener's agreement, confirmation, or reminder.",
+      vietnamese: "",
     },
     {
       type: "example",
