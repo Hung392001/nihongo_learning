@@ -5,177 +5,313 @@ export const unit8: GrammarLesson = {
   title: 'Unit 8: Adjectives - Descriptions & Qualities',
       content: [
         {
+          type: 'title',
+          vietnamese: '1. Tính từ',
+          english: '1. Adjectives',
+        },
+        {
           type: 'explanation',
-          text: 'In Unit 8, you will learn about Japanese adjectives and how to use them to describe nouns and characteristics. Adjectives are divided into two categories: i-adjectives and na-adjectives.',
-          vietnamese: 'ユニット８では、日本語の形容詞と、それらを使って名詞と特性を説明する方法を学びます。'
+          english:
+            'Adjectives can be used as predicates in sentences. In the pattern [N は Adjective です], adjectives are used to express the state or characteristics of a noun. In Japanese, adjectives are divided into two categories: na-adjectives (な形容詞) and i-adjectives (い形容詞), each with different conjugation rules.',
+          vietnamese:
+            'Tính từ có thể dùng làm vị ngữ trong câu. Trong mẫu câu [N は Tính từ です], tính từ được dùng để biểu thị trạng thái / đặc điểm của danh từ. Trong tiếng Nhật, tính từ được chia làm 2 loại: Tính từ đuôi な (な形容詞) và Tính từ đuôi い (い形容詞) - và mỗi loại có cách biến đổi khác nhau.',
         },
         {
           type: 'title',
-          text: '１. Introduction to Adjectives'
+          vietnamese: '2. Danh từ は Tính từ です - Mẫu câu tính từ',
+          english: '2. Noun は Adjective です - Adjective Sentences',
         },
         {
           type: 'explanation',
-          text: 'In Japanese, adjectives describe the state or characteristics of a noun. They are divided into two categories: i-adjectives (い形容詞) and na-adjectives (な形容詞), each with different conjugation rules.',
-          vietnamese: '日本語では、形容詞は名詞の状態または特性を説明します。２つのカテゴリに分かれています：い形容詞とな形容詞。'
+          english:
+            'This is the basic affirmative form of adjective sentences at present time (not past), used to talk about current state, future, general truth, or habitual state. The sentence ends with です to show politeness to the listener.',
+          vietnamese:
+            'Câu tính từ ở thời hiện tại (+), không quá khứ (dùng nói về hiện tại, tương lai, sự thật chung / trạng thái thường xuyên) kết thúc bằng です. です thể hiện thái độ lịch sự đối với người nghe.',
+          structure: 'N は Tính từ-な です / N là Tính từ-い です',
         },
         {
           type: 'title',
-          text: '２. Affirmative & Negative Forms'
-        },
-        {
-          type: 'explanation',
-          text: 'Adjectives have different forms for affirmative (positive) and negative statements.',
-          vietnamese: '形容詞は肯定文と否定文で異なる形を持ちます。'
+          vietnamese: 'A. Thể khẳng định đơn',
+          english: 'A. Simple Affirmative Form',
         },
         {
           type: 'example',
           examples: [
             {
               japanese: 'きょうは ひまです。',
-              vietnamese: 'Hôm nay tôi rãnh.',
-              english: 'Today is my day off.'
+              vietnamese: 'Hôm nay tôi rảnh.',
+              english: 'Today I am free / I have free time.'
             },
             {
               japanese: 'その ほんは おもしろいです。',
               vietnamese: 'Quyển sách đó thú vị.',
               english: 'That book is interesting.'
             },
-            {
-              japanese: 'ビエンホアは しずかな まちです。',
-              vietnamese: 'Biên Hòa là một thành phố yên tĩnh.',
-              english: 'Bien Hoa is a quiet city.'
-            },
-            {
-              japanese: 'うみの みずは きれいじゃ ありません。',
-              vietnamese: 'Nước biển không sạch.',
-              english: 'The sea water is not clean.'
-            },
-            {
-              japanese: 'にほんごは むずかしくない です。',
-              vietnamese: 'Tiếng Nhật không khó.',
-              english: 'Japanese is not difficult.'
-            },
-            {
-              japanese: 'いい ですが、よくない です。',
-              vietnamese: 'Tốt nhưng không tốt lắm.',
-              english: 'Good but not very good.'
-            }
           ]
         },
         {
           type: 'title',
-          text: '３. Connecting Sentences with が (But)'
+          vietnamese: 'B. Thể khẳng định CÓ NOUN 2',
+          english: 'B. Affirmative Form with Noun 2',
         },
         {
           type: 'explanation',
-          text: 'Used to connect two sentences with opposing meanings. Formula: Sentence 1 + が, Sentence 2',
-          vietnamese: '相反する意味の2つの文を接続するために使用されます。「文1 + が、文2」という形式で使われます。'
+          english:
+            'When an adjective describes a noun, it directly modifies that noun. For na-adjectives, add な before the noun. For i-adjectives, use the adjective directly before the noun.',
+          vietnamese:
+            'Khi tính từ bổ nghĩa cho danh từ, tính từ đứng trước danh từ để bổ nghĩa trực tiếp. Đối với tính từ đuôi な, thêm な trước danh từ. Đối với tính từ đuôi い, chỉ cần đặt tính từ trước danh từ.',
+          structure: 'N1 là Tính từ-な N2 です / N1 là Tính từ-い N2 です',
+        },
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'ディエンビエンフーは しずかな まちです。',
+              vietnamese: 'Điện Biên Phủ là thành phố yên tĩnh.',
+              english: 'Dien Bien Phu is a quiet city.'
+            },
+            {
+              japanese: 'きのう わたしは スーパーで あおい シャツを かいました。',
+              vietnamese: 'Hôm qua tôi đã mua chiếc áo sơ mi màu xanh ở siêu thị.',
+              english: 'Yesterday I bought a blue shirt at the supermarket.'
+            },
+          ]
+        },
+        {
+          type: 'title',
+          vietnamese: 'C. Thể phủ định',
+          english: 'C. Negative Form',
+        },
+        {
+          type: 'explanation',
+          english:
+            'For na-adjectives: replace です with じゃありません or ではありません. For i-adjectives: change the final い to くないです. Exception: いいです → よくないです (not いくないです)',
+          vietnamese:
+            'Đối với tính từ đuôi な: thay です bằng じゃありません hoặc ではありません. Đối với tính từ đuôi い: đổi đuôi い thành くないです. * Lưu ý: Thể phủ định của いいです → よくないです',
+          structure: 'N là Tính từ-na じゃ/では ありません / N là Tính từ-i ~く ないです',
+        },
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'にほんごは むずかしく ないです。',
+              vietnamese: 'Tiếng Nhật tôi không khó.',
+              english: 'Japanese is not difficult.'
+            },
+            {
+              japanese: 'かわの みずは きれいじゃ ありません。',
+              vietnamese: 'Nước của suối thì không sạch.',
+              english: 'The water from the river is not clean.'
+            },
+            {
+              japanese: 'その ほんは おもしろく ないです。',
+              vietnamese: 'Quyển sách đó không thú vị.',
+              english: 'That book is not interesting.'
+            },
+          ]
+        },
+        {
+          type: 'title',
+          vietnamese: 'Câu nghi vấn với tính từ',
+          english: 'Interrogative Form with Adjectives',
+        },
+        {
+          type: 'explanation',
+          english:
+            'To form a question with adjectives, simply add か at the end of the sentence. Answer by repeating the adjective from the question, without using そうです or ちがいます.',
+          vietnamese:
+            'Cách tạo thể nghi vấn của câu tính từ cũng tương tự như của danh từ (U1) và câu động từ (U4). Chỉ trả lời bằng cách nhắc lại tính từ trong câu nghi vấn, không dùng そうです / ちがいます.',
+          structure: 'N là Tính từ ですか',
+        },
+        {
+          type: 'example',
+          examples: [
+            {
+              japanese: 'この くるまは いいですか。',
+              vietnamese: 'Chiếc xe hơi này tốt không?',
+              english: 'Is this car good?'
+            },
+            {
+              japanese: 'はい、いいです。',
+              vietnamese: 'Vâng, tốt.',
+              english: 'Yes, it is good.'
+            },
+            {
+              japanese: 'いいえ、よくないです。',
+              vietnamese: 'Không, không tốt.',
+              english: 'No, it is not good.'
+            },
+          ]
+        },
+        {
+          type: 'title',
+          vietnamese: '3. Nhưng',
+          english: '3. But - Connecting Contrasting Ideas',
+        },
+        {
+          type: 'explanation',
+          english:
+            'The particle が connects two sentences with opposite or contrasting meanings. If the sentences share the same subject, and the first clause has a positive evaluation, the second clause will have a negative evaluation, and vice versa.',
+          vietnamese:
+            'が: nối 2 mệnh đề có mối quan hệ ngược nghĩa nhau. Trong câu nếu như có chung chủ ngữ, nếu mệnh đề trước thể hiện đánh giá tích cực thì mệnh đề sau thể hiện đánh giá không tích cực và ngược lại.',
+          structure: 'N1 là ___ ですが、N2 là ___ です',
         },
         {
           type: 'example',
           examples: [
             {
               japanese: 'にほんの たべものは おいしいですが、たかいです。',
-              vietnamese: 'Thức ăn Nhật rất ngon nhưng đắt.',
+              vietnamese: 'Món ăn của Nhật ngon nhưng mà đắt.',
               english: 'Japanese food is delicious but expensive.'
-            }
+            },
+            {
+              japanese: 'この ほんは おもしろいですが、たかく ないです。',
+              vietnamese: 'Quyển sách này thú vị nhưng không đắt.',
+              english: 'This book is interesting but not expensive.'
+            },
           ]
         },
         {
           type: 'title',
-          text: '４. Degree Adverbs: とても & あまり'
+          vietnamese: '4. とても / あまり - Phó từ chỉ mức độ',
+          english: '4. Degree Adverbs: とても / あまり',
         },
         {
           type: 'explanation',
-          text: 'とても (very) is used in positive sentences. あまり (not very) is used with negative verbs/adjectives.',
-          vietnamese: '「とても」は肯定文で使用されます。「あまり」は否定文で使用されます。'
+          english:
+            'とても and あまり are adverbs that express degree. とても means very and is used in positive sentences. あまり means not very or not much and is used in negative sentences. Both are placed before the adjective they modify.',
+          vietnamese:
+            'とても / あまり đều là những phó từ biểu thị mức độ, và khi làm chức năng bổ nghĩa tính từ thì chúng được đặt trước tính từ. とても: rất (+) / あまり: không... lắm (-).',
+          structure: 'とても Tính từ です / あまり Tính từ ~くないです / じゃ ありません',
         },
         {
           type: 'example',
           examples: [
             {
               japanese: 'わたしの へやは とても きれいです。',
-              vietnamese: 'Phòng của tôi rất sạch.',
+              vietnamese: 'Căn phòng của tôi rất sạch.',
               english: 'My room is very clean.'
             },
             {
-              japanese: 'えいごは あまり むずかしくない です。',
+              japanese: 'えいごは あまり むずかしく ないです。',
               vietnamese: 'Tiếng Anh không khó lắm.',
               english: 'English is not very difficult.'
-            }
+            },
+            {
+              japanese: 'この 式は あまり わかりません。',
+              vietnamese: 'Công thức này không rõ lắm.',
+              english: 'This formula is not very clear.'
+            },
           ]
         },
         {
           type: 'title',
-          text: '５. N は どうですか - How is N?'
+          vietnamese: '5. Danh từ là どうですか - Hỏi ấn tượng, cảm tưởng',
+          english: '5. Noun は どうですか - Asking for Impressions',
         },
         {
           type: 'explanation',
-          text: 'Used to ask for an opinion or impression about something. Formula: N は どう です か。',
-          vietnamese: '誰かの意見または印象を求めるために使用されます。「N は どう ですか」という形式で使われます。'
+          english:
+            'This pattern is used to ask for someone\'s impression, opinion, or feelings about something they have experienced, a place they have visited, or a person they have met. The response typically describes the impression using an adjective.',
+          vietnamese:
+            'Mẫu câu dùng để hỏi về ấn tượng, ý kiến hoặc cảm tưởng của người nghe về một việc đã làm / địa điểm đã đến / người đã gặp...',
+          structure: 'N là どうですか',
         },
         {
           type: 'example',
           examples: [
             {
               japanese: 'にほんごは どうですか。',
-              vietnamese: 'Tiếng Nhật thế nào?',
-              english: 'How is Japanese?'
+              vietnamese: 'Tiếng Nhật thì thế nào?',
+              english: 'How is Japanese? / What do you think of Japanese?'
             },
             {
-              japanese: 'むずかしいです。',
-              vietnamese: 'Nó khó.',
-              english: 'It is difficult.'
-            }
+              japanese: '... むずかしいです。',
+              vietnamese: '... Khó dữ á.',
+              english: '... It is difficult.'
+            },
+            {
+              japanese: 'ラーメンは どうですか。',
+              vietnamese: 'Món ramen thế nào?',
+              english: 'How is the ramen?'
+            },
+            {
+              japanese: '... おいしいです。',
+              vietnamese: '... Ngọt.',
+              english: '... It is delicious.'
+            },
           ]
         },
         {
           type: 'title',
-          text: '６. N1 は どんな N2 ですか - What kind of N2?'
+          vietnamese: '6. Danh từ 1 là どんな Danh từ 2 ですか - Hỏi về tính chất',
+          english: '6. Noun1 は どんな Noun2 ですか - Asking About Qualities',
         },
         {
           type: 'explanation',
-          text: 'Used when asking for a description of a specific noun. Formula: N1 は どんな N2 です か。',
-          vietnamese: '特定の名詞の説明を求めるために使用されます。「N1 は どんな N2 ですか」という形式で使われます。'
+          english:
+            'どんな is used to ask about the nature, quality, or characteristics of a person or thing. It is used with adjectives that describe the noun. The answer typically includes an adjective modifying the noun.',
+          vietnamese: 'どんな: dùng để hỏi về tính chất, trạng thái của người hoặc vật và nó được dùng với tính chất bổ nghĩa danh từ.',
+          structure: 'N1 là どんな N2 ですか',
         },
         {
           type: 'example',
           examples: [
             {
-              japanese: 'ビエンホアは どんな まちですか。',
-              vietnamese: 'Biên Hòa là thành phố như thế nào?',
-              english: 'What kind of city is Bien Hoa?'
+              japanese: 'ディエンビエンフーは どんな まちですか。',
+              vietnamese: 'Điện Biên Phủ là thành phố như thế nào?',
+              english: 'What kind of city is Dien Bien Phu?'
             },
             {
-              japanese: 'しずかな まちです。',
-              vietnamese: 'Đó là một thành phố yên tĩnh.',
-              english: 'It is a quiet city.'
-            }
+              japanese: '... しずかな まちです。',
+              vietnamese: '... Là thành phố yên tĩnh.',
+              english: '... It is a quiet city.'
+            },
+            {
+              japanese: 'あなたの せんせいは どんな ひとですか。',
+              vietnamese: 'Thầy giáo của bạn là người như thế nào?',
+              english: 'What kind of person is your teacher?'
+            },
+            {
+              japanese: '... やさしい ひとです。',
+              vietnamese: '... Là người tốt bụng.',
+              english: '... He/She is a kind person.'
+            },
           ]
         },
         {
           type: 'title',
-          text: '７. そうですね - I see / Let me think'
+          vietnamese: '7. そうですね - Biểu thị sự đồng ý / Suy nghĩ',
+          english: '7. そうですね - Expression of Agreement / Thinking',
         },
         {
           type: 'explanation',
-          text: 'This phrase is used to show agreement or to give yourself a moment to think before answering a question.',
-          vietnamese: 'このフレーズは、同意を示すか、質問に答える前に考える時間を与えるために使用されます。'
+          english:
+            'This phrase is used to show agreement or to give yourself a moment to think before answering a question. In the dialogue of this lesson, そうですね appears when someone needs a moment to think, showing hesitation or contemplation.',
+          vietnamese:
+            ' そうですね biểu thị sự đồng ý, đồng cảm. Ở phần hội thoại của bài này そうですね xuất hiện khi một người biểu thị sự ngập ngừng suy nghĩ câu trả lời khi được hỏi.',
         },
         {
           type: 'example',
           examples: [
             {
               japanese: 'おしごとは どうですか。',
-              vietnamese: 'Công việc thế nào?',
+              vietnamese: 'Công việc của bạn thế nào?',
               english: 'How is your work?'
             },
             {
-              japanese: 'そうですね。とても おもしろいです。',
-              vietnamese: 'Để tôi xem... rất thú vị.',
-              english: 'Let me see... it\'s very interesting.'
-            }
+              japanese: '... そうですね。とても おもしろいです。',
+              vietnamese: 'À vâng... Rất thú vị.',
+              english: '... Let me see... It is very interesting.'
+            },
           ]
+        },
+        {
+          type: 'note',
+          english:
+            'Note: そうですね is a versatile expression that can mean I see, That\'s right, Let me think... depending on the context and intonation.',
+          vietnamese:
+            'Lưu ý: そうですね là cách diễn đạt linh hoạt có thể có nghĩa Tôi hiểu, Đúng vậy, Để tôi xem... tùy theo ngữ cảnh và ngữ điệu.',
         },
       ]
 };
