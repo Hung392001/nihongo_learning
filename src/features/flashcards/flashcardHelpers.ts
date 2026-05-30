@@ -87,20 +87,14 @@ export function getModeName(mode: FlashcardMode): string {
 }
 
 /**
- * Get available modes based on vocabulary items
- * (e.g., only show HIRA_TO_KANJI if items have kanji)
+ * Get available modes - always return all 3 modes
  */
 export function getAvailableModes(items: VocabularyItem[]): FlashcardMode[] {
-  const hasKanji = items.some(item => item.kanji !== null && item.kanji.trim() !== '');
-  
-  const modes = [FlashcardMode.VI_TO_HIRA];
-  
-  if (hasKanji) {
-    modes.push(FlashcardMode.HIRA_TO_KANJI);
-    modes.push(FlashcardMode.KANJI_TO_HIRA);
-  }
-  
-  return modes;
+  return [
+    FlashcardMode.VI_TO_HIRA,
+    FlashcardMode.HIRA_TO_KANJI,
+    FlashcardMode.KANJI_TO_HIRA,
+  ];
 }
 
 /**

@@ -268,8 +268,13 @@ function AppContent() {
             const found = flashcards.find((f) => f.id === item.flashcardId);
             if (found) return found;
           }
-          // If flashcard not found or no flashcardId, use denormalized data from deckItem
+          // If flashcard not found or no flashcardId, try to find by matching front/back
           if (item.front && item.back) {
+            const matchingFlashcard = flashcards.find(f => f.front === item.front && f.back === item.back);
+            if (matchingFlashcard) {
+              return matchingFlashcard;
+            }
+            // Fallback to denormalized data from deckItem
             return {
               id: item.id,
               front: item.front,
@@ -287,8 +292,9 @@ function AppContent() {
       return flashcardsInDeck.map((flashcard) => ({
         id: flashcard.id,
         vietnamese: flashcard.back,
-        hiragana: flashcard.kana || flashcard.front,
-        kanji: flashcard.front.includes(flashcard.kana || "") ? null : flashcard.front,
+        // When saved: front = vocab.hiragana, kana = vocab.kanji
+        hiragana: flashcard.front,
+        kanji: flashcard.kana && flashcard.kana.trim() !== '' ? flashcard.kana : null,
         romaji: undefined,
         category: undefined,
         tags: flashcard.tags,
@@ -317,7 +323,7 @@ function AppContent() {
     initialMode: FlashcardMode.VI_TO_HIRA,
   });
 
-  const availableModes = useMemo(() => getAvailableModes(dynamicVocabularyItems), [dynamicVocabularyItems]);
+  const availableModes = useMemo(() => getAvailableModes(flashcardVocabulary), [flashcardVocabulary]);
   const statistics = useMemo(() => calculateStatistics(dynamicVocabularyItems), [dynamicVocabularyItems]);
 
   useEffect(() => { reset(); }, [selectedFlashcardUnit, reset]);
@@ -372,10 +378,11 @@ function AppContent() {
     try {
       const newDeck = await createDeck({ name: deckName });
       for (const vocab of flashcardVocabulary) {
+        // Store hiragana in front, kanji in kana for easier reconstruction
         const flashcard = await createFlashcard({
-          front: vocab.kanji || vocab.hiragana,
+          front: vocab.hiragana,
           back: vocab.vietnamese,
-          kana: vocab.hiragana,
+          kana: vocab.kanji || '',
           note: vocab.note,
           tags: vocab.tags,
           difficulty: vocab.difficulty,
