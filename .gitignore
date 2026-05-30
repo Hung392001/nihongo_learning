@@ -55,5 +55,4 @@ server/node_modules/
 
 # Environment files
 .env
-.env.*
 !server/.env.example
