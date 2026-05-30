@@ -93,11 +93,11 @@ export const unit8: GrammarLesson = {
     {
       type: "explanation",
       english:
-        "For na-adjectives: replace です with じゃありません or ではありません. For i-adjectives: change the final い to くないです. Exception: いいです → よくないです (not いくないです)",
+        "For na-adjectives: replace です with じゃありません or ではありません. For i-adjectives: change the final い to くないです.",
       vietnamese:
-        "Đối với tính từ đuôi な: thay です bằng じゃありません hoặc ではありません. Đối với tính từ đuôi い: đổi đuôi い thành くないです. * Lưu ý: Thể phủ định của いいです → よくないです",
+        "Đối với tính từ đuôi な: thay です bằng じゃありません hoặc ではありません. Đối với tính từ đuôi い: đổi đuôi い thành くないです.",
       structure:
-        "Nは \u3000けいようし-な じゃ/では \u3000ありません <br/> Nは \u3000けいようし-い \u3000くないです",
+        'Nは \u3000けいようし-<span class="highlight-na">な</span> じゃ/では \u3000ありません。 <br/> Nは \u3000けいようし-<span class="highlight-i">い</span> \u3000くないです。',
     },
     {
       type: "example",
@@ -120,6 +120,11 @@ export const unit8: GrammarLesson = {
       ],
     },
     {
+      type: "note",
+      english: "Exception: いいです → よくないです (not いくないです)",
+      vietnamese: "Lưu ý: いいです → よくないです (không phải いくないです)",
+    },
+    {
       type: "title",
       vietnamese: "Câu nghi vấn với tính từ",
       english: "Interrogative Form with Adjectives",
@@ -131,7 +136,7 @@ export const unit8: GrammarLesson = {
       vietnamese:
         "Cách tạo thể nghi vấn của câu tính từ cũng tương tự như của danh từ (U1) và câu động từ (U4). Chỉ trả lời bằng cách nhắc lại tính từ trong câu nghi vấn, không dùng そうです / ちがいます.",
       structure:
-        "Nは \u3000けいようし-い ですか。<br/> Nは \u3000けいようし-な ですか。",
+        "Nは \u3000けいようし-い \u3000ですか。<br/> Nは \u3000けいようし-な \u3000ですか。",
     },
     {
       type: "example",
@@ -195,18 +200,18 @@ export const unit8: GrammarLesson = {
       vietnamese:
         "とても / あまり đều là những phó từ biểu thị mức độ, và khi làm chức năng bổ nghĩa tính từ thì chúng được đặt trước tính từ. とても: rất (+) / あまり: không... lắm (-).",
       structure:
-        'とても\u3000 ___です。 <br/> あまり \u3000けいようし-<span style="position: relative; display: inline-block;">い<span style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: linear-gradient(to top right, transparent 45%, red 48%, red 52%, transparent 55%); pointer-events: none;"></span></span> \u3000くないです。 <br/>あまり \u3000けいようし-<span style="position: relative; display: inline-block;">な<span style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: linear-gradient(to top right, transparent 45%, red 48%, red 52%, transparent 55%); pointer-events: none;"></span></span>じゃ \u3000ありません。',
+        'とても\u3000___です。 <br/> あまり \u3000けいようし-<span class="highlight-i">い</span>\u3000くないです。 <br/>あまり \u3000けいようし-<span class="highlight-na">な</span>じゃ \u3000ありません。',
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "わたしの へやは とても きれいです。",
+          japanese: "わたしの \u3000へやは \u3000とても \u3000きれいです。",
           vietnamese: "Căn phòng của tôi rất sạch.",
           english: "My room is very clean.",
         },
         {
-          japanese: "えいごは あまり むずかしく ないです。",
+          japanese: "えいごは \u3000あまり \u3000むずかしく \u3000ないです。",
           vietnamese: "Tiếng Anh không khó lắm.",
           english: "English is not very difficult.",
         },
@@ -228,13 +233,13 @@ export const unit8: GrammarLesson = {
         "This pattern is used to ask for someone's impression, opinion, or feelings about something they have experienced, a place they have visited, or a person they have met. The response typically describes the impression using an adjective.",
       vietnamese:
         "Mẫu câu dùng để hỏi về ấn tượng, ý kiến hoặc cảm tưởng của người nghe về một việc đã làm / địa điểm đã đến / người đã gặp...",
-      structure: "N là どうですか",
+      structure: "Nは \u3000どうですか。",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "にほんごは どうですか。",
+          japanese: "にほんごは \u3000どうですか。",
           vietnamese: "Tiếng Nhật thì thế nào?",
           english: "How is Japanese? / What do you think of Japanese?",
         },
@@ -244,7 +249,7 @@ export const unit8: GrammarLesson = {
           english: "... It is difficult.",
         },
         {
-          japanese: "ラーメンは どうですか。",
+          japanese: "ラーメンは \u3000どうですか。",
           vietnamese: "Món ramen thế nào?",
           english: "How is the ramen?",
         },
@@ -257,8 +262,8 @@ export const unit8: GrammarLesson = {
     },
     {
       type: "title",
-      vietnamese: "6. Danh từ 1 là どんな Danh từ 2 ですか - Hỏi về tính chất",
-      english: "6. Noun1 は どんな Noun2 ですか - Asking About Qualities",
+      vietnamese: "6. N₁は どんな N₂ですか - Hỏi về tính chất",
+      english: "6. N₁ は どんな N₂ですか - Asking About Qualities",
     },
     {
       type: "explanation",
@@ -266,28 +271,28 @@ export const unit8: GrammarLesson = {
         "どんな is used to ask about the nature, quality, or characteristics of a person or thing. It is used with adjectives that describe the noun. The answer typically includes an adjective modifying the noun.",
       vietnamese:
         "どんな: dùng để hỏi về tính chất, trạng thái của người hoặc vật và nó được dùng với tính chất bổ nghĩa danh từ.",
-      structure: "N1 là どんな N2 ですか",
+      structure: "N₁は \u3000どんな \u3000N₂ですか。",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "ディエンビエンフーは どんな まちですか。",
+          japanese: "ディエンビエンフーは \u3000どんな \u3000まちですか。",
           vietnamese: "Điện Biên Phủ là thành phố như thế nào?",
           english: "What kind of city is Dien Bien Phu?",
         },
         {
-          japanese: "... しずかな まちです。",
+          japanese: "... しずかな \u3000まちです。",
           vietnamese: "... Là thành phố yên tĩnh.",
           english: "... It is a quiet city.",
         },
         {
-          japanese: "あなたの せんせいは どんな ひとですか。",
+          japanese: "あなたの \u3000せんせいは \u3000どんな \u3000ひとですか。",
           vietnamese: "Thầy giáo của bạn là người như thế nào?",
           english: "What kind of person is your teacher?",
         },
         {
-          japanese: "... やさしい ひとです。",
+          japanese: "... やさしい \u3000ひとです。",
           vietnamese: "... Là người tốt bụng.",
           english: "... He/She is a kind person.",
         },
@@ -301,7 +306,7 @@ export const unit8: GrammarLesson = {
     {
       type: "explanation",
       english:
-        "This phrase is used to show agreement or to give yourself a moment to think before answering a question. In the dialogue of this lesson, そうですね appears when someone needs a moment to think, showing hesitation or contemplation.",
+        "そうですね is used to show agreement or to give yourself a moment to think before answering a question. In the dialogue of this lesson, そうですね appears when someone needs a moment to think, showing hesitation or contemplation.",
       vietnamese:
         " そうですね biểu thị sự đồng ý, đồng cảm. Ở phần hội thoại của bài này そうですね xuất hiện khi một người biểu thị sự ngập ngừng suy nghĩ câu trả lời khi được hỏi.",
     },
@@ -309,12 +314,12 @@ export const unit8: GrammarLesson = {
       type: "example",
       examples: [
         {
-          japanese: "おしごとは どうですか。",
+          japanese: "おしごとは \u3000どうですか。",
           vietnamese: "Công việc của bạn thế nào?",
           english: "How is your work?",
         },
         {
-          japanese: "... そうですね。とても おもしろいです。",
+          japanese: "... そうですね。\u3000とても \u3000おもしろいです。",
           vietnamese: "À vâng... Rất thú vị.",
           english: "... Let me see... It is very interesting.",
         },
