@@ -106,7 +106,17 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
       case "explanation":
         return (
           <div key={index} className="grammar-explanation">
-            {renderTextContent(content.text)}
+            {content.text && renderTextContent(content.text)}
+            {!content.text && (
+              <p 
+                className={language === 'vietnamese' ? 'vietnamese' : 'english'}
+                dangerouslySetInnerHTML={{
+                  __html: language === 'vietnamese' 
+                    ? (content.vietnamese || '')
+                    : (content.english || '')
+                }}
+              />
+            )}
             {content.structure && !Array.isArray(content.text) && (
               <p className={language === 'vietnamese' ? 'vietnamese' : 'english'}>
                 <span

@@ -232,7 +232,7 @@ export const unit4: GrammarLesson = {
       type: "explanation",
       english: "Used to connect two nouns of equal status.",
       vietnamese: "",
-      structure: "N1 と N2.",
+      structure: "N1と \u3000N2.",
     },
     {
       type: "example",
@@ -254,7 +254,8 @@ export const unit4: GrammarLesson = {
       type: "explanation",
       english:
         "Particle ね: Used at the end of a sentence to express the speaker's expectation of the listener's agreement, confirmation, or reminder.",
-      vietnamese: "",
+      vietnamese:
+        "Trợ từ ね: Được dùng ở cuối câu để thể hiện sự mong đợi sự đồng ý, xác nhận hoặc nhắc nhở của người nghe.",
     },
     {
       type: "example",

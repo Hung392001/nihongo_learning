@@ -5,13 +5,6 @@ export const unit5: GrammarLesson = {
   title: "Unit 5: Movement & Direction - へ・で・と・いつ",
   content: [
     {
-      type: "explanation",
-      english:
-        "In Unit 5, you will learn about particles and expressions related to movement, direction, means of transportation, and companionship.",
-      vietnamese:
-        "Ở Unit 5, bạn sẽ học về các trợ từ và cách diễn đạt liên quan đến sự di chuyển, phương hướng, phương tiện đi lại và bạn đồng hành.",
-    },
-    {
       type: "title",
       vietnamese: "1. Trợ từ へ - Phương hướng di chuyển",
       english: "1. Particle へ - Direction of Movement",
@@ -61,7 +54,8 @@ export const unit5: GrammarLesson = {
     },
     {
       type: "title",
-      vietnamese: "2. どこ [へ] も Vません / ませんでした - Nơi nào cũng... không",
+      vietnamese:
+        "2. どこ [へ] も Vません / ませんでした - Nơi nào cũng... không",
       english: "2. どこ [へ] も Vません / ませんでした - Not anywhere",
     },
     {
@@ -143,8 +137,10 @@ export const unit5: GrammarLesson = {
       examples: [
         {
           japanese: "あした 私は 朝 7時に 友達と 銀行へ いきます。",
-          vietnamese: "Ngày mai tôi đi đến ngân hàng cùng bạn tôi vào lúc 7 giờ sáng.",
-          english: "Tomorrow morning at 7 AM, I will go to the bank with my friend.",
+          vietnamese:
+            "Ngày mai tôi đi đến ngân hàng cùng bạn tôi vào lúc 7 giờ sáng.",
+          english:
+            "Tomorrow morning at 7 AM, I will go to the bank with my friend.",
         },
         {
           japanese: "私たち は 犬と あそびました。",
@@ -172,24 +168,29 @@ export const unit5: GrammarLesson = {
       type: "explanation",
       text: [
         {
-          english: "いつ is used to ask 'when' an action occurs. Unlike other time expressions, いつ does NOT take the particle に after it.",
-          vietnamese: "いつ được dùng để hỏi 'khi nào' một hành động xảy ra. Không như các cách diễn đạt thời gian khác, いつ KHÔNG đi kèm trợ từ に sau nó.",
+          english:
+            "いつ is used to ask 'when' an action occurs. Unlike other time expressions, いつ does NOT take the particle に after it.<br/><br/>",
+          vietnamese:
+            "いつ được dùng để hỏi 'khi nào' một hành động xảy ra. Không như các cách diễn đạt thời gian khác, いつ KHÔNG đi kèm trợ từ に sau nó.",
         },
         {
           english: "Time expression rules with に:",
           vietnamese: "Quy tắc sử dụng に với thời gian:",
         },
         {
-          english: "• NO に: When time is unspecified (this week, this month, etc.)",
+          english:
+            "• NO に: When time is unspecified (this week, this month, etc.)",
           vietnamese: "• KHÔNG dùng に: Tuần/Tháng chưa xác định rõ ràng",
         },
         {
           english: "• OPTIONAL に: Days of the week (Monday, Tuesday, etc.)",
-          vietnamese: "• CÓ THỂ có/khi không có に: Thứ 2, 3...",
+          vietnamese: "• CÓ THỂ có hoặc không có に: Thứ 2, 3...",
         },
         {
-          english: "• REQUIRED に: Specific dates and times (May 1st, 3 o'clock, etc.)",
-          vietnamese: "• PHẢI có に: Ngày... tháng... (xác định rõ ràng và cụ thể)",
+          english:
+            "• REQUIRED に: Specific dates and times (May 1st, 3 o'clock, etc.)",
+          vietnamese:
+            "• PHẢI có に: Ngày... tháng... (xác định rõ ràng và cụ thể)",
         },
       ],
     },
@@ -197,17 +198,17 @@ export const unit5: GrammarLesson = {
       type: "example",
       examples: [
         {
-          japanese: "あなたは いつ 国へ かえりますか。",
+          japanese: "あなたは \u3000いつ \u3000くにへ \u3000かえりますか。",
           vietnamese: "Bạn sẽ về nước khi nào?",
           english: "When will you return to your country?",
         },
         {
-          japanese: "いつ 行きますか。",
+          japanese: "いつ \u3000いきますか。",
           vietnamese: "Bạn sẽ đi khi nào?",
           english: "When will you go?",
         },
         {
-          japanese: "学校の 入学式は いつですか。",
+          japanese: "がっこうの \u3000にゅうがくしきは \u3000いつですか。",
           vietnamese: "Lễ khai giảng của trường khi nào?",
           english: "When is the school entrance ceremony?",
         },
@@ -229,17 +230,17 @@ export const unit5: GrammarLesson = {
       type: "example",
       examples: [
         {
-          japanese: "あした は 雨だよ。",
+          japanese: "あしたは \u3000あめだよ。",
           vietnamese: "Ngày mai trời sẽ mưa đấy.",
           english: "Tomorrow will be rainy, you know.",
         },
         {
-          japanese: "その 本は おもしろいですよ。",
+          japanese: "その \u3000ほんは \u3000おもしろいですよ。",
           vietnamese: "Quyển sách đó thú vị lắm đấy.",
           english: "That book is interesting, you know.",
         },
         {
-          japanese: "きょう は あついですよ。",
+          japanese: "きょうは \u3000あついですよ。",
           vietnamese: "Hôm nay trời nóng đấy.",
           english: "Today is hot, you know.",
         },
@@ -261,47 +262,15 @@ export const unit5: GrammarLesson = {
       type: "example",
       examples: [
         {
-          japanese: "A: あした は 休みです。\nB: そうですね。",
-          vietnamese: "A: Ngày mai là ngày nghỉ.\nB: Đúng vậy nhỉ.",
-          english: "A: Tomorrow is a day off.\nB: That's right.",
+          japanese: "A: あしたは \u3000やすみです。<br/>B: そうですね。",
+          vietnamese: "A: Ngày mai là ngày nghỉ.<br/>B: Đúng vậy nhỉ.",
+          english: "A: Tomorrow is a day off.</br>B: That's right.",
         },
         {
-          japanese: "A: その 映画は とても いいです。\nB: そうですね。",
-          vietnamese: "A: Bộ phim đó rất hay.\nB: Đúng vậy.",
-          english: "A: That movie is very good.\nB: Yes, it is.",
-        },
-      ],
-    },
-    {
-      type: "practice",
-      items: [
-        {
-          meaning: "I went to the park yesterday.",
-          usage: "きのう + こうえん + へ + いきました",
-        },
-        {
-          meaning: "I will go to school by bicycle tomorrow.",
-          usage: "あした + じてんしゃ + で + がっこう + へ + いきます",
-        },
-        {
-          meaning: "I went to the library with my sister.",
-          usage: "わたし + あね + と + としょかん + へ + いきました",
-        },
-        {
-          meaning: "When will you go to Japan?",
-          usage: "あなた + いつ + にほん + へ + いきますか",
-        },
-        {
-          meaning: "I returned home alone.",
-          usage: "わたし + ひとりで + うち + へ + かえりました",
-        },
-        {
-          meaning: "I didn't go anywhere last week.",
-          usage: "せんしゅう + どこへも + いきませんでした",
-        },
-        {
-          meaning: "I walked from the station to the hotel.",
-          usage: "えき + から + ホテル + まで + あるいて + いきました",
+          japanese:
+            "A: その \u3000えいがは \u3000とても \u3000いいです。<br/>B: そうですね。",
+          vietnamese: "A: Bộ phim đó rất hay.<br/>B: Đúng vậy.",
+          english: "A: That movie is very good.<br/>B: Yes, it is.",
         },
       ],
     },
