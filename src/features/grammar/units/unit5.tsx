@@ -21,32 +21,35 @@ export const unit5: GrammarLesson = {
       type: "example",
       examples: [
         {
-          japanese: "きのう 私は スーパーへ いきました。",
+          japanese: "きのう \u3000わたしは \u3000スーパーへ \u3000いきました。",
           vietnamese: "Hôm qua tôi đã đi đến siêu thị.",
           english: "Yesterday, I went to the supermarket.",
         },
         {
-          japanese: "こんばん 私は 10時に うちへ かえります。",
+          japanese:
+            "こんばん \u3000わたしは \u300010じに \u3000うちへ \u3000かえります。",
           vietnamese: "Tối nay tôi về nhà lúc 10 giờ.",
           english: "Tonight, I will return home at 10 PM.",
         },
         {
-          japanese: "きのう あなたは どこへ いきましたか。",
+          japanese: "きのう \u3000あなたは \u3000どこへ \u3000いきましたか。",
           vietnamese: "Hôm qua bạn có đi đâu không?",
           english: "Where did you go yesterday?",
         },
         {
-          japanese: "... いいえ、私は どこへも いきませんでした。",
+          japanese:
+            "... いいえ、\u3000わたしは \u3000どこへも \u3000いきませんでした。",
           vietnamese: "... Không, tôi không đi đâu cả.",
           english: "... No, I didn't go anywhere.",
         },
         {
-          japanese: "あした あなたは どこへ いきますか。",
+          japanese: "あした \u3000あなたは \u3000どこへ \u3000いきますか。",
           vietnamese: "Ngày mai bạn có đi đâu không?",
           english: "Where will you go tomorrow?",
         },
         {
-          japanese: "... いいえ、私は どこへも いきません。",
+          japanese:
+            "... いいえ、\u3000わたしは \u3000どこへも \u3000いきません。",
           vietnamese: "... Không, tôi không đi đâu cả.",
           english: "... No, I'm not going anywhere.",
         },
@@ -54,28 +57,27 @@ export const unit5: GrammarLesson = {
     },
     {
       type: "title",
-      vietnamese:
-        "2. どこ [へ] も Vません / ませんでした - Nơi nào cũng... không",
-      english: "2. どこ [へ] も Vません / ませんでした - Not anywhere",
+      vietnamese: "1. Trợ từ も- Không đi đâu cả / Không nơi nào",
+      english: "1. Particle も - Not Going Anywhere",
     },
     {
       type: "explanation",
       english:
-        "The pattern どこへも + negative verb means 'not going anywhere / nowhere'. When using the particle も with question words (どこ, だれ, なに, etc.), the verb must be in negative form (ません / ませんでした). For two specific choices, use どちらも + negative.",
+        "The pattern どこも + negative verb means 'not going anywhere / nowhere'. When using the particle も with question words (どこ, だれ, なに, etc.), the verb must be in negative form (ません / ませんでした). For two specific choices, use どちらも + negative.",
       vietnamese:
-        "Mẫu câu どこへも + động từ phủ định có nghĩa là 'không đi đâu cả / không nơi nào'. Khi sử dụng trợ từ も với từ nghi vấn (どこ, だれ, なに,...) thì động từ phải ở dạng phủ định (ません / ませんでした). Đối với 2 lựa chọn cụ thể, dùng どちらも + phủ định.",
-      structure: "どこ [へ] も V<sub>ません / ませんでした</sub>",
+        "Mẫu câu どこも + động từ phủ định có nghĩa là 'không đi đâu cả / không nơi nào'. Khi sử dụng trợ từ も với từ nghi vấn (どこ, だれ, なに,...) thì động từ phải ở dạng phủ định (ません / ませんでした). Đối với 2 lựa chọn cụ thể, dùng どちらも + phủ định.",
+      structure: "どこも \u3000V<sub>ません / ませんでした</sub>",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "どこへも いきません。",
+          japanese: "どこへも \u3000いきません。",
           vietnamese: "Tôi không đi đâu cả.",
           english: "I'm not going anywhere.",
         },
         {
-          japanese: "きのう どこへも いきませんでした。",
+          japanese: "きのう \u3000どこへも \u3000いきませんでした。",
           vietnamese: "Hôm qua tôi không đi đâu cả.",
           english: "Yesterday, I didn't go anywhere.",
         },
@@ -92,28 +94,29 @@ export const unit5: GrammarLesson = {
         "The particle で indicates the means or method by which an action is performed. With movement verbs, it indicates the mode of transportation. Note: For walking, use あるいて without the particle で.",
       vietnamese:
         "Trợ từ で biểu thị phương tiện hoặc cách thức để hoàn thành một hành động. Với động từ di chuyển, nó biểu thị phương tiện giao thông. Lưu ý: Đối với việc đi bộ, dùng あるいて mà không dùng trợ từで.",
-      structure: "N<sub>vehicle</sub> で V<sub>movement</sub>",
+      structure: "N<sub>vehicle</sub>で \u3000V<sub>movement</sub>",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "けさ 私は バスで 会社へ きました。",
+          japanese:
+            "けさ \u3000わたしは \u3000バスで \u3000かいしゃへ \u3000きました。",
           vietnamese: "Sáng nay tôi đến công ty bằng xe bus.",
           english: "This morning, I came to the company by bus.",
         },
         {
-          japanese: "でんしゃで 学校へ いきます。",
+          japanese: "でんしゃで \u3000がっこうへ \u3000いきます。",
           vietnamese: "Tôi đi đến trường bằng tàu điện.",
           english: "I go to school by train.",
         },
         {
-          japanese: "駅から あるいて かえりました。",
+          japanese: "えきから \u3000あるいて \u3000かえりました。",
           vietnamese: "Tôi đã đi bộ từ ga về.",
           english: "I walked home from the station.",
         },
         {
-          japanese: "タクシーで ホテルへ いきます。",
+          japanese: "タクシーで \u3000ホテルへ \u3000いきます。",
           vietnamese: "Tôi đi đến khách sạn bằng taxi.",
           english: "I go to the hotel by taxi.",
         },
@@ -130,30 +133,31 @@ export const unit5: GrammarLesson = {
         "The particle と indicates a person or animal with whom an action is performed together. For doing something alone, use ひとりで instead of と.",
       vietnamese:
         "Trợ từ と biểu thị một người (hoặc động vật) cùng tham gia thực hiện một hành động. Trường hợp thực hiện hành động một mình dùng ひとりで - không dùng trợ từ と.",
-      structure: "N<sub>person/animal</sub> と V",
+      structure: "N<sub>person/animal</sub>と \u3000V",
     },
     {
       type: "example",
       examples: [
         {
-          japanese: "あした 私は 朝 7時に 友達と 銀行へ いきます。",
+          japanese:
+            "あした \u3000わたしは \u3000あさ 7じに \u3000ともだちと \u3000ぎんこうへ \u3000いきます。",
           vietnamese:
             "Ngày mai tôi đi đến ngân hàng cùng bạn tôi vào lúc 7 giờ sáng.",
           english:
             "Tomorrow morning at 7 AM, I will go to the bank with my friend.",
         },
         {
-          japanese: "私たち は 犬と あそびました。",
+          japanese: "わたしたちは \u3000いぬと \u3000あそびました。",
           vietnamese: "Chúng tôi đã chơi cùng con chó.",
           english: "We played with the dog.",
         },
         {
-          japanese: "私は ひとりで うちへ かえります。",
+          japanese: "わたしは \u3000ひとりで \u3000うちへ \u3000かえります。",
           vietnamese: "Tôi đi về nhà một mình.",
           english: "I return home alone.",
         },
         {
-          japanese: "先生と さんぽします。",
+          japanese: "せんせいと \u3000さんぽします。",
           vietnamese: "Tôi đi dạo với thầy giáo.",
           english: "I take a walk with the teacher.",
         },
