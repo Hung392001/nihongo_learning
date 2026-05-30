@@ -15,7 +15,7 @@ export interface GrammarItem {
 }
 
 export interface TextItem {
-  text: string;
+  text?: string;
   english?: string;
   vietnamese?: string;
   structure?: string;

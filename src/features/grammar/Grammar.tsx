@@ -18,8 +18,6 @@ import { unit15 } from "./units/unit15";
 import {
   GrammarLesson,
   GrammarContent,
-  GrammarExample,
-  GrammarItem,
   TextItem,
 } from "./units/types";
 
@@ -59,38 +57,35 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
     if (Array.isArray(text)) {
       return (
         <div className="multi-text-content">
-          {text.map((item: TextItem, idx: number) => (
-            <div key={idx} className="text-item">
-              <p 
-                className="english"
-                dangerouslySetInnerHTML={{ __html: item.english || item.text || '' }}
-              />
-              {language === 'vietnamese' && item.vietnamese && (
-                <p className="vietnamese">
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: item.vietnamese,
-                    }}
-                  />
-                </p>
-              )}
-              {item.structure && (
-                <p className="vietnamese">
-                  <span
-                    className="formula-block"
-                    dangerouslySetInnerHTML={{
-                      __html: item.structure,
-                    }}
-                  />
-                </p>
-              )}
-            </div>
-          ))}
+          {text.map((item: TextItem, idx: number) => {
+            const displayText = language === 'vietnamese' 
+              ? item.vietnamese || item.text || ''
+              : item.english || item.text || '';
+            
+            return (
+              <div key={idx} className="text-item">
+                <p 
+                  className={language === 'vietnamese' ? 'vietnamese' : 'english'}
+                  dangerouslySetInnerHTML={{ __html: displayText }}
+                />
+                {item.structure && (
+                  <p className={language === 'vietnamese' ? 'vietnamese' : 'english'}>
+                    <span
+                      className="formula-block"
+                      dangerouslySetInnerHTML={{
+                        __html: item.structure,
+                      }}
+                    />
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
       );
     }
     
-    return <p className="english" dangerouslySetInnerHTML={{ __html: text }} />;
+    return <p className={language === 'vietnamese' ? 'vietnamese' : 'english'} dangerouslySetInnerHTML={{ __html: text }} />;
   };
 
   const renderContent = (content: GrammarContent, index: number): React.ReactNode => {
@@ -112,26 +107,8 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
         return (
           <div key={index} className="grammar-explanation">
             {renderTextContent(content.text)}
-            {language === 'vietnamese' && content.vietnamese && !Array.isArray(content.text) && (
-              <p className="vietnamese">
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: content.vietnamese,
-                  }}
-                />
-              </p>
-            )}
-            {language === 'english' && content.english && !Array.isArray(content.text) && (
-              <p className="vietnamese">
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: content.english,
-                  }}
-                />
-              </p>
-            )}
             {content.structure && !Array.isArray(content.text) && (
-              <p className="vietnamese">
+              <p className={language === 'vietnamese' ? 'vietnamese' : 'english'}>
                 <span
                   className="formula-block"
                   dangerouslySetInnerHTML={{
@@ -166,18 +143,12 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
       case "note":
         return (
           <div key={index} className="grammar-note">
-            <p>
+            <p className={language === 'vietnamese' ? 'vietnamese' : 'english'}>
               <strong>
                 💡
-                {content.text && (
-                  <span dangerouslySetInnerHTML={{ __html: content.text }} />
-                )}
-                {language === 'vietnamese' && content.vietnamese && (
-                  <span dangerouslySetInnerHTML={{ __html: content.vietnamese }} />
-                )}
-                {language === 'english' && content.english && (
-                  <span dangerouslySetInnerHTML={{ __html: content.english }} />
-                )}
+                {language === 'vietnamese' 
+                  ? (content.vietnamese || (typeof content.text === 'string' ? content.text : '') || '')
+                  : (content.english || (typeof content.text === 'string' ? content.text : '') || '')}
               </strong>
             </p>
           </div>
