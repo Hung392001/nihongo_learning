@@ -184,17 +184,17 @@ export const unit7: GrammarLesson = {
       type: "example",
       examples: [
         {
-          japanese: "もう にもつを おくりましたか。",
+          japanese: "もう \u3000にもつを \u3000おくりましたか。",
           vietnamese: "Bạn đã gửi đồ chưa?",
           english: "Have you sent the luggage yet?",
         },
         {
-          japanese: "はい、[もう] おくりました。",
+          japanese: "はい、\u3000[もう] \u3000おくりました。",
           vietnamese: "Vâng, [tôi đã] gửi rồi.",
           english: "Yes, I already sent it.",
         },
         {
-          japanese: "いいえ、まだです。",
+          japanese: "いいえ、\u3000まだです。",
           vietnamese: "Không, chưa.",
           english: "No, not yet.",
         },
@@ -221,12 +221,13 @@ export const unit7: GrammarLesson = {
       type: "example",
       examples: [
         {
-          japanese: "この スプーン[は]、すてきですね。",
+          japanese: "この \u3000スプーン[は]、\u3000すてきですね。",
           vietnamese: "Cái muỗng này đẹp nhỉ!",
           english: "This spoon is pretty!",
         },
         {
-          japanese: "コーヒー[を]、もう いっぱい いかがですか。",
+          japanese:
+            "コーヒー[を]、\u3000もう \u3000いっぱい \u3000いかがですか。",
           vietnamese: "Bạn dùng thêm cốc cà phê nhé!",
           english: "Would you like another cup of coffee?",
         },
