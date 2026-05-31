@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { VocabularyItem, FlashcardMode, FlashcardState } from '../vocabulary/vocabulary';
 import { createFlashcardContent, shuffleArray } from './flashcardHelpers';
 
@@ -17,6 +17,18 @@ interface UseFlashcardManagerReturn {
   changeMode: (mode: FlashcardMode) => void;
   shuffle: () => void;
   reset: () => void;
+}
+
+/**
+ * Filter vocabulary based on mode - exclude items without kanji for kanji-related modes
+ */
+function filterVocabularyByMode(vocabulary: VocabularyItem[], mode: FlashcardMode): VocabularyItem[] {
+  // For kanji-related modes, only include items that have kanji
+  if (mode === FlashcardMode.HIRA_TO_KANJI || mode === FlashcardMode.KANJI_TO_HIRA) {
+    return vocabulary.filter(item => item.kanji !== null && item.kanji.trim() !== '');
+  }
+  // For other modes, include all vocabulary
+  return vocabulary;
 }
 
 /**
@@ -39,16 +51,18 @@ export function useFlashcardManager({
   const [isFlipped, setIsFlipped] = useState(false);
   
   // Shuffled vocabulary deck
-  const [deck, setDeck] = useState<VocabularyItem[]>(() => 
-    shuffled ? shuffleArray(vocabulary) : vocabulary
-  );
+  const [deck, setDeck] = useState<VocabularyItem[]>(() => {
+    const filtered = filterVocabularyByMode(vocabulary, initialMode);
+    return shuffled ? shuffleArray(filtered) : filtered;
+  });
 
-  // Update deck when vocabulary changes
-  useMemo(() => {
-    setDeck(shuffled ? shuffleArray(vocabulary) : vocabulary);
+  // Update deck when vocabulary or mode changes
+  useEffect(() => {
+    const filtered = filterVocabularyByMode(vocabulary, mode);
+    setDeck(shuffled ? shuffleArray(filtered) : filtered);
     setCurrentIndex(0);
     setIsFlipped(false);
-  }, [vocabulary, shuffled]);
+  }, [vocabulary, mode, shuffled]);
 
   // Current flashcard content
   const currentContent = useMemo(() => {
@@ -124,11 +138,12 @@ export function useFlashcardManager({
    * Reset to initial state
    */
   const reset = useCallback(() => {
-    setDeck(vocabulary);
+    const filtered = filterVocabularyByMode(vocabulary, initialMode);
+    setDeck(shuffled ? shuffleArray(filtered) : filtered);
     setCurrentIndex(0);
     setIsFlipped(false);
     setMode(initialMode);
-  }, [vocabulary, initialMode]);
+  }, [vocabulary, initialMode, shuffled]);
 
   return {
     state,
