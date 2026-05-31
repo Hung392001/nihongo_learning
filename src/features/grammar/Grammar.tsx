@@ -15,11 +15,7 @@ import { unit12 } from "./units/unit12";
 import { unit13 } from "./units/unit13";
 import { unit14 } from "./units/unit14";
 import { unit15 } from "./units/unit15";
-import {
-  GrammarLesson,
-  GrammarContent,
-  TextItem,
-} from "./units/types";
+import { GrammarLesson, GrammarContent, TextItem } from "./units/types";
 
 interface GrammarProps {
   onNavigate?: (page: string) => void;
@@ -27,10 +23,12 @@ interface GrammarProps {
 
 export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
   const [selectedUnit, setSelectedUnit] = useState<string>("unit1");
-  const [language, setLanguage] = useState<'vietnamese' | 'english'>('vietnamese');
+  const [language, setLanguage] = useState<"vietnamese" | "english">(
+    "vietnamese",
+  );
 
   const toggleLanguage = () => {
-    setLanguage(prev => prev === 'vietnamese' ? 'english' : 'vietnamese');
+    setLanguage((prev) => (prev === "vietnamese" ? "english" : "vietnamese"));
   };
 
   const grammarLessons: Record<string, GrammarLesson> = {
@@ -51,25 +49,34 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
     unit15,
   };
 
-  const renderTextContent = (text: string | TextItem[] | undefined): React.ReactNode => {
+  const renderTextContent = (
+    text: string | TextItem[] | undefined,
+  ): React.ReactNode => {
     if (!text) return null;
-    
+
     if (Array.isArray(text)) {
       return (
         <div className="multi-text-content">
           {text.map((item: TextItem, idx: number) => {
-            const displayText = language === 'vietnamese' 
-              ? item.vietnamese || item.text || ''
-              : item.english || item.text || '';
-            
+            const displayText =
+              language === "vietnamese"
+                ? item.vietnamese || item.text || ""
+                : item.english || item.text || "";
+
             return (
               <div key={idx} className="text-item">
-                <p 
-                  className={language === 'vietnamese' ? 'vietnamese' : 'english'}
+                <p
+                  className={
+                    language === "vietnamese" ? "vietnamese" : "english"
+                  }
                   dangerouslySetInnerHTML={{ __html: displayText }}
                 />
                 {item.structure && (
-                  <p className={language === 'vietnamese' ? 'vietnamese' : 'english'}>
+                  <p
+                    className={
+                      language === "vietnamese" ? "vietnamese" : "english"
+                    }
+                  >
                     <span
                       className="formula-block"
                       dangerouslySetInnerHTML={{
@@ -84,21 +91,36 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
         </div>
       );
     }
-    
-    return <p className={language === 'vietnamese' ? 'vietnamese' : 'english'} dangerouslySetInnerHTML={{ __html: text }} />;
+
+    return (
+      <p
+        className={language === "vietnamese" ? "vietnamese" : "english"}
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
+    );
   };
 
-  const renderContent = (content: GrammarContent, index: number): React.ReactNode => {
+  const renderContent = (
+    content: GrammarContent,
+    index: number,
+  ): React.ReactNode => {
     switch (content.type) {
       case "title":
         return (
-          <h3 
-            key={index} 
+          <h3
+            key={index}
             className="grammar-section-title"
             dangerouslySetInnerHTML={{
-              __html: language === 'vietnamese' 
-                ? (content.vietnamese || (typeof content.text === 'string' ? content.text : String(content.text)))
-                : (content.english || (typeof content.text === 'string' ? content.text : String(content.text)))
+              __html:
+                language === "vietnamese"
+                  ? content.vietnamese ||
+                    (typeof content.text === "string"
+                      ? content.text
+                      : String(content.text))
+                  : content.english ||
+                    (typeof content.text === "string"
+                      ? content.text
+                      : String(content.text)),
             }}
           />
         );
@@ -108,17 +130,20 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
           <div key={index} className="grammar-explanation">
             {content.text && renderTextContent(content.text)}
             {!content.text && (
-              <p 
-                className={language === 'vietnamese' ? 'vietnamese' : 'english'}
+              <p
+                className={language === "vietnamese" ? "vietnamese" : "english"}
                 dangerouslySetInnerHTML={{
-                  __html: language === 'vietnamese' 
-                    ? (content.vietnamese || '')
-                    : (content.english || '')
+                  __html:
+                    language === "vietnamese"
+                      ? content.vietnamese || ""
+                      : content.english || "",
                 }}
               />
             )}
             {content.structure && !Array.isArray(content.text) && (
-              <p className={language === 'vietnamese' ? 'vietnamese' : 'english'}>
+              <p
+                className={language === "vietnamese" ? "vietnamese" : "english"}
+              >
                 <span
                   className="formula-block"
                   dangerouslySetInnerHTML={{
@@ -136,12 +161,12 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
             {content.examples?.map((ex, idx) => (
               <div key={idx} className="example-item">
                 <div key={idx} className="example-text">
-                  <p 
-                    className="example-japanese" 
+                  <p
+                    className="example-japanese"
                     dangerouslySetInnerHTML={{ __html: ex.japanese }}
                   />
-                  <p 
-                    className="example-english" 
+                  <p
+                    className="example-english"
                     dangerouslySetInnerHTML={{ __html: ex.english }}
                   />
                 </div>
@@ -153,14 +178,19 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
       case "note":
         return (
           <div key={index} className="grammar-note">
-            <p className={language === 'vietnamese' ? 'vietnamese' : 'english'}>
-              <strong>
-                💡
-                {language === 'vietnamese' 
-                  ? (content.vietnamese || (typeof content.text === 'string' ? content.text : '') || '')
-                  : (content.english || (typeof content.text === 'string' ? content.text : '') || '')}
-              </strong>
-            </p>
+            <p
+              className={language === "vietnamese" ? "vietnamese" : "english"}
+              dangerouslySetInnerHTML={{
+                __html:
+                  language === "vietnamese"
+                    ? `<strong>💡 ${content.vietnamese ||
+                        (typeof content.text === "string" ? content.text : "") ||
+                        ""}</strong>`
+                    : `<strong>💡 ${content.english ||
+                        (typeof content.text === "string" ? content.text : "") ||
+                        ""}</strong>`,
+              }}
+            />
           </div>
         );
 
@@ -169,20 +199,25 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
           <div key={index} className="grammar-practice">
             {content.items?.map((item, idx) => (
               <div key={idx} className="practice-item">
-                <div 
-                  className="practice-meaning" 
+                <div
+                  className="practice-meaning"
                   dangerouslySetInnerHTML={{
-                    __html: language === 'vietnamese' && item.vietnameseMeaning
-                      ? item.vietnameseMeaning
-                      : item.meaning
+                    __html:
+                      language === "vietnamese" && item.vietnameseMeaning
+                        ? item.vietnameseMeaning
+                        : item.meaning,
                   }}
                 />
                 <div className="practice-hint">
-                  💡 <span dangerouslySetInnerHTML={{
-                    __html: language === 'vietnamese' && item.vietnameseUsage
-                      ? item.vietnameseUsage
-                      : item.usage
-                  }} />
+                  💡{" "}
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        language === "vietnamese" && item.vietnameseUsage
+                          ? item.vietnameseUsage
+                          : item.usage,
+                    }}
+                  />
                 </div>
               </div>
             ))}
@@ -312,12 +347,16 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
         <div className="grammar-header">
           <div className="header-content">
             <h1 className="grammar-title">{lesson.title}</h1>
-            <button 
-              className="language-toggle" 
+            <button
+              className="language-toggle"
               onClick={toggleLanguage}
-              title={language === 'vietnamese' ? 'Switch to English' : 'Switch to Vietnamese'}
+              title={
+                language === "vietnamese"
+                  ? "Switch to English"
+                  : "Switch to Vietnamese"
+              }
             >
-              {language === 'vietnamese' ? '🇻🇳' : '🇬🇧'}
+              {language === "vietnamese" ? "🇻🇳" : "🇬🇧"}
             </button>
           </div>
         </div>
