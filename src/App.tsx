@@ -349,6 +349,7 @@ function AppContent() {
   const handleStartPractice = (unit: number | "all" | string) => {
     setSelectedFlashcardUnit(unit);
     setSelectedVocabularyUnit(unit);
+    setSelectedDeckId(null); // Clear selected deck to practice the unit's vocabulary
     handleNavigate("flashcards");
   };
 
@@ -648,7 +649,7 @@ function AppContent() {
         {currentPage === "vocabulary" && (
           <UnitSelector
             selectedUnit={selectedVocabularyUnit}
-            onUnitSelect={(unit) => { setSelectedVocabularyUnit(unit); setSelectedFlashcardUnit(unit); }}
+            onUnitSelect={(unit) => { setSelectedVocabularyUnit(unit); setSelectedFlashcardUnit(unit); setSelectedDeckId(null); }}
             customLists={customLists}
             onCreateCustomList={() => setIsListModalOpen(true)}
             unitCounts={{}}
@@ -669,7 +670,7 @@ function AppContent() {
         {currentPage === "vocabulary" && (
           <UnitSelector
             selectedUnit={selectedVocabularyUnit}
-            onUnitSelect={(unit) => { setSelectedVocabularyUnit(unit); setSelectedFlashcardUnit(unit); }}
+            onUnitSelect={(unit) => { setSelectedVocabularyUnit(unit); setSelectedFlashcardUnit(unit); setSelectedDeckId(null); }}
             customLists={customLists}
             onCreateCustomList={() => setIsListModalOpen(true)}
             unitCounts={{}}
@@ -690,7 +691,7 @@ function AppContent() {
       {currentPage === "vocabulary" && location.pathname === "/vocabulary" && (
         <UnitSelector
           selectedUnit={selectedVocabularyUnit}
-          onUnitSelect={(unit) => { setSelectedVocabularyUnit(unit); setSelectedFlashcardUnit(unit); }}
+          onUnitSelect={(unit) => { setSelectedVocabularyUnit(unit); setSelectedFlashcardUnit(unit); setSelectedDeckId(null); }}
           customLists={customLists}
           onCreateCustomList={() => setIsListModalOpen(true)}
           unitCounts={{}}
