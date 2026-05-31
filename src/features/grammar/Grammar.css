@@ -193,11 +193,10 @@
 
 .grammar-explanation .vietnamese {
   font-weight: bold;
-  margin: 0.5rem 0 0 0;
+  margin: 0 0 0;
   color: #333;
-  font-size: 1.05rem;
-  line-height: 1.5;
-  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .formula-block {
@@ -291,6 +290,96 @@
   color: #333;
   line-height: 1.5;
   font-style: italic;
+}
+
+/* Counter Table */
+.counter-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: black;
+}
+
+.counter-table th,
+.counter-table td {
+  border: 2px solid #999;
+  padding: 0.75rem;
+  text-align: left;
+  color: black;
+}
+
+.counter-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: black;
+}
+
+.counter-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.counter-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.counter-header {
+  background-color: #4a90e2;
+  color: white;
+  padding: 0.75rem;
+  font-weight: bold;
+}
+
+.counter-row {
+  border-bottom: 2px solid #eee;
+}
+
+.counter-cell {
+  padding: 0.5rem;
+  border: 2px solid #999;
+  font-weight: bold;
+  color: black;
+  text-align: left;
+}
+
+/* Dark Mode - Counter Table */
+[data-theme="dark"] .counter-table {
+  color: white;
+}
+
+[data-theme="dark"] .counter-table th,
+[data-theme="dark"] .counter-table td,
+[data-theme="dark"] .counter-header,
+[data-theme="dark"] .counter-cell {
+  color: white;
+}
+
+[data-theme="dark"] .counter-table th,
+[data-theme="dark"] .counter-header {
+  background-color: #333;
+}
+
+[data-theme="dark"] .counter-table {
+  border-color: #444;
+}
+
+[data-theme="dark"] .counter-table th,
+[data-theme="dark"] .counter-table td,
+[data-theme="dark"] .counter-cell {
+  border-color: #555;
+}
+
+[data-theme="dark"] .counter-table tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
+
+[data-theme="dark"] .counter-table tr:hover {
+  background-color: #333;
+}
+
+[data-theme="dark"] .counter-table tr {
+  border-bottom-color: #444;
 }
 
 /* Practice Section */

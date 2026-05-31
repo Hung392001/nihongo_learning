@@ -22,7 +22,7 @@ export interface TextItem {
 }
 
 export interface GrammarContent {
-  type: 'title' | 'explanation' | 'particle' | 'example' | 'note' | 'practice';
+  type: 'title' | 'explanation' | 'particle' | 'example' | 'note' | 'practice' | 'table';
   text?: string | TextItem[];
   japanese?: string;
   english?: string;

@@ -194,6 +194,24 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
           </div>
         );
 
+      case "table":
+        return (
+          <div
+            key={index}
+            className="grammar-table"
+            dangerouslySetInnerHTML={{
+              __html:
+                language === "vietnamese"
+                  ? content.vietnamese ||
+                    (typeof content.text === "string" ? content.text : "") ||
+                    ""
+                  : content.english ||
+                    (typeof content.text === "string" ? content.text : "") ||
+                    "",
+            }}
+          />
+        );
+
       case "practice":
         return (
           <div key={index} className="grammar-practice">
