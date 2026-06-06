@@ -15,6 +15,7 @@ import { unit12 } from "./units/unit12";
 import { unit13 } from "./units/unit13";
 import { unit14 } from "./units/unit14";
 import { unit15 } from "./units/unit15";
+import { unit16 } from "./units/unit16";
 import { GrammarLesson, GrammarContent, TextItem } from "./units/types";
 
 interface GrammarProps {
@@ -47,6 +48,7 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
     unit13,
     unit14,
     unit15,
+    unit16,
   };
 
   const renderTextContent = (
@@ -183,12 +185,20 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
               dangerouslySetInnerHTML={{
                 __html:
                   language === "vietnamese"
-                    ? `<strong>💡 ${content.vietnamese ||
-                        (typeof content.text === "string" ? content.text : "") ||
-                        ""}</strong>`
-                    : `<strong>💡 ${content.english ||
-                        (typeof content.text === "string" ? content.text : "") ||
-                        ""}</strong>`,
+                    ? `<strong>💡 ${
+                        content.vietnamese ||
+                        (typeof content.text === "string"
+                          ? content.text
+                          : "") ||
+                        ""
+                      }</strong>`
+                    : `<strong>💡 ${
+                        content.english ||
+                        (typeof content.text === "string"
+                          ? content.text
+                          : "") ||
+                        ""
+                      }</strong>`,
               }}
             />
           </div>
@@ -358,6 +368,13 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
           >
             <span className="unit-number">15</span>
             <span className="unit-name">Unit 15</span>
+          </button>
+          <button
+            className={`grammar-unit-btn ${selectedUnit === "unit16" ? "active" : ""}`}
+            onClick={() => setSelectedUnit("unit16")}
+          >
+            <span className="unit-number">16</span>
+            <span className="unit-name">Unit 16</span>
           </button>
         </div>
       </div>
