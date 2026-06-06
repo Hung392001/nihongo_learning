@@ -2,211 +2,276 @@ import { GrammarLesson } from "./types";
 
 export const unit13: GrammarLesson = {
   id: "unit13",
-  title: "Unit 13: Wants and Purposes",
+  title: "Unit 13: Wants and Desires - ほしい and たい",
   content: [
     {
-      type: "explanation",
-      text: "In Unit 13, you will learn how to express desires, purposes of movement, indefinite question words, and polite honorific expressions.",
-      vietnamese:
-        "ユニット１３では、欲しいもの、したいこと、移動の目的、不定疑問詞、丁寧な敬語表現を学びます。",
-    },
-
-    {
       type: "title",
-      text: "１. ほしいです - Want Something",
+      english: "1. Noun が ほしいです - Want a Noun",
+      vietnamese: "1. Danh từ が ほしいです (ほしい: muốn NOUN)",
     },
 
     {
       type: "explanation",
-      text: "ほしいです is used to express that the speaker wants a noun or object.",
-      vietnamese: "「ほしいです」は、話者が何か物を欲しい時に使います。",
+      english:
+        "ほしい is an i-adjective used to express the speaker's desire to have/own something. The object/noun is marked with the particle が.",
+      vietnamese:
+        "ほしい là tính từ đuôi い, diễn tả mong muốn sở hữu cái gì đó. Tân ngữ của ほしい được đánh dấu bằng trợ từ が.",
+      structure: "Nが \u3000ほしいです",
     },
-
     {
       type: "note",
-      text: "Structure: N が ほしいです",
-      vietnamese: "文型：N が ほしいです",
+      english:
+        "ほしいです is only used for the speaker's own desires, not for third parties or invitations.",
+      vietnamese:
+        "ほしいです chỉ biểu thị ham muốn của người nói, không dùng cho người thứ ba hoặc lời mời.",
     },
 
     {
       type: "example",
       examples: [
         {
-          japanese: "わたしは あたらしい くるまが ほしいです。",
-          vietnamese: "Tôi muốn một chiếc xe mới.",
-          english: "I want a new car.",
+          japanese: "わたしは \u3000あかい \u3000くるまが \u3000ほしいです。",
+          vietnamese: "Tôi muốn chiếc xe hơi màu đỏ.",
+          english: "I want a red car.",
         },
         {
-          japanese: "わたしは おおきな いえが ほしいです。",
-          vietnamese: "Tôi muốn một ngôi nhà lớn.",
-          english: "I want a big house.",
+          japanese: "わたしは \u3000あたらしい \u3000うちが \u3000ほしいです。",
+          vietnamese: "Tôi muốn có căn nhà mới.",
+          english: "I want a new house.",
         },
         {
-          japanese: "いま カメラが ほしいです。",
-          vietnamese: "Bây giờ tôi muốn máy ảnh.",
-          english: "I want a camera now.",
+          japanese: "わたしは \u3000おかねが \u3000たくさん \u3000ほしいです。",
+          vietnamese: "Tôi muốn có nhiều tiền.",
+          english: "I want a lot of money.",
         },
       ],
     },
 
     {
       type: "title",
-      text: "２. ～たいです - Want to Do",
+      english: "2. Verb (ます-stem) たいです - Want to Do Something",
+      vietnamese: "2. Động từ (thể ます) たいです - Muốn làm gì đó",
     },
 
     {
       type: "explanation",
-      text: "たいです is attached to the verb stem to express the desire to do an action.",
+      english:
+        "たいです is attached to the stem of a verb (remove ます) to express the desire to do an action. It conjugates like an i-adjective. The object particle can be either を or が.",
       vietnamese:
-        "「たいです」は動詞のます形の語幹に付けて、「〜したい」という希望を表します。",
+        "たい là trợ từ gắn sau thể ます của động từ (bỏ ます) để biểu thị mong muốn làm việc gì đó. Nó biến đổi tương tự như tính từ đuôi い. Trợ từ chỉ tân ngữ có thể là を hoặc が.",
+      structure: 'V <span class="highlight-i">ます</span> + たいです',
     },
-
     {
       type: "note",
-      text: "Structure: V（ます-stem） + たいです",
-      vietnamese: "文型：V（ます形語幹）+ たいです",
+      english:
+        "たいです is only used for the speaker's own desires, not for third parties or invitations. For invitations, use ～ませんか instead.",
+      vietnamese:
+        "V(thể ます)たいです chỉ biểu thị ham muốn của người nói, không dùng cho người thứ ba hoặc lời mời. Để mời ai đó, dùng ～ませんか.",
     },
 
     {
       type: "example",
       examples: [
         {
-          japanese: "わたしは きょう うちへ はやく かえりたいです。",
+          japanese:
+            "わたしは \u3000きょう \u3000うちへ \u3000はやく \u3000かえりたいです。",
           vietnamese: "Hôm nay tôi muốn về nhà sớm.",
           english: "I want to go home early today.",
         },
         {
-          japanese: "わたしは スーパーで くろい かばんを かいたいです。",
+          japanese:
+            "わたしは \u3000スーパーで \u3000くろい \u3000かばんを / が \u3000かいたいです。",
           vietnamese: "Tôi muốn mua cái cặp màu đen ở siêu thị.",
           english: "I want to buy a black bag at the supermarket.",
         },
         {
-          japanese: "にほんへ いきたいです。",
-          vietnamese: "Tôi muốn đi Nhật.",
-          english: "I want to go to Japan.",
+          japanese:
+            "わたしは \u3000この \u3000しんぶんを / が \u3000よみたいです。",
+          vietnamese: "Tôi muốn đọc cuốn báo này.",
+          english: "I want to read this newspaper.",
+        },
+        {
+          japanese:
+            "おなかが \u3000いたいですから、\u3000なにも \u3000たべたくないです。",
+          vietnamese: "Vì đau bụng nên tôi không muốn ăn gì cả.",
+          english: "Because my stomach hurts, I don't want to eat anything.",
         },
       ],
     },
 
     {
       type: "note",
-      text: "Do not use ～たいです to directly ask another person’s desire. Use ～ませんか for invitations instead.",
+      text: "For invitations:<br/>Incorrect: ❌ コーヒーが \u3000ほしいですか。 / コーヒーが \u3000のみたいですか。<br/>Correct: ✅ コーヒーは \u3000いかがですか。 / コーヒーを \u3000  のみませんか。",
       vietnamese:
-        "相手の希望を直接聞く時には「〜たいです」を使いません。招待には「〜ませんか」を使います。",
+        "Đối với lời mời:<br/>Sai: ❌ コーヒーが \u3000ほしいですか。 / コーヒーが \u3000のみたいですか。<br/>Đúng: ✅ コーヒーは \u3000いかがですか。 / コーヒーを \u3000のみませんか。",
     },
 
     {
       type: "title",
-      text: "３. Purpose of Movement",
+      english: "3. Purpose of Movement",
+      vietnamese: "3. Mục đích di chuyển",
     },
 
     {
       type: "explanation",
-      text: "Use に with movement verbs to express the purpose of going, coming, or returning somewhere.",
-      vietnamese: "移動動詞と一緒に「に」を使って、移動の目的を表します。",
-    },
-
-    {
-      type: "note",
-      text: "Structure: Place へ V（ます-stem）/N に いきます・きます・かえります",
+      english:
+        "Used to express going, coming, or returning somewhere with a specific purpose or activity in mind. The purpose can be an action (using the verb in the ます form) or a noun. The particle に indicates the purpose of the movement.<br/><br/>",
       vietnamese:
-        "文型：場所 へ V（ます形語幹）/名詞 に いきます・きます・かえります",
-    },
+        "Dùng để biểu thị việc đi, đến hoặc trở về một nơi nào đó với mục đích hoặc hoạt động cụ thể trong tâm trí. Mục đích có thể là một hành động (sử dụng động từ ở thể ます) hoặc danh từ. Trợ từ に chỉ thị mục đích của hành động di chuyển.<br/><br/>",
 
+      structure:
+        'N<sub>place</sub>へ \u3000V(<span class="highlight-i">ます</span>)に \u3000いきます・きます・かえります。<br/>N<sub>place</sub>へ \u3000Nに \u3000いきます・きます・かえります。',
+    },
     {
       type: "example",
       examples: [
         {
-          japanese: "わたしは スーパーへ おかしを かいに いきます。",
-          vietnamese: "Tôi đi siêu thị để mua bánh kẹo.",
-          english: "I go to the supermarket to buy snacks.",
+          japanese:
+            "わたしは \u3000スーパーへ \u3000やさいを \u3000かいに \u3000いきたいです。",
+          vietnamese: "Tôi muốn đi đến siêu thị để mua rau.",
+          english: "I want to go to the supermarket to buy vegetables.",
         },
         {
-          japanese: "わたしは にほんへ けいざいの べんきょうに きました。",
-          vietnamese: "Tôi đến Nhật để học kinh tế.",
-          english: "I came to Japan to study economics.",
+          japanese:
+            "わたしは \u3000にほんへ \u3000けいざいを \u3000べんきょうしに\u3000 いきたいです。",
+          vietnamese: "Tôi muốn đến Nhật để học kinh tế Nhật.",
+          english: "I want to go to Japan to study Japanese economics.",
         },
         {
-          japanese: "ともだちに あいに いきます。",
-          vietnamese: "Tôi đi gặp bạn.",
-          english: "I go to meet my friend.",
+          japanese: "あなたは \u3000どこへ \u3000いきたいですか。",
+          vietnamese: "Bạn có muốn đi đâu không?",
+          english: "Where do you want to go?",
+        },
+        {
+          japanese: "... わたしは \u3000どこへも \u3000いきたくないです。",
+          vietnamese: "... Tôi không muốn đi đâu...",
+          english: "... I don't want to go anywhere...",
+        },
+        {
+          japanese:
+            "... あした、\u3000わたしは プールへ \u3000およぎに \u3000いきたいです。",
+          vietnamese: "... Ngày mai, tôi muốn đi đến hồ bơi...",
+          english: "... Tomorrow, I want to go to the pool to swim...",
+        },
+        {
+          japanese:
+            "... わたしは \u3000つかれましたから、\u3000なにも \u3000たべたくないです。",
+          vietnamese: "... Mệt vì mệt, nên không muốn ăn gì...",
+          english: "... I'm tired, so I don't want to eat anything...",
+        },
+        {
+          japanese: "あした \u3000きょうとの \u3000おまつりに \u3000いきます。",
+          vietnamese: "Ngày mai tôi sẽ đi lễ hội ở Kyoto. (danh từ hành động)",
+          english: "Tomorrow I will go to the festival in Kyoto.",
         },
       ],
     },
 
     {
       type: "title",
-      text: "４. Particles に and へ",
+      english: "4. でます : leave / exit; はいります : enter",
+      vietnamese: "4. でます : ra ; はいります : vào",
     },
 
     {
       type: "explanation",
-      text: "に indicates time or purpose, while へ indicates direction or destination.",
-      vietnamese: "「に」は時間や目的を表し、「へ」は方向や目的地を表します。",
+      english:
+        "Use でます when someone leaves or exits a location, and use はいります when someone enters or goes into a location. These verbs describe movement between places.",
+      vietnamese:
+        "Dùng でます khi ai đó rời khỏi hoặc ra khỏi một địa điểm, và dùng はいります khi ai đó vào hoặc đi vào một địa điểm. Những động từ này mô tả sự di chuyển giữa các nơi.",
+      structure:
+        "N<sub>place</sub> を \u3000でます.<br/>N<sub>place</sub> に \u3000はいります.",
     },
-
     {
       type: "example",
       examples: [
         {
-          japanese: "けさ わたしは ７じに うちを でました。",
-          vietnamese: "Sáng nay tôi ra khỏi nhà lúc 7 giờ.",
-          english: "This morning I left home at 7.",
+          japanese:
+            "わたしは \u3000けさ \u30007じに \u3000うちを \u3000でます。",
+          vietnamese: "Sáng nay tôi ra khỏi nhà lúc 7g.",
+          english: "I left home at 7 o'clock this morning.",
         },
         {
-          japanese: "こんばん わたしは きっさてんに はいります。",
-          vietnamese: "Tối nay tôi sẽ vào quán cà phê.",
-          english: "Tonight I will enter a coffee shop.",
-        },
-        {
-          japanese: "とうきょうへ いきます。",
-          vietnamese: "Tôi đi Tokyo.",
-          english: "I go to Tokyo.",
+          japanese: "わたしは \u3000こんばん \u3000きっさに \u3000はいります。",
+          vietnamese: "Tối nay tôi vào quán cà phê.",
+          english: "I will enter a coffee shop tonight.",
         },
       ],
     },
 
     {
       type: "title",
-      text: "５. どこか and なにか",
+      english: "5. ごろ and ぐらい - Approximate Time and Quantity",
+      vietnamese: "5. ごろ và ぐらい - Thời gian và số lượng xấp xỉ",
     },
 
     {
       type: "explanation",
-      text: "どこか means “somewhere” and なにか means “something.” They are used for indefinite questions or statements.",
-      vietnamese: "「どこか」は「どこか」、「なにか」は「何か」を意味します。",
+      english:
+        "ごろ is used for approximate time points (around what time). ぐらい is used for approximate durations, quantities, and degrees (about how much).",
+      vietnamese:
+        "ごろ dùng để chỉ thời điểm xấp xỉ (khoảng mấy giờ). ぐらい dùng để chỉ khoảng thời gian, số lượng, mức độ xấp xỉ (khoảng bao nhiêu).",
     },
-
     {
       type: "example",
       examples: [
         {
-          japanese: "ふゆやすみは どこか いきましたか。",
-          vietnamese: "Kỳ nghỉ đông bạn có đi đâu không?",
-          english: "Did you go somewhere during winter vacation?",
+          japanese: "9じごろ",
+          vietnamese: "Khoảng 9 giờ",
+          english: "Around 9 o'clock",
         },
         {
-          japanese: "おなかが すきましたから、なにか たべたいです。",
-          vietnamese: "Vì đói nên tôi muốn ăn cái gì đó.",
-          english: "Because I am hungry, I want to eat something.",
+          japanese: "7じかんぐらい",
+          vietnamese: "Khoảng 7 tiếng",
+          english: "About 7 hours",
         },
         {
-          japanese: "だれか きましたか。",
-          vietnamese: "Có ai đến không?",
-          english: "Did someone come?",
+          japanese: "100えんぐらい",
+          vietnamese: "Khoảng 100 yên",
+          english: "About 100 yen",
+        },
+      ],
+    },
+    {
+      type: "title",
+      english: "6. どこか and なにか - Somewhere and Something",
+      vietnamese: "6. どこか và なにか - Nơi nào đó và cái gì đó",
+    },
+    {
+      type: "explanation",
+      english:
+        "どこか means 'somewhere' and なにか means 'something'. The particles へ and を can be omitted after どこか and なにか respectively.",
+      vietnamese:
+        "どこか có nghĩa là 'điểm đó, nơi nào đó'. なにか có nghĩa là 'cái gì đó'. Có thể lược bỏ trợ từ ～へ sau どこか và ～を sau なにか.",
+    },
+    {
+      type: "example",
+      examples: [
+        {
+          japanese: "どこかへ \u3000いきたいです。",
+          vietnamese: "Tôi muốn đi đâu đó.",
+          english: "I want to go somewhere.",
+        },
+        {
+          japanese: "なにかを \u3000たべたいです。",
+          vietnamese: "Tôi muốn ăn cái gì đó.",
+          english: "I want to eat something.",
         },
       ],
     },
 
     {
       type: "title",
-      text: "６. Honorific Prefix ご〜",
+      english: "7. Honorific Prefix ご～",
+      vietnamese: "7. ご～",
     },
 
     {
       type: "explanation",
-      text: "ご is added before certain nouns to make expressions more polite and respectful.",
-      vietnamese: "「ご」は名詞の前に付けて、丁寧で敬意のある表現にします。",
+      english:
+        "The prefix ご is added to certain nouns to make expressions more polite and respectful, especially in business or formal situations.",
+      vietnamese:
+        "Tiền tố ご được thêm vào trước một số danh từ để thể hiện sự tôn trọng, lịch sự.",
     },
 
     {
@@ -214,56 +279,18 @@ export const unit13: GrammarLesson = {
       examples: [
         {
           japanese: "ごちゅうもんは？",
-          vietnamese: "Anh/Chị gọi món gì ạ?",
+          vietnamese: "Anh / Chị dùng món gì ạ?",
           english: "What would you like to order?",
         },
         {
-          japanese: "ごかぞくは おげんきですか。",
+          japanese: "ごかぞくは \u3000おげんきですか。",
           vietnamese: "Gia đình bạn có khỏe không?",
           english: "Is your family well?",
         },
         {
-          japanese: "ごしゅっしんは どちらですか。",
+          japanese: "ごしゅっしんは \u3000どちらですか。",
           vietnamese: "Quê quán của bạn ở đâu?",
           english: "Where are you from?",
-        },
-      ],
-    },
-
-    {
-      type: "title",
-      text: "７. Common Patterns Summary",
-    },
-
-    {
-      type: "note",
-      text: "Pattern 1: N が ほしいです | Pattern 2: V（ます-stem）+ たいです | Pattern 3: Place へ Purpose に いきます | Pattern 4: どこか / なにか | Pattern 5: ご + Noun",
-      vietnamese:
-        "パターン1：N が ほしいです｜パターン2：V（ます形語幹）+ たいです｜パターン3：場所 へ 目的 に いきます｜パターン4：どこか・なにか｜パターン5：ご + 名詞",
-    },
-
-    {
-      type: "practice",
-      items: [
-        {
-          meaning: "I want a new phone.",
-          usage: "あたらしい でんわが ほしいです",
-        },
-        {
-          meaning: "I want to eat sushi.",
-          usage: "すしを たべたいです",
-        },
-        {
-          meaning: "I go to the library to study.",
-          usage: "としょかんへ べんきょうに いきます",
-        },
-        {
-          meaning: "Did you buy something?",
-          usage: "なにか かいましたか",
-        },
-        {
-          meaning: "What would you like to drink?",
-          usage: "ごちゅうもんは？",
         },
       ],
     },
