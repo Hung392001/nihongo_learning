@@ -1,11 +1,14 @@
 import React from 'react';
 import './Navigation.css';
+import { VietnameseFlagIcon, EnglishFlagIcon } from '../grammar/icons';
 
 interface NavigationProps {
   currentPage: string;
   onNavigate: (page: string) => void;
   darkMode: boolean;
   onThemeToggle: () => void;
+  language?: "vietnamese" | "english";
+  onLanguageToggle?: () => void;
 }
 
 /**
@@ -16,6 +19,8 @@ export const Navigation: React.FC<NavigationProps> = ({
   onNavigate,
   darkMode,
   onThemeToggle,
+  language = "vietnamese",
+  onLanguageToggle,
 }) => {
   const isHome = currentPage === 'home';
 
@@ -71,6 +76,20 @@ export const Navigation: React.FC<NavigationProps> = ({
       </div>
 
       <div className="nav-right">
+        {onLanguageToggle && (
+          <button
+            className="nav-language-toggle"
+            onClick={onLanguageToggle}
+            title={language === "vietnamese" ? "Switch to English" : "Switch to Vietnamese"}
+            aria-label="Toggle language"
+          >
+            {language === "vietnamese" ? (
+              <VietnameseFlagIcon size={24} />
+            ) : (
+              <EnglishFlagIcon size={24} />
+            )}
+          </button>
+        )}
         <button
           className="nav-theme-toggle"
           onClick={onThemeToggle}

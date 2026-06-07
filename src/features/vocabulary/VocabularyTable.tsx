@@ -389,17 +389,6 @@ export const VocabularyTable: React.FC<VocabularyTableProps> = ({
           </tbody>
         </table>
       </div>
-
-      {filteredVocabulary.length > 0 && (
-        <div className="table-footer">
-          <p>
-            💡 Mẹo: Click vào "Luyện tập Flashcard" để luyện tập với unit đã chọn!
-          </p>
-        </div>
-      )}
-
-
-
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (
         <div className="modal-overlay" onClick={cancelDelete}>

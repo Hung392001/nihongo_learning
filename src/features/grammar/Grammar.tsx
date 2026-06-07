@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Grammar.css";
+import { ListFormatIcon } from "./icons";
 import { unit1 } from "./units/unit1";
 import { unit2 } from "./units/unit2";
 import { unit3 } from "./units/unit3";
@@ -22,17 +23,47 @@ import { GrammarLesson, GrammarContent, TextItem } from "./units/types";
 
 interface GrammarProps {
   onNavigate?: (page: string) => void;
+  language?: "vietnamese" | "english";
 }
 
-export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
+export const Grammar: React.FC<GrammarProps> = ({
+  onNavigate,
+  language = "vietnamese",
+}) => {
   const [selectedUnit, setSelectedUnit] = useState<string>("unit1");
-  const [language, setLanguage] = useState<"vietnamese" | "english">(
-    "vietnamese",
-  );
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarWidth, setSidebarWidth] = useState(250);
+  const [isResizing, setIsResizing] = useState(false);
 
-  const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "vietnamese" ? "english" : "vietnamese"));
+  const toggleSidebarCollapse = () => {
+    setSidebarCollapsed((prev) => !prev);
   };
+
+  const handleMouseDown = () => {
+    setIsResizing(true);
+  };
+
+  React.useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isResizing) return;
+      const newWidth = Math.max(150, Math.min(400, e.clientX));
+      setSidebarWidth(newWidth);
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+    };
+
+    if (isResizing) {
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+    }
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isResizing]);
 
   const grammarLessons: Record<string, GrammarLesson> = {
     unit1,
@@ -265,152 +296,183 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
 
   return (
     <div className="grammar-container">
-      <div className="grammar-sidebar">
-        <h2 className="grammar-sidebar-title">📚 Grammar Units</h2>
+      <div
+        className={`grammar-sidebar ${sidebarCollapsed ? "collapsed" : ""}`}
+        style={{ width: sidebarCollapsed ? "60px" : `${sidebarWidth}px` }}
+      >
+        <div className="grammar-sidebar-header">
+          <div
+            title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          >
+            <ListFormatIcon
+              size={20}
+              color="#333"
+              onClick={toggleSidebarCollapse}
+              className="grammar-menu-icon"
+            />
+          </div>
+          {!sidebarCollapsed && (
+            <h2 className="grammar-sidebar-title">Grammar Units</h2>
+          )}
+        </div>
         <div className="grammar-units-list">
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit1" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit1")}
+            title="Unit 1"
           >
             <span className="unit-number">1</span>
-            <span className="unit-name">Unit 1</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 1</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit2" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit2")}
+            title="Unit 2"
           >
             <span className="unit-number">2</span>
-            <span className="unit-name">Unit 2</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 2</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit3" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit3")}
+            title="Unit 3"
           >
             <span className="unit-number">3</span>
-            <span className="unit-name">Unit 3</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 3</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit4" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit4")}
+            title="Unit 4"
           >
             <span className="unit-number">4</span>
-            <span className="unit-name">Unit 4</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 4</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit5" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit5")}
+            title="Unit 5"
           >
             <span className="unit-number">5</span>
-            <span className="unit-name">Unit 5</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 5</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit6" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit6")}
+            title="Unit 6"
           >
             <span className="unit-number">6</span>
-            <span className="unit-name">Unit 6</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 6</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit7" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit7")}
+            title="Unit 7"
           >
             <span className="unit-number">7</span>
-            <span className="unit-name">Unit 7</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 7</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit8" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit8")}
+            title="Unit 8"
           >
             <span className="unit-number">8</span>
-            <span className="unit-name">Unit 8</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 8</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit9" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit9")}
+            title="Unit 9"
           >
             <span className="unit-number">9</span>
-            <span className="unit-name">Unit 9</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 9</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit10" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit10")}
+            title="Unit 10"
           >
             <span className="unit-number">10</span>
-            <span className="unit-name">Unit 10</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 10</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit11" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit11")}
+            title="Unit 11"
           >
             <span className="unit-number">11</span>
-            <span className="unit-name">Unit 11</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 11</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit12" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit12")}
+            title="Unit 12"
           >
             <span className="unit-number">12</span>
-            <span className="unit-name">Unit 12</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 12</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit13" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit13")}
+            title="Unit 13"
           >
             <span className="unit-number">13</span>
-            <span className="unit-name">Unit 13</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 13</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit14" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit14")}
+            title="Unit 14"
           >
             <span className="unit-number">14</span>
-            <span className="unit-name">Unit 14</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 14</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit15" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit15")}
+            title="Unit 15"
           >
             <span className="unit-number">15</span>
-            <span className="unit-name">Unit 15</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 15</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit16" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit16")}
+            title="Unit 16"
           >
             <span className="unit-number">16</span>
-            <span className="unit-name">Unit 16</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 16</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit17" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit17")}
+            title="Unit 17"
           >
             <span className="unit-number">17</span>
-            <span className="unit-name">Unit 17</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 17</span>}
           </button>
           <button
             className={`grammar-unit-btn ${selectedUnit === "unit18" ? "active" : ""}`}
             onClick={() => setSelectedUnit("unit18")}
+            title="Unit 18"
           >
             <span className="unit-number">18</span>
-            <span className="unit-name">Unit 18</span>
+            {!sidebarCollapsed && <span className="unit-name">Unit 18</span>}
           </button>
         </div>
+        {!sidebarCollapsed && (
+          <div
+            className="sidebar-resize-handle"
+            onMouseDown={handleMouseDown}
+          />
+        )}
       </div>
       <div className="grammar-main">
         <div className="grammar-header">
           <div className="header-content">
             <h1 className="grammar-title">{lesson.title}</h1>
-            <button
-              className="language-toggle"
-              onClick={toggleLanguage}
-              title={
-                language === "vietnamese"
-                  ? "Switch to English"
-                  : "Switch to Vietnamese"
-              }
-            >
-              {language === "vietnamese" ? "🇻🇳" : "🇬🇧"}
-            </button>
           </div>
         </div>
         <div className="grammar-content">
