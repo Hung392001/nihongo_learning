@@ -16,6 +16,7 @@ import { unit13 } from "./units/unit13";
 import { unit14 } from "./units/unit14";
 import { unit15 } from "./units/unit15";
 import { unit16 } from "./units/unit16";
+import { unit17 } from "./units/unit17";
 import { GrammarLesson, GrammarContent, TextItem } from "./units/types";
 
 interface GrammarProps {
@@ -49,6 +50,7 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
     unit14,
     unit15,
     unit16,
+    unit17,
   };
 
   const renderTextContent = (
@@ -375,6 +377,13 @@ export const Grammar: React.FC<GrammarProps> = ({ onNavigate }) => {
           >
             <span className="unit-number">16</span>
             <span className="unit-name">Unit 16</span>
+          </button>
+          <button
+            className={`grammar-unit-btn ${selectedUnit === "unit17" ? "active" : ""}`}
+            onClick={() => setSelectedUnit("unit17")}
+          >
+            <span className="unit-number">17</span>
+            <span className="unit-name">Unit 17</span>
           </button>
         </div>
       </div>
