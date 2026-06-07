@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Grammar.css";
-import { ListFormatIcon } from "./icons";
+import { ListFormatIcon } from "../shared/icons";
 import { unit1 } from "./units/unit1";
 import { unit2 } from "./units/unit2";
 import { unit3 } from "./units/unit3";

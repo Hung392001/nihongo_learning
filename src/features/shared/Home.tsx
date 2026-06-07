@@ -12,11 +12,6 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ onNavigate, vocabularyCount }) => {
   return (
     <div className="home-container">
-      <section className="home-hero">
-        <h2>Welcome to Nihongo Learning! 🇯🇵</h2>
-        <p>Choose your learning path below</p>
-      </section>
-
       <div className="home-grid">
         {/* Flashcards Section */}
         <div

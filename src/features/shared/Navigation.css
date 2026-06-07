@@ -170,6 +170,14 @@
   --hover-bg: rgba(102, 126, 234, 0.15);
 }
 
+[data-theme='light'] .app-navigation {
+  --nav-bg: white;
+  --border-color: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #666;
+  --hover-bg: rgba(102, 126, 234, 0.1);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .app-navigation {

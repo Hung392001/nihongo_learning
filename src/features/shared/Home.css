@@ -51,7 +51,7 @@
 }
 
 .home-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -71,6 +71,62 @@
 
 .home-card:hover::before {
   transform: scaleX(1);
+}
+
+/* Card Type Specific Background Gradients - Light Mode */
+[data-theme="light"] .flashcards-card {
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+[data-theme="light"] .vocabulary-card {
+  background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+  border: 1px solid rgba(236, 72, 153, 0.3);
+}
+
+[data-theme="light"] .alphabet-card {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="light"] .grammar-card {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+[data-theme="light"] .kanji-card {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Flashcards */
+[data-theme="dark"] .flashcards-card {
+  background: linear-gradient(135deg, #312e81 0%, #4338ca 100%);
+  border: 1px solid rgba(129, 140, 248, 0.25);
+}
+
+/* Vocabulary */
+[data-theme="dark"] .vocabulary-card {
+  background: linear-gradient(135deg, #831843 0%, #be185d 100%);
+  border: 1px solid rgba(244, 114, 182, 0.25);
+}
+
+/* Alphabet */
+[data-theme="dark"] .alphabet-card {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+}
+
+/* Grammar - Green */
+[data-theme="dark"] .grammar-card {
+  background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+/* Kanji - Amber */
+[data-theme="dark"] .kanji-card {
+  background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
 }
 
 .card-icon {
@@ -134,81 +190,159 @@
   transform: translateX(4px);
 }
 
-/* Card Type Specific Colors */
+/* Card Type Specific Colors - Top border gradient */
 .flashcards-card::before {
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, #8b5cf6, #7c3aed);
 }
 
 .vocabulary-card::before {
-  background: linear-gradient(90deg, #f093fb, #f5576c);
+  background: linear-gradient(90deg, #ec4899, #dc2626);
 }
 
 .alphabet-card::before {
-  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
 }
 
 .grammar-card::before {
-  background: linear-gradient(90deg, #43e97b, #38f9d7);
+  background: linear-gradient(90deg, #22c55e, #166534);
+}
+
+.kanji-card::before {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+/* Light Mode - Text colors for colored cards */
+[data-theme="light"] .flashcards-card h3,
+[data-theme="light"] .flashcards-card .card-description,
+[data-theme="light"] .flashcards-card .card-stats,
+[data-theme="light"] .flashcards-card .card-cta {
+  color: #1e293b;
+}
+
+[data-theme="light"] .vocabulary-card h3,
+[data-theme="light"] .vocabulary-card .card-description,
+[data-theme="light"] .vocabulary-card .card-stats,
+[data-theme="light"] .vocabulary-card .card-cta {
+  color: #7f1d1d;
+}
+
+[data-theme="light"] .alphabet-card h3,
+[data-theme="light"] .alphabet-card .card-description,
+[data-theme="light"] .alphabet-card .card-stats,
+[data-theme="light"] .alphabet-card .card-cta {
+  color: #1e40af;
+}
+
+[data-theme="light"] .grammar-card h3,
+[data-theme="light"] .grammar-card .card-description,
+[data-theme="light"] .grammar-card .card-stats,
+[data-theme="light"] .grammar-card .card-cta {
+  color: #042f1a;
+}
+
+[data-theme="light"] .kanji-card h3,
+[data-theme="light"] .kanji-card .card-description,
+[data-theme="light"] .kanji-card .card-stats,
+[data-theme="light"] .kanji-card .card-cta {
+  color: #78350f;
+}
+
+/* Dark Mode - Text colors for colored cards */
+[data-theme="dark"] .flashcards-card h3,
+[data-theme="dark"] .flashcards-card .card-description,
+[data-theme="dark"] .flashcards-card .card-stats,
+[data-theme="dark"] .flashcards-card .card-cta {
+  color: #e0e7ff;
+}
+
+[data-theme="dark"] .vocabulary-card h3,
+[data-theme="dark"] .vocabulary-card .card-description,
+[data-theme="dark"] .vocabulary-card .card-stats,
+[data-theme="dark"] .vocabulary-card .card-cta {
+  color: #fce7f3;
+}
+
+[data-theme="dark"] .alphabet-card h3,
+[data-theme="dark"] .alphabet-card .card-description,
+[data-theme="dark"] .alphabet-card .card-stats,
+[data-theme="dark"] .alphabet-card .card-cta {
+  color: #dbeafe;
+}
+
+[data-theme="dark"] .grammar-card h3,
+[data-theme="dark"] .grammar-card .card-description,
+[data-theme="dark"] .grammar-card .card-stats,
+[data-theme="dark"] .grammar-card .card-cta {
+  color: #d1fae5;
+}
+
+[data-theme="dark"] .kanji-card h3,
+[data-theme="dark"] .kanji-card .card-description,
+[data-theme="dark"] .kanji-card .card-stats,
+[data-theme="dark"] .kanji-card .card-cta {
+  color: #fef3c7;
+}
+
+/* Feature tags - Light mode colors */
+.flashcards-card .stat-badge,
+.flashcards-card .feature-tag {
+  background: rgba(139, 92, 246, 0.15);
+  color: #8b5cf6;
 }
 
 .vocabulary-card .stat-badge,
 .vocabulary-card .feature-tag {
-  background: rgba(245, 87, 108, 0.1);
+  background: rgba(245, 87, 108, 0.15);
   color: #f5576c;
 }
 
 .alphabet-card .stat-badge,
 .alphabet-card .feature-tag {
-  background: rgba(79, 172, 254, 0.1);
+  background: rgba(79, 172, 254, 0.15);
   color: #4facfe;
 }
 
 .grammar-card .stat-badge,
 .grammar-card .feature-tag {
-  background: rgba(67, 233, 123, 0.1);
+  background: rgba(67, 233, 123, 0.15);
   color: #43e97b;
-}
-
-.vocabulary-card .card-cta {
-  color: #f5576c;
-}
-
-.vocabulary-card:hover .card-cta {
-  color: #f093fb;
-}
-
-.alphabet-card .card-cta {
-  color: #4facfe;
-}
-
-.alphabet-card:hover .card-cta {
-  color: #00f2fe;
-}
-
-.grammar-card .card-cta {
-  color: #43e97b;
-}
-
-.grammar-card:hover .card-cta {
-  color: #38f9d7;
-}
-
-.kanji-card::before {
-  background: linear-gradient(90deg, #fa709a, #fee140);
 }
 
 .kanji-card .stat-badge,
 .kanji-card .feature-tag {
-  background: rgba(250, 112, 154, 0.1);
+  background: rgba(250, 112, 154, 0.15);
   color: #fa709a;
 }
 
-.kanji-card .card-cta {
-  color: #fa709a;
+/* Feature tags - Dark mode colors (lighter for dark backgrounds) */
+[data-theme="dark"] .flashcards-card .stat-badge,
+[data-theme="dark"] .flashcards-card .feature-tag {
+  background: rgba(139, 92, 246, 0.25);
+  color: #c4b5fd;
 }
 
-.kanji-card:hover .card-cta {
-  color: #fee140;
+[data-theme="dark"] .vocabulary-card .stat-badge,
+[data-theme="dark"] .vocabulary-card .feature-tag {
+  background: rgba(245, 87, 108, 0.25);
+  color: #fca5a5;
+}
+
+[data-theme="dark"] .alphabet-card .stat-badge,
+[data-theme="dark"] .alphabet-card .feature-tag {
+  background: rgba(79, 172, 254, 0.25);
+  color: #93c5fd;
+}
+
+[data-theme="dark"] .grammar-card .stat-badge,
+[data-theme="dark"] .grammar-card .feature-tag {
+  background: rgba(67, 233, 123, 0.25);
+  color: #86efac;
+}
+
+[data-theme="dark"] .kanji-card .stat-badge,
+[data-theme="dark"] .kanji-card .feature-tag {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fcd34d;
 }
 
 /* New Vocabulary Units Card */
@@ -245,7 +379,11 @@
 
 .info-card.new-feature {
   border-left: 4px solid #667eea;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.05),
+    rgba(118, 75, 162, 0.05)
+  );
 }
 
 .info-card h4 {
@@ -278,15 +416,34 @@
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
-[data-theme='dark'] .info-card {
+[data-theme="dark"] .info-card {
   --card-bg: #1e1e1e;
   --border-color: #333;
   --text-primary: #e0e0e0;
   --text-secondary: #999;
 }
 
-[data-theme='dark'] .info-card.new-feature {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+[data-theme="light"] .info-card {
+  --card-bg: white;
+  --border-color: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #666;
+}
+
+[data-theme="dark"] .info-card.new-feature {
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.1),
+    rgba(118, 75, 162, 0.1)
+  );
+}
+
+[data-theme="light"] .info-card.new-feature {
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.05),
+    rgba(118, 75, 162, 0.05)
+  );
 }
 
 /* Quick Stats Section */
@@ -330,22 +487,40 @@
 }
 
 /* Dark Mode Support */
-[data-theme='dark'] .home-card {
+[data-theme="dark"] .home-card {
   --card-bg: #1e1e1e;
   --border-color: #333;
   --text-primary: #e0e0e0;
   --text-secondary: #999;
 }
 
-[data-theme='dark'] .home-hero {
+[data-theme="light"] .home-card {
+  --card-bg: white;
+  --border-color: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #666;
+}
+
+[data-theme="dark"] .home-hero {
   background: linear-gradient(135deg, #5a6fd8 0%, #6a3fa0 100%);
 }
 
-[data-theme='dark'] .home-quick-stats {
+[data-theme="light"] .home-hero {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+[data-theme="dark"] .home-quick-stats {
   --card-bg: #1e1e1e;
   --border-color: #333;
   --text-primary: #e0e0e0;
   --text-secondary: #999;
+}
+
+[data-theme="light"] .home-quick-stats {
+  --card-bg: white;
+  --border-color: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #666;
 }
 
 /* Responsive Design */

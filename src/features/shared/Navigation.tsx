@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navigation.css';
-import { VietnameseFlagIcon, EnglishFlagIcon } from '../grammar/icons';
+import { VietnameseFlagIcon, EnglishFlagIcon } from './icons';
 
 interface NavigationProps {
   currentPage: string;
